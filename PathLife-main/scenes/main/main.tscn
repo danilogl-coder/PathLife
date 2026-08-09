@@ -1,0 +1,57 @@
+[gd_scene load_steps=5 format=3 uid="uid://bnldxue1wvwfg"]
+
+[ext_resource type="Script" uid="uid://cef0wnptgyqqq" path="res://scenes/main/main.gd" id="1_main"]
+[ext_resource type="PackedScene" uid="uid://ccclce5ap3ngs" path="res://gameplay/player/player.tscn" id="2_player"]
+[ext_resource type="PackedScene" uid="uid://ca5ujyn4qqegm" path="res://interface/hud/hud.tscn" id="3_hud"]
+
+[sub_resource type="RectangleShape2D" id="RectangleShape2D_test_wall"]
+size = Vector2(120, 50)
+
+[node name="Main" type="Node2D" node_paths=PackedStringArray("player", "hud")]
+script = ExtResource("1_main")
+player = NodePath("World/Entities/Player")
+hud = NodePath("Interface/HUD")
+
+[node name="World" type="Node2D" parent="."]
+
+[node name="Ground" type="Polygon2D" parent="World"]
+z_index = -100
+color = Color(0.105, 0.14, 0.16, 1)
+polygon = PackedVector2Array(-1200, -900, 1200, -900, 1200, 900, -1200, 900)
+
+[node name="GroundAccent" type="Polygon2D" parent="World"]
+z_index = -99
+color = Color(0.135, 0.19, 0.2, 1)
+polygon = PackedVector2Array(-700, 40, 0, -310, 700, 40, 0, 390)
+
+[node name="Entities" type="Node2D" parent="World"]
+y_sort_enabled = true
+
+[node name="Player" parent="World/Entities" instance=ExtResource("2_player")]
+position = Vector2(300, 220)
+
+[node name="Camera2D" type="Camera2D" parent="World/Entities/Player"]
+
+[node name="TestWall" type="StaticBody2D" parent="World/Entities"]
+position = Vector2(430, 285)
+
+[node name="Shadow" type="Polygon2D" parent="World/Entities/TestWall"]
+z_index = -1
+color = Color(0, 0, 0, 0.28)
+polygon = PackedVector2Array(-66, -4, 54, -4, 68, 3, -52, 3)
+
+[node name="WallVisual" type="Polygon2D" parent="World/Entities/TestWall"]
+color = Color(0.25, 0.34, 0.36, 1)
+polygon = PackedVector2Array(-60, -40, 60, -40, 60, 0, -60, 0)
+
+[node name="WallTop" type="Polygon2D" parent="World/Entities/TestWall"]
+color = Color(0.38, 0.52, 0.5, 1)
+polygon = PackedVector2Array(-60, -40, -48, -48, 72, -48, 60, -40)
+
+[node name="CollisionShape2D" type="CollisionShape2D" parent="World/Entities/TestWall"]
+position = Vector2(0, -15)
+shape = SubResource("RectangleShape2D_test_wall")
+
+[node name="Interface" type="CanvasLayer" parent="."]
+
+[node name="HUD" parent="Interface" instance=ExtResource("3_hud")]

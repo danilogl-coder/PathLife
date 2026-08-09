@@ -1,0 +1,121 @@
+[gd_scene load_steps=5 format=3 uid="uid://ca5ujyn4qqegm"]
+
+[ext_resource type="Script" path="res://interface/hud/hud.gd" id="1_hud"]
+
+[sub_resource type="StyleBoxFlat" id="StyleBox_panel"]
+bg_color = Color(0.047, 0.059, 0.078, 0.94)
+border_width_left = 1
+border_width_top = 1
+border_width_right = 1
+border_width_bottom = 1
+border_color = Color(0.27, 0.82, 0.69, 0.75)
+corner_radius_top_left = 10
+corner_radius_top_right = 10
+corner_radius_bottom_right = 10
+corner_radius_bottom_left = 10
+shadow_color = Color(0, 0, 0, 0.35)
+shadow_size = 6
+
+[sub_resource type="StyleBoxFlat" id="StyleBox_bar_background"]
+bg_color = Color(0.12, 0.15, 0.19, 1)
+corner_radius_top_left = 5
+corner_radius_top_right = 5
+corner_radius_bottom_right = 5
+corner_radius_bottom_left = 5
+
+[sub_resource type="StyleBoxFlat" id="StyleBox_bar_fill"]
+bg_color = Color(0.28, 0.83, 0.54, 1)
+corner_radius_top_left = 5
+corner_radius_top_right = 5
+corner_radius_bottom_right = 5
+corner_radius_bottom_left = 5
+
+[node name="HUD" type="Control" unique_id=125299917]
+layout_mode = 3
+anchors_preset = 15
+anchor_right = 1.0
+anchor_bottom = 1.0
+grow_horizontal = 2
+grow_vertical = 2
+mouse_filter = 2
+script = ExtResource("1_hud")
+
+[node name="SafeMargin" type="MarginContainer" parent="."]
+layout_mode = 1
+anchors_preset = 15
+anchor_right = 1.0
+anchor_bottom = 1.0
+grow_horizontal = 2
+grow_vertical = 2
+mouse_filter = 2
+theme_override_constants/margin_left = 24
+theme_override_constants/margin_top = 24
+theme_override_constants/margin_right = 24
+theme_override_constants/margin_bottom = 24
+
+[node name="HUDColumn" type="VBoxContainer" parent="SafeMargin"]
+layout_mode = 2
+mouse_filter = 2
+
+[node name="StatusPanel" type="PanelContainer" parent="SafeMargin/HUDColumn"]
+custom_minimum_size = Vector2(300, 0)
+layout_mode = 2
+size_flags_horizontal = 0
+mouse_filter = 2
+theme_override_styles/panel = SubResource("StyleBox_panel")
+
+[node name="PanelMargin" type="MarginContainer" parent="SafeMargin/HUDColumn/StatusPanel"]
+layout_mode = 2
+mouse_filter = 2
+theme_override_constants/margin_left = 16
+theme_override_constants/margin_top = 14
+theme_override_constants/margin_right = 16
+theme_override_constants/margin_bottom = 14
+
+[node name="Content" type="VBoxContainer" parent="SafeMargin/HUDColumn/StatusPanel/PanelMargin"]
+layout_mode = 2
+mouse_filter = 2
+theme_override_constants/separation = 8
+
+[node name="TitleLabel" type="Label" parent="SafeMargin/HUDColumn/StatusPanel/PanelMargin/Content"]
+layout_mode = 2
+theme_override_colors/font_color = Color(0.43, 0.95, 0.8, 1)
+theme_override_colors/font_shadow_color = Color(0, 0, 0, 0.7)
+theme_override_constants/shadow_offset_x = 1
+theme_override_constants/shadow_offset_y = 1
+theme_override_font_sizes/font_size = 18
+text = "PERSONAGEM"
+
+[node name="Separator" type="HSeparator" parent="SafeMargin/HUDColumn/StatusPanel/PanelMargin/Content"]
+layout_mode = 2
+mouse_filter = 2
+
+[node name="HealthLabel" type="Label" parent="SafeMargin/HUDColumn/StatusPanel/PanelMargin/Content"]
+unique_name_in_owner = true
+layout_mode = 2
+theme_override_colors/font_color = Color(0.93, 0.96, 1, 1)
+theme_override_font_sizes/font_size = 14
+text = "VIDA  100 / 100"
+
+[node name="HealthBar" type="ProgressBar" parent="SafeMargin/HUDColumn/StatusPanel/PanelMargin/Content"]
+unique_name_in_owner = true
+custom_minimum_size = Vector2(268, 16)
+layout_mode = 2
+mouse_filter = 2
+theme_override_font_sizes/font_size = 11
+theme_override_styles/background = SubResource("StyleBox_bar_background")
+theme_override_styles/fill = SubResource("StyleBox_bar_fill")
+value = 100.0
+show_percentage = false
+
+[node name="MovementLabel" type="Label" parent="SafeMargin/HUDColumn/StatusPanel/PanelMargin/Content"]
+unique_name_in_owner = true
+layout_mode = 2
+theme_override_colors/font_color = Color(0.67, 0.72, 0.79, 1)
+theme_override_font_sizes/font_size = 13
+text = "PARADO  •  SE"
+
+[node name="Spacer" type="Control" parent="SafeMargin/HUDColumn"]
+layout_mode = 2
+size_flags_vertical = 3
+mouse_filter = 2
