@@ -1,4 +1,4 @@
-[gd_resource type="AnimationLibrary" load_steps=29 format=3 uid="uid://ii3ps1adww4l"]
+[gd_resource type="AnimationLibrary" format=3 uid="uid://ii3ps1adww4l"]
 
 [sub_resource type="Animation" id="Animation_idle_ne"]
 resource_name = "idle_ne"
@@ -101,7 +101,6 @@ tracks/7/keys = {
 "update": 0,
 "values": [-0.000244, -0.000646, -0.00103, -0.000576, -0.000244]
 }
-
 tracks/8/type = "value"
 tracks/8/imported = false
 tracks/8/enabled = true
@@ -288,7 +287,6 @@ tracks/7/keys = {
 "update": 0,
 "values": [0.000716, 0.001326, 0.001763, 0.001169, 0.000716]
 }
-
 tracks/8/type = "value"
 tracks/8/imported = false
 tracks/8/enabled = true
@@ -475,7 +473,6 @@ tracks/7/keys = {
 "update": 0,
 "values": [0.000384, 0.000803, 0.001152, 0.000698, 0.000384]
 }
-
 tracks/8/type = "value"
 tracks/8/imported = false
 tracks/8/enabled = true
@@ -662,7 +659,6 @@ tracks/7/keys = {
 "update": 0,
 "values": [-0.000401, -0.000716, -0.000942, -0.000646, -0.000401]
 }
-
 tracks/8/type = "value"
 tracks/8/imported = false
 tracks/8/enabled = true

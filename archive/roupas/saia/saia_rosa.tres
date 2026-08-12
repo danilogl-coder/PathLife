@@ -1,0 +1,16 @@
+[gd_resource type="Resource" script_class="SaiaRecurso" load_steps=2 format=3]
+
+[ext_resource type="Script" path="res://saia/saia_recurso.gd" id="1_rec"]
+
+[resource]
+script = ExtResource("1_rec")
+dados = "res://saia/saia_malha.json"
+pasta_texturas = "res://"
+rigidez = 2.4
+amortecimento = 0.34
+ganho = 0.055
+limite = 12.0
+rigidez_barra = 1.6
+amortecimento_barra = 0.24
+limite_barra = 7.0
+limiar_parado = 1.5

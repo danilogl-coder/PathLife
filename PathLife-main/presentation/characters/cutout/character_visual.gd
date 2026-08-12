@@ -3,6 +3,7 @@ extends Node2D
 
 @onready var rig: CharacterRig = $Skeleton2D
 @onready var animation_player: AnimationPlayer = $AnimationPlayer
+@onready var wardrobe: WardrobePresenter = $WardrobePresenter
 
 @export_category("Animation Transitions")
 @export_range(0.0, 0.5, 0.01) var locomotion_blend_time: float = 0.08
@@ -12,10 +13,12 @@ var _current_animation: StringName = &""
 var _direction: StringName = &"se"
 var _is_moving: bool = false
 var _is_running: bool = false
+var _appearance: CharacterAppearance = CharacterAppearance.new()
 
 
 func _ready() -> void:
 	_direction = StringName(rig.initial_direction)
+	_appearance.body_type = rig.body_type
 	_refresh_locomotion_animation()
 
 
@@ -24,11 +27,24 @@ func present_locomotion(direction: StringName, is_moving: bool, is_running: bool
 	_is_moving = is_moving
 	_is_running = is_moving and is_running
 	rig.set_direction(direction)
+	wardrobe.present(_appearance, direction)
 	_refresh_locomotion_animation()
 
 
 func present_body(body_type: String) -> void:
-	rig.set_body(body_type)
+	var updated := _appearance.snapshot()
+	updated.body_type = body_type
+	present_appearance(updated)
+
+
+func present_appearance(appearance: CharacterAppearance) -> void:
+	if appearance == null:
+		return
+	_appearance = appearance.snapshot()
+	rig.set_body(_appearance.body_type)
+	rig.set_direction(_direction)
+	wardrobe.invalidate()
+	wardrobe.present(_appearance, _direction)
 	_current_animation = &""
 	_refresh_locomotion_animation()
 

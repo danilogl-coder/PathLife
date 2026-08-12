@@ -1,4 +1,4 @@
-[gd_resource type="AnimationLibrary" load_steps=29 format=3 uid="uid://b67y5mcj7i54n"]
+[gd_resource type="AnimationLibrary" format=3 uid="uid://b67y5mcj7i54n"]
 
 [sub_resource type="Animation" id="Animation_idle_ne"]
 resource_name = "idle_ne"
@@ -161,7 +161,6 @@ tracks/12/keys = {
 "update": 0,
 "values": [0.110567, 0.110567, 0.110567, 0.110567, 0.110567]
 }
-
 tracks/13/type = "value"
 tracks/13/imported = false
 tracks/13/enabled = true
@@ -348,7 +347,6 @@ tracks/12/keys = {
 "update": 0,
 "values": [0.048677, 0.048677, 0.048677, 0.048677, 0.048677]
 }
-
 tracks/13/type = "value"
 tracks/13/imported = false
 tracks/13/enabled = true

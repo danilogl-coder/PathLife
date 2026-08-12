@@ -11,6 +11,7 @@ var _current_health: int = 1
 var _facing_direction: StringName = &"se"
 var _was_moving: bool = false
 var _was_running: bool = false
+var _controls_enabled: bool = true
 
 
 func _ready() -> void:
@@ -23,6 +24,9 @@ func _ready() -> void:
 
 
 func _physics_process(_delta: float) -> void:
+	if not _controls_enabled:
+		velocity = Vector2.ZERO
+		return
 	var raw_input := Input.get_vector(
 		"move_left",
 		"move_right",
@@ -56,6 +60,22 @@ func _physics_process(_delta: float) -> void:
 
 	_was_moving = is_moving
 	_was_running = is_running
+
+
+func set_controls_enabled(enabled: bool) -> void:
+	if _controls_enabled == enabled:
+		return
+	_controls_enabled = enabled
+	if not enabled:
+		velocity = Vector2.ZERO
+		if _was_moving or _was_running:
+			locomotion_changed.emit(_facing_direction, false, false)
+		_was_moving = false
+		_was_running = false
+
+
+func are_controls_enabled() -> bool:
+	return _controls_enabled
 
 
 func damage(amount: int) -> void:

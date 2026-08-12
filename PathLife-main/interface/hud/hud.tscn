@@ -115,7 +115,14 @@ theme_override_colors/font_color = Color(0.67, 0.72, 0.79, 1)
 theme_override_font_sizes/font_size = 13
 text = "PARADO  •  SE"
 
+[node name="CustomizeButton" type="Button" parent="SafeMargin/HUDColumn/StatusPanel/PanelMargin/Content"]
+layout_mode = 2
+mouse_filter = 0
+text = "Personalizar personagem"
+
 [node name="Spacer" type="Control" parent="SafeMargin/HUDColumn"]
 layout_mode = 2
 size_flags_vertical = 3
 mouse_filter = 2
+
+[connection signal="pressed" from="SafeMargin/HUDColumn/StatusPanel/PanelMargin/Content/CustomizeButton" to="." method="_on_customize_button_pressed"]

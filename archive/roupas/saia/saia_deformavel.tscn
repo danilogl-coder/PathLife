@@ -1,0 +1,30 @@
+[gd_scene load_steps=3 format=3]
+
+; Instancie esta cena como filha do no' do personagem (qualquer lugar fora do
+; Skeleton2D serve). Depois preencha no Inspector, no no' raiz:
+;   recurso        -> o .tres da saia
+;   esqueleto      -> o Skeleton2D do personagem
+;   osso_quadril   -> o Bone2D do quadril
+;   osso_coxa_esq / osso_coxa_dir -> os Bone2D das coxas
+; Os sete ossos da saia sao criados sob o quadril em tempo de execucao: a
+; posicao de repouso deles muda por direcao, entao nao podem viver estaticos.
+
+[ext_resource type="Script" path="res://saia/saia_malha.gd" id="1_malha"]
+[ext_resource type="Script" path="res://saia/saia_balanco.gd" id="2_balanco"]
+
+[node name="SaiaDeformavel" type="Node2D"]
+script = ExtResource("1_malha")
+painel_tras = NodePath("SaiaTras")
+painel_frente = NodePath("SaiaFrente")
+
+[node name="SaiaTras" type="Polygon2D" parent="."]
+texture_filter = 1
+antialiased = false
+
+[node name="SaiaFrente" type="Polygon2D" parent="."]
+texture_filter = 1
+antialiased = false
+
+[node name="SaiaBalanco" type="Node" parent="."]
+script = ExtResource("2_balanco")
+malha = NodePath("..")

@@ -1,8 +1,11 @@
-[gd_scene load_steps=5 format=3 uid="uid://ccclce5ap3ngs"]
+[gd_scene load_steps=8 format=3 uid="uid://ccclce5ap3ngs"]
 
 [ext_resource type="Script" uid="uid://b54ob6bq6i7mu" path="res://gameplay/player/player_controller.gd" id="1_xq3ts"]
 [ext_resource type="Resource" uid="uid://cy5yh3iq3rj1j" path="res://data/player/default_player_config.tres" id="2_wvk08"]
 [ext_resource type="PackedScene" uid="uid://gcuaslvokbkv" path="res://presentation/characters/cutout/character_visual.tscn" id="3_visual"]
+[ext_resource type="Script" path="res://gameplay/player/character_appearance_state.gd" id="4_appearance_state"]
+[ext_resource type="Resource" path="res://data/character_customization/default_character_appearance.tres" id="5_default_appearance"]
+[ext_resource type="Resource" path="res://data/character_customization/default_clothing_catalog.tres" id="6_catalog"]
 
 [sub_resource type="CapsuleShape2D" id="CapsuleShape2D_omfh6"]
 radius = 5.0
@@ -11,6 +14,11 @@ height = 10.0
 [node name="Player" type="CharacterBody2D"]
 script = ExtResource("1_xq3ts")
 config = ExtResource("2_wvk08")
+
+[node name="AppearanceState" type="Node" parent="."]
+script = ExtResource("4_appearance_state")
+default_appearance = ExtResource("5_default_appearance")
+catalog = ExtResource("6_catalog")
 
 [node name="CollisionShape2D" type="CollisionShape2D" parent="."]
 position = Vector2(0, -5)
@@ -21,3 +29,4 @@ shape = SubResource("CapsuleShape2D_omfh6")
 [node name="CharacterVisual" parent="VisualAnchor" instance=ExtResource("3_visual")]
 
 [connection signal="locomotion_changed" from="." to="VisualAnchor/CharacterVisual" method="present_locomotion"]
+[connection signal="appearance_changed" from="AppearanceState" to="VisualAnchor/CharacterVisual" method="present_appearance"]

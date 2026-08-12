@@ -1,0 +1,8 @@
+[gd_resource type="Resource" script_class="ClothingItem" load_steps=2 format=3]
+[ext_resource type="Script" path="res://data/character_customization/clothing_item.gd" id="1"]
+[resource]
+script = ExtResource("1")
+id = &"calca"
+display_name = "Calça"
+source_key = &"calca"
+slot = "bottom"

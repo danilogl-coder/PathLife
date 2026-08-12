@@ -10,6 +10,15 @@ var _pieces: Dictionary = {}
 var _current_direction: StringName = &""
 
 
+func get_piece_bone(piece_name: StringName) -> Bone2D:
+	var nodes: Dictionary = _pieces.get(String(piece_name), {})
+	return nodes.get("bone") as Bone2D
+
+
+func get_current_direction() -> StringName:
+	return _current_direction
+
+
 func _ready() -> void:
 	_cache_piece_nodes()
 	_load_body_data()
@@ -44,6 +53,7 @@ func set_direction(direction: StringName) -> void:
 		sprite.offset = _parse_vector2(piece["offset_sprite"])
 		sprite.texture = load("%s/%s" % [assets_root, piece["arquivo"]]) as Texture2D
 
+	_apply_core_layering()
 	_apply_markers(direction_data["pontas"])
 	_current_direction = direction
 
@@ -102,6 +112,36 @@ func _apply_markers(markers_data: Dictionary) -> void:
 		var marker := find_child(marker_name, true, false) as Marker2D
 		if marker != null:
 			marker.position = _parse_vector2(markers_data[marker_name]["posicao"])
+
+
+func _apply_core_layering() -> void:
+	var hip := get_piece_bone(&"quadril")
+	var torso := get_piece_bone(&"torso")
+	var head := get_piece_bone(&"cabeca")
+	if hip == null or torso == null:
+		return
+
+	# A frente da saia usa no máximo Z 12. O torso começa em 13 para cobrir a
+	# cintura da saia, e a cadeia do braço frontal continua acima dele. Alterar
+	# apenas o torso faria o peitoral encobrir o braço em algumas direções.
+	const SKIRT_FOREGROUND_Z := 12
+	torso.z_index = maxi(maxi(torso.z_index, hip.z_index + 1), SKIRT_FOREGROUND_Z + 1)
+	if head != null:
+		head.z_index = maxi(head.z_index, torso.z_index + 1)
+
+	var left_upper := get_piece_bone(&"braco_sup_e")
+	var right_upper := get_piece_bone(&"braco_sup_d")
+	if left_upper == null or right_upper == null:
+		return
+	var front_side := &"e" if left_upper.z_index > right_upper.z_index else &"d"
+	var front_upper := get_piece_bone(StringName("braco_sup_%s" % front_side))
+	var front_lower := get_piece_bone(StringName("braco_inf_%s" % front_side))
+	var front_hand := get_piece_bone(StringName("mao_%s" % front_side))
+	front_upper.z_index = maxi(front_upper.z_index, torso.z_index + 2)
+	if front_lower != null:
+		front_lower.z_index = maxi(front_lower.z_index, front_upper.z_index + 1)
+	if front_hand != null and front_lower != null:
+		front_hand.z_index = maxi(front_hand.z_index, front_lower.z_index + 1)
 
 
 func _parse_vector2(value: Variant) -> Vector2:

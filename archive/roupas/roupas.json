@@ -1,0 +1,2233 @@
+{
+ "obs": "cada peca e' um Sprite2D IRMAO do sprite do corpo, dentro do mesmo Bone2D, declarado DEPOIS dele (irmao posterior desenha na frente). Entre roupas do mesmo osso, ordem crescente de 'ordem'. posicao e z_index do osso nao mudam.",
+ "roupas": {
+  "camisa": {
+   "ossos": [
+    "torso",
+    "braco_sup_e",
+    "braco_sup_d"
+   ],
+   "ordem": 1,
+   "corpos": {
+    "masc": {
+     "se": {
+      "torso": {
+       "arquivo": "camisa/masc/se/torso.png",
+       "tamanho": [
+        19,
+        31
+       ],
+       "offset_sprite": [
+        1.09,
+        -6.78
+       ]
+      },
+      "braco_sup_e": {
+       "arquivo": "camisa/masc/se/braco_sup_e.png",
+       "tamanho": [
+        10,
+        18
+       ],
+       "offset_sprite": [
+        -0.13,
+        3.77
+       ]
+      },
+      "braco_sup_d": {
+       "arquivo": "camisa/masc/se/braco_sup_d.png",
+       "tamanho": [
+        10,
+        17
+       ],
+       "offset_sprite": [
+        0.82,
+        3.3
+       ]
+      }
+     },
+     "sw": {
+      "torso": {
+       "arquivo": "camisa/masc/sw/torso.png",
+       "tamanho": [
+        19,
+        31
+       ],
+       "offset_sprite": [
+        -0.09,
+        -6.78
+       ]
+      },
+      "braco_sup_e": {
+       "arquivo": "camisa/masc/sw/braco_sup_e.png",
+       "tamanho": [
+        10,
+        17
+       ],
+       "offset_sprite": [
+        0.18,
+        3.3
+       ]
+      },
+      "braco_sup_d": {
+       "arquivo": "camisa/masc/sw/braco_sup_d.png",
+       "tamanho": [
+        10,
+        18
+       ],
+       "offset_sprite": [
+        1.13,
+        3.77
+       ]
+      }
+     },
+     "nw": {
+      "torso": {
+       "arquivo": "camisa/masc/nw/torso.png",
+       "tamanho": [
+        19,
+        31
+       ],
+       "offset_sprite": [
+        -0.09,
+        -6.37
+       ]
+      },
+      "braco_sup_e": {
+       "arquivo": "camisa/masc/nw/braco_sup_e.png",
+       "tamanho": [
+        10,
+        17
+       ],
+       "offset_sprite": [
+        1.13,
+        3.46
+       ]
+      },
+      "braco_sup_d": {
+       "arquivo": "camisa/masc/nw/braco_sup_d.png",
+       "tamanho": [
+        10,
+        17
+       ],
+       "offset_sprite": [
+        0.18,
+        3.43
+       ]
+      }
+     },
+     "ne": {
+      "torso": {
+       "arquivo": "camisa/masc/ne/torso.png",
+       "tamanho": [
+        19,
+        31
+       ],
+       "offset_sprite": [
+        1.09,
+        -6.37
+       ]
+      },
+      "braco_sup_e": {
+       "arquivo": "camisa/masc/ne/braco_sup_e.png",
+       "tamanho": [
+        10,
+        17
+       ],
+       "offset_sprite": [
+        0.82,
+        3.43
+       ]
+      },
+      "braco_sup_d": {
+       "arquivo": "camisa/masc/ne/braco_sup_d.png",
+       "tamanho": [
+        10,
+        17
+       ],
+       "offset_sprite": [
+        -0.13,
+        3.46
+       ]
+      }
+     }
+    },
+    "fem": {
+     "se": {
+      "torso": {
+       "arquivo": "camisa/fem/se/torso.png",
+       "tamanho": [
+        19,
+        31
+       ],
+       "offset_sprite": [
+        1.09,
+        -6.78
+       ]
+      },
+      "braco_sup_e": {
+       "arquivo": "camisa/fem/se/braco_sup_e.png",
+       "tamanho": [
+        10,
+        18
+       ],
+       "offset_sprite": [
+        -0.13,
+        3.77
+       ]
+      },
+      "braco_sup_d": {
+       "arquivo": "camisa/fem/se/braco_sup_d.png",
+       "tamanho": [
+        10,
+        17
+       ],
+       "offset_sprite": [
+        0.82,
+        3.3
+       ]
+      }
+     },
+     "sw": {
+      "torso": {
+       "arquivo": "camisa/fem/sw/torso.png",
+       "tamanho": [
+        19,
+        31
+       ],
+       "offset_sprite": [
+        -0.09,
+        -6.78
+       ]
+      },
+      "braco_sup_e": {
+       "arquivo": "camisa/fem/sw/braco_sup_e.png",
+       "tamanho": [
+        10,
+        17
+       ],
+       "offset_sprite": [
+        0.18,
+        3.3
+       ]
+      },
+      "braco_sup_d": {
+       "arquivo": "camisa/fem/sw/braco_sup_d.png",
+       "tamanho": [
+        10,
+        18
+       ],
+       "offset_sprite": [
+        1.13,
+        3.77
+       ]
+      }
+     },
+     "nw": {
+      "torso": {
+       "arquivo": "camisa/fem/nw/torso.png",
+       "tamanho": [
+        18,
+        31
+       ],
+       "offset_sprite": [
+        0.41,
+        -6.37
+       ]
+      },
+      "braco_sup_e": {
+       "arquivo": "camisa/fem/nw/braco_sup_e.png",
+       "tamanho": [
+        10,
+        16
+       ],
+       "offset_sprite": [
+        1.13,
+        2.96
+       ]
+      },
+      "braco_sup_d": {
+       "arquivo": "camisa/fem/nw/braco_sup_d.png",
+       "tamanho": [
+        10,
+        17
+       ],
+       "offset_sprite": [
+        0.18,
+        3.43
+       ]
+      }
+     },
+     "ne": {
+      "torso": {
+       "arquivo": "camisa/fem/ne/torso.png",
+       "tamanho": [
+        18,
+        31
+       ],
+       "offset_sprite": [
+        0.59,
+        -6.37
+       ]
+      },
+      "braco_sup_e": {
+       "arquivo": "camisa/fem/ne/braco_sup_e.png",
+       "tamanho": [
+        10,
+        17
+       ],
+       "offset_sprite": [
+        0.82,
+        3.43
+       ]
+      },
+      "braco_sup_d": {
+       "arquivo": "camisa/fem/ne/braco_sup_d.png",
+       "tamanho": [
+        10,
+        16
+       ],
+       "offset_sprite": [
+        -0.13,
+        2.96
+       ]
+      }
+     }
+    }
+   }
+  },
+  "jaqueta": {
+   "ossos": [
+    "torso",
+    "braco_sup_e",
+    "braco_sup_d",
+    "braco_inf_e",
+    "braco_inf_d"
+   ],
+   "ordem": 2,
+   "corpos": {
+    "masc": {
+     "se": {
+      "torso": {
+       "arquivo": "jaqueta/masc/se/torso.png",
+       "tamanho": [
+        25,
+        34
+       ],
+       "offset_sprite": [
+        0.09,
+        -7.28
+       ]
+      },
+      "braco_sup_e": {
+       "arquivo": "jaqueta/masc/se/braco_sup_e.png",
+       "tamanho": [
+        13,
+        23
+       ],
+       "offset_sprite": [
+        0.37,
+        5.27
+       ]
+      },
+      "braco_sup_d": {
+       "arquivo": "jaqueta/masc/se/braco_sup_d.png",
+       "tamanho": [
+        13,
+        22
+       ],
+       "offset_sprite": [
+        0.32,
+        4.8
+       ]
+      },
+      "braco_inf_e": {
+       "arquivo": "jaqueta/masc/se/braco_inf_e.png",
+       "tamanho": [
+        9,
+        15
+       ],
+       "offset_sprite": [
+        0.1,
+        4.54
+       ]
+      },
+      "braco_inf_d": {
+       "arquivo": "jaqueta/masc/se/braco_inf_d.png",
+       "tamanho": [
+        9,
+        16
+       ],
+       "offset_sprite": [
+        0.97,
+        4.11
+       ]
+      }
+     },
+     "sw": {
+      "torso": {
+       "arquivo": "jaqueta/masc/sw/torso.png",
+       "tamanho": [
+        25,
+        34
+       ],
+       "offset_sprite": [
+        0.91,
+        -7.28
+       ]
+      },
+      "braco_sup_e": {
+       "arquivo": "jaqueta/masc/sw/braco_sup_e.png",
+       "tamanho": [
+        13,
+        22
+       ],
+       "offset_sprite": [
+        0.68,
+        4.8
+       ]
+      },
+      "braco_sup_d": {
+       "arquivo": "jaqueta/masc/sw/braco_sup_d.png",
+       "tamanho": [
+        13,
+        23
+       ],
+       "offset_sprite": [
+        0.63,
+        5.27
+       ]
+      },
+      "braco_inf_e": {
+       "arquivo": "jaqueta/masc/sw/braco_inf_e.png",
+       "tamanho": [
+        9,
+        16
+       ],
+       "offset_sprite": [
+        0.03,
+        4.11
+       ]
+      },
+      "braco_inf_d": {
+       "arquivo": "jaqueta/masc/sw/braco_inf_d.png",
+       "tamanho": [
+        9,
+        15
+       ],
+       "offset_sprite": [
+        0.9,
+        4.54
+       ]
+      }
+     },
+     "nw": {
+      "torso": {
+       "arquivo": "jaqueta/masc/nw/torso.png",
+       "tamanho": [
+        25,
+        32
+       ],
+       "offset_sprite": [
+        0.91,
+        -6.87
+       ]
+      },
+      "braco_sup_e": {
+       "arquivo": "jaqueta/masc/nw/braco_sup_e.png",
+       "tamanho": [
+        13,
+        22
+       ],
+       "offset_sprite": [
+        0.63,
+        4.96
+       ]
+      },
+      "braco_sup_d": {
+       "arquivo": "jaqueta/masc/nw/braco_sup_d.png",
+       "tamanho": [
+        13,
+        23
+       ],
+       "offset_sprite": [
+        0.68,
+        5.43
+       ]
+      },
+      "braco_inf_e": {
+       "arquivo": "jaqueta/masc/nw/braco_inf_e.png",
+       "tamanho": [
+        10,
+        15
+       ],
+       "offset_sprite": [
+        0.4,
+        4.07
+       ]
+      },
+      "braco_inf_d": {
+       "arquivo": "jaqueta/masc/nw/braco_inf_d.png",
+       "tamanho": [
+        9,
+        15
+       ],
+       "offset_sprite": [
+        0.03,
+        4.01
+       ]
+      }
+     },
+     "ne": {
+      "torso": {
+       "arquivo": "jaqueta/masc/ne/torso.png",
+       "tamanho": [
+        25,
+        32
+       ],
+       "offset_sprite": [
+        0.09,
+        -6.87
+       ]
+      },
+      "braco_sup_e": {
+       "arquivo": "jaqueta/masc/ne/braco_sup_e.png",
+       "tamanho": [
+        13,
+        23
+       ],
+       "offset_sprite": [
+        0.32,
+        5.43
+       ]
+      },
+      "braco_sup_d": {
+       "arquivo": "jaqueta/masc/ne/braco_sup_d.png",
+       "tamanho": [
+        13,
+        22
+       ],
+       "offset_sprite": [
+        0.37,
+        4.96
+       ]
+      },
+      "braco_inf_e": {
+       "arquivo": "jaqueta/masc/ne/braco_inf_e.png",
+       "tamanho": [
+        9,
+        15
+       ],
+       "offset_sprite": [
+        0.97,
+        4.01
+       ]
+      },
+      "braco_inf_d": {
+       "arquivo": "jaqueta/masc/ne/braco_inf_d.png",
+       "tamanho": [
+        10,
+        15
+       ],
+       "offset_sprite": [
+        0.6,
+        4.07
+       ]
+      }
+     }
+    },
+    "fem": {
+     "se": {
+      "torso": {
+       "arquivo": "jaqueta/fem/se/torso.png",
+       "tamanho": [
+        25,
+        33
+       ],
+       "offset_sprite": [
+        0.09,
+        -6.78
+       ]
+      },
+      "braco_sup_e": {
+       "arquivo": "jaqueta/fem/se/braco_sup_e.png",
+       "tamanho": [
+        12,
+        23
+       ],
+       "offset_sprite": [
+        -0.13,
+        5.27
+       ]
+      },
+      "braco_sup_d": {
+       "arquivo": "jaqueta/fem/se/braco_sup_d.png",
+       "tamanho": [
+        12,
+        22
+       ],
+       "offset_sprite": [
+        0.82,
+        4.8
+       ]
+      },
+      "braco_inf_e": {
+       "arquivo": "jaqueta/fem/se/braco_inf_e.png",
+       "tamanho": [
+        9,
+        15
+       ],
+       "offset_sprite": [
+        0.1,
+        4.54
+       ]
+      },
+      "braco_inf_d": {
+       "arquivo": "jaqueta/fem/se/braco_inf_d.png",
+       "tamanho": [
+        9,
+        15
+       ],
+       "offset_sprite": [
+        0.97,
+        4.61
+       ]
+      }
+     },
+     "sw": {
+      "torso": {
+       "arquivo": "jaqueta/fem/sw/torso.png",
+       "tamanho": [
+        25,
+        33
+       ],
+       "offset_sprite": [
+        0.91,
+        -6.78
+       ]
+      },
+      "braco_sup_e": {
+       "arquivo": "jaqueta/fem/sw/braco_sup_e.png",
+       "tamanho": [
+        12,
+        22
+       ],
+       "offset_sprite": [
+        0.18,
+        4.8
+       ]
+      },
+      "braco_sup_d": {
+       "arquivo": "jaqueta/fem/sw/braco_sup_d.png",
+       "tamanho": [
+        12,
+        23
+       ],
+       "offset_sprite": [
+        1.13,
+        5.27
+       ]
+      },
+      "braco_inf_e": {
+       "arquivo": "jaqueta/fem/sw/braco_inf_e.png",
+       "tamanho": [
+        9,
+        15
+       ],
+       "offset_sprite": [
+        0.03,
+        4.61
+       ]
+      },
+      "braco_inf_d": {
+       "arquivo": "jaqueta/fem/sw/braco_inf_d.png",
+       "tamanho": [
+        9,
+        15
+       ],
+       "offset_sprite": [
+        0.9,
+        4.54
+       ]
+      }
+     },
+     "nw": {
+      "torso": {
+       "arquivo": "jaqueta/fem/nw/torso.png",
+       "tamanho": [
+        25,
+        33
+       ],
+       "offset_sprite": [
+        0.91,
+        -6.37
+       ]
+      },
+      "braco_sup_e": {
+       "arquivo": "jaqueta/fem/nw/braco_sup_e.png",
+       "tamanho": [
+        12,
+        22
+       ],
+       "offset_sprite": [
+        1.13,
+        4.96
+       ]
+      },
+      "braco_sup_d": {
+       "arquivo": "jaqueta/fem/nw/braco_sup_d.png",
+       "tamanho": [
+        12,
+        23
+       ],
+       "offset_sprite": [
+        0.18,
+        5.43
+       ]
+      },
+      "braco_inf_e": {
+       "arquivo": "jaqueta/fem/nw/braco_inf_e.png",
+       "tamanho": [
+        9,
+        15
+       ],
+       "offset_sprite": [
+        0.9,
+        4.07
+       ]
+      },
+      "braco_inf_d": {
+       "arquivo": "jaqueta/fem/nw/braco_inf_d.png",
+       "tamanho": [
+        9,
+        15
+       ],
+       "offset_sprite": [
+        0.03,
+        4.01
+       ]
+      }
+     },
+     "ne": {
+      "torso": {
+       "arquivo": "jaqueta/fem/ne/torso.png",
+       "tamanho": [
+        25,
+        33
+       ],
+       "offset_sprite": [
+        0.09,
+        -6.37
+       ]
+      },
+      "braco_sup_e": {
+       "arquivo": "jaqueta/fem/ne/braco_sup_e.png",
+       "tamanho": [
+        12,
+        23
+       ],
+       "offset_sprite": [
+        0.82,
+        5.43
+       ]
+      },
+      "braco_sup_d": {
+       "arquivo": "jaqueta/fem/ne/braco_sup_d.png",
+       "tamanho": [
+        12,
+        22
+       ],
+       "offset_sprite": [
+        -0.13,
+        4.96
+       ]
+      },
+      "braco_inf_e": {
+       "arquivo": "jaqueta/fem/ne/braco_inf_e.png",
+       "tamanho": [
+        9,
+        15
+       ],
+       "offset_sprite": [
+        0.97,
+        4.01
+       ]
+      },
+      "braco_inf_d": {
+       "arquivo": "jaqueta/fem/ne/braco_inf_d.png",
+       "tamanho": [
+        9,
+        15
+       ],
+       "offset_sprite": [
+        0.1,
+        4.07
+       ]
+      }
+     }
+    }
+   }
+  },
+  "calca": {
+   "ossos": [
+    "quadril",
+    "coxa_e",
+    "coxa_d",
+    "perna_e",
+    "perna_d"
+   ],
+   "ordem": 1,
+   "corpos": {
+    "masc": {
+     "se": {
+      "quadril": {
+       "arquivo": "calca/masc/se/quadril.png",
+       "tamanho": [
+        19,
+        18
+       ],
+       "offset_sprite": [
+        0.24,
+        1.87
+       ]
+      },
+      "coxa_e": {
+       "arquivo": "calca/masc/se/coxa_e.png",
+       "tamanho": [
+        13,
+        25
+       ],
+       "offset_sprite": [
+        0.55,
+        6.52
+       ]
+      },
+      "coxa_d": {
+       "arquivo": "calca/masc/se/coxa_d.png",
+       "tamanho": [
+        13,
+        26
+       ],
+       "offset_sprite": [
+        0.73,
+        6.43
+       ]
+      },
+      "perna_e": {
+       "arquivo": "calca/masc/se/perna_e.png",
+       "tamanho": [
+        11,
+        21
+       ],
+       "offset_sprite": [
+        -0.4,
+        7.36
+       ]
+      },
+      "perna_d": {
+       "arquivo": "calca/masc/se/perna_d.png",
+       "tamanho": [
+        11,
+        22
+       ],
+       "offset_sprite": [
+        0.37,
+        7.47
+       ]
+      }
+     },
+     "sw": {
+      "quadril": {
+       "arquivo": "calca/masc/sw/quadril.png",
+       "tamanho": [
+        19,
+        18
+       ],
+       "offset_sprite": [
+        0.76,
+        1.87
+       ]
+      },
+      "coxa_e": {
+       "arquivo": "calca/masc/sw/coxa_e.png",
+       "tamanho": [
+        13,
+        26
+       ],
+       "offset_sprite": [
+        0.27,
+        6.43
+       ]
+      },
+      "coxa_d": {
+       "arquivo": "calca/masc/sw/coxa_d.png",
+       "tamanho": [
+        13,
+        25
+       ],
+       "offset_sprite": [
+        0.45,
+        6.52
+       ]
+      },
+      "perna_e": {
+       "arquivo": "calca/masc/sw/perna_e.png",
+       "tamanho": [
+        11,
+        22
+       ],
+       "offset_sprite": [
+        0.63,
+        7.47
+       ]
+      },
+      "perna_d": {
+       "arquivo": "calca/masc/sw/perna_d.png",
+       "tamanho": [
+        11,
+        21
+       ],
+       "offset_sprite": [
+        1.4,
+        7.36
+       ]
+      }
+     },
+     "nw": {
+      "quadril": {
+       "arquivo": "calca/masc/nw/quadril.png",
+       "tamanho": [
+        19,
+        18
+       ],
+       "offset_sprite": [
+        0.76,
+        2.13
+       ]
+      },
+      "coxa_e": {
+       "arquivo": "calca/masc/nw/coxa_e.png",
+       "tamanho": [
+        13,
+        25
+       ],
+       "offset_sprite": [
+        0.45,
+        6.29
+       ]
+      },
+      "coxa_d": {
+       "arquivo": "calca/masc/nw/coxa_d.png",
+       "tamanho": [
+        13,
+        26
+       ],
+       "offset_sprite": [
+        0.27,
+        6.38
+       ]
+      },
+      "perna_e": {
+       "arquivo": "calca/masc/nw/perna_e.png",
+       "tamanho": [
+        11,
+        21
+       ],
+       "offset_sprite": [
+        1.4,
+        7.49
+       ]
+      },
+      "perna_d": {
+       "arquivo": "calca/masc/nw/perna_d.png",
+       "tamanho": [
+        11,
+        22
+       ],
+       "offset_sprite": [
+        0.63,
+        7.37
+       ]
+      }
+     },
+     "ne": {
+      "quadril": {
+       "arquivo": "calca/masc/ne/quadril.png",
+       "tamanho": [
+        19,
+        18
+       ],
+       "offset_sprite": [
+        0.24,
+        2.13
+       ]
+      },
+      "coxa_e": {
+       "arquivo": "calca/masc/ne/coxa_e.png",
+       "tamanho": [
+        13,
+        26
+       ],
+       "offset_sprite": [
+        0.73,
+        6.38
+       ]
+      },
+      "coxa_d": {
+       "arquivo": "calca/masc/ne/coxa_d.png",
+       "tamanho": [
+        13,
+        25
+       ],
+       "offset_sprite": [
+        0.55,
+        6.29
+       ]
+      },
+      "perna_e": {
+       "arquivo": "calca/masc/ne/perna_e.png",
+       "tamanho": [
+        11,
+        22
+       ],
+       "offset_sprite": [
+        0.37,
+        7.37
+       ]
+      },
+      "perna_d": {
+       "arquivo": "calca/masc/ne/perna_d.png",
+       "tamanho": [
+        11,
+        21
+       ],
+       "offset_sprite": [
+        -0.4,
+        7.49
+       ]
+      }
+     }
+    },
+    "fem": {
+     "se": {
+      "quadril": {
+       "arquivo": "calca/fem/se/quadril.png",
+       "tamanho": [
+        20,
+        18
+       ],
+       "offset_sprite": [
+        0.74,
+        1.87
+       ]
+      },
+      "coxa_e": {
+       "arquivo": "calca/fem/se/coxa_e.png",
+       "tamanho": [
+        13,
+        26
+       ],
+       "offset_sprite": [
+        0.55,
+        6.02
+       ]
+      },
+      "coxa_d": {
+       "arquivo": "calca/fem/se/coxa_d.png",
+       "tamanho": [
+        13,
+        26
+       ],
+       "offset_sprite": [
+        0.73,
+        6.43
+       ]
+      },
+      "perna_e": {
+       "arquivo": "calca/fem/se/perna_e.png",
+       "tamanho": [
+        11,
+        21
+       ],
+       "offset_sprite": [
+        -0.4,
+        7.36
+       ]
+      },
+      "perna_d": {
+       "arquivo": "calca/fem/se/perna_d.png",
+       "tamanho": [
+        11,
+        22
+       ],
+       "offset_sprite": [
+        0.37,
+        7.47
+       ]
+      }
+     },
+     "sw": {
+      "quadril": {
+       "arquivo": "calca/fem/sw/quadril.png",
+       "tamanho": [
+        20,
+        18
+       ],
+       "offset_sprite": [
+        0.26,
+        1.87
+       ]
+      },
+      "coxa_e": {
+       "arquivo": "calca/fem/sw/coxa_e.png",
+       "tamanho": [
+        13,
+        26
+       ],
+       "offset_sprite": [
+        0.27,
+        6.43
+       ]
+      },
+      "coxa_d": {
+       "arquivo": "calca/fem/sw/coxa_d.png",
+       "tamanho": [
+        13,
+        26
+       ],
+       "offset_sprite": [
+        0.45,
+        6.02
+       ]
+      },
+      "perna_e": {
+       "arquivo": "calca/fem/sw/perna_e.png",
+       "tamanho": [
+        11,
+        22
+       ],
+       "offset_sprite": [
+        0.63,
+        7.47
+       ]
+      },
+      "perna_d": {
+       "arquivo": "calca/fem/sw/perna_d.png",
+       "tamanho": [
+        11,
+        21
+       ],
+       "offset_sprite": [
+        1.4,
+        7.36
+       ]
+      }
+     },
+     "nw": {
+      "quadril": {
+       "arquivo": "calca/fem/nw/quadril.png",
+       "tamanho": [
+        20,
+        18
+       ],
+       "offset_sprite": [
+        0.26,
+        2.13
+       ]
+      },
+      "coxa_e": {
+       "arquivo": "calca/fem/nw/coxa_e.png",
+       "tamanho": [
+        13,
+        26
+       ],
+       "offset_sprite": [
+        0.45,
+        5.79
+       ]
+      },
+      "coxa_d": {
+       "arquivo": "calca/fem/nw/coxa_d.png",
+       "tamanho": [
+        13,
+        26
+       ],
+       "offset_sprite": [
+        0.27,
+        6.38
+       ]
+      },
+      "perna_e": {
+       "arquivo": "calca/fem/nw/perna_e.png",
+       "tamanho": [
+        11,
+        21
+       ],
+       "offset_sprite": [
+        1.4,
+        7.49
+       ]
+      },
+      "perna_d": {
+       "arquivo": "calca/fem/nw/perna_d.png",
+       "tamanho": [
+        11,
+        22
+       ],
+       "offset_sprite": [
+        0.63,
+        7.37
+       ]
+      }
+     },
+     "ne": {
+      "quadril": {
+       "arquivo": "calca/fem/ne/quadril.png",
+       "tamanho": [
+        20,
+        18
+       ],
+       "offset_sprite": [
+        0.74,
+        2.13
+       ]
+      },
+      "coxa_e": {
+       "arquivo": "calca/fem/ne/coxa_e.png",
+       "tamanho": [
+        13,
+        26
+       ],
+       "offset_sprite": [
+        0.73,
+        6.38
+       ]
+      },
+      "coxa_d": {
+       "arquivo": "calca/fem/ne/coxa_d.png",
+       "tamanho": [
+        13,
+        26
+       ],
+       "offset_sprite": [
+        0.55,
+        5.79
+       ]
+      },
+      "perna_e": {
+       "arquivo": "calca/fem/ne/perna_e.png",
+       "tamanho": [
+        11,
+        22
+       ],
+       "offset_sprite": [
+        0.37,
+        7.37
+       ]
+      },
+      "perna_d": {
+       "arquivo": "calca/fem/ne/perna_d.png",
+       "tamanho": [
+        11,
+        21
+       ],
+       "offset_sprite": [
+        -0.4,
+        7.49
+       ]
+      }
+     }
+    }
+   }
+  },
+  "saia": {
+   "ossos": [
+    "quadril"
+   ],
+   "ordem": 1,
+   "corpos": {
+    "masc": {
+     "se": {
+      "quadril": {
+       "arquivo": "saia/masc/se/quadril.png",
+       "tamanho": [
+        23,
+        29
+       ],
+       "offset_sprite": [
+        0.24,
+        8.37
+       ]
+      }
+     },
+     "sw": {
+      "quadril": {
+       "arquivo": "saia/masc/sw/quadril.png",
+       "tamanho": [
+        23,
+        29
+       ],
+       "offset_sprite": [
+        0.76,
+        8.37
+       ]
+      }
+     },
+     "nw": {
+      "quadril": {
+       "arquivo": "saia/masc/nw/quadril.png",
+       "tamanho": [
+        23,
+        29
+       ],
+       "offset_sprite": [
+        0.76,
+        8.63
+       ]
+      }
+     },
+     "ne": {
+      "quadril": {
+       "arquivo": "saia/masc/ne/quadril.png",
+       "tamanho": [
+        23,
+        29
+       ],
+       "offset_sprite": [
+        0.24,
+        8.63
+       ]
+      }
+     }
+    },
+    "fem": {
+     "se": {
+      "quadril": {
+       "arquivo": "saia/fem/se/quadril.png",
+       "tamanho": [
+        23,
+        29
+       ],
+       "offset_sprite": [
+        0.24,
+        8.37
+       ]
+      }
+     },
+     "sw": {
+      "quadril": {
+       "arquivo": "saia/fem/sw/quadril.png",
+       "tamanho": [
+        23,
+        29
+       ],
+       "offset_sprite": [
+        0.76,
+        8.37
+       ]
+      }
+     },
+     "nw": {
+      "quadril": {
+       "arquivo": "saia/fem/nw/quadril.png",
+       "tamanho": [
+        23,
+        29
+       ],
+       "offset_sprite": [
+        0.76,
+        8.63
+       ]
+      }
+     },
+     "ne": {
+      "quadril": {
+       "arquivo": "saia/fem/ne/quadril.png",
+       "tamanho": [
+        23,
+        29
+       ],
+       "offset_sprite": [
+        0.24,
+        8.63
+       ]
+      }
+     }
+    }
+   }
+  },
+  "sapato": {
+   "ossos": [
+    "pe_e",
+    "pe_d"
+   ],
+   "ordem": 1,
+   "corpos": {
+    "masc": {
+     "se": {
+      "pe_e": {
+       "arquivo": "sapato/masc/se/pe_e.png",
+       "tamanho": [
+        12,
+        13
+       ],
+       "offset_sprite": [
+        2.05,
+        4.0
+       ]
+      },
+      "pe_d": {
+       "arquivo": "sapato/masc/se/pe_d.png",
+       "tamanho": [
+        13,
+        13
+       ],
+       "offset_sprite": [
+        2.11,
+        3.72
+       ]
+      }
+     },
+     "sw": {
+      "pe_e": {
+       "arquivo": "sapato/masc/sw/pe_e.png",
+       "tamanho": [
+        13,
+        13
+       ],
+       "offset_sprite": [
+        -1.11,
+        3.72
+       ]
+      },
+      "pe_d": {
+       "arquivo": "sapato/masc/sw/pe_d.png",
+       "tamanho": [
+        12,
+        13
+       ],
+       "offset_sprite": [
+        -1.05,
+        4.0
+       ]
+      }
+     },
+     "nw": {
+      "pe_e": {
+       "arquivo": "sapato/masc/nw/pe_e.png",
+       "tamanho": [
+        12,
+        10
+       ],
+       "offset_sprite": [
+        -1.05,
+        2.9
+       ]
+      },
+      "pe_d": {
+       "arquivo": "sapato/masc/nw/pe_d.png",
+       "tamanho": [
+        13,
+        11
+       ],
+       "offset_sprite": [
+        -1.11,
+        2.68
+       ]
+      }
+     },
+     "ne": {
+      "pe_e": {
+       "arquivo": "sapato/masc/ne/pe_e.png",
+       "tamanho": [
+        13,
+        11
+       ],
+       "offset_sprite": [
+        2.11,
+        2.68
+       ]
+      },
+      "pe_d": {
+       "arquivo": "sapato/masc/ne/pe_d.png",
+       "tamanho": [
+        12,
+        10
+       ],
+       "offset_sprite": [
+        2.05,
+        2.9
+       ]
+      }
+     }
+    },
+    "fem": {
+     "se": {
+      "pe_e": {
+       "arquivo": "sapato/fem/se/pe_e.png",
+       "tamanho": [
+        12,
+        13
+       ],
+       "offset_sprite": [
+        2.05,
+        4.0
+       ]
+      },
+      "pe_d": {
+       "arquivo": "sapato/fem/se/pe_d.png",
+       "tamanho": [
+        13,
+        13
+       ],
+       "offset_sprite": [
+        2.11,
+        3.72
+       ]
+      }
+     },
+     "sw": {
+      "pe_e": {
+       "arquivo": "sapato/fem/sw/pe_e.png",
+       "tamanho": [
+        13,
+        13
+       ],
+       "offset_sprite": [
+        -1.11,
+        3.72
+       ]
+      },
+      "pe_d": {
+       "arquivo": "sapato/fem/sw/pe_d.png",
+       "tamanho": [
+        12,
+        13
+       ],
+       "offset_sprite": [
+        -1.05,
+        4.0
+       ]
+      }
+     },
+     "nw": {
+      "pe_e": {
+       "arquivo": "sapato/fem/nw/pe_e.png",
+       "tamanho": [
+        12,
+        10
+       ],
+       "offset_sprite": [
+        -1.05,
+        2.9
+       ]
+      },
+      "pe_d": {
+       "arquivo": "sapato/fem/nw/pe_d.png",
+       "tamanho": [
+        13,
+        11
+       ],
+       "offset_sprite": [
+        -1.11,
+        2.68
+       ]
+      }
+     },
+     "ne": {
+      "pe_e": {
+       "arquivo": "sapato/fem/ne/pe_e.png",
+       "tamanho": [
+        13,
+        11
+       ],
+       "offset_sprite": [
+        2.11,
+        2.68
+       ]
+      },
+      "pe_d": {
+       "arquivo": "sapato/fem/ne/pe_d.png",
+       "tamanho": [
+        12,
+        10
+       ],
+       "offset_sprite": [
+        2.05,
+        2.9
+       ]
+      }
+     }
+    }
+   }
+  },
+  "chinelo": {
+   "ossos": [
+    "pe_e",
+    "pe_d"
+   ],
+   "ordem": 1,
+   "corpos": {
+    "masc": {
+     "se": {
+      "pe_e": {
+       "arquivo": "chinelo/masc/se/pe_e.png",
+       "tamanho": [
+        11,
+        8
+       ],
+       "offset_sprite": [
+        1.55,
+        5.5
+       ]
+      },
+      "pe_d": {
+       "arquivo": "chinelo/masc/se/pe_d.png",
+       "tamanho": [
+        10,
+        8
+       ],
+       "offset_sprite": [
+        2.61,
+        5.22
+       ]
+      }
+     },
+     "sw": {
+      "pe_e": {
+       "arquivo": "chinelo/masc/sw/pe_e.png",
+       "tamanho": [
+        10,
+        8
+       ],
+       "offset_sprite": [
+        -1.61,
+        5.22
+       ]
+      },
+      "pe_d": {
+       "arquivo": "chinelo/masc/sw/pe_d.png",
+       "tamanho": [
+        11,
+        8
+       ],
+       "offset_sprite": [
+        -0.55,
+        5.5
+       ]
+      }
+     },
+     "nw": {
+      "pe_e": {
+       "arquivo": "chinelo/masc/nw/pe_e.png",
+       "tamanho": [
+        11,
+        8
+       ],
+       "offset_sprite": [
+        -0.55,
+        3.9
+       ]
+      },
+      "pe_d": {
+       "arquivo": "chinelo/masc/nw/pe_d.png",
+       "tamanho": [
+        10,
+        8
+       ],
+       "offset_sprite": [
+        -1.61,
+        4.18
+       ]
+      }
+     },
+     "ne": {
+      "pe_e": {
+       "arquivo": "chinelo/masc/ne/pe_e.png",
+       "tamanho": [
+        10,
+        8
+       ],
+       "offset_sprite": [
+        2.61,
+        4.18
+       ]
+      },
+      "pe_d": {
+       "arquivo": "chinelo/masc/ne/pe_d.png",
+       "tamanho": [
+        11,
+        8
+       ],
+       "offset_sprite": [
+        1.55,
+        3.9
+       ]
+      }
+     }
+    },
+    "fem": {
+     "se": {
+      "pe_e": {
+       "arquivo": "chinelo/fem/se/pe_e.png",
+       "tamanho": [
+        11,
+        8
+       ],
+       "offset_sprite": [
+        1.55,
+        5.5
+       ]
+      },
+      "pe_d": {
+       "arquivo": "chinelo/fem/se/pe_d.png",
+       "tamanho": [
+        10,
+        8
+       ],
+       "offset_sprite": [
+        2.61,
+        5.22
+       ]
+      }
+     },
+     "sw": {
+      "pe_e": {
+       "arquivo": "chinelo/fem/sw/pe_e.png",
+       "tamanho": [
+        10,
+        8
+       ],
+       "offset_sprite": [
+        -1.61,
+        5.22
+       ]
+      },
+      "pe_d": {
+       "arquivo": "chinelo/fem/sw/pe_d.png",
+       "tamanho": [
+        11,
+        8
+       ],
+       "offset_sprite": [
+        -0.55,
+        5.5
+       ]
+      }
+     },
+     "nw": {
+      "pe_e": {
+       "arquivo": "chinelo/fem/nw/pe_e.png",
+       "tamanho": [
+        11,
+        8
+       ],
+       "offset_sprite": [
+        -0.55,
+        3.9
+       ]
+      },
+      "pe_d": {
+       "arquivo": "chinelo/fem/nw/pe_d.png",
+       "tamanho": [
+        10,
+        8
+       ],
+       "offset_sprite": [
+        -1.61,
+        4.18
+       ]
+      }
+     },
+     "ne": {
+      "pe_e": {
+       "arquivo": "chinelo/fem/ne/pe_e.png",
+       "tamanho": [
+        10,
+        8
+       ],
+       "offset_sprite": [
+        2.61,
+        4.18
+       ]
+      },
+      "pe_d": {
+       "arquivo": "chinelo/fem/ne/pe_d.png",
+       "tamanho": [
+        11,
+        8
+       ],
+       "offset_sprite": [
+        1.55,
+        3.9
+       ]
+      }
+     }
+    }
+   }
+  },
+  "bone": {
+   "ossos": [
+    "cabeca"
+   ],
+   "ordem": 3,
+   "corpos": {
+    "masc": {
+     "se": {
+      "cabeca": {
+       "arquivo": "bone/masc/se/cabeca.png",
+       "tamanho": [
+        18,
+        15
+       ],
+       "offset_sprite": [
+        1.59,
+        -12.71
+       ]
+      }
+     },
+     "sw": {
+      "cabeca": {
+       "arquivo": "bone/masc/sw/cabeca.png",
+       "tamanho": [
+        18,
+        15
+       ],
+       "offset_sprite": [
+        -0.59,
+        -12.71
+       ]
+      }
+     },
+     "nw": {
+      "cabeca": {
+       "arquivo": "bone/masc/nw/cabeca.png",
+       "tamanho": [
+        19,
+        12
+       ],
+       "offset_sprite": [
+        -1.09,
+        -13.79
+       ]
+      }
+     },
+     "ne": {
+      "cabeca": {
+       "arquivo": "bone/masc/ne/cabeca.png",
+       "tamanho": [
+        19,
+        12
+       ],
+       "offset_sprite": [
+        2.09,
+        -13.79
+       ]
+      }
+     }
+    },
+    "fem": {
+     "se": {
+      "cabeca": {
+       "arquivo": "bone/fem/se/cabeca.png",
+       "tamanho": [
+        18,
+        15
+       ],
+       "offset_sprite": [
+        1.59,
+        -12.71
+       ]
+      }
+     },
+     "sw": {
+      "cabeca": {
+       "arquivo": "bone/fem/sw/cabeca.png",
+       "tamanho": [
+        18,
+        15
+       ],
+       "offset_sprite": [
+        -0.59,
+        -12.71
+       ]
+      }
+     },
+     "nw": {
+      "cabeca": {
+       "arquivo": "bone/fem/nw/cabeca.png",
+       "tamanho": [
+        19,
+        12
+       ],
+       "offset_sprite": [
+        -1.09,
+        -13.79
+       ]
+      }
+     },
+     "ne": {
+      "cabeca": {
+       "arquivo": "bone/fem/ne/cabeca.png",
+       "tamanho": [
+        19,
+        12
+       ],
+       "offset_sprite": [
+        2.09,
+        -13.79
+       ]
+      }
+     }
+    }
+   }
+  },
+  "chapeu": {
+   "ossos": [
+    "cabeca"
+   ],
+   "ordem": 3,
+   "corpos": {
+    "masc": {
+     "se": {
+      "cabeca": {
+       "arquivo": "chapeu/masc/se/cabeca.png",
+       "tamanho": [
+        19,
+        17
+       ],
+       "offset_sprite": [
+        1.09,
+        -14.71
+       ]
+      }
+     },
+     "sw": {
+      "cabeca": {
+       "arquivo": "chapeu/masc/sw/cabeca.png",
+       "tamanho": [
+        19,
+        17
+       ],
+       "offset_sprite": [
+        -0.09,
+        -14.71
+       ]
+      }
+     },
+     "nw": {
+      "cabeca": {
+       "arquivo": "chapeu/masc/nw/cabeca.png",
+       "tamanho": [
+        19,
+        16
+       ],
+       "offset_sprite": [
+        -0.09,
+        -14.79
+       ]
+      }
+     },
+     "ne": {
+      "cabeca": {
+       "arquivo": "chapeu/masc/ne/cabeca.png",
+       "tamanho": [
+        19,
+        16
+       ],
+       "offset_sprite": [
+        1.09,
+        -14.79
+       ]
+      }
+     }
+    },
+    "fem": {
+     "se": {
+      "cabeca": {
+       "arquivo": "chapeu/fem/se/cabeca.png",
+       "tamanho": [
+        19,
+        17
+       ],
+       "offset_sprite": [
+        1.09,
+        -14.71
+       ]
+      }
+     },
+     "sw": {
+      "cabeca": {
+       "arquivo": "chapeu/fem/sw/cabeca.png",
+       "tamanho": [
+        19,
+        17
+       ],
+       "offset_sprite": [
+        -0.09,
+        -14.71
+       ]
+      }
+     },
+     "nw": {
+      "cabeca": {
+       "arquivo": "chapeu/fem/nw/cabeca.png",
+       "tamanho": [
+        19,
+        16
+       ],
+       "offset_sprite": [
+        -0.09,
+        -14.79
+       ]
+      }
+     },
+     "ne": {
+      "cabeca": {
+       "arquivo": "chapeu/fem/ne/cabeca.png",
+       "tamanho": [
+        19,
+        16
+       ],
+       "offset_sprite": [
+        1.09,
+        -14.79
+       ]
+      }
+     }
+    }
+   }
+  },
+  "oculos_escuro": {
+   "ossos": [
+    "cabeca"
+   ],
+   "ordem": 2,
+   "corpos": {
+    "masc": {
+     "se": {
+      "cabeca": {
+       "arquivo": "oculos_escuro/masc/se/cabeca.png",
+       "tamanho": [
+        14,
+        10
+       ],
+       "offset_sprite": [
+        0.59,
+        -8.21
+       ]
+      }
+     },
+     "sw": {
+      "cabeca": {
+       "arquivo": "oculos_escuro/masc/sw/cabeca.png",
+       "tamanho": [
+        14,
+        10
+       ],
+       "offset_sprite": [
+        0.41,
+        -8.21
+       ]
+      }
+     },
+     "nw": {
+      "cabeca": {
+       "arquivo": "oculos_escuro/masc/nw/cabeca.png",
+       "tamanho": [
+        13,
+        8
+       ],
+       "offset_sprite": [
+        -0.09,
+        -9.79
+       ]
+      }
+     },
+     "ne": {
+      "cabeca": {
+       "arquivo": "oculos_escuro/masc/ne/cabeca.png",
+       "tamanho": [
+        13,
+        8
+       ],
+       "offset_sprite": [
+        1.09,
+        -9.79
+       ]
+      }
+     }
+    },
+    "fem": {
+     "se": {
+      "cabeca": {
+       "arquivo": "oculos_escuro/fem/se/cabeca.png",
+       "tamanho": [
+        14,
+        10
+       ],
+       "offset_sprite": [
+        0.59,
+        -8.21
+       ]
+      }
+     },
+     "sw": {
+      "cabeca": {
+       "arquivo": "oculos_escuro/fem/sw/cabeca.png",
+       "tamanho": [
+        14,
+        10
+       ],
+       "offset_sprite": [
+        0.41,
+        -8.21
+       ]
+      }
+     },
+     "nw": {
+      "cabeca": {
+       "arquivo": "oculos_escuro/fem/nw/cabeca.png",
+       "tamanho": [
+        13,
+        8
+       ],
+       "offset_sprite": [
+        -0.09,
+        -9.79
+       ]
+      }
+     },
+     "ne": {
+      "cabeca": {
+       "arquivo": "oculos_escuro/fem/ne/cabeca.png",
+       "tamanho": [
+        13,
+        8
+       ],
+       "offset_sprite": [
+        1.09,
+        -9.79
+       ]
+      }
+     }
+    }
+   }
+  },
+  "oculos": {
+   "ossos": [
+    "cabeca"
+   ],
+   "ordem": 2,
+   "corpos": {
+    "masc": {
+     "se": {
+      "cabeca": {
+       "arquivo": "oculos/masc/se/cabeca.png",
+       "tamanho": [
+        14,
+        10
+       ],
+       "offset_sprite": [
+        0.59,
+        -8.21
+       ]
+      }
+     },
+     "sw": {
+      "cabeca": {
+       "arquivo": "oculos/masc/sw/cabeca.png",
+       "tamanho": [
+        14,
+        10
+       ],
+       "offset_sprite": [
+        0.41,
+        -8.21
+       ]
+      }
+     },
+     "nw": {
+      "cabeca": {
+       "arquivo": "oculos/masc/nw/cabeca.png",
+       "tamanho": [
+        13,
+        8
+       ],
+       "offset_sprite": [
+        -0.09,
+        -9.79
+       ]
+      }
+     },
+     "ne": {
+      "cabeca": {
+       "arquivo": "oculos/masc/ne/cabeca.png",
+       "tamanho": [
+        13,
+        8
+       ],
+       "offset_sprite": [
+        1.09,
+        -9.79
+       ]
+      }
+     }
+    },
+    "fem": {
+     "se": {
+      "cabeca": {
+       "arquivo": "oculos/fem/se/cabeca.png",
+       "tamanho": [
+        14,
+        10
+       ],
+       "offset_sprite": [
+        0.59,
+        -8.21
+       ]
+      }
+     },
+     "sw": {
+      "cabeca": {
+       "arquivo": "oculos/fem/sw/cabeca.png",
+       "tamanho": [
+        14,
+        10
+       ],
+       "offset_sprite": [
+        0.41,
+        -8.21
+       ]
+      }
+     },
+     "nw": {
+      "cabeca": {
+       "arquivo": "oculos/fem/nw/cabeca.png",
+       "tamanho": [
+        13,
+        8
+       ],
+       "offset_sprite": [
+        -0.09,
+        -9.79
+       ]
+      }
+     },
+     "ne": {
+      "cabeca": {
+       "arquivo": "oculos/fem/ne/cabeca.png",
+       "tamanho": [
+        13,
+        8
+       ],
+       "offset_sprite": [
+        1.09,
+        -9.79
+       ]
+      }
+     }
+    }
+   }
+  }
+ }
+}

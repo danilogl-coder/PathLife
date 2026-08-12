@@ -1,4 +1,4 @@
-[gd_scene load_steps=20 format=3 uid="uid://gcuaslvokbkv"]
+[gd_scene load_steps=24 format=3 uid="uid://gcuaslvokbkv"]
 
 [ext_resource type="Script" uid="uid://q2uetts5phi4" path="res://presentation/characters/cutout/character_visual.gd" id="1_g0nxb"]
 [ext_resource type="Script" uid="uid://b1rtkdeixfyy3" path="res://presentation/characters/cutout/character_rig.gd" id="1_n1fq5"]
@@ -19,6 +19,11 @@
 [ext_resource type="Texture2D" uid="uid://dff6idco8owvy" path="res://assets/characters/cutout/masc/se/pe_d.png" id="15_pe_d"]
 [ext_resource type="AnimationLibrary" path="res://presentation/characters/cutout/animation/animacoes_fem.tres" id="18_26yyw"]
 [ext_resource type="AnimationLibrary" path="res://presentation/characters/cutout/animation/animacoes_masc.tres" id="19_ycmqt"]
+[ext_resource type="PackedScene" path="res://presentation/characters/cutout/skirt/saia_deformavel.tscn" id="20_skirt"]
+[ext_resource type="Resource" path="res://data/character_customization/skirt/default_skirt.tres" id="21_skirt_resource"]
+[ext_resource type="Script" path="res://presentation/characters/cutout/clothing/wardrobe_presenter.gd" id="22_wardrobe"]
+[ext_resource type="Resource" path="res://data/character_customization/default_clothing_catalog.tres" id="23_catalog"]
+[ext_resource type="PackedScene" path="res://presentation/characters/cutout/clothing/clothing_piece.tscn" id="24_piece"]
 
 [node name="CharacterVisual" type="Node2D"]
 texture_filter = 1
@@ -209,6 +214,20 @@ offset = Vector2(2.11, 3.72)
 
 [node name="ponta_pe_d" type="Marker2D" parent="Skeleton2D/quadril/coxa_d/perna_d/pe_d"]
 position = Vector2(5.22, 5.91)
+
+[node name="SaiaDeformavel" parent="." node_paths=PackedStringArray("esqueleto", "osso_quadril", "osso_coxa_esq", "osso_coxa_dir") instance=ExtResource("20_skirt")]
+recurso = ExtResource("21_skirt_resource")
+esqueleto = NodePath("../Skeleton2D")
+osso_quadril = NodePath("../Skeleton2D/quadril")
+osso_coxa_esq = NodePath("../Skeleton2D/quadril/coxa_e")
+osso_coxa_dir = NodePath("../Skeleton2D/quadril/coxa_d")
+
+[node name="WardrobePresenter" type="Node" parent="." node_paths=PackedStringArray("rig", "skirt")]
+script = ExtResource("22_wardrobe")
+catalog = ExtResource("23_catalog")
+clothing_piece_scene = ExtResource("24_piece")
+rig = NodePath("../Skeleton2D")
+skirt = NodePath("../SaiaDeformavel")
 
 [node name="AnimationPlayer" type="AnimationPlayer" parent="."]
 libraries = {
