@@ -1,0 +1,11 @@
+[gd_resource type="Resource" script_class="CharacterColorPalette" load_steps=2 format=3]
+[ext_resource type="Script" path="res://data/character_customization/colors/character_color_palette.gd" id="1"]
+[resource]
+script = ExtResource("1")
+id = &"pessego"
+display_name = "Pêssego"
+preview_color = Color(0.94117647, 0.75294118, 0.62745098, 1)
+shadow_color = Color(0.42352941, 0.33882353, 0.28235294, 1)
+base_color = Color(0.94117647, 0.75294118, 0.62745098, 1)
+highlight_color = Color(0.95764706, 0.82211765, 0.73176471, 1)
+family = "natural"

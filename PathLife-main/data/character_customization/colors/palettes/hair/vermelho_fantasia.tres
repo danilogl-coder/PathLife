@@ -1,0 +1,11 @@
+[gd_resource type="Resource" script_class="CharacterColorPalette" load_steps=2 format=3]
+[ext_resource type="Script" path="res://data/character_customization/colors/character_color_palette.gd" id="1"]
+[resource]
+script = ExtResource("1")
+id = &"vermelho_fantasia"
+display_name = "Vermelho fantasia"
+preview_color = Color(0.71372549, 0.14117647, 0.19607843, 1)
+shadow_color = Color(0.19984314, 0.03952941, 0.05490196, 1)
+base_color = Color(0.71372549, 0.14117647, 0.19607843, 1)
+highlight_color = Color(0.82250980, 0.46752941, 0.50156863, 1)
+family = "fantasy"

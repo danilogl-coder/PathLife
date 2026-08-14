@@ -1,0 +1,11 @@
+[gd_resource type="Resource" script_class="CharacterColorPalette" load_steps=2 format=3]
+[ext_resource type="Script" path="res://data/character_customization/colors/character_color_palette.gd" id="1"]
+[resource]
+script = ExtResource("1")
+id = &"platinado"
+display_name = "Platinado"
+preview_color = Color(0.90588235, 0.88627451, 0.81568627, 1)
+shadow_color = Color(0.25364706, 0.24815686, 0.22839216, 1)
+base_color = Color(0.90588235, 0.88627451, 0.81568627, 1)
+highlight_color = Color(0.94164706, 0.92949020, 0.88572549, 1)
+family = "natural"

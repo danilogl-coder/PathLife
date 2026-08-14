@@ -1,0 +1,23 @@
+[gd_resource type="Resource" script_class="HairPhysicsProfile" load_steps=2 format=3]
+
+[ext_resource type="Script" path="res://data/character_customization/hair/hair_physics_profile.gd" id="1_p"]
+
+[resource]
+script = ExtResource("1_p")
+ativo = true
+frequencia = 3.2
+amortecimento = 0.50
+maciez_por_osso = 0.90
+ganho_aceleracao = 0.038
+ganho_velocidade = 0.008
+influencia_gravidade = 0.55
+limite_graus = 5.5
+limite_entre_ossos = 3.5
+expoente_amplitude = 1.9
+idle_graus = 0.20
+idle_hz = 0.29
+limiar_parado = 1.5
+distancia_teleporte = 64.0
+passo_maximo = 0.0166667
+passo_angulo_graus = 2.0
+arredondar_posicao = true

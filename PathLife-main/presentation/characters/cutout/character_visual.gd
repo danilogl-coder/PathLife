@@ -4,6 +4,8 @@ extends Node2D
 @onready var rig: CharacterRig = $Skeleton2D
 @onready var animation_player: AnimationPlayer = $AnimationPlayer
 @onready var wardrobe: WardrobePresenter = $WardrobePresenter
+@onready var hair: HairManager = $Skeleton2D/quadril/torso/cabeca/HairRig
+@onready var color_presenter: CharacterColorPresenter = $CharacterColorPresenter
 
 @export_category("Animation Transitions")
 @export_range(0.0, 0.5, 0.01) var locomotion_blend_time: float = 0.08
@@ -13,12 +15,17 @@ var _current_animation: StringName = &""
 var _direction: StringName = &"se"
 var _is_moving: bool = false
 var _is_running: bool = false
+var _is_crouching: bool = false
 var _appearance: CharacterAppearance = CharacterAppearance.new()
 
 
 func _ready() -> void:
+	rig.color_presenter = color_presenter
+	wardrobe.color_presenter = color_presenter
+	hair.color_presenter = color_presenter
 	_direction = StringName(rig.initial_direction)
 	_appearance.body_type = rig.body_type
+	rig.present_skin_color(_appearance.skin_color)
 	_refresh_locomotion_animation()
 
 
@@ -28,6 +35,7 @@ func present_locomotion(direction: StringName, is_moving: bool, is_running: bool
 	_is_running = is_moving and is_running
 	rig.set_direction(direction)
 	wardrobe.present(_appearance, direction)
+	hair.present(_appearance.hair_front, _appearance.hair_back, direction, _appearance.hair_color)
 	_refresh_locomotion_animation()
 
 
@@ -37,14 +45,24 @@ func present_body(body_type: String) -> void:
 	present_appearance(updated)
 
 
+func present_crouch(is_crouching: bool) -> void:
+	if _is_crouching == is_crouching:
+		return
+	_is_crouching = is_crouching
+	_refresh_locomotion_animation()
+
+
 func present_appearance(appearance: CharacterAppearance) -> void:
 	if appearance == null:
 		return
 	_appearance = appearance.snapshot()
 	rig.set_body(_appearance.body_type)
 	rig.set_direction(_direction)
+	rig.present_skin_color(_appearance.skin_color)
 	wardrobe.invalidate()
 	wardrobe.present(_appearance, _direction)
+	hair.invalidate()
+	hair.present(_appearance.hair_front, _appearance.hair_back, _direction, _appearance.hair_color)
 	_current_animation = &""
 	_refresh_locomotion_animation()
 
@@ -54,7 +72,9 @@ func play_action(action: StringName) -> void:
 
 
 func _refresh_locomotion_animation() -> void:
-	if not _is_moving:
+	if _is_crouching:
+		_play_action(&"crouch_walk" if _is_moving else &"croushed")
+	elif not _is_moving:
 		_play_action(&"idle")
 	elif _is_running:
 		_play_action(&"run")

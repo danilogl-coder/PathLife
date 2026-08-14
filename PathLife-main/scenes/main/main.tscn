@@ -3,7 +3,7 @@
 [ext_resource type="Script" uid="uid://cef0wnptgyqqq" path="res://scenes/main/main.gd" id="1_main"]
 [ext_resource type="PackedScene" uid="uid://ccclce5ap3ngs" path="res://gameplay/player/player.tscn" id="2_player"]
 [ext_resource type="PackedScene" uid="uid://ca5ujyn4qqegm" path="res://interface/hud/hud.tscn" id="3_hud"]
-[ext_resource type="PackedScene" path="res://interface/character_customization/character_customization_menu.tscn" id="4_customization"]
+[ext_resource type="PackedScene" uid="uid://b1yb6motfr0wf" path="res://interface/character_customization/character_customization_menu.tscn" id="4_customization"]
 
 [sub_resource type="RectangleShape2D" id="RectangleShape2D_test_wall"]
 size = Vector2(120, 50)
@@ -58,5 +58,11 @@ shape = SubResource("RectangleShape2D_test_wall")
 [node name="Interface" type="CanvasLayer" parent="." unique_id=1871894078]
 
 [node name="HUD" parent="Interface" unique_id=934474313 instance=ExtResource("3_hud")]
+offset_top = 3.0
+offset_bottom = 3.0
 
-[node name="CharacterCustomizationMenu" parent="Interface" instance=ExtResource("4_customization")]
+[node name="CharacterCustomizationMenu" parent="Interface" unique_id=1112057127 instance=ExtResource("4_customization")]
+offset_left = -1.0
+offset_top = 3.0
+offset_right = -1.0
+offset_bottom = 3.0

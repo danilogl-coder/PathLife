@@ -1,0 +1,7 @@
+[gd_resource type="Resource" script_class="RecolorProfile" load_steps=2 format=3]
+[ext_resource type="Script" path="res://data/character_customization/colors/recolor_profile.gd" id="1"]
+[resource]
+script = ExtResource("1")
+id = &"camisa"
+source_colors = PackedColorArray(0.16470588, 0.19607843, 0.26666667, 1, 0.39607843, 0.46274510, 0.57254902, 1, 0.51764706, 0.58431373, 0.69019608, 1, 0.63921569, 0.69803922, 0.78431373, 1, 0.74901961, 0.80000000, 0.86666667, 1, 0.84705882, 0.88627451, 0.93333333, 1)
+tone_positions = PackedFloat32Array(0.00000000, 0.38145478, 0.55804218, 0.72398905, 0.87280692, 1.00000000)

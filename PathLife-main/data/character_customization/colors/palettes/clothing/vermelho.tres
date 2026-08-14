@@ -1,0 +1,11 @@
+[gd_resource type="Resource" script_class="CharacterColorPalette" load_steps=2 format=3]
+[ext_resource type="Script" path="res://data/character_customization/colors/character_color_palette.gd" id="1"]
+[resource]
+script = ExtResource("1")
+id = &"vermelho"
+display_name = "Vermelho"
+preview_color = Color(0.77647059, 0.23921569, 0.30980392, 1)
+shadow_color = Color(0.21741176, 0.06698039, 0.08674510, 1)
+base_color = Color(0.77647059, 0.23921569, 0.30980392, 1)
+highlight_color = Color(0.86141176, 0.52831373, 0.57207843, 1)
+family = "natural"

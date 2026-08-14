@@ -1,0 +1,11 @@
+[gd_resource type="Resource" script_class="CharacterColorPalette" load_steps=2 format=3]
+[ext_resource type="Script" path="res://data/character_customization/colors/character_color_palette.gd" id="1"]
+[resource]
+script = ExtResource("1")
+id = &"porcelana"
+display_name = "Porcelana"
+preview_color = Color(0.96470588, 0.88627451, 0.82352941, 1)
+shadow_color = Color(0.43411765, 0.39882353, 0.37058824, 1)
+base_color = Color(0.96470588, 0.88627451, 0.82352941, 1)
+highlight_color = Color(0.97458824, 0.91811765, 0.87294118, 1)
+family = "natural"

@@ -1,0 +1,11 @@
+[gd_resource type="Resource" script_class="CharacterColorPalette" load_steps=2 format=3]
+[ext_resource type="Script" path="res://data/character_customization/colors/character_color_palette.gd" id="1"]
+[resource]
+script = ExtResource("1")
+id = &"verde_agua"
+display_name = "Verde água"
+preview_color = Color(0.27058824, 0.66274510, 0.61176471, 1)
+shadow_color = Color(0.07576471, 0.18556863, 0.17129412, 1)
+base_color = Color(0.27058824, 0.66274510, 0.61176471, 1)
+highlight_color = Color(0.54776471, 0.79090196, 0.75929412, 1)
+family = "natural"

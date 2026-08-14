@@ -1,0 +1,11 @@
+[gd_resource type="Resource" script_class="CharacterColorPalette" load_steps=2 format=3]
+[ext_resource type="Script" path="res://data/character_customization/colors/character_color_palette.gd" id="1"]
+[resource]
+script = ExtResource("1")
+id = &"chocolate"
+display_name = "Chocolate"
+preview_color = Color(0.29019608, 0.16470588, 0.12549020, 1)
+shadow_color = Color(0.08125490, 0.04611765, 0.03513725, 1)
+base_color = Color(0.29019608, 0.16470588, 0.12549020, 1)
+highlight_color = Color(0.55992157, 0.48211765, 0.45780392, 1)
+family = "natural"

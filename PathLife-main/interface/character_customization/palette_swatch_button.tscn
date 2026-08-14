@@ -1,0 +1,11 @@
+[gd_scene load_steps=2 format=3]
+
+[ext_resource type="Script" path="res://interface/character_customization/palette_swatch_button.gd" id="1"]
+
+[node name="PaletteSwatchButton" type="Button"]
+custom_minimum_size = Vector2(28, 28)
+focus_mode = 0
+toggle_mode = true
+script = ExtResource("1")
+
+[connection signal="pressed" from="." to="." method="_on_pressed"]

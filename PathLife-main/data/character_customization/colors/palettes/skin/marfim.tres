@@ -1,0 +1,11 @@
+[gd_resource type="Resource" script_class="CharacterColorPalette" load_steps=2 format=3]
+[ext_resource type="Script" path="res://data/character_customization/colors/character_color_palette.gd" id="1"]
+[resource]
+script = ExtResource("1")
+id = &"marfim"
+display_name = "Marfim"
+preview_color = Color(0.91764706, 0.78039216, 0.65882353, 1)
+shadow_color = Color(0.41294118, 0.35117647, 0.29647059, 1)
+base_color = Color(0.91764706, 0.78039216, 0.65882353, 1)
+highlight_color = Color(0.94070588, 0.84188235, 0.75435294, 1)
+family = "natural"

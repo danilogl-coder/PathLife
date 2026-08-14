@@ -2097,3 +2097,327 @@ Depois de gerar o executável, teste novamente abrir o menu, trocar gênero, ves
 - [ ] Não existem erros vermelhos no Debugger.
 
 Quando todos os itens estiverem marcados, o sistema estará separado em dados, estado, apresentação, interface e composição, sem transformar `PlayerController`, `CharacterRig` ou o menu em um script responsável por tudo.
+
+## 35. Cabelo com física: o que já foi instalado
+
+O cabelo usa o mesmo `CharacterAppearance`, mas **não é tratado como roupa**. Roupa pertence a um slot corporal; cabelo possui duas escolhas independentes:
+
+```text
+hair_front = franja/base frontal escolhida
+hair_back  = volume/mechas traseiras escolhidas
+```
+
+Isso permite, por exemplo, usar a frente de `tigela` com a traseira de `longo`. Os dois corpos usam exatamente o mesmo catálogo. Trocar masculino/feminino não apaga o cabelo.
+
+Os arquivos foram organizados pelas responsabilidades:
+
+```text
+data/character_customization/hair/
+├── hair_catalog.gd                 catálogo e nomes exibidos
+├── hair_definition.gd              dados de um estilo
+├── hair_physics_profile.gd         parâmetros de uma mola
+├── default_hair_catalog.tres       os 46 estilos
+├── definitions/                    46 HairDefinition
+└── profiles/                       8 perfis físicos
+
+presentation/characters/cutout/hair/
+├── hair_rig.tscn                   composição visual reutilizável
+├── hair_manager.gd                 monta frente e trás
+├── hair_physics_controller.gd      simulação física
+├── hair_chain_visual.tscn          uma cadeia variável
+└── hair_segment.tscn               um Bone2D e seu Sprite2D
+
+assets/characters/cutout/cabelo_fisica/
+├── cabelo_fisica.json
+└── 710 PNGs
+```
+
+Essa divisão é importante: `CharacterAppearance` guarda apenas IDs, `CharacterAppearanceState` valida, `HairManager` desenha, e o menu apenas edita uma cópia temporária.
+
+## 36. Árvore do HairRig
+
+Abra `presentation/characters/cutout/character_visual.tscn`. Dentro de `cabeca`, existe uma instância de `HairRig`:
+
+```text
+cabeca (Bone2D)
+├── Sprite
+├── HairRig
+│   ├── HairBack (z_index = -2)
+│   │   ├── Base
+│   │   └── Chains
+│   ├── HairFront (z_index = 1)
+│   │   ├── Base
+│   │   └── Chains
+│   └── HairPhysics
+└── ponta_cabeca
+```
+
+Não mova `HairRig` para fora de `cabeca`: ser filho desse Bone2D é o que faz cabelo e cabeça acompanharem juntos idle, walk e run.
+
+O `hair_rig.tscn` já possui estas propriedades ligadas no Inspector:
+
+- `Catalog`: `default_hair_catalog.tres`.
+- `Chain Visual Scene`: `hair_chain_visual.tscn`.
+- `Anchor`: `..`, isto é, o Bone2D `cabeca`.
+- `Back Base`: `HairBack/Base`.
+- `Back Chains`: `HairBack/Chains`.
+- `Front Base`: `HairFront/Base`.
+- `Front Chains`: `HairFront/Chains`.
+- `Physics Controller`: `HairPhysics`.
+
+`Base` é a parte rígida presa ao crânio. `Chains` recebe somente as mechas que balançam. A quantidade de mechas e segmentos varia por penteado, então somente essa parte é criada em tempo de execução a partir de cenas reutilizáveis.
+
+## 37. Como frente e trás são combinadas
+
+Quando `CharacterVisual` recebe uma aparência, ele executa conceitualmente:
+
+```gdscript
+hair.present(appearance.hair_front, appearance.hair_back, direction)
+```
+
+O gerenciador faz duas leituras diferentes:
+
+1. Da definição de `hair_back`, carrega somente `base_tras` e cadeias cujo `peca` seja `tras`.
+2. Da definição de `hair_front`, carrega somente `base_frente` e cadeias cujo `peca` seja `frente`.
+
+Por isso os IDs podem ser diferentes. Ao mudar NE, NW, SE ou SW, as duas metades são reconstruídas com os PNGs daquela direção e a física é resetada. Esse reset impede que uma mecha guarde o ângulo da direção anterior.
+
+## 38. O que a física faz
+
+Cada segmento móvel continua sendo um `Bone2D`. O controlador mede o movimento da cabeça na tela e usa:
+
+- aceleração horizontal como força principal;
+- um pequeno termo de velocidade;
+- mola com frequência e amortecimento do perfil;
+- amplitude crescente da raiz até a ponta;
+- limite total e limite entre ossos;
+- passo físico fixo, independente do FPS;
+- reset quando detecta teleporte;
+- idle muito discreto;
+- ângulo arredondado para a pixel art não rastejar.
+
+Os perfis ficam em `data/character_customization/hair/profiles`. Um cabelo curto usa uma resposta mais firme; um longo usa uma mola mais lenta. Você pode ajustar um `.tres` no Inspector sem alterar código.
+
+## 39. Ordem visual correta
+
+A pilha instalada é:
+
+```text
+cabelo traseiro
+corpo, torso e cabeça
+cabelo frontal
+óculos
+boné ou chapéu
+```
+
+`HairBack` usa `z_index = -2` relativo à cabeça. `HairFront` usa `z_index = 1`. O `WardrobePresenter` força óculos para 2 e boné/chapéu para 3, todos relativos ao mesmo osso. Portanto, acessórios continuam permitidos e aparecem por cima do cabelo.
+
+Não copie o `z_index` absoluto do JSON para os segmentos. O JSON foi criado para o protótipo isolado; dentro do personagem, a camada correta é controlada pelos nós `HairBack` e `HairFront`.
+
+## 40. Usar o menu de personalização
+
+Abra o jogo e clique no botão de personalização do HUD. Dentro da área rolável aparecem:
+
+```text
+Cabelo da frente: [Nenhum / 45 estilos]
+Cabelo de trás:   [Nenhum / 45 estilos]
+```
+
+`careca` não aparece como opção separada porque seria visualmente igual a `Nenhum`. O catálogo ainda contém os 46 Resources; o menu mostra `Nenhum` mais os 45 estilos que possuem visual.
+
+Ao selecionar uma opção, o preview muda imediatamente. Os botões NE, NW, SE e SW servem para verificar todos os ângulos. **Confirmar** envia a cópia para `CharacterAppearanceState`; **Cancelar** fecha o menu sem alterar o Player.
+
+O padrão em `default_character_appearance.tres` é:
+
+```text
+hair_front = basico_normal
+hair_back = basico_normal
+```
+
+## 41. Adicionar um penteado novo
+
+Para um novo estilo chamado `meu_cabelo`:
+
+1. Gere/adicione no JSON as quatro direções `ne`, `nw`, `se` e `sw`.
+2. Coloque os PNGs sob `assets/characters/cutout/cabelo_fisica/meu_cabelo/`.
+3. Duplique uma definição em `data/character_customization/hair/definitions`.
+4. Renomeie para `meu_cabelo.tres`.
+5. No Inspector, configure `Estilo = meu_cabelo`.
+6. Mantenha `Dados` apontando para `cabelo_fisica.json`.
+7. Mantenha `Pasta Texturas = res://assets/characters/cutout`.
+8. Escolha um `Perfil Padrão` apropriado.
+9. Adicione o novo Resource ao array `Definitions` de `default_hair_catalog.tres`.
+10. Teste as duas metades, os dois corpos e as quatro direções.
+
+Você não precisa criar botão, `if meu_cabelo`, script ou nó especial. O menu é preenchido pelo catálogo e o rig é montado pelos dados.
+
+## 42. Exportação e checklist do cabelo
+
+Como os caminhos das imagens estão dentro do JSON, mantenha **Export All Resources in the Project** e o filtro `*.json` no preset de exportação. Caso contrário, o editor pode funcionar e o executável final ficar careca.
+
+- [ ] `cabelo_fisica.json` está dentro de `res://`.
+- [ ] Os 710 PNGs foram importados.
+- [ ] O catálogo contém 46 definições.
+- [ ] O menu mostra 46 entradas contando `Nenhum`.
+- [ ] Frente e trás podem ser escolhidas separadamente.
+- [ ] `basico_normal` aparece ao iniciar.
+- [ ] Masculino e feminino preservam as duas escolhas.
+- [ ] NE, NW, SE e SW trocam as duas texturas.
+- [ ] Cabelo longo balança ao andar e correr.
+- [ ] O cabelo assenta ao parar.
+- [ ] Teleporte e troca de direção não deixam mechas presas.
+- [ ] Cabelo traseiro fica atrás do torso/cabeça.
+- [ ] Cabelo frontal fica acima da cabeça.
+- [ ] Óculos, boné e chapéu ficam acima do cabelo frontal.
+- [ ] Confirmar aplica e Cancelar descarta.
+
+## 43. Cores: não é `modulate`
+
+O sistema agora troca os pixels por shader. `modulate` apenas multiplica a cor existente e costuma sujar sombras, branco e tons claros. Aqui cada cor existente no PNG pertence a um `RecolorProfile`; o shader reconhece esse RGB e o substitui por um tom discreto da paleta escolhida.
+
+```text
+RGB original do PNG
+        ↓ procura no RecolorProfile
+posição tonal entre 0 e 1
+        ↓
+sombra / base / luz da CharacterColorPalette
+        ↓
+novo RGB, preservando o alpha original
+```
+
+Pixels transparentes continuam transparentes. Pixels que não pertencem ao perfil ficam inalterados. O projeto permanece com `Texture Filter = Nearest` para impedir borrão entre pixels.
+
+## 44. Arquitetura das cores
+
+```text
+data/character_customization/colors/
+├── character_color_palette.gd
+├── character_color_catalog.gd
+├── recolor_profile.gd
+├── default_character_color_catalog.tres
+├── palettes/
+│   ├── skin/       20 Resources
+│   ├── hair/       20 Resources
+│   └── clothing/   20 Resources
+└── profiles/
+    ├── skin.tres
+    ├── hair.tres
+    └── um perfil por tipo de roupa
+
+CharacterVisual
+├── Skeleton2D
+├── SaiaDeformavel
+├── WardrobePresenter
+├── CharacterColorPresenter
+└── AnimationPlayer
+```
+
+`CharacterAppearance` guarda somente os IDs escolhidos. `CharacterAppearanceState` valida esses IDs. `CharacterColorPresenter` converte paleta + perfil em `ShaderMaterial`. `CharacterRig`, `HairManager`, `WardrobePresenter` e `SaiaMalha` apenas aplicam o material recebido aos elementos que apresentam.
+
+Cada instância de `CharacterVisual` possui seu próprio `CharacterColorPresenter` e cache. Por isso mudar a cor no preview não modifica o Player real antes de confirmar.
+
+## 45. Campos de cor da aparência
+
+O Resource de aparência possui:
+
+```text
+skin_color
+hair_color
+top_color
+outerwear_color
+bottom_color
+footwear_color
+eyewear_color
+headwear_color
+```
+
+Frente e traseira do cabelo usam `hair_color` juntas. As roupas possuem cores independentes por slot. Trocar a camisa não apaga `top_color`: a próxima camisa usa a cor que já estava selecionada naquele slot.
+
+Os padrões são:
+
+```text
+Pele             marfim
+Cabelo           castanho
+Camisa           branco
+Casaco           verde_oliva
+Parte de baixo   azul_marinho
+Calçado          marrom
+Óculos           preto
+Chapéu           azul
+```
+
+## 46. Usar a grade de cores
+
+Abra o menu pelo HUD. Abaixo de cada categoria existe uma grade responsiva de vinte quadrados. O contorno branco marca a seleção e o nome aparece no cabeçalho da grade.
+
+- `Cor da pele` permanece sempre visível.
+- `Cor do cabelo` controla frente e traseira.
+- A grade de uma roupa só aparece quando existe uma peça equipada naquele slot.
+- O `HFlowContainer` quebra as amostras em novas linhas automaticamente.
+- Toda a lista está dentro do `ScrollContainer`.
+
+Selecionar uma cor atualiza imediatamente o `CharacterVisual` do preview. **Confirmar** aplica IDs e peças ao Player. **Cancelar** descarta tanto as escolhas manuais quanto qualquer randomização feita enquanto o menu estava aberto.
+
+## 47. Randomizar tudo
+
+O botão `Randomizar tudo` usa `CharacterAppearanceRandomizer`, um Resource separado da interface. No Inspector do `default_character_appearance_randomizer.tres` podem ser alteradas estas probabilidades:
+
+```text
+Outerwear Probability       0.45
+Eyewear Probability         0.30
+Headwear Probability        0.35
+Fantasy Hair Probability    0.15
+```
+
+O sorteio sempre mantém camisa, parte de baixo e calçado. Corpo, cabelos e cores também são sorteados. Cores de pele vêm das vinte paletas de pele; cada roupa recebe uma das vinte cores de roupa; cabelo escolhe uma cor natural em 85% dos casos e fantasia em 15%.
+
+O randomizador recebe um `RandomNumberGenerator`. No jogo ele é inicializado aleatoriamente; em testes pode receber uma seed fixa e produzir exatamente o mesmo personagem.
+
+## 48. Criar uma nova paleta
+
+1. Entre em uma das pastas `palettes/skin`, `palettes/hair` ou `palettes/clothing`.
+2. Duplique um `.tres` existente.
+3. Troque `Id` e `Display Name`.
+4. Configure `Preview Color`, `Shadow Color`, `Base Color` e `Highlight Color` no Inspector.
+5. Para cabelo, defina `Family` como `natural` ou `fantasy`.
+6. Adicione o Resource ao array correto de `default_character_color_catalog.tres`.
+7. Abra o menu e confira sombra, meio-tom e luz em NE, NW, SE e SW.
+
+O sistema atual exige exatamente vinte paletas por categoria. Se adicionar uma nova, remova ou substitua outra para manter esse contrato e os testes.
+
+## 49. Criar ou atualizar perfil de recoloração
+
+Um `RecolorProfile` descreve as cores realmente existentes nos PNGs de uma categoria:
+
+```text
+Source Colors    cores RGB originais
+Tone Positions   posição de cada cor entre sombra 0 e luz 1
+```
+
+Os dois arrays precisam possuir a mesma quantidade e no máximo 24 entradas. Para uma roupa nova:
+
+1. Liste todas as cores opacas usadas por todos os PNGs da peça.
+2. Ordene-as pela luminosidade.
+3. Crie um `RecolorProfile.tres`.
+4. Preencha `Source Colors` e `Tone Positions`.
+5. Abra o `ClothingItem.tres` correspondente.
+6. Arraste o perfil para `Recolor Profile`.
+7. Teste ambos os corpos e as quatro direções.
+
+Não reutilize cegamente o perfil de outra roupa: camisa, jaqueta, saia e acessórios usam rampas originais diferentes.
+
+## 50. Checklist das cores
+
+- [ ] O catálogo possui 20 peles, 20 cabelos e 20 roupas.
+- [ ] O corpo usa um `ShaderMaterial`, não `modulate`.
+- [ ] Frente, traseira e segmentos físicos do cabelo têm a mesma cor.
+- [ ] Cada roupa equipada pode ter uma cor diferente.
+- [ ] `SaiaFrente` e `SaiaTras` compartilham o material correto.
+- [ ] Trocar NE, NW, SE e SW preserva todas as cores.
+- [ ] Trocar masculino/feminino preserva todas as cores.
+- [ ] Idle, walk e run não removem materiais.
+- [ ] `Nenhum` oculta a grade do slot correspondente.
+- [ ] Randomizar nunca remove camisa, parte de baixo ou calçado.
+- [ ] Confirmar aplica e Cancelar descarta.
+- [ ] Player e preview não compartilham material mutável.
+- [ ] Não existem erros vermelhos no Debugger.

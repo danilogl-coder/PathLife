@@ -1,0 +1,11 @@
+[gd_resource type="Resource" script_class="CharacterColorPalette" load_steps=2 format=3]
+[ext_resource type="Script" path="res://data/character_customization/colors/character_color_palette.gd" id="1"]
+[resource]
+script = ExtResource("1")
+id = &"preto"
+display_name = "Preto"
+preview_color = Color(0.09019608, 0.08235294, 0.10588235, 1)
+shadow_color = Color(0.02525490, 0.02305882, 0.02964706, 1)
+base_color = Color(0.09019608, 0.08235294, 0.10588235, 1)
+highlight_color = Color(0.43592157, 0.43105882, 0.44564706, 1)
+family = "natural"

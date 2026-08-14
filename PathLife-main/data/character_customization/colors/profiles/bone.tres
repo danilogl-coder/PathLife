@@ -1,0 +1,7 @@
+[gd_resource type="Resource" script_class="RecolorProfile" load_steps=2 format=3]
+[ext_resource type="Script" path="res://data/character_customization/colors/recolor_profile.gd" id="1"]
+[resource]
+script = ExtResource("1")
+id = &"bone"
+source_colors = PackedColorArray(0.05490196, 0.11764706, 0.15686275, 1, 0.12156863, 0.25882353, 0.32549020, 1, 0.16862745, 0.34117647, 0.42352941, 1, 0.21960784, 0.42745098, 0.52156863, 1, 0.27450980, 0.50980392, 0.61176471, 1, 0.32941176, 0.58823529, 0.69019608, 1)
+tone_positions = PackedFloat32Array(0.00000000, 0.29374297, 0.46904597, 0.65274345, 0.83058705, 1.00000000)

@@ -1,0 +1,11 @@
+[gd_resource type="Resource" script_class="CharacterColorPalette" load_steps=2 format=3]
+[ext_resource type="Script" path="res://data/character_customization/colors/character_color_palette.gd" id="1"]
+[resource]
+script = ExtResource("1")
+id = &"onix"
+display_name = "Ônix"
+preview_color = Color(0.16862745, 0.08627451, 0.07058824, 1)
+shadow_color = Color(0.07588235, 0.03882353, 0.03176471, 1)
+base_color = Color(0.16862745, 0.08627451, 0.07058824, 1)
+highlight_color = Color(0.40141176, 0.34211765, 0.33082353, 1)
+family = "natural"

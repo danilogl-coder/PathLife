@@ -1,0 +1,11 @@
+[gd_resource type="Resource" script_class="CharacterColorPalette" load_steps=2 format=3]
+[ext_resource type="Script" path="res://data/character_customization/colors/character_color_palette.gd" id="1"]
+[resource]
+script = ExtResource("1")
+id = &"azul"
+display_name = "Azul"
+preview_color = Color(0.24313725, 0.43137255, 0.72156863, 1)
+shadow_color = Color(0.06807843, 0.12078431, 0.20203922, 1)
+base_color = Color(0.24313725, 0.43137255, 0.72156863, 1)
+highlight_color = Color(0.53074510, 0.64745098, 0.82737255, 1)
+family = "natural"

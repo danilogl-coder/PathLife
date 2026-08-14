@@ -1,0 +1,7 @@
+[gd_resource type="Resource" script_class="RecolorProfile" load_steps=2 format=3]
+[ext_resource type="Script" path="res://data/character_customization/colors/recolor_profile.gd" id="1"]
+[resource]
+script = ExtResource("1")
+id = &"oculos"
+source_colors = PackedColorArray(0.18039216, 0.16470588, 0.14901961, 1, 0.47058824, 0.44705882, 0.41568627, 1, 0.58823529, 0.56470588, 0.52941176, 1, 0.69803922, 0.67450980, 0.63921569, 1, 0.79607843, 0.77647059, 0.74117647, 1, 0.88627451, 0.87058824, 0.83921569, 1)
+tone_positions = PackedFloat32Array(0.00000000, 0.40140180, 0.56793455, 0.72374009, 0.86723365, 1.00000000)

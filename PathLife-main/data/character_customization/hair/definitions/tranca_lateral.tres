@@ -1,0 +1,19 @@
+[gd_resource type="Resource" script_class="HairDefinition" load_steps=3 format=3]
+
+; Gerado por gerar_cabelo_fisica.py a partir da geometria do sprite.
+; 'perfil_padrao' e' uma SUGESTAO pelo comprimento da mecha (12px,
+; 1 cadeia(s)). Troque a vontade -- rabo de cavalo, tranca e
+; twintail tem a mesma assinatura geometrica e fisica diferente, entao essa
+; escolha e' sua, nao do gerador.
+
+[ext_resource type="Script" path="res://data/character_customization/hair/hair_definition.gd" id="1_d"]
+[ext_resource type="Resource" path="res://data/character_customization/hair/profiles/long.tres" id="2_p"]
+
+[resource]
+script = ExtResource("1_d")
+estilo = &"tranca_lateral"
+dados = "res://assets/characters/cutout/cabelo_fisica/cabelo_fisica.json"
+pasta_texturas = "res://assets/characters/cutout"
+perfil_padrao = ExtResource("2_p")
+deslocamento = Vector2(0, 0)
+escala_limite = 1.0

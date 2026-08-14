@@ -1,0 +1,11 @@
+[gd_resource type="Resource" script_class="CharacterColorPalette" load_steps=2 format=3]
+[ext_resource type="Script" path="res://data/character_customization/colors/character_color_palette.gd" id="1"]
+[resource]
+script = ExtResource("1")
+id = &"azul_marinho"
+display_name = "Azul marinho"
+preview_color = Color(0.14901961, 0.23137255, 0.41176471, 1)
+shadow_color = Color(0.04172549, 0.06478431, 0.11529412, 1)
+base_color = Color(0.14901961, 0.23137255, 0.41176471, 1)
+highlight_color = Color(0.47239216, 0.52345098, 0.63529412, 1)
+family = "natural"

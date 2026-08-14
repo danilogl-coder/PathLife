@@ -1,0 +1,11 @@
+[gd_resource type="Resource" script_class="CharacterColorPalette" load_steps=2 format=3]
+[ext_resource type="Script" path="res://data/character_customization/colors/character_color_palette.gd" id="1"]
+[resource]
+script = ExtResource("1")
+id = &"grisalho"
+display_name = "Grisalho"
+preview_color = Color(0.54901961, 0.55686275, 0.59607843, 1)
+shadow_color = Color(0.15372549, 0.15592157, 0.16690196, 1)
+base_color = Color(0.54901961, 0.55686275, 0.59607843, 1)
+highlight_color = Color(0.72039216, 0.72525490, 0.74956863, 1)
+family = "natural"

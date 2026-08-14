@@ -8,6 +8,7 @@ extends Skeleton2D
 var _rig_data: Dictionary = {}
 var _pieces: Dictionary = {}
 var _current_direction: StringName = &""
+var color_presenter: CharacterColorPresenter
 
 
 func get_piece_bone(piece_name: StringName) -> Bone2D:
@@ -17,6 +18,17 @@ func get_piece_bone(piece_name: StringName) -> Bone2D:
 
 func get_current_direction() -> StringName:
 	return _current_direction
+
+
+func present_skin_color(color_id: StringName) -> void:
+	if color_presenter == null:
+		return
+	var skin_material := color_presenter.get_skin_material(color_id)
+	for nodes_value: Variant in _pieces.values():
+		var nodes: Dictionary = nodes_value
+		var sprite := nodes.get("sprite") as Sprite2D
+		if sprite != null:
+			sprite.material = skin_material
 
 
 func _ready() -> void:

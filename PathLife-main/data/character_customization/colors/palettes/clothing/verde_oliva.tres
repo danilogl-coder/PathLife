@@ -1,0 +1,11 @@
+[gd_resource type="Resource" script_class="CharacterColorPalette" load_steps=2 format=3]
+[ext_resource type="Script" path="res://data/character_customization/colors/character_color_palette.gd" id="1"]
+[resource]
+script = ExtResource("1")
+id = &"verde_oliva"
+display_name = "Verde oliva"
+preview_color = Color(0.47058824, 0.51764706, 0.27843137, 1)
+shadow_color = Color(0.13176471, 0.14494118, 0.07796078, 1)
+base_color = Color(0.47058824, 0.51764706, 0.27843137, 1)
+highlight_color = Color(0.67176471, 0.70094118, 0.55262745, 1)
+family = "natural"

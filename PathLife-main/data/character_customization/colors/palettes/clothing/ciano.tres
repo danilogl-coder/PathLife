@@ -1,0 +1,11 @@
+[gd_resource type="Resource" script_class="CharacterColorPalette" load_steps=2 format=3]
+[ext_resource type="Script" path="res://data/character_customization/colors/character_color_palette.gd" id="1"]
+[resource]
+script = ExtResource("1")
+id = &"ciano"
+display_name = "Ciano"
+preview_color = Color(0.27058824, 0.68627451, 0.76078431, 1)
+shadow_color = Color(0.07576471, 0.19215686, 0.21301961, 1)
+base_color = Color(0.27058824, 0.68627451, 0.76078431, 1)
+highlight_color = Color(0.54776471, 0.80549020, 0.85168627, 1)
+family = "natural"

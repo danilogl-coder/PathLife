@@ -1,0 +1,36 @@
+[gd_scene load_steps=5 format=3]
+
+[ext_resource type="Script" path="res://presentation/characters/cutout/hair/hair_manager.gd" id="1"]
+[ext_resource type="Script" path="res://presentation/characters/cutout/hair/hair_physics_controller.gd" id="2"]
+[ext_resource type="PackedScene" path="res://presentation/characters/cutout/hair/hair_chain_visual.tscn" id="3"]
+[ext_resource type="Resource" path="res://data/character_customization/hair/default_hair_catalog.tres" id="4"]
+
+[node name="HairRig" type="Node2D" node_paths=PackedStringArray("anchor", "back_base", "back_chains", "front_base", "front_chains", "physics_controller")]
+script = ExtResource("1")
+catalog = ExtResource("4")
+chain_visual_scene = ExtResource("3")
+anchor = NodePath("..")
+back_base = NodePath("HairBack/Base")
+back_chains = NodePath("HairBack/Chains")
+front_base = NodePath("HairFront/Base")
+front_chains = NodePath("HairFront/Chains")
+physics_controller = NodePath("HairPhysics")
+
+[node name="HairBack" type="Node2D" parent="."]
+z_index = -2
+
+[node name="Base" type="Sprite2D" parent="HairBack"]
+texture_filter = 1
+
+[node name="Chains" type="Node2D" parent="HairBack"]
+
+[node name="HairFront" type="Node2D" parent="."]
+z_index = 1
+
+[node name="Base" type="Sprite2D" parent="HairFront"]
+texture_filter = 1
+
+[node name="Chains" type="Node2D" parent="HairFront"]
+
+[node name="HairPhysics" type="Node" parent="."]
+script = ExtResource("2")

@@ -1,0 +1,11 @@
+[gd_resource type="Resource" script_class="CharacterColorPalette" load_steps=2 format=3]
+[ext_resource type="Script" path="res://data/character_customization/colors/character_color_palette.gd" id="1"]
+[resource]
+script = ExtResource("1")
+id = &"canela"
+display_name = "Canela"
+preview_color = Color(0.49803922, 0.28235294, 0.17647059, 1)
+shadow_color = Color(0.22411765, 0.12705882, 0.07941176, 1)
+base_color = Color(0.49803922, 0.28235294, 0.17647059, 1)
+highlight_color = Color(0.63858824, 0.48329412, 0.40705882, 1)
+family = "natural"

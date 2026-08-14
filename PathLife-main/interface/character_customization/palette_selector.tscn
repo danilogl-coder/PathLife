@@ -1,0 +1,31 @@
+[gd_scene load_steps=3 format=3]
+
+[ext_resource type="Script" path="res://interface/character_customization/palette_selector.gd" id="1"]
+[ext_resource type="PackedScene" path="res://interface/character_customization/palette_swatch_button.tscn" id="2"]
+
+[node name="PaletteSelector" type="VBoxContainer"]
+theme_override_constants/separation = 4
+script = ExtResource("1")
+swatch_scene = ExtResource("2")
+
+[node name="Header" type="HBoxContainer" parent="."]
+layout_mode = 2
+
+[node name="TitleLabel" type="Label" parent="Header"]
+unique_name_in_owner = true
+layout_mode = 2
+size_flags_horizontal = 3
+text = "Cor"
+
+[node name="SelectedLabel" type="Label" parent="Header"]
+unique_name_in_owner = true
+layout_mode = 2
+text = "Selecionada"
+horizontal_alignment = 2
+
+[node name="Swatches" type="HFlowContainer" parent="."]
+unique_name_in_owner = true
+layout_mode = 2
+size_flags_horizontal = 3
+theme_override_constants/h_separation = 5
+theme_override_constants/v_separation = 5

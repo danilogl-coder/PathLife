@@ -1,0 +1,11 @@
+[gd_resource type="Resource" script_class="CharacterColorPalette" load_steps=2 format=3]
+[ext_resource type="Script" path="res://data/character_customization/colors/character_color_palette.gd" id="1"]
+[resource]
+script = ExtResource("1")
+id = &"cacau"
+display_name = "Cacau"
+preview_color = Color(0.30196078, 0.15686275, 0.10980392, 1)
+shadow_color = Color(0.13588235, 0.07058824, 0.04941176, 1)
+base_color = Color(0.30196078, 0.15686275, 0.10980392, 1)
+highlight_color = Color(0.49741176, 0.39294118, 0.35905882, 1)
+family = "natural"

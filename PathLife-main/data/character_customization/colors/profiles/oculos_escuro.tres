@@ -1,0 +1,7 @@
+[gd_resource type="Resource" script_class="RecolorProfile" load_steps=2 format=3]
+[ext_resource type="Script" path="res://data/character_customization/colors/recolor_profile.gd" id="1"]
+[resource]
+script = ExtResource("1")
+id = &"oculos_escuro"
+source_colors = PackedColorArray(0.03921569, 0.03921569, 0.05490196, 1, 0.13333333, 0.14117647, 0.16862745, 1, 0.18039216, 0.19215686, 0.22352941, 1, 0.23529412, 0.24705882, 0.28235294, 1, 0.29019608, 0.30588235, 0.34509804, 1)
+tone_positions = PackedFloat32Array(0.00000000, 0.38162669, 0.57190587, 0.78012749, 1.00000000)

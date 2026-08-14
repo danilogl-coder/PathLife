@@ -1,0 +1,11 @@
+[gd_resource type="Resource" script_class="CharacterColorPalette" load_steps=2 format=3]
+[ext_resource type="Script" path="res://data/character_customization/colors/character_color_palette.gd" id="1"]
+[resource]
+script = ExtResource("1")
+id = &"cinza_claro"
+display_name = "Cinza claro"
+preview_color = Color(0.72549020, 0.73725490, 0.77254902, 1)
+shadow_color = Color(0.20313725, 0.20643137, 0.21631373, 1)
+base_color = Color(0.72549020, 0.73725490, 0.77254902, 1)
+highlight_color = Color(0.82980392, 0.83709804, 0.85898039, 1)
+family = "natural"

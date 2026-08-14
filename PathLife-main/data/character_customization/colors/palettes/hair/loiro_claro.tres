@@ -1,0 +1,11 @@
+[gd_resource type="Resource" script_class="CharacterColorPalette" load_steps=2 format=3]
+[ext_resource type="Script" path="res://data/character_customization/colors/character_color_palette.gd" id="1"]
+[resource]
+script = ExtResource("1")
+id = &"loiro_claro"
+display_name = "Loiro claro"
+preview_color = Color(0.90980392, 0.81176471, 0.54117647, 1)
+shadow_color = Color(0.25474510, 0.22729412, 0.15152941, 1)
+base_color = Color(0.90980392, 0.81176471, 0.54117647, 1)
+highlight_color = Color(0.94407843, 0.88329412, 0.71552941, 1)
+family = "natural"

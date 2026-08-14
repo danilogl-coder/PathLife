@@ -1,8 +1,10 @@
-[gd_resource type="Resource" script_class="ClothingItem" load_steps=2 format=3]
+[gd_resource type="Resource" script_class="ClothingItem" load_steps=3 format=3]
 [ext_resource type="Script" path="res://data/character_customization/clothing_item.gd" id="1"]
+[ext_resource type="Resource" path="res://data/character_customization/colors/profiles/oculos_escuro.tres" id="2_color"]
 [resource]
 script = ExtResource("1")
 id = &"oculos_escuro"
 display_name = "Óculos escuros"
 source_key = &"oculos_escuro"
 slot = "eyewear"
+recolor_profile = ExtResource("2_color")

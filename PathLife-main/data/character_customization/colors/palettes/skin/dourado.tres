@@ -1,0 +1,11 @@
+[gd_resource type="Resource" script_class="CharacterColorPalette" load_steps=2 format=3]
+[ext_resource type="Script" path="res://data/character_customization/colors/character_color_palette.gd" id="1"]
+[resource]
+script = ExtResource("1")
+id = &"dourado"
+display_name = "Dourado"
+preview_color = Color(0.77254902, 0.54901961, 0.38431373, 1)
+shadow_color = Color(0.34764706, 0.24705882, 0.17294118, 1)
+base_color = Color(0.77254902, 0.54901961, 0.38431373, 1)
+highlight_color = Color(0.83623529, 0.67529412, 0.55670588, 1)
+family = "natural"

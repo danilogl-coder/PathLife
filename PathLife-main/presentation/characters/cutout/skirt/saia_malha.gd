@@ -40,6 +40,7 @@ var _corpo: StringName = &""
 var _direcao: StringName = &""
 var _texturas: Dictionary = {}       # cache: caminho -> Texture2D
 var _montado := false
+var _color_material: Material
 
 signal reconfigurada
 
@@ -71,6 +72,14 @@ func remover() -> void:
 	hide()
 
 
+func set_color_material(new_material: Material) -> void:
+	_color_material = new_material
+	if painel_tras != null:
+		painel_tras.material = _color_material
+	if painel_frente != null:
+		painel_frente.material = _color_material
+
+
 func _montar() -> void:
 	if _montado or recurso == null or esqueleto == null or osso_quadril == null:
 		return
@@ -94,17 +103,20 @@ func _montar() -> void:
 	# os sete ossos, criados UMA vez. Reposicionados a cada troca de direcao.
 	var raiz_b := Bone2D.new()
 	raiz_b.name = "SaiaRaiz"
+	raiz_b.auto_calculate_length_and_angle = false
 	raiz_b.rest = Transform2D.IDENTITY
 	osso_quadril.add_child(raiz_b)
 	_ossos[&"SaiaRaiz"] = raiz_b
 	for i in 3:
 		var m := Bone2D.new()
 		m.name = String(MEIO[i])
+		m.auto_calculate_length_and_angle = false
 		m.rest = Transform2D.IDENTITY
 		raiz_b.add_child(m)
 		_ossos[MEIO[i]] = m
 		var b := Bone2D.new()
 		b.name = String(BARRA[i])
+		b.auto_calculate_length_and_angle = false
 		b.rest = Transform2D.IDENTITY
 		m.add_child(b)
 		_ossos[BARRA[i]] = b

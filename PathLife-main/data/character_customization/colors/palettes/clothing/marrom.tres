@@ -1,0 +1,11 @@
+[gd_resource type="Resource" script_class="CharacterColorPalette" load_steps=2 format=3]
+[ext_resource type="Script" path="res://data/character_customization/colors/character_color_palette.gd" id="1"]
+[resource]
+script = ExtResource("1")
+id = &"marrom"
+display_name = "Marrom"
+preview_color = Color(0.39607843, 0.26274510, 0.20784314, 1)
+shadow_color = Color(0.11090196, 0.07356863, 0.05819608, 1)
+base_color = Color(0.39607843, 0.26274510, 0.20784314, 1)
+highlight_color = Color(0.62556863, 0.54290196, 0.50886275, 1)
+family = "natural"

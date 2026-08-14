@@ -1,4 +1,4 @@
-[gd_scene load_steps=24 format=3 uid="uid://gcuaslvokbkv"]
+[gd_scene format=3 uid="uid://gcuaslvokbkv"]
 
 [ext_resource type="Script" uid="uid://q2uetts5phi4" path="res://presentation/characters/cutout/character_visual.gd" id="1_g0nxb"]
 [ext_resource type="Script" uid="uid://b1rtkdeixfyy3" path="res://presentation/characters/cutout/character_rig.gd" id="1_n1fq5"]
@@ -17,220 +17,426 @@
 [ext_resource type="Texture2D" uid="uid://c6kuldkvqpdat" path="res://assets/characters/cutout/masc/se/coxa_d.png" id="13_coxa_d"]
 [ext_resource type="Texture2D" uid="uid://0wk2rusxhvpx" path="res://assets/characters/cutout/masc/se/perna_d.png" id="14_perna_d"]
 [ext_resource type="Texture2D" uid="uid://dff6idco8owvy" path="res://assets/characters/cutout/masc/se/pe_d.png" id="15_pe_d"]
-[ext_resource type="AnimationLibrary" path="res://presentation/characters/cutout/animation/animacoes_fem.tres" id="18_26yyw"]
-[ext_resource type="AnimationLibrary" path="res://presentation/characters/cutout/animation/animacoes_masc.tres" id="19_ycmqt"]
+[ext_resource type="AnimationLibrary" uid="uid://b67y5mcj7i54n" path="res://presentation/characters/cutout/animation/animacoes_fem.tres" id="18_26yyw"]
+[ext_resource type="AnimationLibrary" uid="uid://ii3ps1adww4l" path="res://presentation/characters/cutout/animation/animacoes_masc.tres" id="19_ycmqt"]
 [ext_resource type="PackedScene" path="res://presentation/characters/cutout/skirt/saia_deformavel.tscn" id="20_skirt"]
 [ext_resource type="Resource" path="res://data/character_customization/skirt/default_skirt.tres" id="21_skirt_resource"]
-[ext_resource type="Script" path="res://presentation/characters/cutout/clothing/wardrobe_presenter.gd" id="22_wardrobe"]
+[ext_resource type="Script" uid="uid://b1n3mcm274sna" path="res://presentation/characters/cutout/clothing/wardrobe_presenter.gd" id="22_wardrobe"]
 [ext_resource type="Resource" path="res://data/character_customization/default_clothing_catalog.tres" id="23_catalog"]
 [ext_resource type="PackedScene" path="res://presentation/characters/cutout/clothing/clothing_piece.tscn" id="24_piece"]
+[ext_resource type="PackedScene" path="res://presentation/characters/cutout/hair/hair_rig.tscn" id="25_hair"]
+[ext_resource type="Script" uid="uid://bul5s3owv2y66" path="res://presentation/characters/cutout/color/character_color_presenter.gd" id="26_color_presenter"]
+[ext_resource type="Resource" path="res://data/character_customization/colors/default_character_color_catalog.tres" id="27_color_catalog"]
+[ext_resource type="Shader" uid="uid://cajxmkhkhryo8" path="res://shaders/skin_palette_swap.gdshader" id="28_palette_shader"]
+[ext_resource type="Resource" path="res://data/character_customization/colors/profiles/skin.tres" id="29_skin_profile"]
+[ext_resource type="Resource" path="res://data/character_customization/colors/profiles/hair.tres" id="30_hair_profile"]
 
-[node name="CharacterVisual" type="Node2D"]
+[sub_resource type="Animation" id="Animation_ukv25"]
+length = 0.001
+tracks/0/type = "value"
+tracks/0/imported = false
+tracks/0/enabled = true
+tracks/0/path = NodePath("Skeleton2D/quadril/coxa_e:rest")
+tracks/0/interp = 1
+tracks/0/loop_wrap = true
+tracks/0/keys = {
+"times": PackedFloat32Array(0),
+"transitions": PackedFloat32Array(1),
+"update": 0,
+"values": [Transform2D(1, 0, 0, 1, -3.31, 2.85)]
+}
+tracks/1/type = "value"
+tracks/1/imported = false
+tracks/1/enabled = true
+tracks/1/path = NodePath("Skeleton2D/quadril/coxa_e/perna_e:rotation")
+tracks/1/interp = 1
+tracks/1/loop_wrap = true
+tracks/1/keys = {
+"times": PackedFloat32Array(0),
+"transitions": PackedFloat32Array(1),
+"update": 0,
+"values": [0.0]
+}
+tracks/2/type = "value"
+tracks/2/imported = false
+tracks/2/enabled = true
+tracks/2/path = NodePath("Skeleton2D/quadril/coxa_e/perna_e/pe_e:rotation")
+tracks/2/interp = 1
+tracks/2/loop_wrap = true
+tracks/2/keys = {
+"times": PackedFloat32Array(0),
+"transitions": PackedFloat32Array(1),
+"update": 0,
+"values": [0.041417]
+}
+tracks/3/type = "value"
+tracks/3/imported = false
+tracks/3/enabled = true
+tracks/3/path = NodePath("Skeleton2D/quadril/coxa_d:rotation")
+tracks/3/interp = 1
+tracks/3/loop_wrap = true
+tracks/3/keys = {
+"times": PackedFloat32Array(0),
+"transitions": PackedFloat32Array(1),
+"update": 0,
+"values": [0.002601]
+}
+tracks/4/type = "value"
+tracks/4/imported = false
+tracks/4/enabled = true
+tracks/4/path = NodePath("Skeleton2D/quadril/coxa_d/perna_d:rotation")
+tracks/4/interp = 1
+tracks/4/loop_wrap = true
+tracks/4/keys = {
+"times": PackedFloat32Array(0),
+"transitions": PackedFloat32Array(1),
+"update": 0,
+"values": [0.0]
+}
+tracks/5/type = "value"
+tracks/5/imported = false
+tracks/5/enabled = true
+tracks/5/path = NodePath("Skeleton2D/quadril/coxa_d/perna_d/pe_d:rotation")
+tracks/5/interp = 1
+tracks/5/loop_wrap = true
+tracks/5/keys = {
+"times": PackedFloat32Array(0),
+"transitions": PackedFloat32Array(1),
+"update": 0,
+"values": [0.110567]
+}
+tracks/6/type = "value"
+tracks/6/imported = false
+tracks/6/enabled = true
+tracks/6/path = NodePath("Skeleton2D/quadril:rotation")
+tracks/6/interp = 1
+tracks/6/loop_wrap = true
+tracks/6/keys = {
+"times": PackedFloat32Array(0),
+"transitions": PackedFloat32Array(1),
+"update": 0,
+"values": [-0.077615]
+}
+tracks/7/type = "value"
+tracks/7/imported = false
+tracks/7/enabled = true
+tracks/7/path = NodePath("Skeleton2D/quadril:position")
+tracks/7/interp = 1
+tracks/7/loop_wrap = true
+tracks/7/keys = {
+"times": PackedFloat32Array(0),
+"transitions": PackedFloat32Array(1),
+"update": 0,
+"values": [Vector2(0.26, -37.87)]
+}
+tracks/8/type = "value"
+tracks/8/imported = false
+tracks/8/enabled = true
+tracks/8/path = NodePath("Skeleton2D/quadril/coxa_e:rotation")
+tracks/8/interp = 1
+tracks/8/loop_wrap = true
+tracks/8/keys = {
+"times": PackedFloat32Array(0),
+"transitions": PackedFloat32Array(1),
+"update": 0,
+"values": [0.002967]
+}
+tracks/9/type = "value"
+tracks/9/imported = false
+tracks/9/enabled = true
+tracks/9/path = NodePath("Skeleton2D/quadril/torso:rotation")
+tracks/9/interp = 1
+tracks/9/loop_wrap = true
+tracks/9/keys = {
+"times": PackedFloat32Array(0),
+"transitions": PackedFloat32Array(1),
+"update": 0,
+"values": [-0.0048986664]
+}
+tracks/10/type = "value"
+tracks/10/imported = false
+tracks/10/enabled = true
+tracks/10/path = NodePath("Skeleton2D/quadril/torso/braco_sup_d:rotation")
+tracks/10/interp = 1
+tracks/10/loop_wrap = true
+tracks/10/keys = {
+"times": PackedFloat32Array(0),
+"transitions": PackedFloat32Array(1),
+"update": 0,
+"values": [0.034906585]
+}
+tracks/11/type = "value"
+tracks/11/imported = false
+tracks/11/enabled = true
+tracks/11/path = NodePath(".:position:y")
+tracks/11/interp = 1
+tracks/11/loop_wrap = true
+tracks/11/keys = {
+"times": PackedFloat32Array(0),
+"transitions": PackedFloat32Array(1),
+"update": 1,
+"values": [5.4285707]
+}
+
+[sub_resource type="AnimationLibrary" id="AnimationLibrary_d2752"]
+_data = {
+&"RESET": SubResource("Animation_ukv25")
+}
+
+[node name="CharacterVisual" type="Node2D" unique_id=1497687241]
 texture_filter = 1
-position = Vector2(0, -1)
+position = Vector2(0, 5.4285707)
 script = ExtResource("1_g0nxb")
 
-[node name="Skeleton2D" type="Skeleton2D" parent="."]
+[node name="Skeleton2D" type="Skeleton2D" parent="." unique_id=1875722216]
 script = ExtResource("1_n1fq5")
 
-[node name="quadril" type="Bone2D" parent="Skeleton2D"]
-z_as_relative = false
+[node name="quadril" type="Bone2D" parent="Skeleton2D" unique_id=1919106796]
 z_index = 6
+z_as_relative = false
 position = Vector2(0.26, -37.87)
-rotation = 0.002303025
+rotation = -0.077615
+scale = Vector2(0.9999994, 0.9999994)
 rest = Transform2D(1, 0, 0, 1, 0.26, -37.87)
+editor_settings/show_bone_gizmo = false
 
-[node name="Sprite" type="Sprite2D" parent="Skeleton2D/quadril"]
+[node name="Sprite" type="Sprite2D" parent="Skeleton2D/quadril" unique_id=610921489]
 texture = ExtResource("1_quadril")
 offset = Vector2(0.74, 1.87)
 
-[node name="torso" type="Bone2D" parent="Skeleton2D/quadril"]
-z_as_relative = false
+[node name="torso" type="Bone2D" parent="Skeleton2D/quadril" unique_id=2018465207]
 z_index = 7
+z_as_relative = false
 position = Vector2(0.15, -2.85)
-rotation = -0.035276584
+rotation = -0.0048986664
+scale = Vector2(0.99999976, 0.99999976)
 rest = Transform2D(1, 0, 0, 1, 0.15, -2.85)
+editor_settings/show_bone_gizmo = false
 
-[node name="Sprite" type="Sprite2D" parent="Skeleton2D/quadril/torso"]
+[node name="Sprite" type="Sprite2D" parent="Skeleton2D/quadril/torso" unique_id=934821201]
 texture = ExtResource("2_torso")
 offset = Vector2(0.59, -7.28)
 
-[node name="cabeca" type="Bone2D" parent="Skeleton2D/quadril/torso"]
-z_as_relative = false
+[node name="cabeca" type="Bone2D" parent="Skeleton2D/quadril/torso" unique_id=324886718]
 z_index = 8
+z_as_relative = false
 position = Vector2(0, -16.07)
-rotation = 0.0003495445
+rotation = 0.010969
+scale = Vector2(0.99999994, 0.99999994)
 rest = Transform2D(1, 0, 0, 1, 0, -16.07)
+auto_calculate_length_and_angle = false
+length = 16.0
+bone_angle = 0.0
+editor_settings/show_bone_gizmo = false
 
-[node name="Sprite" type="Sprite2D" parent="Skeleton2D/quadril/torso/cabeca"]
+[node name="Sprite" type="Sprite2D" parent="Skeleton2D/quadril/torso/cabeca" unique_id=522589627]
 texture = ExtResource("3_cabeca")
 offset = Vector2(1.09, -6.21)
 
-[node name="ponta_cabeca" type="Marker2D" parent="Skeleton2D/quadril/torso/cabeca"]
+[node name="HairRig" parent="Skeleton2D/quadril/torso/cabeca" unique_id=1910570323 instance=ExtResource("25_hair")]
+
+[node name="ponta_cabeca" type="Marker2D" parent="Skeleton2D/quadril/torso/cabeca" unique_id=1360661259]
 position = Vector2(-0.2, -18.01)
 
-[node name="braco_sup_e" type="Bone2D" parent="Skeleton2D/quadril/torso"]
-z_as_relative = false
+[node name="braco_sup_e" type="Bone2D" parent="Skeleton2D/quadril/torso" unique_id=769834160]
 z_index = 12
+z_as_relative = false
 position = Vector2(-7.28, -13.05)
-rotation = 0.0435599
-scale = Vector2(0.99999994, 0.99999994)
+rotation = -0.30850497
+scale = Vector2(0.99999946, 0.99999946)
 rest = Transform2D(1, 0, 0, 1, -7.28, -13.05)
+editor_settings/show_bone_gizmo = false
 
-[node name="Sprite" type="Sprite2D" parent="Skeleton2D/quadril/torso/braco_sup_e"]
+[node name="Sprite" type="Sprite2D" parent="Skeleton2D/quadril/torso/braco_sup_e" unique_id=457216814]
 texture = ExtResource("4_braco_sup_e")
 offset = Vector2(0.37, 6.27)
 
-[node name="braco_inf_e" type="Bone2D" parent="Skeleton2D/quadril/torso/braco_sup_e"]
-z_as_relative = false
+[node name="braco_inf_e" type="Bone2D" parent="Skeleton2D/quadril/torso/braco_sup_e" unique_id=1127701697]
 z_index = 13
+z_as_relative = false
 position = Vector2(-0.73, 12.73)
-rotation = -0.1790381
+rotation = -0.16794108
+scale = Vector2(0.99999964, 0.99999964)
 rest = Transform2D(1, 0, 0, 1, -0.73, 12.73)
+editor_settings/show_bone_gizmo = false
 
-[node name="Sprite" type="Sprite2D" parent="Skeleton2D/quadril/torso/braco_sup_e/braco_inf_e"]
+[node name="Sprite" type="Sprite2D" parent="Skeleton2D/quadril/torso/braco_sup_e/braco_inf_e" unique_id=403364657]
 texture = ExtResource("5_braco_inf_e")
 offset = Vector2(0.1, 5.54)
 
-[node name="mao_e" type="Bone2D" parent="Skeleton2D/quadril/torso/braco_sup_e/braco_inf_e"]
-z_as_relative = false
+[node name="mao_e" type="Bone2D" parent="Skeleton2D/quadril/torso/braco_sup_e/braco_inf_e" unique_id=416255710]
 z_index = 14
+z_as_relative = false
 position = Vector2(0.11, 10)
-rotation = -0.00054466515
+rotation = -0.0015211666
+scale = Vector2(0.99999976, 0.99999976)
 rest = Transform2D(1, 0, 0, 1, 0.11, 10)
+auto_calculate_length_and_angle = false
+length = 16.0
+bone_angle = 0.0
+editor_settings/show_bone_gizmo = false
 
-[node name="Sprite" type="Sprite2D" parent="Skeleton2D/quadril/torso/braco_sup_e/braco_inf_e/mao_e"]
+[node name="Sprite" type="Sprite2D" parent="Skeleton2D/quadril/torso/braco_sup_e/braco_inf_e/mao_e" unique_id=717385908]
 texture = ExtResource("6_mao_e")
 offset = Vector2(0.99, 4.54)
 
-[node name="ponta_mao_e" type="Marker2D" parent="Skeleton2D/quadril/torso/braco_sup_e/braco_inf_e/mao_e"]
+[node name="ponta_mao_e" type="Marker2D" parent="Skeleton2D/quadril/torso/braco_sup_e/braco_inf_e/mao_e" unique_id=693928445]
 position = Vector2(0.49000043, 7.039997)
 
-[node name="braco_sup_d" type="Bone2D" parent="Skeleton2D/quadril/torso"]
-z_as_relative = false
+[node name="braco_sup_d" type="Bone2D" parent="Skeleton2D/quadril/torso" unique_id=1441605657]
 z_index = 2
+z_as_relative = false
 position = Vector2(6.77, -20.08)
-rotation = -0.036272015
+rotation = 0.034906585
+scale = Vector2(0.99999976, 0.99999976)
 rest = Transform2D(1, 0, 0, 1, 6.77, -20.08)
+editor_settings/show_bone_gizmo = false
 
-[node name="Sprite" type="Sprite2D" parent="Skeleton2D/quadril/torso/braco_sup_d"]
+[node name="Sprite" type="Sprite2D" parent="Skeleton2D/quadril/torso/braco_sup_d" unique_id=1492398909]
 texture = ExtResource("7_braco_sup_d")
 offset = Vector2(0.82, 5.8)
 
-[node name="braco_inf_d" type="Bone2D" parent="Skeleton2D/quadril/torso/braco_sup_d"]
+[node name="braco_inf_d" type="Bone2D" parent="Skeleton2D/quadril/torso/braco_sup_d" unique_id=923007449]
 z_as_relative = false
 position = Vector2(1.35, 11.69)
-rotation = -0.17017429
+rotation = -0.79307586
+scale = Vector2(0.9999999, 0.9999999)
 rest = Transform2D(1, 0, 0, 1, 1.35, 11.69)
+editor_settings/show_bone_gizmo = false
 
-[node name="Sprite" type="Sprite2D" parent="Skeleton2D/quadril/torso/braco_sup_d/braco_inf_d"]
+[node name="Sprite" type="Sprite2D" parent="Skeleton2D/quadril/torso/braco_sup_d/braco_inf_d" unique_id=1641406455]
 texture = ExtResource("8_braco_inf_d")
 offset = Vector2(0.97, 5.11)
 
-[node name="mao_d" type="Bone2D" parent="Skeleton2D/quadril/torso/braco_sup_d/braco_inf_d"]
-z_as_relative = false
+[node name="mao_d" type="Bone2D" parent="Skeleton2D/quadril/torso/braco_sup_d/braco_inf_d" unique_id=1125033144]
 z_index = 1
+z_as_relative = false
 position = Vector2(0.72, 9.7)
-rotation = -0.0006465445
-scale = Vector2(0.99999994, 0.99999994)
+rotation = 0.113674
+scale = Vector2(0.9999994, 0.9999994)
 rest = Transform2D(1, 0, 0, 1, 0.72, 9.7)
+auto_calculate_length_and_angle = false
+length = 16.0
+bone_angle = 0.0
+editor_settings/show_bone_gizmo = false
 
-[node name="Sprite" type="Sprite2D" parent="Skeleton2D/quadril/torso/braco_sup_d/braco_inf_d/mao_d"]
+[node name="Sprite" type="Sprite2D" parent="Skeleton2D/quadril/torso/braco_sup_d/braco_inf_d/mao_d" unique_id=1815500163]
 texture = ExtResource("9_mao_d")
 offset = Vector2(0.75, 4.41)
 
-[node name="ponta_mao_d" type="Marker2D" parent="Skeleton2D/quadril/torso/braco_sup_d/braco_inf_d/mao_d"]
+[node name="ponta_mao_d" type="Marker2D" parent="Skeleton2D/quadril/torso/braco_sup_d/braco_inf_d/mao_d" unique_id=709406238]
 position = Vector2(0.31, 6.68)
 
-[node name="coxa_e" type="Bone2D" parent="Skeleton2D/quadril"]
-z_as_relative = false
+[node name="coxa_e" type="Bone2D" parent="Skeleton2D/quadril" unique_id=860536902]
 z_index = 9
+z_as_relative = false
 position = Vector2(-3.31, 2.85)
-rotation = -0.05804423
+rotation = 0.002967
+scale = Vector2(0.99999964, 0.99999964)
 rest = Transform2D(1, 0, 0, 1, -3.31, 2.85)
+editor_settings/show_bone_gizmo = false
 
-[node name="Sprite" type="Sprite2D" parent="Skeleton2D/quadril/coxa_e"]
+[node name="Sprite" type="Sprite2D" parent="Skeleton2D/quadril/coxa_e" unique_id=1604647318]
 texture = ExtResource("10_coxa_e")
 offset = Vector2(0.55, 7.02)
 
-[node name="perna_e" type="Bone2D" parent="Skeleton2D/quadril/coxa_e"]
-z_as_relative = false
+[node name="perna_e" type="Bone2D" parent="Skeleton2D/quadril/coxa_e" unique_id=36184905]
 z_index = 10
+z_as_relative = false
 position = Vector2(-0.05, 15.16)
-rotation = 0.6222728
+scale = Vector2(0.9999998, 0.9999998)
 rest = Transform2D(1, 0, 0, 1, -0.05, 15.16)
+editor_settings/show_bone_gizmo = false
 
-[node name="Sprite" type="Sprite2D" parent="Skeleton2D/quadril/coxa_e/perna_e"]
+[node name="Sprite" type="Sprite2D" parent="Skeleton2D/quadril/coxa_e/perna_e" unique_id=1706935530]
 texture = ExtResource("11_perna_e")
 offset = Vector2(0.1, 8.36)
 
-[node name="pe_e" type="Bone2D" parent="Skeleton2D/quadril/coxa_e/perna_e"]
-z_as_relative = false
+[node name="pe_e" type="Bone2D" parent="Skeleton2D/quadril/coxa_e/perna_e" unique_id=1325204587]
 z_index = 11
+z_as_relative = false
 position = Vector2(0.05, 16.36)
-rotation = -0.16019511
+rotation = 0.041417
+scale = Vector2(0.9999998, 0.9999998)
 rest = Transform2D(1, 0, 0, 1, 0.05, 16.36)
+auto_calculate_length_and_angle = false
+length = 16.0
+bone_angle = 0.0
+editor_settings/show_bone_gizmo = false
 
-[node name="Sprite" type="Sprite2D" parent="Skeleton2D/quadril/coxa_e/perna_e/pe_e"]
+[node name="Sprite" type="Sprite2D" parent="Skeleton2D/quadril/coxa_e/perna_e/pe_e" unique_id=190876036]
 texture = ExtResource("12_pe_e")
 offset = Vector2(2.05, 4)
 
-[node name="ponta_pe_e" type="Marker2D" parent="Skeleton2D/quadril/coxa_e/perna_e/pe_e"]
+[node name="ponta_pe_e" type="Marker2D" parent="Skeleton2D/quadril/coxa_e/perna_e/pe_e" unique_id=727334009]
 position = Vector2(3.36, 6.84)
 
-[node name="coxa_d" type="Bone2D" parent="Skeleton2D/quadril"]
-z_as_relative = false
+[node name="coxa_d" type="Bone2D" parent="Skeleton2D/quadril" unique_id=19474920]
 z_index = 5
+z_as_relative = false
 position = Vector2(3.51, -0.56)
-rotation = 0.045693807
-scale = Vector2(0.99999994, 0.99999994)
+rotation = 0.002601
+scale = Vector2(0.99999946, 0.99999946)
 rest = Transform2D(1, 0, 0, 1, 3.51, -0.56)
+editor_settings/show_bone_gizmo = false
 
-[node name="Sprite" type="Sprite2D" parent="Skeleton2D/quadril/coxa_d"]
+[node name="Sprite" type="Sprite2D" parent="Skeleton2D/quadril/coxa_d" unique_id=770316218]
 texture = ExtResource("13_coxa_d")
 offset = Vector2(0.73, 6.93)
 
-[node name="perna_d" type="Bone2D" parent="Skeleton2D/quadril/coxa_d"]
-z_as_relative = false
+[node name="perna_d" type="Bone2D" parent="Skeleton2D/quadril/coxa_d" unique_id=926923870]
 z_index = 3
+z_as_relative = false
 position = Vector2(0.36, 14.96)
-rotation = 0.083671734
+scale = Vector2(0.99999976, 0.99999976)
 rest = Transform2D(1, 0, 0, 1, 0.36, 14.96)
+editor_settings/show_bone_gizmo = false
 
-[node name="Sprite" type="Sprite2D" parent="Skeleton2D/quadril/coxa_d/perna_d"]
+[node name="Sprite" type="Sprite2D" parent="Skeleton2D/quadril/coxa_d/perna_d" unique_id=1571106886]
 texture = ExtResource("14_perna_d")
 offset = Vector2(-0.13, 7.97)
 
-[node name="pe_d" type="Bone2D" parent="Skeleton2D/quadril/coxa_d/perna_d"]
-z_as_relative = false
+[node name="pe_d" type="Bone2D" parent="Skeleton2D/quadril/coxa_d/perna_d" unique_id=306288951]
 z_index = 4
+z_as_relative = false
 position = Vector2(0.26, 16.25)
-rotation = -0.15900199
+rotation = 0.110567
+scale = Vector2(0.9999994, 0.9999994)
 rest = Transform2D(1, 0, 0, 1, 0.26, 16.25)
+auto_calculate_length_and_angle = false
+length = 16.0
+bone_angle = 0.0
+editor_settings/show_bone_gizmo = false
 
-[node name="Sprite" type="Sprite2D" parent="Skeleton2D/quadril/coxa_d/perna_d/pe_d"]
+[node name="Sprite" type="Sprite2D" parent="Skeleton2D/quadril/coxa_d/perna_d/pe_d" unique_id=403857317]
 texture = ExtResource("15_pe_d")
 offset = Vector2(2.11, 3.72)
 
-[node name="ponta_pe_d" type="Marker2D" parent="Skeleton2D/quadril/coxa_d/perna_d/pe_d"]
+[node name="ponta_pe_d" type="Marker2D" parent="Skeleton2D/quadril/coxa_d/perna_d/pe_d" unique_id=811760231]
 position = Vector2(5.22, 5.91)
 
-[node name="SaiaDeformavel" parent="." node_paths=PackedStringArray("esqueleto", "osso_quadril", "osso_coxa_esq", "osso_coxa_dir") instance=ExtResource("20_skirt")]
+[node name="SaiaDeformavel" parent="." unique_id=394965324 node_paths=PackedStringArray("esqueleto", "osso_quadril", "osso_coxa_esq", "osso_coxa_dir") instance=ExtResource("20_skirt")]
 recurso = ExtResource("21_skirt_resource")
 esqueleto = NodePath("../Skeleton2D")
 osso_quadril = NodePath("../Skeleton2D/quadril")
 osso_coxa_esq = NodePath("../Skeleton2D/quadril/coxa_e")
 osso_coxa_dir = NodePath("../Skeleton2D/quadril/coxa_d")
 
-[node name="WardrobePresenter" type="Node" parent="." node_paths=PackedStringArray("rig", "skirt")]
+[node name="WardrobePresenter" type="Node" parent="." unique_id=320713546 node_paths=PackedStringArray("rig", "skirt")]
 script = ExtResource("22_wardrobe")
 catalog = ExtResource("23_catalog")
 clothing_piece_scene = ExtResource("24_piece")
 rig = NodePath("../Skeleton2D")
 skirt = NodePath("../SaiaDeformavel")
 
-[node name="AnimationPlayer" type="AnimationPlayer" parent="."]
-libraries = {
-&"fem": ExtResource("18_26yyw"),
-&"masc": ExtResource("19_ycmqt")
-}
+[node name="CharacterColorPresenter" type="Node" parent="." unique_id=936108413]
+script = ExtResource("26_color_presenter")
+catalog = ExtResource("27_color_catalog")
+palette_shader = ExtResource("28_palette_shader")
+skin_profile = ExtResource("29_skin_profile")
+hair_profile = ExtResource("30_hair_profile")
+
+[node name="AnimationPlayer" type="AnimationPlayer" parent="." unique_id=1842682913]
+libraries/ = SubResource("AnimationLibrary_d2752")
+libraries/fem = ExtResource("18_26yyw")
+libraries/masc = ExtResource("19_ycmqt")

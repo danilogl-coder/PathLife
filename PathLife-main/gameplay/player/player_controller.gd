@@ -2,6 +2,7 @@ class_name PlayerController
 extends CharacterBody2D
 
 signal locomotion_changed(direction: StringName, is_moving: bool, is_running: bool)
+signal crouch_changed(is_crouching: bool)
 signal health_changed(current_health: int, maximum_health: int)
 
 @export_category("Configuration")
@@ -11,6 +12,7 @@ var _current_health: int = 1
 var _facing_direction: StringName = &"se"
 var _was_moving: bool = false
 var _was_running: bool = false
+var _is_crouching: bool = false
 var _controls_enabled: bool = true
 
 
@@ -27,6 +29,12 @@ func _physics_process(_delta: float) -> void:
 	if not _controls_enabled:
 		velocity = Vector2.ZERO
 		return
+
+	var wants_to_crouch := Input.is_action_pressed("crouch")
+	if wants_to_crouch != _is_crouching:
+		_is_crouching = wants_to_crouch
+		crouch_changed.emit(_is_crouching)
+
 	var raw_input := Input.get_vector(
 		"move_left",
 		"move_right",
@@ -37,12 +45,20 @@ func _physics_process(_delta: float) -> void:
 	var isometric_input := _to_isometric(grid_input)
 
 	var has_movement_input := grid_input != Vector2.ZERO
-	var wants_to_run := has_movement_input and Input.is_action_pressed("move_run")
+	var wants_to_run := (
+		has_movement_input
+		and not _is_crouching
+		and Input.is_action_pressed("move_run")
+	)
 	var previous_direction := _facing_direction
 	if has_movement_input:
 		_facing_direction = _direction_from_grid_input(grid_input)
 
-	var speed_multiplier := config.run_speed_multiplier if wants_to_run else 1.0
+	var speed_multiplier := 1.0
+	if _is_crouching:
+		speed_multiplier = config.crouch_speed_multiplier
+	elif wants_to_run:
+		speed_multiplier = config.run_speed_multiplier
 	velocity = isometric_input * config.movement_speed * speed_multiplier
 	var position_before_move := global_position
 	move_and_slide()
@@ -68,6 +84,9 @@ func set_controls_enabled(enabled: bool) -> void:
 	_controls_enabled = enabled
 	if not enabled:
 		velocity = Vector2.ZERO
+		if _is_crouching:
+			_is_crouching = false
+			crouch_changed.emit(false)
 		if _was_moving or _was_running:
 			locomotion_changed.emit(_facing_direction, false, false)
 		_was_moving = false
@@ -76,6 +95,10 @@ func set_controls_enabled(enabled: bool) -> void:
 
 func are_controls_enabled() -> bool:
 	return _controls_enabled
+
+
+func is_crouching() -> bool:
+	return _is_crouching
 
 
 func damage(amount: int) -> void:

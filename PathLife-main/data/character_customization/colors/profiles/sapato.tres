@@ -1,0 +1,7 @@
+[gd_resource type="Resource" script_class="RecolorProfile" load_steps=2 format=3]
+[ext_resource type="Script" path="res://data/character_customization/colors/recolor_profile.gd" id="1"]
+[resource]
+script = ExtResource("1")
+id = &"sapato"
+source_colors = PackedColorArray(0.06274510, 0.04705882, 0.04313725, 1, 0.15294118, 0.12549020, 0.11372549, 1, 0.21176471, 0.17647059, 0.16078431, 1, 0.27450980, 0.23529412, 0.21568627, 1, 0.34117647, 0.29411765, 0.27450980, 1, 0.40784314, 0.36078431, 0.33725490, 1)
+tone_positions = PackedFloat32Array(0.00000000, 0.25194800, 0.41611118, 0.60224884, 0.79188786, 1.00000000)

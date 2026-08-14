@@ -1,0 +1,11 @@
+[gd_resource type="Resource" script_class="CharacterColorPalette" load_steps=2 format=3]
+[ext_resource type="Script" path="res://data/character_customization/colors/character_color_palette.gd" id="1"]
+[resource]
+script = ExtResource("1")
+id = &"ambar"
+display_name = "Âmbar"
+preview_color = Color(0.60784314, 0.37647059, 0.23137255, 1)
+shadow_color = Color(0.27352941, 0.16941176, 0.10411765, 1)
+base_color = Color(0.60784314, 0.37647059, 0.23137255, 1)
+highlight_color = Color(0.71764706, 0.55105882, 0.44658824, 1)
+family = "natural"

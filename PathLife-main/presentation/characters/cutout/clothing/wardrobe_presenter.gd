@@ -8,6 +8,7 @@ extends Node
 
 var _spawned_pieces: Array[Sprite2D] = []
 var _last_signature: String = ""
+var color_presenter: CharacterColorPresenter
 
 func present(appearance: CharacterAppearance, direction: StringName) -> void:
 	if appearance == null or catalog == null or clothing_piece_scene == null or rig == null or skirt == null:
@@ -32,6 +33,9 @@ func _spawn_item(item_id: StringName, body_type: String, direction: StringName) 
 	var item := catalog.get_item(item_id)
 	if item == null: return
 	if item.visual_type == "deformable_skirt":
+		if color_presenter != null:
+			skirt.set_color_material(color_presenter.get_clothing_material(
+				item.recolor_profile, appearance_color(item.slot)))
 		skirt.equipar(StringName(body_type), direction)
 		return
 	var pieces := catalog.get_piece_data(item_id, body_type, direction)
@@ -43,6 +47,13 @@ func _spawn_item(item_id: StringName, body_type: String, direction: StringName) 
 		sprite.name = "Clothing_%s_%s" % [item_id, piece_name]
 		sprite.offset = _parse_vector2(data.get("offset_sprite", []))
 		sprite.texture = catalog.load_piece_texture(String(data.get("arquivo", "")))
+		if color_presenter != null:
+			sprite.material = color_presenter.get_clothing_material(
+				item.recolor_profile, _active_appearance.get_item_color(StringName(item.slot)))
+		# Acessórios da cabeça ficam acima do cabelo frontal. Como são filhos do
+		# Bone2D da cabeça, estes valores são relativos à mesma camada do HairRig.
+		if item.slot == "eyewear": sprite.z_index = 2
+		elif item.slot == "headwear": sprite.z_index = 3
 		bone.add_child(sprite)
 		_spawned_pieces.append(sprite)
 
@@ -58,8 +69,16 @@ func _clear_spawned_pieces() -> void:
 func _sort_items_by_layer(a: StringName, b: StringName) -> bool:
 	return catalog.get_layer_order(a) < catalog.get_layer_order(b)
 
+var _active_appearance: CharacterAppearance
+
+func appearance_color(slot_name: String) -> StringName:
+	return _active_appearance.get_item_color(StringName(slot_name)) if _active_appearance != null else &"branco"
+
 func _make_signature(a: CharacterAppearance, direction: StringName) -> String:
-	return "%s|%s|%s|%s|%s|%s|%s|%s" % [a.body_type, direction, a.top, a.outerwear, a.bottom, a.footwear, a.eyewear, a.headwear]
+	_active_appearance = a
+	return "%s|%s|%s|%s|%s|%s|%s|%s|%s|%s|%s|%s|%s|%s" % [
+		a.body_type, direction, a.top, a.outerwear, a.bottom, a.footwear, a.eyewear, a.headwear,
+		a.top_color, a.outerwear_color, a.bottom_color, a.footwear_color, a.eyewear_color, a.headwear_color]
 
 func _parse_vector2(value: Variant) -> Vector2:
 	if value is Array and value.size() == 2:

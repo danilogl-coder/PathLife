@@ -1,0 +1,11 @@
+[gd_resource type="Resource" script_class="CharacterColorPalette" load_steps=2 format=3]
+[ext_resource type="Script" path="res://data/character_customization/colors/character_color_palette.gd" id="1"]
+[resource]
+script = ExtResource("1")
+id = &"bronze"
+display_name = "Bronze"
+preview_color = Color(0.55686275, 0.33333333, 0.20392157, 1)
+shadow_color = Color(0.25058824, 0.15000000, 0.09176471, 1)
+base_color = Color(0.55686275, 0.33333333, 0.20392157, 1)
+highlight_color = Color(0.68094118, 0.52000000, 0.42682353, 1)
+family = "natural"

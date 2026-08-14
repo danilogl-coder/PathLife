@@ -14,3 +14,6 @@ var visual_type: String = "bone_sprites"
 
 @export_category("Menu")
 @export var icon: Texture2D
+
+@export_category("Color")
+@export var recolor_profile: RecolorProfile

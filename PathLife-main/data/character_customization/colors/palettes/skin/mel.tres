@@ -1,0 +1,11 @@
+[gd_resource type="Resource" script_class="CharacterColorPalette" load_steps=2 format=3]
+[ext_resource type="Script" path="res://data/character_customization/colors/character_color_palette.gd" id="1"]
+[resource]
+script = ExtResource("1")
+id = &"mel"
+display_name = "Mel"
+preview_color = Color(0.72549020, 0.49019608, 0.32156863, 1)
+shadow_color = Color(0.32647059, 0.22058824, 0.14470588, 1)
+base_color = Color(0.72549020, 0.49019608, 0.32156863, 1)
+highlight_color = Color(0.80235294, 0.63294118, 0.51152941, 1)
+family = "natural"

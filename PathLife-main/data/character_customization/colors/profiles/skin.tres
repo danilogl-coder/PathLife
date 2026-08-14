@@ -1,0 +1,7 @@
+[gd_resource type="Resource" script_class="RecolorProfile" load_steps=2 format=3]
+[ext_resource type="Script" path="res://data/character_customization/colors/recolor_profile.gd" id="1"]
+[resource]
+script = ExtResource("1")
+id = &"skin"
+source_colors = PackedColorArray(0.34509804, 0.25098039, 0.22745098, 1, 0.63137255, 0.52156863, 0.44313725, 1, 0.73725490, 0.62745098, 0.53725490, 1, 0.81960784, 0.71764706, 0.62352941, 1, 0.88627451, 0.79607843, 0.70196078, 1, 0.94117647, 0.87058824, 0.78431373, 1)
+tone_positions = PackedFloat32Array(0.00000000, 0.44250147, 0.61466537, 0.75931225, 0.88377262, 1.00000000)

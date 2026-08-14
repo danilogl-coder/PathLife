@@ -4,4 +4,5 @@
 
 [resource]
 script = ExtResource("1_lob52")
+crouch_speed_multiplier = 0.45
 metadata/_custom_type_script = "uid://vu77qkgydy0k"

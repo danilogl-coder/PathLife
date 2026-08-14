@@ -1,0 +1,10 @@
+[gd_resource type="Resource" script_class="CharacterAppearanceRandomizer" load_steps=2 format=3]
+
+[ext_resource type="Script" path="res://data/character_customization/character_appearance_randomizer.gd" id="1"]
+
+[resource]
+script = ExtResource("1")
+outerwear_probability = 0.45
+eyewear_probability = 0.3
+headwear_probability = 0.35
+fantasy_hair_probability = 0.15

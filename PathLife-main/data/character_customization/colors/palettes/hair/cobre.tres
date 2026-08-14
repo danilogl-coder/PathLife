@@ -1,0 +1,11 @@
+[gd_resource type="Resource" script_class="CharacterColorPalette" load_steps=2 format=3]
+[ext_resource type="Script" path="res://data/character_customization/colors/character_color_palette.gd" id="1"]
+[resource]
+script = ExtResource("1")
+id = &"cobre"
+display_name = "Cobre"
+preview_color = Color(0.66274510, 0.30980392, 0.17647059, 1)
+shadow_color = Color(0.18556863, 0.08674510, 0.04941176, 1)
+base_color = Color(0.66274510, 0.30980392, 0.17647059, 1)
+highlight_color = Color(0.79090196, 0.57207843, 0.48941176, 1)
+family = "natural"
