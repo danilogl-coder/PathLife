@@ -1,0 +1,9 @@
+[gd_resource type="Resource" script_class="GroundVariant" format=3]
+
+[ext_resource type="Script" path="res://world_generation/climate/ground_variant.gd" id="1_o85vq"]
+
+[resource]
+resource_name = "campo_mato_denso"
+script = ExtResource("1_o85vq")
+ground_id = &"campo_mato_denso"
+weight = 0.6

@@ -1,0 +1,21 @@
+[gd_resource type="Resource" script_class="BiomeDefinition" format=3]
+
+[ext_resource type="Script" path="res://world_generation/decoration/decoration_definition.gd" id="1_y8ghj"]
+[ext_resource type="Resource" path="res://data/world/decorations/alamo.tres" id="2_o2lqb"]
+[ext_resource type="Script" path="res://world_generation/climate/biome_definition.gd" id="3_yytn4"]
+[ext_resource type="Script" path="res://world_generation/structures/structure_definition.gd" id="4_tp8x1"]
+
+[resource]
+resource_name = "tundra"
+script = ExtResource("3_yytn4")
+id = &"tundra"
+display_name = "Tundra"
+temperature_min = 0.1
+temperature_max = 0.3
+humidity_min = 0.3
+humidity_max = 0.8
+continentalness_min = 0.34
+height_bias = 0.5
+ground_id = &"campo_claro"
+wall_id = &"pedra"
+decorations = Array[ExtResource("1_y8ghj")]([ExtResource("2_o2lqb")])

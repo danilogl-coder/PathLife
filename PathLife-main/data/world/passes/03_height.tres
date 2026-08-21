@@ -1,0 +1,9 @@
+[gd_resource type="Resource" script_class="HeightPass" format=3]
+
+[ext_resource type="Resource" path="res://data/world/world_sampler.tres" id="1_jkato"]
+[ext_resource type="Script" path="res://world_generation/passes/height_pass.gd" id="2_nknrr"]
+
+[resource]
+script = ExtResource("2_nknrr")
+sampler = ExtResource("1_jkato")
+pass_name = "3 - Relevo base"

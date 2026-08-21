@@ -1,0 +1,9 @@
+[gd_resource type="Resource" script_class="GroundVariant" format=3]
+
+[ext_resource type="Script" path="res://world_generation/climate/ground_variant.gd" id="1_vhtye"]
+
+[resource]
+resource_name = "campo_quase_ralo_para_campo_baixo_1"
+script = ExtResource("1_vhtye")
+ground_id = &"campo_quase_ralo_para_campo_baixo_1"
+weight = 0.12

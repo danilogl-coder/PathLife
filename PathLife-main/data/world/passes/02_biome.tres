@@ -1,0 +1,9 @@
+[gd_resource type="Resource" script_class="BiomePass" format=3]
+
+[ext_resource type="Resource" path="res://data/world/world_sampler.tres" id="1_eavv3"]
+[ext_resource type="Script" path="res://world_generation/passes/biome_pass.gd" id="2_50j1n"]
+
+[resource]
+script = ExtResource("2_50j1n")
+sampler = ExtResource("1_eavv3")
+pass_name = "2 - Biomas"

@@ -1,0 +1,47 @@
+[gd_scene load_steps=11 format=3 uid="uid://ccclce5ap3ngs"]
+
+[ext_resource type="Script" uid="uid://b54ob6bq6i7mu" path="res://gameplay/player/player_controller.gd" id="1_xq3ts"]
+[ext_resource type="Resource" uid="uid://cy5yh3iq3rj1j" path="res://data/player/default_player_config.tres" id="2_wvk08"]
+[ext_resource type="PackedScene" uid="uid://gcuaslvokbkv" path="res://presentation/characters/cutout/character_visual.tscn" id="3_visual"]
+[ext_resource type="Script" path="res://gameplay/player/character_appearance_state.gd" id="4_appearance_state"]
+[ext_resource type="Resource" path="res://data/character_customization/default_character_appearance.tres" id="5_default_appearance"]
+[ext_resource type="Resource" path="res://data/character_customization/default_clothing_catalog.tres" id="6_catalog"]
+[ext_resource type="Resource" path="res://data/character_customization/hair/default_hair_catalog.tres" id="7_hair_catalog"]
+[ext_resource type="Resource" path="res://data/character_customization/colors/default_character_color_catalog.tres" id="8_color_catalog"]
+[ext_resource type="PackedScene" path="res://gameplay/player/bed_sleep_interactor.tscn" id="9_sleep_interactor"]
+
+[sub_resource type="CapsuleShape2D" id="CapsuleShape2D_omfh6"]
+radius = 5.0
+height = 10.0
+
+[node name="Player" type="CharacterBody2D" groups=["depth_actor"]]
+z_index = 0
+collision_layer = 2
+collision_mask = 9
+script = ExtResource("1_xq3ts")
+config = ExtResource("2_wvk08")
+
+[node name="AppearanceState" type="Node" parent="."]
+script = ExtResource("4_appearance_state")
+default_appearance = ExtResource("5_default_appearance")
+catalog = ExtResource("6_catalog")
+hair_catalog = ExtResource("7_hair_catalog")
+color_catalog = ExtResource("8_color_catalog")
+
+[node name="CollisionShape2D" type="CollisionShape2D" parent="."]
+position = Vector2(0, -5)
+shape = SubResource("CapsuleShape2D_omfh6")
+
+[node name="VisualAnchor" type="CanvasGroup" parent="."]
+
+[node name="CharacterVisual" parent="VisualAnchor" instance=ExtResource("3_visual")]
+
+[node name="BedSleepInteractor" parent="." node_paths=PackedStringArray("player", "visual_anchor", "character_visual") instance=ExtResource("9_sleep_interactor")]
+player = NodePath("..")
+visual_anchor = NodePath("../VisualAnchor")
+character_visual = NodePath("../VisualAnchor/CharacterVisual")
+
+[connection signal="locomotion_changed" from="." to="VisualAnchor/CharacterVisual" method="present_locomotion"]
+[connection signal="crouch_changed" from="." to="VisualAnchor/CharacterVisual" method="present_crouch"]
+[connection signal="sleep_changed" from="." to="VisualAnchor/CharacterVisual" method="present_sleep"]
+[connection signal="appearance_changed" from="AppearanceState" to="VisualAnchor/CharacterVisual" method="present_appearance"]

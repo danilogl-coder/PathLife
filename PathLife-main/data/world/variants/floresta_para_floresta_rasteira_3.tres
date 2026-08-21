@@ -1,0 +1,9 @@
+[gd_resource type="Resource" script_class="GroundVariant" format=3]
+
+[ext_resource type="Script" path="res://world_generation/climate/ground_variant.gd" id="1_0hywl"]
+
+[resource]
+resource_name = "floresta_para_floresta_rasteira_3"
+script = ExtResource("1_0hywl")
+ground_id = &"floresta_para_floresta_rasteira_3"
+weight = 0.21

@@ -1,0 +1,9 @@
+[gd_resource type="FastNoiseLite" format=3]
+
+[resource]
+resource_name = "mountain"
+noise_type = 0
+frequency = 1.0
+fractal_octaves = 4
+fractal_lacunarity = 2.1
+fractal_gain = 0.55

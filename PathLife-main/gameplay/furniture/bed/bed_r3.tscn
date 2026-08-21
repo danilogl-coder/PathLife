@@ -1,0 +1,35 @@
+[gd_scene format=3 uid="uid://cehbejb8dn640"]
+
+[ext_resource type="PackedScene" uid="uid://c2ll6yox0l7xj" path="res://gameplay/furniture/bed/bed_base.tscn" id="1_base"]
+[ext_resource type="Texture2D" uid="uid://dnuu6b5aj1kro" path="res://assets/furniture/bedroom/bed/cama_r3.png" id="2_texture"]
+[ext_resource type="Texture2D" uid="uid://djjhwnok7uipr" path="res://assets/furniture/bedroom/bed/lencol_r3.png" id="3_blanket"]
+[ext_resource type="Texture2D" uid="uid://c08q3balnwrtp" path="res://assets/furniture/bedroom/bed/cabeceira_r3.png" id="4_headboard"]
+
+[node name="Bed" unique_id=1094821658 instance=ExtResource("1_base")]
+sleep_direction = "se"
+sleep_animation_direction = "se"
+sleep_visual_rotation_degrees = 10.0
+
+[node name="BedBack" parent="Visual" parent_id_path=PackedInt32Array(1523704961) index="0" unique_id=2045096022]
+texture = ExtResource("2_texture")
+
+[node name="BedFront" parent="Visual" parent_id_path=PackedInt32Array(1523704961) index="2" unique_id=424874191]
+texture = ExtResource("3_blanket")
+
+[node name="SleepingHeadboard" parent="Visual" parent_id_path=PackedInt32Array(1523704961) index="3" unique_id=1610010139]
+texture = ExtResource("4_headboard")
+
+[node name="SolidCollision" parent="." index="1" unique_id=165171394]
+polygon = PackedVector2Array(-90, -48, -14, -86, 68, -40, -3, 7)
+
+[node name="InteractionShape" parent="InteractionArea" parent_id_path=PackedInt32Array(1451867950) index="0" unique_id=26919407]
+polygon = PackedVector2Array(-84, -32, 16, -86, 82, -42, -20, 14)
+
+[node name="PillowAnchor" parent="." index="4" unique_id=1391424610]
+position = Vector2(35, -42)
+
+[node name="TopOcclusionShape" parent="TopOcclusionArea" parent_id_path=PackedInt32Array(373969822) index="0"]
+polygon = PackedVector2Array(-109, -58, -8, -112, 96, -51, 61, -32, -14, -78, -82, -40)
+
+[editable path="Visual"]
+[editable path="TopOcclusionArea"]

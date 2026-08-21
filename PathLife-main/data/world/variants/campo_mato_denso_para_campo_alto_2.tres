@@ -1,0 +1,9 @@
+[gd_resource type="Resource" script_class="GroundVariant" format=3]
+
+[ext_resource type="Script" path="res://world_generation/climate/ground_variant.gd" id="1_dxom0"]
+
+[resource]
+resource_name = "campo_mato_denso_para_campo_alto_2"
+script = ExtResource("1_dxom0")
+ground_id = &"campo_mato_denso_para_campo_alto_2"
+weight = 0.18

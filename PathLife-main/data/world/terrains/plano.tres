@@ -1,0 +1,9 @@
+[gd_resource type="Resource" script_class="TerrainDefinition" format=3]
+
+[ext_resource type="Script" path="res://world_generation/terrain/terrain_definition.gd" id="1_a0u78"]
+
+[resource]
+resource_name = "plano"
+script = ExtResource("1_a0u78")
+max_roughness = 0.6
+max_slope = 1.0

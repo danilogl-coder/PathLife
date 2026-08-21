@@ -179,7 +179,7 @@ layout_mode = 2
 size_flags_horizontal = 3
 theme_override_constants/separation = 6
 
-[node name="SkinPalette" parent="SafeMargin/Center/MainPanel/Margin/Column/OptionsScroll/Options" instance=ExtResource("9")]
+[node name="SkinPalette" parent="SafeMargin/Center/MainPanel/Margin/Column/OptionsScroll/Options" unique_id=806517728 instance=ExtResource("9")]
 unique_name_in_owner = true
 layout_mode = 2
 label_text = "Cor da pele"
@@ -187,7 +187,6 @@ label_text = "Cor da pele"
 [node name="HairFrontRow" parent="SafeMargin/Center/MainPanel/Margin/Column/OptionsScroll/Options" unique_id=947710218 instance=ExtResource("6")]
 unique_name_in_owner = true
 layout_mode = 2
-side = "front"
 label_text = "Cabelo da frente"
 
 [node name="HairBackRow" parent="SafeMargin/Center/MainPanel/Margin/Column/OptionsScroll/Options" unique_id=7071749 instance=ExtResource("6")]
@@ -196,7 +195,7 @@ layout_mode = 2
 side = "back"
 label_text = "Cabelo de trás"
 
-[node name="HairPalette" parent="SafeMargin/Center/MainPanel/Margin/Column/OptionsScroll/Options" instance=ExtResource("9")]
+[node name="HairPalette" parent="SafeMargin/Center/MainPanel/Margin/Column/OptionsScroll/Options" unique_id=1849696748 instance=ExtResource("9")]
 unique_name_in_owner = true
 layout_mode = 2
 target = "hair"
@@ -207,7 +206,7 @@ unique_name_in_owner = true
 layout_mode = 2
 label_text = "Camisa"
 
-[node name="TopPalette" parent="SafeMargin/Center/MainPanel/Margin/Column/OptionsScroll/Options" instance=ExtResource("9")]
+[node name="TopPalette" parent="SafeMargin/Center/MainPanel/Margin/Column/OptionsScroll/Options" unique_id=1565063068 instance=ExtResource("9")]
 unique_name_in_owner = true
 layout_mode = 2
 target = "top"
@@ -219,7 +218,7 @@ layout_mode = 2
 slot = "outerwear"
 label_text = "Casaco"
 
-[node name="OuterwearPalette" parent="SafeMargin/Center/MainPanel/Margin/Column/OptionsScroll/Options" instance=ExtResource("9")]
+[node name="OuterwearPalette" parent="SafeMargin/Center/MainPanel/Margin/Column/OptionsScroll/Options" unique_id=172710489 instance=ExtResource("9")]
 unique_name_in_owner = true
 layout_mode = 2
 target = "outerwear"
@@ -231,7 +230,7 @@ layout_mode = 2
 slot = "bottom"
 label_text = "Parte de baixo"
 
-[node name="BottomPalette" parent="SafeMargin/Center/MainPanel/Margin/Column/OptionsScroll/Options" instance=ExtResource("9")]
+[node name="BottomPalette" parent="SafeMargin/Center/MainPanel/Margin/Column/OptionsScroll/Options" unique_id=1552746010 instance=ExtResource("9")]
 unique_name_in_owner = true
 layout_mode = 2
 target = "bottom"
@@ -243,7 +242,7 @@ layout_mode = 2
 slot = "footwear"
 label_text = "Calçado"
 
-[node name="FootwearPalette" parent="SafeMargin/Center/MainPanel/Margin/Column/OptionsScroll/Options" instance=ExtResource("9")]
+[node name="FootwearPalette" parent="SafeMargin/Center/MainPanel/Margin/Column/OptionsScroll/Options" unique_id=1822356753 instance=ExtResource("9")]
 unique_name_in_owner = true
 layout_mode = 2
 target = "footwear"
@@ -255,7 +254,7 @@ layout_mode = 2
 slot = "eyewear"
 label_text = "Óculos"
 
-[node name="EyewearPalette" parent="SafeMargin/Center/MainPanel/Margin/Column/OptionsScroll/Options" instance=ExtResource("9")]
+[node name="EyewearPalette" parent="SafeMargin/Center/MainPanel/Margin/Column/OptionsScroll/Options" unique_id=904439374 instance=ExtResource("9")]
 unique_name_in_owner = true
 layout_mode = 2
 target = "eyewear"
@@ -267,7 +266,7 @@ layout_mode = 2
 slot = "headwear"
 label_text = "Chapéu"
 
-[node name="HeadwearPalette" parent="SafeMargin/Center/MainPanel/Margin/Column/OptionsScroll/Options" instance=ExtResource("9")]
+[node name="HeadwearPalette" parent="SafeMargin/Center/MainPanel/Margin/Column/OptionsScroll/Options" unique_id=380089693 instance=ExtResource("9")]
 unique_name_in_owner = true
 layout_mode = 2
 target = "headwear"
@@ -282,7 +281,7 @@ alignment = 2
 layout_mode = 2
 text = "Cancelar"
 
-[node name="RandomizeButton" type="Button" parent="SafeMargin/Center/MainPanel/Margin/Column/ActionRow"]
+[node name="RandomizeButton" type="Button" parent="SafeMargin/Center/MainPanel/Margin/Column/ActionRow" unique_id=693886391]
 layout_mode = 2
 text = "Randomizar tudo"
 
@@ -296,21 +295,21 @@ text = "Confirmar"
 [connection signal="pressed" from="SafeMargin/Center/MainPanel/Margin/Column/DirectionRow/SWButton" to="." method="_set_preview_direction" binds= [&"sw"]]
 [connection signal="pressed" from="SafeMargin/Center/MainPanel/Margin/Column/GenderRow/MascButton" to="." method="_on_masc_button_pressed"]
 [connection signal="pressed" from="SafeMargin/Center/MainPanel/Margin/Column/GenderRow/FemButton" to="." method="_on_fem_button_pressed"]
+[connection signal="selection_changed" from="SafeMargin/Center/MainPanel/Margin/Column/OptionsScroll/Options/SkinPalette" to="." method="_on_palette_selection_changed"]
 [connection signal="selection_changed" from="SafeMargin/Center/MainPanel/Margin/Column/OptionsScroll/Options/HairFrontRow" to="." method="_on_hair_selection_changed"]
 [connection signal="selection_changed" from="SafeMargin/Center/MainPanel/Margin/Column/OptionsScroll/Options/HairBackRow" to="." method="_on_hair_selection_changed"]
-[connection signal="selection_changed" from="SafeMargin/Center/MainPanel/Margin/Column/OptionsScroll/Options/TopRow" to="." method="_on_slot_selection_changed"]
-[connection signal="selection_changed" from="SafeMargin/Center/MainPanel/Margin/Column/OptionsScroll/Options/OuterwearRow" to="." method="_on_slot_selection_changed"]
-[connection signal="selection_changed" from="SafeMargin/Center/MainPanel/Margin/Column/OptionsScroll/Options/BottomRow" to="." method="_on_slot_selection_changed"]
-[connection signal="selection_changed" from="SafeMargin/Center/MainPanel/Margin/Column/OptionsScroll/Options/FootwearRow" to="." method="_on_slot_selection_changed"]
-[connection signal="selection_changed" from="SafeMargin/Center/MainPanel/Margin/Column/OptionsScroll/Options/EyewearRow" to="." method="_on_slot_selection_changed"]
-[connection signal="selection_changed" from="SafeMargin/Center/MainPanel/Margin/Column/OptionsScroll/Options/HeadwearRow" to="." method="_on_slot_selection_changed"]
-[connection signal="selection_changed" from="SafeMargin/Center/MainPanel/Margin/Column/OptionsScroll/Options/SkinPalette" to="." method="_on_palette_selection_changed"]
 [connection signal="selection_changed" from="SafeMargin/Center/MainPanel/Margin/Column/OptionsScroll/Options/HairPalette" to="." method="_on_palette_selection_changed"]
+[connection signal="selection_changed" from="SafeMargin/Center/MainPanel/Margin/Column/OptionsScroll/Options/TopRow" to="." method="_on_slot_selection_changed"]
 [connection signal="selection_changed" from="SafeMargin/Center/MainPanel/Margin/Column/OptionsScroll/Options/TopPalette" to="." method="_on_palette_selection_changed"]
+[connection signal="selection_changed" from="SafeMargin/Center/MainPanel/Margin/Column/OptionsScroll/Options/OuterwearRow" to="." method="_on_slot_selection_changed"]
 [connection signal="selection_changed" from="SafeMargin/Center/MainPanel/Margin/Column/OptionsScroll/Options/OuterwearPalette" to="." method="_on_palette_selection_changed"]
+[connection signal="selection_changed" from="SafeMargin/Center/MainPanel/Margin/Column/OptionsScroll/Options/BottomRow" to="." method="_on_slot_selection_changed"]
 [connection signal="selection_changed" from="SafeMargin/Center/MainPanel/Margin/Column/OptionsScroll/Options/BottomPalette" to="." method="_on_palette_selection_changed"]
+[connection signal="selection_changed" from="SafeMargin/Center/MainPanel/Margin/Column/OptionsScroll/Options/FootwearRow" to="." method="_on_slot_selection_changed"]
 [connection signal="selection_changed" from="SafeMargin/Center/MainPanel/Margin/Column/OptionsScroll/Options/FootwearPalette" to="." method="_on_palette_selection_changed"]
+[connection signal="selection_changed" from="SafeMargin/Center/MainPanel/Margin/Column/OptionsScroll/Options/EyewearRow" to="." method="_on_slot_selection_changed"]
 [connection signal="selection_changed" from="SafeMargin/Center/MainPanel/Margin/Column/OptionsScroll/Options/EyewearPalette" to="." method="_on_palette_selection_changed"]
+[connection signal="selection_changed" from="SafeMargin/Center/MainPanel/Margin/Column/OptionsScroll/Options/HeadwearRow" to="." method="_on_slot_selection_changed"]
 [connection signal="selection_changed" from="SafeMargin/Center/MainPanel/Margin/Column/OptionsScroll/Options/HeadwearPalette" to="." method="_on_palette_selection_changed"]
 [connection signal="pressed" from="SafeMargin/Center/MainPanel/Margin/Column/ActionRow/CancelButton" to="." method="_on_cancel_button_pressed"]
 [connection signal="pressed" from="SafeMargin/Center/MainPanel/Margin/Column/ActionRow/RandomizeButton" to="." method="_on_randomize_button_pressed"]

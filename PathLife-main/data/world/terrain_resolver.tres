@@ -1,0 +1,14 @@
+[gd_resource type="Resource" script_class="TerrainResolver" format=3]
+
+[ext_resource type="Resource" path="res://data/world/terrains/plano.tres" id="1_0wcrp"]
+[ext_resource type="Script" path="res://world_generation/terrain/terrain_resolver.gd" id="2_1qtek"]
+[ext_resource type="Script" path="res://world_generation/terrain/terrain_definition.gd" id="3_v37a8"]
+[ext_resource type="Resource" path="res://data/world/terrains/colina.tres" id="4_e8m5t"]
+[ext_resource type="Resource" path="res://data/world/terrains/montanha.tres" id="5_m5pdf"]
+[ext_resource type="Resource" path="res://data/world/terrains/penhasco.tres" id="6_oql3e"]
+
+[resource]
+resource_name = "TerrainResolver"
+script = ExtResource("2_1qtek")
+terrains = Array[ExtResource("3_v37a8")]([ExtResource("1_0wcrp"), ExtResource("4_e8m5t"), ExtResource("5_m5pdf"), ExtResource("6_oql3e")])
+fallback_terrain = ExtResource("1_0wcrp")

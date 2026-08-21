@@ -4,56 +4,91 @@
 [ext_resource type="PackedScene" uid="uid://ccclce5ap3ngs" path="res://gameplay/player/player.tscn" id="2_player"]
 [ext_resource type="PackedScene" uid="uid://ca5ujyn4qqegm" path="res://interface/hud/hud.tscn" id="3_hud"]
 [ext_resource type="PackedScene" uid="uid://b1yb6motfr0wf" path="res://interface/character_customization/character_customization_menu.tscn" id="4_customization"]
+[ext_resource type="PackedScene" uid="uid://b4hngmvm30gkn" path="res://gameplay/furniture/bed/bed_r1.tscn" id="4_yyfjg"]
+[ext_resource type="PackedScene" uid="uid://b3rv40xiu5y8m" path="res://gameplay/furniture/bed/bed_r2.tscn" id="5_b1x3f"]
+[ext_resource type="PackedScene" uid="uid://c0i0bkk7ynmk5" path="res://gameplay/furniture/bed/bed_r0.tscn" id="5_test_bed"]
+[ext_resource type="PackedScene" uid="uid://cehbejb8dn640" path="res://gameplay/furniture/bed/bed_r3.tscn" id="6_a8run"]
+[ext_resource type="PackedScene" path="res://scenes/world/procedural_world.tscn" id="7_world"]
+[ext_resource type="PackedScene" path="res://world_generation/agents/world_object_anchor.tscn" id="8_anchor"]
 
 [sub_resource type="RectangleShape2D" id="RectangleShape2D_test_wall"]
 size = Vector2(120, 50)
 
 [node name="Main" type="Node2D" unique_id=1361923482 node_paths=PackedStringArray("player", "hud", "appearance_state", "customization_menu")]
 script = ExtResource("1_main")
-player = NodePath("World/Entities/Player")
+player = NodePath("World/DepthSort/Entities/PlayerAnchor/Player")
 hud = NodePath("Interface/HUD")
-appearance_state = NodePath("World/Entities/Player/AppearanceState")
+appearance_state = NodePath("World/DepthSort/Entities/PlayerAnchor/Player/AppearanceState")
 customization_menu = NodePath("Interface/CharacterCustomizationMenu")
 
 [node name="World" type="Node2D" parent="." unique_id=280199975]
+y_sort_enabled = true
+texture_filter = 1
 
-[node name="Ground" type="Polygon2D" parent="World" unique_id=934002394]
-z_index = -100
-color = Color(0.105, 0.14, 0.16, 1)
-polygon = PackedVector2Array(-1200, -900, 1200, -900, 1200, 900, -1200, 900)
-
-[node name="GroundAccent" type="Polygon2D" parent="World" unique_id=1103095509]
-z_index = -99
-color = Color(0.135, 0.19, 0.2, 1)
-polygon = PackedVector2Array(-700, 40, 0, -310, 700, 40, 0, 390)
-
-[node name="Entities" type="Node2D" parent="World" unique_id=1244772519]
+[node name="GroundRoot" type="Node2D" parent="World" unique_id=528219166]
 y_sort_enabled = true
 
-[node name="Player" parent="World/Entities" unique_id=1321220107 instance=ExtResource("2_player")]
-position = Vector2(300, 220)
+[node name="DepthSort" type="Node2D" parent="World" unique_id=665491448]
+y_sort_enabled = true
 
-[node name="Camera2D" type="Camera2D" parent="World/Entities/Player" unique_id=2041763413]
+[node name="Entities" type="Node2D" parent="World/DepthSort" unique_id=1244772519]
+y_sort_enabled = true
 
-[node name="TestWall" type="StaticBody2D" parent="World/Entities" unique_id=2113966212]
+[node name="PlayerAnchor" type="Node2D" parent="World/DepthSort/Entities" unique_id=1331326104 groups=["grid_sort_anchor"]]
+
+[node name="Player" parent="World/DepthSort/Entities/PlayerAnchor" unique_id=1321220107 instance=ExtResource("2_player")]
+
+[node name="Camera2D" type="Camera2D" parent="World/DepthSort/Entities/PlayerAnchor/Player" unique_id=2041763413]
+
+[node name="TestBedAnchor" parent="World/DepthSort/Entities" unique_id=546027735 instance=ExtResource("8_anchor")]
+position = Vector2(181, -74)
+
+[node name="TestBed" parent="World/DepthSort/Entities/TestBedAnchor" unique_id=1223521039 instance=ExtResource("5_test_bed")]
+
+[node name="BedAnchor" parent="World/DepthSort/Entities" unique_id=61484907 instance=ExtResource("8_anchor")]
+position = Vector2(-109, -40)
+
+[node name="Bed" parent="World/DepthSort/Entities/BedAnchor" unique_id=808126670 instance=ExtResource("4_yyfjg")]
+
+[node name="Bed2Anchor" parent="World/DepthSort/Entities" unique_id=296258295 instance=ExtResource("8_anchor")]
+position = Vector2(-120, 180)
+
+[node name="Bed2" parent="World/DepthSort/Entities/Bed2Anchor" unique_id=607398354 instance=ExtResource("5_b1x3f")]
+
+[node name="Bed3Anchor" parent="World/DepthSort/Entities" unique_id=525674821 instance=ExtResource("8_anchor")]
+position = Vector2(296, 207)
+
+[node name="Bed3" parent="World/DepthSort/Entities/Bed3Anchor" unique_id=1094821658 instance=ExtResource("6_a8run")]
+
+[node name="TestWallAnchor" parent="World/DepthSort/Entities" unique_id=900827913 instance=ExtResource("8_anchor")]
 position = Vector2(430, 285)
 
-[node name="Shadow" type="Polygon2D" parent="World/Entities/TestWall" unique_id=1242071428]
-z_index = -1
+[node name="TestWall" type="StaticBody2D" parent="World/DepthSort/Entities/TestWallAnchor" unique_id=2113966212]
+
+[node name="Shadow" type="Polygon2D" parent="World/DepthSort/Entities/TestWallAnchor/TestWall" unique_id=1242071428]
 color = Color(0, 0, 0, 0.28)
 polygon = PackedVector2Array(-66, -4, 54, -4, 68, 3, -52, 3)
 
-[node name="WallVisual" type="Polygon2D" parent="World/Entities/TestWall" unique_id=1259871246]
+[node name="WallVisual" type="Polygon2D" parent="World/DepthSort/Entities/TestWallAnchor/TestWall" unique_id=1259871246]
 color = Color(0.25, 0.34, 0.36, 1)
 polygon = PackedVector2Array(-60, -40, 60, -40, 60, 0, -60, 0)
 
-[node name="WallTop" type="Polygon2D" parent="World/Entities/TestWall" unique_id=184190110]
+[node name="WallTop" type="Polygon2D" parent="World/DepthSort/Entities/TestWallAnchor/TestWall" unique_id=184190110]
 color = Color(0.38, 0.52, 0.5, 1)
 polygon = PackedVector2Array(-60, -40, -48, -48, 72, -48, 60, -40)
 
-[node name="CollisionShape2D" type="CollisionShape2D" parent="World/Entities/TestWall" unique_id=318190069]
+[node name="CollisionShape2D" type="CollisionShape2D" parent="World/DepthSort/Entities/TestWallAnchor/TestWall" unique_id=318190069]
 position = Vector2(0, -15)
 shape = SubResource("RectangleShape2D_test_wall")
+
+[node name="OverlayRoot" type="Node2D" parent="World" unique_id=811994426]
+z_index = 1
+
+[node name="ProceduralWorld" parent="World" unique_id=509181516 node_paths=PackedStringArray("focus", "ground_root", "depth_root", "overlay_root") instance=ExtResource("7_world")]
+focus = NodePath("../DepthSort/Entities/PlayerAnchor/Player")
+ground_root = NodePath("../GroundRoot")
+depth_root = NodePath("../DepthSort")
+overlay_root = NodePath("../OverlayRoot")
 
 [node name="Interface" type="CanvasLayer" parent="." unique_id=1871894078]
 

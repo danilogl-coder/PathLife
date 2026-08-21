@@ -1,4 +1,4 @@
-[gd_resource type="Resource" script_class="ClothingCatalog" load_steps=13 format=3]
+[gd_resource type="Resource" script_class="ClothingCatalog" load_steps=12 format=3]
 
 [ext_resource type="Script" path="res://data/character_customization/clothing_catalog.gd" id="1"]
 [ext_resource type="Resource" path="res://data/character_customization/skirt/default_skirt.tres" id="2"]
@@ -11,11 +11,10 @@
 [ext_resource type="Resource" path="res://data/character_customization/items/bone.tres" id="9"]
 [ext_resource type="Resource" path="res://data/character_customization/items/chapeu.tres" id="10"]
 [ext_resource type="Resource" path="res://data/character_customization/items/oculos.tres" id="11"]
-[ext_resource type="Resource" path="res://data/character_customization/items/oculos_escuro.tres" id="12"]
 
 [resource]
 script = ExtResource("1")
 metadata_path = "res://assets/characters/cutout/clothing/roupas.json"
 textures_root = "res://assets/characters/cutout/clothing"
 deformable_skirt = ExtResource("2")
-items = Array[ExtResource("3")]([ExtResource("3"), ExtResource("4"), ExtResource("5"), ExtResource("6"), ExtResource("7"), ExtResource("8"), ExtResource("9"), ExtResource("10"), ExtResource("11"), ExtResource("12")])
+items = Array[ExtResource("3")]([ExtResource("3"), ExtResource("4"), ExtResource("5"), ExtResource("6"), ExtResource("7"), ExtResource("8"), ExtResource("9"), ExtResource("10"), ExtResource("11")])

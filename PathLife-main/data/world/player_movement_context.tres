@@ -1,0 +1,7 @@
+[gd_resource type="Resource" script_class="MovementContext" format=3]
+
+[ext_resource type="Script" path="res://world_generation/navigation/movement_context.gd" id="1_7ekjo"]
+
+[resource]
+resource_name = "PlayerMovementContext"
+script = ExtResource("1_7ekjo")

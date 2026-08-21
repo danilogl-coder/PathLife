@@ -1,0 +1,13 @@
+[gd_resource type="Resource" script_class="DecorationDefinition" format=3]
+
+[ext_resource type="PackedScene" path="res://presentation/world/vegetation/arvore_alamo.tscn" id="1_wkfew"]
+[ext_resource type="Script" path="res://world_generation/decoration/decoration_definition.gd" id="2_t615m"]
+
+[resource]
+resource_name = "alamo"
+script = ExtResource("2_t615m")
+id = &"alamo"
+scene = ExtResource("1_wkfew")
+density = 0.05
+minimum_spacing = 3
+max_slope = 1.0

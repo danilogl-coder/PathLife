@@ -1,0 +1,15 @@
+[gd_resource type="Resource" script_class="BiomeResolver" format=3]
+
+[ext_resource type="Script" path="res://world_generation/climate/biome_definition.gd" id="1_8e1ux"]
+[ext_resource type="Resource" path="res://data/world/biomes/campo_claro.tres" id="2_f1lsw"]
+[ext_resource type="Resource" path="res://data/world/biomes/campo.tres" id="3_7bos2"]
+[ext_resource type="Resource" path="res://data/world/biomes/floresta.tres" id="4_elv2b"]
+[ext_resource type="Resource" path="res://data/world/biomes/campo_florido.tres" id="5_2854k"]
+[ext_resource type="Resource" path="res://data/world/biomes/savana.tres" id="6_epg2r"]
+[ext_resource type="Script" path="res://world_generation/climate/biome_resolver.gd" id="7_d7f4o"]
+
+[resource]
+resource_name = "BiomeResolver"
+script = ExtResource("7_d7f4o")
+biomes = Array[ExtResource("1_8e1ux")]([ExtResource("2_f1lsw"), ExtResource("3_7bos2"), ExtResource("4_elv2b"), ExtResource("5_2854k"), ExtResource("6_epg2r")])
+fallback_biome = ExtResource("3_7bos2")

@@ -1,0 +1,31 @@
+[gd_resource type="Resource" script_class="BiomeDefinition" format=3]
+
+[ext_resource type="Script" path="res://world_generation/decoration/decoration_definition.gd" id="1_ml13x"]
+[ext_resource type="Resource" path="res://data/world/decorations/ipe.tres" id="2_47nls"]
+[ext_resource type="Script" path="res://world_generation/climate/ground_variant.gd" id="3_6pslx"]
+[ext_resource type="Resource" path="res://data/world/variants/florida.tres" id="4_arbjv"]
+[ext_resource type="Resource" path="res://data/world/variants/florida_para_florida_rasteira_1.tres" id="5_64gif"]
+[ext_resource type="Resource" path="res://data/world/variants/florida_para_florida_rasteira_2.tres" id="6_arrgq"]
+[ext_resource type="Resource" path="res://data/world/variants/florida_para_florida_rasteira_3.tres" id="7_ytc47"]
+[ext_resource type="Resource" path="res://data/world/variants/florida_para_florida_rasteira_4.tres" id="8_qbcm0"]
+[ext_resource type="Resource" path="res://data/world/variants/florida_rasteira.tres" id="9_07saw"]
+[ext_resource type="Resource" path="res://data/world/variants/florida_rasteira_para_florida_baixa.tres" id="10_jx2qy"]
+[ext_resource type="Resource" path="res://data/world/variants/florida_baixa.tres" id="11_jx82m"]
+[ext_resource type="Script" path="res://world_generation/climate/biome_definition.gd" id="12_xul1k"]
+[ext_resource type="Script" path="res://world_generation/structures/structure_definition.gd" id="13_1igsp"]
+[ext_resource type="Resource" path="res://data/world/structures/deck_madeira.tres" id="14_vx7ca"]
+
+[resource]
+resource_name = "campo_florido"
+script = ExtResource("12_xul1k")
+id = &"campo_florido"
+display_name = "Campo florido"
+temperature_min = 0.68
+humidity_min = 0.48
+height_amplitude = 0.95
+ground_variants = Array[ExtResource("3_6pslx")]([ExtResource("4_arbjv"), ExtResource("5_64gif"), ExtResource("6_arrgq"), ExtResource("7_ytc47"), ExtResource("8_qbcm0"), ExtResource("9_07saw"), ExtResource("10_jx2qy"), ExtResource("11_jx82m")])
+ground_id = &"florida_baixa"
+wall_id = &"campo_florido_terra"
+underwater_ground_id = &"campo_florido_terra"
+decorations = Array[ExtResource("1_ml13x")]([ExtResource("2_47nls")])
+structure_pool = Array[ExtResource("13_1igsp")]([ExtResource("14_vx7ca")])

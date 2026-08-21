@@ -1,0 +1,73 @@
+{
+ "animation": "queda",
+ "frame_milliseconds": 110,
+ "fps": 9.091,
+ "trees": [
+  {
+   "id": "alamo",
+   "texture": "res://assets/world/vegetation/arvore_alamo_atlas.png",
+   "frame_size": [
+    128,
+    208
+   ],
+   "columns": 8,
+   "rows": 6,
+   "frames": 48
+  },
+  {
+   "id": "baoba",
+   "texture": "res://assets/world/vegetation/arvore_baoba_atlas.png",
+   "frame_size": [
+    128,
+    208
+   ],
+   "columns": 8,
+   "rows": 6,
+   "frames": 48
+  },
+  {
+   "id": "ipe",
+   "texture": "res://assets/world/vegetation/arvore_ipe_atlas.png",
+   "frame_size": [
+    128,
+    208
+   ],
+   "columns": 8,
+   "rows": 6,
+   "frames": 48
+  },
+  {
+   "id": "palmeira",
+   "texture": "res://assets/world/vegetation/arvore_palmeira_atlas.png",
+   "frame_size": [
+    128,
+    208
+   ],
+   "columns": 8,
+   "rows": 6,
+   "frames": 48
+  },
+  {
+   "id": "salgueiro",
+   "texture": "res://assets/world/vegetation/arvore_salgueiro_atlas.png",
+   "frame_size": [
+    128,
+    208
+   ],
+   "columns": 8,
+   "rows": 6,
+   "frames": 48
+  },
+  {
+   "id": "sequoia",
+   "texture": "res://assets/world/vegetation/arvore_sequoia_atlas.png",
+   "frame_size": [
+    128,
+    208
+   ],
+   "columns": 8,
+   "rows": 6,
+   "frames": 48
+  }
+ ]
+}

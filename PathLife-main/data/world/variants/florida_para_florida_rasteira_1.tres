@@ -1,0 +1,9 @@
+[gd_resource type="Resource" script_class="GroundVariant" format=3]
+
+[ext_resource type="Script" path="res://world_generation/climate/ground_variant.gd" id="1_tsx3p"]
+
+[resource]
+resource_name = "florida_para_florida_rasteira_1"
+script = ExtResource("1_tsx3p")
+ground_id = &"florida_para_florida_rasteira_1"
+weight = 0.18

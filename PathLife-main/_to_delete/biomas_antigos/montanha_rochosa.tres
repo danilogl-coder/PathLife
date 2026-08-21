@@ -1,0 +1,17 @@
+[gd_resource type="Resource" script_class="BiomeDefinition" format=3]
+
+[ext_resource type="Script" path="res://world_generation/decoration/decoration_definition.gd" id="1_awxmt"]
+[ext_resource type="Script" path="res://world_generation/climate/biome_definition.gd" id="2_h72jn"]
+[ext_resource type="Script" path="res://world_generation/structures/structure_definition.gd" id="3_kqjbw"]
+
+[resource]
+resource_name = "montanha_rochosa"
+script = ExtResource("2_h72jn")
+id = &"montanha_rochosa"
+display_name = "Montanha rochosa"
+continentalness_min = 0.9
+weight = 1.2
+height_bias = 4.0
+height_amplitude = 1.7
+ground_id = &"pedra"
+wall_id = &"pedra"

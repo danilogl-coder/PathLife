@@ -1,0 +1,32 @@
+[gd_scene format=3 uid="uid://b22gof0njmoxi"]
+
+[ext_resource type="Texture2D" uid="uid://b77imncp703si" path="res://assets/furniture/bedroom/bed/cama_r0.png" id="1_bed_texture"]
+[ext_resource type="Script" uid="uid://b48vaxdml5v4e" path="res://presentation/furniture/bed/bed_visual.gd" id="2_visual_script"]
+[ext_resource type="Texture2D" uid="uid://88dcc6mc4dy7" path="res://assets/furniture/bedroom/bed/lencol_r0.png" id="3_blanket_texture"]
+
+[node name="BedVisual" type="Node2D" unique_id=1888471817 node_paths=PackedStringArray("blanket", "sleeping_headboard")]
+texture_filter = 1
+script = ExtResource("2_visual_script")
+blanket = NodePath("BedFront")
+sleeping_headboard = NodePath("SleepingHeadboard")
+
+[node name="BedBack" type="Sprite2D" parent="." unique_id=2045096022]
+position = Vector2(10, -81)
+texture = ExtResource("1_bed_texture")
+offset = Vector2(-10, -10)
+
+[node name="OccupantLayer" type="Node2D" parent="." unique_id=1410114730]
+z_index = 1
+
+[node name="BedFront" type="Sprite2D" parent="." unique_id=424874191]
+visible = false
+z_index = 20
+position = Vector2(10, -81)
+texture = ExtResource("3_blanket_texture")
+offset = Vector2(-10, -10)
+
+[node name="SleepingHeadboard" type="Sprite2D" parent="." unique_id=1610010139]
+visible = false
+z_index = 21
+position = Vector2(10, -81)
+offset = Vector2(-10, -10)

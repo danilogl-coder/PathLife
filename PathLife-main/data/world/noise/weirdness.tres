@@ -1,0 +1,6 @@
+[gd_resource type="FastNoiseLite" format=3]
+
+[resource]
+resource_name = "weirdness"
+frequency = 1.4
+fractal_octaves = 2

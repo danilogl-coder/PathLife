@@ -1,0 +1,17 @@
+[gd_resource type="Resource" script_class="HeightGenerator" format=3]
+
+[ext_resource type="FastNoiseLite" path="res://data/world/noise/continentalness.tres" id="1_jj8ld"]
+[ext_resource type="FastNoiseLite" path="res://data/world/noise/detail.tres" id="2_uau3p"]
+[ext_resource type="FastNoiseLite" path="res://data/world/noise/elevation.tres" id="3_y1lr3"]
+[ext_resource type="FastNoiseLite" path="res://data/world/noise/mountain.tres" id="4_2vfvh"]
+[ext_resource type="FastNoiseLite" path="res://data/world/noise/roughness.tres" id="5_mu73l"]
+[ext_resource type="Script" path="res://world_generation/terrain/height_generator.gd" id="6_colqv"]
+
+[resource]
+resource_name = "HeightGenerator"
+script = ExtResource("6_colqv")
+continentalness_noise = ExtResource("1_jj8ld")
+elevation_noise = ExtResource("3_y1lr3")
+mountain_noise = ExtResource("4_2vfvh")
+roughness_noise = ExtResource("5_mu73l")
+detail_noise = ExtResource("2_uau3p")

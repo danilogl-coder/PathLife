@@ -1,0 +1,6 @@
+[gd_resource type="FastNoiseLite" format=3]
+
+[resource]
+resource_name = "humidity"
+frequency = 1.1
+fractal_octaves = 3

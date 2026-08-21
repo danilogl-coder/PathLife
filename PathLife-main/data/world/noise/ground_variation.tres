@@ -1,0 +1,6 @@
+[gd_resource type="FastNoiseLite" format=3]
+
+[resource]
+resource_name = "ground_variation"
+frequency = 1.0
+fractal_octaves = 3

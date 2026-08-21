@@ -1,0 +1,9 @@
+[gd_resource type="Resource" script_class="ClimatePass" format=3]
+
+[ext_resource type="Resource" path="res://data/world/world_sampler.tres" id="1_ahwo2"]
+[ext_resource type="Script" path="res://world_generation/passes/climate_pass.gd" id="2_cq56m"]
+
+[resource]
+script = ExtResource("2_cq56m")
+sampler = ExtResource("1_ahwo2")
+pass_name = "1 - Clima macro"

@@ -1,0 +1,15 @@
+[gd_resource type="Resource" script_class="StructureDefinition" format=3]
+
+[ext_resource type="PackedScene" path="res://presentation/world/structures/deck_madeira.tscn" id="1_2801p"]
+[ext_resource type="Script" path="res://world_generation/structures/structure_definition.gd" id="2_7l4cw"]
+
+[resource]
+resource_name = "deck_madeira"
+script = ExtResource("2_7l4cw")
+id = &"deck_madeira"
+display_name = "Deck de madeira"
+scene = ExtResource("1_2801p")
+adaptation_margin = 5
+spawn_chance = 0.6
+allowed_biomes = Array[StringName]([&"campo", &"campo_claro", &"campo_florido", &"floresta"])
+minimum_spacing = 40

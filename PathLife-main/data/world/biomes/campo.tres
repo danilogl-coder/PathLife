@@ -1,0 +1,38 @@
+[gd_resource type="Resource" script_class="BiomeDefinition" format=3]
+
+[ext_resource type="Script" path="res://world_generation/decoration/decoration_definition.gd" id="1_vef4d"]
+[ext_resource type="Resource" path="res://data/world/decorations/ipe.tres" id="2_fbfwx"]
+[ext_resource type="Resource" path="res://data/world/decorations/alamo.tres" id="3_cxip4"]
+[ext_resource type="Script" path="res://world_generation/climate/ground_variant.gd" id="4_dvoac"]
+[ext_resource type="Resource" path="res://data/world/variants/campo_mato_denso.tres" id="5_dxj36"]
+[ext_resource type="Resource" path="res://data/world/variants/campo_mato_denso_para_campo_alto_1.tres" id="6_8xvk0"]
+[ext_resource type="Resource" path="res://data/world/variants/campo_mato_denso_para_campo_alto_2.tres" id="7_tnat1"]
+[ext_resource type="Resource" path="res://data/world/variants/campo_alto.tres" id="8_b051e"]
+[ext_resource type="Resource" path="res://data/world/variants/campo_alto_para_campo_ralo_1.tres" id="9_ikrtf"]
+[ext_resource type="Resource" path="res://data/world/variants/campo_alto_para_campo_ralo_2.tres" id="10_ojv4s"]
+[ext_resource type="Resource" path="res://data/world/variants/campo_alto_para_campo_ralo_3.tres" id="11_iwrgm"]
+[ext_resource type="Resource" path="res://data/world/variants/campo_ralo.tres" id="12_aol0t"]
+[ext_resource type="Resource" path="res://data/world/variants/campo_ralo_para_campo_quase_ralo_1.tres" id="13_n8q16"]
+[ext_resource type="Resource" path="res://data/world/variants/campo_ralo_para_campo_quase_ralo_2.tres" id="14_ijqhg"]
+[ext_resource type="Resource" path="res://data/world/variants/campo_ralo_para_campo_quase_ralo_3.tres" id="15_smawp"]
+[ext_resource type="Resource" path="res://data/world/variants/campo_quase_ralo.tres" id="16_lcguw"]
+[ext_resource type="Resource" path="res://data/world/variants/campo_quase_ralo_para_campo_baixo_1.tres" id="17_tse6e"]
+[ext_resource type="Resource" path="res://data/world/variants/campo_quase_ralo_para_campo_baixo_2.tres" id="18_mcylr"]
+[ext_resource type="Resource" path="res://data/world/variants/campo_quase_ralo_para_campo_baixo_3.tres" id="19_n0oio"]
+[ext_resource type="Resource" path="res://data/world/variants/campo_baixo.tres" id="20_e6ap7"]
+[ext_resource type="Script" path="res://world_generation/climate/biome_definition.gd" id="21_cvrcp"]
+[ext_resource type="Script" path="res://world_generation/structures/structure_definition.gd" id="22_v03kc"]
+[ext_resource type="Resource" path="res://data/world/structures/deck_madeira.tres" id="23_jsswh"]
+
+[resource]
+resource_name = "campo"
+script = ExtResource("21_cvrcp")
+id = &"campo"
+display_name = "Campo"
+temperature_min = 0.36
+temperature_max = 0.68
+humidity_max = 0.55
+weight = 1.15
+ground_variants = Array[ExtResource("4_dvoac")]([ExtResource("5_dxj36"), ExtResource("6_8xvk0"), ExtResource("7_tnat1"), ExtResource("8_b051e"), ExtResource("9_ikrtf"), ExtResource("10_ojv4s"), ExtResource("11_iwrgm"), ExtResource("12_aol0t"), ExtResource("13_n8q16"), ExtResource("14_ijqhg"), ExtResource("15_smawp"), ExtResource("16_lcguw"), ExtResource("17_tse6e"), ExtResource("18_mcylr"), ExtResource("19_n0oio"), ExtResource("20_e6ap7")])
+decorations = Array[ExtResource("1_vef4d")]([ExtResource("2_fbfwx"), ExtResource("3_cxip4")])
+structure_pool = Array[ExtResource("22_v03kc")]([ExtResource("23_jsswh")])

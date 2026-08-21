@@ -1,0 +1,9 @@
+[gd_resource type="Resource" script_class="DecorationPass" format=3]
+
+[ext_resource type="Resource" path="res://data/world/world_sampler.tres" id="1_j2of3"]
+[ext_resource type="Script" path="res://world_generation/passes/decoration_pass.gd" id="2_yod6q"]
+
+[resource]
+script = ExtResource("2_yod6q")
+sampler = ExtResource("1_j2of3")
+pass_name = "7 - Decoracao"

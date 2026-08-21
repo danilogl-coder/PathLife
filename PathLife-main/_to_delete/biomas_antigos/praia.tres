@@ -1,0 +1,20 @@
+[gd_resource type="Resource" script_class="BiomeDefinition" format=3]
+
+[ext_resource type="Script" path="res://world_generation/decoration/decoration_definition.gd" id="1_okuio"]
+[ext_resource type="Resource" path="res://data/world/decorations/palmeira.tres" id="2_ywhty"]
+[ext_resource type="Script" path="res://world_generation/climate/biome_definition.gd" id="3_80evk"]
+[ext_resource type="Script" path="res://world_generation/structures/structure_definition.gd" id="4_72s4b"]
+
+[resource]
+resource_name = "praia"
+script = ExtResource("3_80evk")
+id = &"praia"
+display_name = "Praia"
+temperature_min = 0.35
+continentalness_min = 0.24
+continentalness_max = 0.36
+height_bias = -0.5
+height_amplitude = 0.35
+ground_id = &"areia"
+wall_id = &"areia"
+decorations = Array[ExtResource("1_okuio")]([ExtResource("2_ywhty")])

@@ -1,0 +1,27 @@
+[gd_resource type="Resource" script_class="BiomeDefinition" format=3]
+
+[ext_resource type="Script" path="res://world_generation/decoration/decoration_definition.gd" id="1_poiy5"]
+[ext_resource type="Resource" path="res://data/world/decorations/alamo.tres" id="2_nikiq"]
+[ext_resource type="Script" path="res://world_generation/climate/ground_variant.gd" id="3_4d21b"]
+[ext_resource type="Resource" path="res://data/world/variants/claro_denso.tres" id="4_k0hjb"]
+[ext_resource type="Resource" path="res://data/world/variants/claro_denso_para_claro_1.tres" id="5_tkehh"]
+[ext_resource type="Resource" path="res://data/world/variants/claro_denso_para_claro_2.tres" id="6_w5qix"]
+[ext_resource type="Resource" path="res://data/world/variants/claro.tres" id="7_01p3l"]
+[ext_resource type="Script" path="res://world_generation/climate/biome_definition.gd" id="8_l5l7v"]
+[ext_resource type="Script" path="res://world_generation/structures/structure_definition.gd" id="9_8d57x"]
+[ext_resource type="Resource" path="res://data/world/structures/deck_madeira.tres" id="10_ulfdw"]
+
+[resource]
+resource_name = "campo_claro"
+script = ExtResource("8_l5l7v")
+id = &"campo_claro"
+display_name = "Campo claro"
+temperature_max = 0.36
+height_bias = 0.8
+height_amplitude = 1.15
+ground_variants = Array[ExtResource("3_4d21b")]([ExtResource("4_k0hjb"), ExtResource("5_tkehh"), ExtResource("6_w5qix"), ExtResource("7_01p3l")])
+ground_id = &"claro"
+wall_id = &"campo_claro_terra"
+underwater_ground_id = &"campo_claro_terra"
+decorations = Array[ExtResource("1_poiy5")]([ExtResource("2_nikiq")])
+structure_pool = Array[ExtResource("9_8d57x")]([ExtResource("10_ulfdw")])

@@ -1,0 +1,17 @@
+[gd_scene load_steps=3 format=3]
+
+[ext_resource type="Script" path="res://presentation/world/vegetation/vegetation_animation.gd" id="1_anim"]
+[ext_resource type="SpriteFrames" path="res://presentation/world/vegetation/arvore_alamo_frames.tres" id="2_frames"]
+
+[node name="Alamo" type="Node2D" node_paths=PackedStringArray("sprite")]
+y_sort_enabled = true
+script = ExtResource("1_anim")
+sprite = NodePath("Sprite")
+
+[node name="Sprite" type="AnimatedSprite2D" parent="."]
+texture_filter = 1
+sprite_frames = ExtResource("2_frames")
+animation = &"queda"
+autoplay = "queda"
+centered = false
+offset = Vector2(-64, -198)

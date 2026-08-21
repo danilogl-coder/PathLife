@@ -1,0 +1,6 @@
+[gd_resource type="FastNoiseLite" format=3]
+
+[resource]
+resource_name = "continentalness"
+frequency = 0.8
+fractal_octaves = 3

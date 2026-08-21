@@ -1,0 +1,49 @@
+[gd_scene load_steps=10 format=3]
+
+[ext_resource type="Script" path="res://scenes/world/procedural_world.gd" id="1_world"]
+[ext_resource type="Script" path="res://world_generation/chunks/chunk_manager.gd" id="2_chunks"]
+[ext_resource type="Script" path="res://world_generation/rendering/height_visibility_manager.gd" id="3_visibility"]
+[ext_resource type="Script" path="res://world_generation/saving/world_save_manager.gd" id="4_save"]
+[ext_resource type="PackedScene" path="res://world_generation/rendering/chunk_view.tscn" id="5_chunk_view"]
+[ext_resource type="Resource" path="res://data/world/world_settings.tres" id="6_settings"]
+[ext_resource type="Resource" path="res://data/world/world_generator.tres" id="7_generator"]
+[ext_resource type="Resource" path="res://data/world/world_sampler.tres" id="8_sampler"]
+[ext_resource type="Resource" path="res://data/world/tiles/ground_catalog.tres" id="9_catalog"]
+
+[node name="ProceduralWorld" type="Node2D"]
+texture_filter = 1
+script = ExtResource("1_world")
+
+[node name="ChunkContainer" type="Node" parent="."]
+unique_name_in_owner = true
+
+[node name="GroundRoot" type="Node2D" parent="."]
+unique_name_in_owner = true
+y_sort_enabled = true
+
+[node name="DepthSort" type="Node2D" parent="."]
+unique_name_in_owner = true
+y_sort_enabled = true
+
+[node name="OverlayRoot" type="Node2D" parent="."]
+unique_name_in_owner = true
+z_index = 1
+
+[node name="Systems" type="Node" parent="."]
+
+[node name="SaveManager" type="Node" parent="Systems"]
+unique_name_in_owner = true
+script = ExtResource("4_save")
+
+[node name="ChunkManager" type="Node" parent="Systems" groups=["chunk_manager"]]
+unique_name_in_owner = true
+script = ExtResource("2_chunks")
+settings = ExtResource("6_settings")
+generator = ExtResource("7_generator")
+sampler = ExtResource("8_sampler")
+catalog = ExtResource("9_catalog")
+chunk_view_scene = ExtResource("5_chunk_view")
+
+[node name="HeightVisibility" type="Node" parent="Systems"]
+unique_name_in_owner = true
+script = ExtResource("3_visibility")

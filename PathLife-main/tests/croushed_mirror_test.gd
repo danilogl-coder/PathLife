@@ -21,9 +21,11 @@ func _init() -> void:
 	var fem_library := load(FEM_LIBRARY_PATH) as AnimationLibrary
 	_assert(fem_library != null, "Biblioteca feminina não carregou.")
 	_validate_library(library, &"masc")
+	_validate_crouch_idle_library(library, &"masc")
 	_validate_crouch_walk_library(library, &"masc")
 	if fem_library != null:
 		_validate_library(fem_library, &"fem")
+		_validate_crouch_idle_library(fem_library, &"fem")
 		_validate_crouch_walk_library(fem_library, &"fem")
 		_validate_gender_copies(library, fem_library)
 
@@ -107,10 +109,15 @@ func _validate_ctrl_input() -> void:
 	Input.action_press("crouch")
 	await physics_frame
 	_assert(player.is_crouching(), "Ctrl não ativou o estado de agachamento.")
-	var visual := player.get_node("VisualAnchor/CharacterVisual") as CharacterVisual
+	var visual := player.get_node("VisualAnchor/CharacterViewport/CharacterStage/CharacterVisual") as CharacterVisual
 	_assert(
 		visual.animation_player.assigned_animation == &"masc/croushed_se",
 		"Ctrl não reproduziu masc/croushed_se."
+	)
+	visual.animation_player.advance(visual.animation_player.current_animation_length + 0.01)
+	_assert(
+		visual.animation_player.assigned_animation == &"masc/crouch_idle_se",
+		"Terminar croushed_se não ativou crouch_idle_se."
 	)
 	var position_before_walk := player.global_position
 	Input.action_press("move_right")
@@ -134,8 +141,8 @@ func _validate_ctrl_input() -> void:
 	Input.action_release("move_right")
 	await physics_frame
 	_assert(
-		visual.animation_player.assigned_animation == &"masc/croushed_se",
-		"Parar com Ctrl pressionado não restaurou croushed_se."
+		visual.animation_player.assigned_animation == &"masc/crouch_idle_se",
+		"Parar com Ctrl pressionado não ativou crouch_idle_se."
 	)
 	Input.action_release("crouch")
 	await physics_frame
@@ -157,6 +164,10 @@ func _validate_gender_copies(masc: AnimationLibrary, fem: AnimationLibrary) -> v
 		&"crouch_walk_nw",
 		&"crouch_walk_se",
 		&"crouch_walk_sw",
+		&"crouch_idle_ne",
+		&"crouch_idle_nw",
+		&"crouch_idle_se",
+		&"crouch_idle_sw",
 	]:
 		var source := masc.get_animation(animation_name)
 		var target := fem.get_animation(animation_name)
@@ -230,6 +241,33 @@ func _validate_crouch_walk_library(
 			lower_body_moves,
 			"%s/%s não movimenta as pernas." % [body_type, animation_name]
 		)
+
+
+func _validate_crouch_idle_library(
+	library: AnimationLibrary,
+	body_type: StringName
+) -> void:
+	for direction: StringName in [&"ne", &"nw", &"se", &"sw"]:
+		var enter_name := StringName("croushed_%s" % direction)
+		var idle_name := StringName("crouch_idle_%s" % direction)
+		var enter := library.get_animation(enter_name)
+		var idle := library.get_animation(idle_name)
+		_assert(enter != null and idle != null, "%s/%s ausente." % [body_type, idle_name])
+		if enter == null or idle == null:
+			continue
+		_assert(idle.loop_mode == Animation.LOOP_LINEAR, "%s/%s não está em loop." % [body_type, idle_name])
+		_assert(enter.get_track_count() == idle.get_track_count(), "%s/%s perdeu tracks." % [body_type, idle_name])
+		for track in mini(enter.get_track_count(), idle.get_track_count()):
+			var final_enter: Variant = enter.track_get_key_value(
+				track,
+				enter.track_get_key_count(track) - 1
+			)
+			_assert(idle.track_get_key_count(track) == 2, "%s/%s deve ter duas chaves por track." % [body_type, idle_name])
+			_assert(
+				idle.track_get_key_value(track, 0) == final_enter
+				and idle.track_get_key_value(track, 1) == final_enter,
+				"%s/%s não conserva a pose final agachada." % [body_type, idle_name]
+			)
 
 
 func _assert(condition: bool, message: String) -> void:

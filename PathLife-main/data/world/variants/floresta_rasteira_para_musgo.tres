@@ -1,0 +1,9 @@
+[gd_resource type="Resource" script_class="GroundVariant" format=3]
+
+[ext_resource type="Script" path="res://world_generation/climate/ground_variant.gd" id="1_867vt"]
+
+[resource]
+resource_name = "floresta_rasteira_para_musgo"
+script = ExtResource("1_867vt")
+ground_id = &"floresta_rasteira_para_musgo"
+weight = 0.21

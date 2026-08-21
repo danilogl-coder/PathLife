@@ -1,0 +1,32 @@
+[gd_resource type="Resource" script_class="BiomeDefinition" format=3]
+
+[ext_resource type="Script" path="res://world_generation/decoration/decoration_definition.gd" id="1_nmjge"]
+[ext_resource type="Resource" path="res://data/world/decorations/baoba.tres" id="2_f5176"]
+[ext_resource type="Resource" path="res://data/world/decorations/palmeira.tres" id="3_otij1"]
+[ext_resource type="Script" path="res://world_generation/climate/ground_variant.gd" id="4_oebsm"]
+[ext_resource type="Resource" path="res://data/world/variants/savana.tres" id="5_bediw"]
+[ext_resource type="Resource" path="res://data/world/variants/savana_para_savana_rasteira_1.tres" id="6_nhexs"]
+[ext_resource type="Resource" path="res://data/world/variants/savana_para_savana_rasteira_2.tres" id="7_0vmve"]
+[ext_resource type="Resource" path="res://data/world/variants/savana_para_savana_rasteira_3.tres" id="8_4aamh"]
+[ext_resource type="Resource" path="res://data/world/variants/savana_para_savana_rasteira_4.tres" id="9_ajh8p"]
+[ext_resource type="Resource" path="res://data/world/variants/savana_rasteira.tres" id="10_7nqsn"]
+[ext_resource type="Resource" path="res://data/world/variants/savana_rasteira_para_savana_baixa_1.tres" id="11_w0h3w"]
+[ext_resource type="Resource" path="res://data/world/variants/savana_rasteira_para_savana_baixa_2.tres" id="12_mw7aw"]
+[ext_resource type="Resource" path="res://data/world/variants/savana_baixa.tres" id="13_hdm31"]
+[ext_resource type="Script" path="res://world_generation/climate/biome_definition.gd" id="14_dyu53"]
+[ext_resource type="Script" path="res://world_generation/structures/structure_definition.gd" id="15_iodfk"]
+
+[resource]
+resource_name = "savana"
+script = ExtResource("14_dyu53")
+id = &"savana"
+display_name = "Savana"
+temperature_min = 0.68
+humidity_max = 0.48
+weight = 1.05
+height_amplitude = 0.85
+ground_variants = Array[ExtResource("4_oebsm")]([ExtResource("5_bediw"), ExtResource("6_nhexs"), ExtResource("7_0vmve"), ExtResource("8_4aamh"), ExtResource("9_ajh8p"), ExtResource("10_7nqsn"), ExtResource("11_w0h3w"), ExtResource("12_mw7aw"), ExtResource("13_hdm31")])
+ground_id = &"savana_baixa"
+wall_id = &"savana_terra"
+underwater_ground_id = &"savana_terra"
+decorations = Array[ExtResource("1_nmjge")]([ExtResource("2_f5176"), ExtResource("3_otij1")])

@@ -1,0 +1,12 @@
+[gd_resource type="Resource" script_class="DecorationDefinition" format=3]
+
+[ext_resource type="PackedScene" path="res://presentation/world/vegetation/arvore_sequoia.tscn" id="1_g3v2c"]
+[ext_resource type="Script" path="res://world_generation/decoration/decoration_definition.gd" id="2_2jhqx"]
+
+[resource]
+resource_name = "sequoia"
+script = ExtResource("2_2jhqx")
+id = &"sequoia"
+scene = ExtResource("1_g3v2c")
+density = 0.09
+max_slope = 1.0

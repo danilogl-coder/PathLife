@@ -1,0 +1,8 @@
+[gd_resource type="Resource" script_class="GroundVariant" format=3]
+
+[ext_resource type="Script" path="res://world_generation/climate/ground_variant.gd" id="1_ywv8c"]
+
+[resource]
+resource_name = "campo_baixo"
+script = ExtResource("1_ywv8c")
+weight = 2.0

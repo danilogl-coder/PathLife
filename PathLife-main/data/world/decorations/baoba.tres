@@ -1,0 +1,13 @@
+[gd_resource type="Resource" script_class="DecorationDefinition" format=3]
+
+[ext_resource type="PackedScene" path="res://presentation/world/vegetation/arvore_baoba.tscn" id="1_q2106"]
+[ext_resource type="Script" path="res://world_generation/decoration/decoration_definition.gd" id="2_txvrs"]
+
+[resource]
+resource_name = "baoba"
+script = ExtResource("2_txvrs")
+id = &"baoba"
+scene = ExtResource("1_q2106")
+density = 0.025
+minimum_spacing = 6
+max_slope = 1.0

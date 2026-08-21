@@ -1,0 +1,9 @@
+[gd_resource type="Resource" script_class="GroundVariant" format=3]
+
+[ext_resource type="Script" path="res://world_generation/climate/ground_variant.gd" id="1_8le6a"]
+
+[resource]
+resource_name = "campo_alto_para_campo_ralo_3"
+script = ExtResource("1_8le6a")
+ground_id = &"campo_alto_para_campo_ralo_3"
+weight = 0.075

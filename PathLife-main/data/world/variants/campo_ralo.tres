@@ -1,0 +1,9 @@
+[gd_resource type="Resource" script_class="GroundVariant" format=3]
+
+[ext_resource type="Script" path="res://world_generation/climate/ground_variant.gd" id="1_vplkr"]
+
+[resource]
+resource_name = "campo_ralo"
+script = ExtResource("1_vplkr")
+ground_id = &"campo_ralo"
+weight = 0.25

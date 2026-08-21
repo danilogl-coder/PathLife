@@ -1,0 +1,35 @@
+[gd_resource type="Resource" script_class="BiomeDefinition" format=3]
+
+[ext_resource type="Script" path="res://world_generation/decoration/decoration_definition.gd" id="1_flmbq"]
+[ext_resource type="Resource" path="res://data/world/decorations/sequoia.tres" id="2_b1p3a"]
+[ext_resource type="Resource" path="res://data/world/decorations/salgueiro.tres" id="3_dl7bx"]
+[ext_resource type="Resource" path="res://data/world/decorations/ipe.tres" id="4_bvj4i"]
+[ext_resource type="Script" path="res://world_generation/climate/ground_variant.gd" id="5_mwrpp"]
+[ext_resource type="Resource" path="res://data/world/variants/floresta.tres" id="6_wcpr4"]
+[ext_resource type="Resource" path="res://data/world/variants/floresta_para_floresta_rasteira_1.tres" id="7_ydt7j"]
+[ext_resource type="Resource" path="res://data/world/variants/floresta_para_floresta_rasteira_2.tres" id="8_6uas8"]
+[ext_resource type="Resource" path="res://data/world/variants/floresta_para_floresta_rasteira_3.tres" id="9_g7n6e"]
+[ext_resource type="Resource" path="res://data/world/variants/floresta_rasteira.tres" id="10_b04na"]
+[ext_resource type="Resource" path="res://data/world/variants/floresta_rasteira_para_musgo.tres" id="11_2t6ba"]
+[ext_resource type="Resource" path="res://data/world/variants/musgo.tres" id="12_a2snl"]
+[ext_resource type="Script" path="res://world_generation/climate/biome_definition.gd" id="13_yw0vj"]
+[ext_resource type="Script" path="res://world_generation/structures/structure_definition.gd" id="14_46xsn"]
+[ext_resource type="Resource" path="res://data/world/structures/deck_madeira.tres" id="15_i7dp6"]
+
+[resource]
+resource_name = "floresta"
+script = ExtResource("13_yw0vj")
+id = &"floresta"
+display_name = "Floresta"
+temperature_min = 0.3
+temperature_max = 0.68
+humidity_min = 0.55
+weight = 1.05
+height_bias = 0.4
+height_amplitude = 1.1
+ground_variants = Array[ExtResource("5_mwrpp")]([ExtResource("6_wcpr4"), ExtResource("7_ydt7j"), ExtResource("8_6uas8"), ExtResource("9_g7n6e"), ExtResource("10_b04na"), ExtResource("11_2t6ba"), ExtResource("12_a2snl")])
+ground_id = &"musgo"
+wall_id = &"floresta_terra"
+underwater_ground_id = &"floresta_terra"
+decorations = Array[ExtResource("1_flmbq")]([ExtResource("2_b1p3a"), ExtResource("3_dl7bx"), ExtResource("4_bvj4i")])
+structure_pool = Array[ExtResource("14_46xsn")]([ExtResource("15_i7dp6")])

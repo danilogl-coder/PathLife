@@ -1,0 +1,31 @@
+[gd_scene load_steps=4 format=3]
+
+[ext_resource type="Script" path="res://world_generation/rendering/chunk_view.gd" id="1_chunk_view"]
+[ext_resource type="PackedScene" path="res://world_generation/rendering/height_layer.tscn" id="2_height_layer"]
+[ext_resource type="PackedScene" path="res://world_generation/rendering/prop_anchor.tscn" id="3_prop_anchor"]
+
+[node name="ChunkView" type="Node2D"]
+y_sort_enabled = true
+script = ExtResource("1_chunk_view")
+height_layer_scene = ExtResource("2_height_layer")
+prop_anchor_scene = ExtResource("3_prop_anchor")
+
+[node name="GroundLayers" type="Node2D" parent="."]
+unique_name_in_owner = true
+z_index = -1
+
+[node name="DepthLayers" type="Node2D" parent="."]
+unique_name_in_owner = true
+y_sort_enabled = true
+
+[node name="Structures" type="Node2D" parent="."]
+unique_name_in_owner = true
+y_sort_enabled = true
+
+[node name="Decorations" type="Node2D" parent="."]
+unique_name_in_owner = true
+y_sort_enabled = true
+
+[node name="OverlayLayers" type="Node2D" parent="."]
+unique_name_in_owner = true
+z_index = 1

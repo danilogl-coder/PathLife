@@ -1,0 +1,6 @@
+[gd_resource type="FastNoiseLite" format=3]
+
+[resource]
+resource_name = "temperature"
+frequency = 0.9
+fractal_octaves = 3

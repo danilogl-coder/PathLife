@@ -185,7 +185,7 @@ _data = {
 
 [node name="CharacterVisual" type="Node2D" unique_id=1497687241]
 texture_filter = 1
-position = Vector2(0, 5.4285707)
+position = Vector2(-2, 5.4285707)
 script = ExtResource("1_g0nxb")
 
 [node name="Skeleton2D" type="Skeleton2D" parent="." unique_id=1875722216]
@@ -196,7 +196,7 @@ z_index = 6
 z_as_relative = false
 position = Vector2(0.26, -37.87)
 rotation = -0.077615
-scale = Vector2(0.9999994, 0.9999994)
+scale = Vector2(0.99999917, 0.99999917)
 rest = Transform2D(1, 0, 0, 1, 0.26, -37.87)
 editor_settings/show_bone_gizmo = false
 
@@ -209,7 +209,7 @@ z_index = 7
 z_as_relative = false
 position = Vector2(0.15, -2.85)
 rotation = -0.0048986664
-scale = Vector2(0.99999976, 0.99999976)
+scale = Vector2(0.9999997, 0.9999997)
 rest = Transform2D(1, 0, 0, 1, 0.15, -2.85)
 editor_settings/show_bone_gizmo = false
 
@@ -221,7 +221,7 @@ offset = Vector2(0.59, -7.28)
 z_index = 8
 z_as_relative = false
 position = Vector2(0, -16.07)
-rotation = 0.010969
+rotation = -0.051295
 scale = Vector2(0.99999994, 0.99999994)
 rest = Transform2D(1, 0, 0, 1, 0, -16.07)
 auto_calculate_length_and_angle = false
@@ -242,7 +242,7 @@ position = Vector2(-0.2, -18.01)
 z_index = 12
 z_as_relative = false
 position = Vector2(-7.28, -13.05)
-rotation = -0.30850497
+rotation = -0.022636998
 scale = Vector2(0.99999946, 0.99999946)
 rest = Transform2D(1, 0, 0, 1, -7.28, -13.05)
 editor_settings/show_bone_gizmo = false
@@ -255,8 +255,8 @@ offset = Vector2(0.37, 6.27)
 z_index = 13
 z_as_relative = false
 position = Vector2(-0.73, 12.73)
-rotation = -0.16794108
-scale = Vector2(0.99999964, 0.99999964)
+rotation = -0.168651
+scale = Vector2(0.99999917, 0.99999917)
 rest = Transform2D(1, 0, 0, 1, -0.73, 12.73)
 editor_settings/show_bone_gizmo = false
 
@@ -268,7 +268,7 @@ offset = Vector2(0.1, 5.54)
 z_index = 14
 z_as_relative = false
 position = Vector2(0.11, 10)
-rotation = -0.0015211666
+rotation = -0.000489
 scale = Vector2(0.99999976, 0.99999976)
 rest = Transform2D(1, 0, 0, 1, 0.11, 10)
 auto_calculate_length_and_angle = false
@@ -288,7 +288,7 @@ z_index = 2
 z_as_relative = false
 position = Vector2(6.77, -20.08)
 rotation = 0.034906585
-scale = Vector2(0.99999976, 0.99999976)
+scale = Vector2(0.99999917, 0.99999917)
 rest = Transform2D(1, 0, 0, 1, 6.77, -20.08)
 editor_settings/show_bone_gizmo = false
 
@@ -299,8 +299,8 @@ offset = Vector2(0.82, 5.8)
 [node name="braco_inf_d" type="Bone2D" parent="Skeleton2D/quadril/torso/braco_sup_d" unique_id=923007449]
 z_as_relative = false
 position = Vector2(1.35, 11.69)
-rotation = -0.79307586
-scale = Vector2(0.9999999, 0.9999999)
+rotation = -0.17327602
+scale = Vector2(0.9999994, 0.9999994)
 rest = Transform2D(1, 0, 0, 1, 1.35, 11.69)
 editor_settings/show_bone_gizmo = false
 
@@ -312,7 +312,7 @@ offset = Vector2(0.97, 5.11)
 z_index = 1
 z_as_relative = false
 position = Vector2(0.72, 9.7)
-rotation = 0.113674
+rotation = 0.000401
 scale = Vector2(0.9999994, 0.9999994)
 rest = Transform2D(1, 0, 0, 1, 0.72, 9.7)
 auto_calculate_length_and_angle = false
@@ -344,7 +344,7 @@ offset = Vector2(0.55, 7.02)
 z_index = 10
 z_as_relative = false
 position = Vector2(-0.05, 15.16)
-scale = Vector2(0.9999998, 0.9999998)
+scale = Vector2(0.99999964, 0.99999964)
 rest = Transform2D(1, 0, 0, 1, -0.05, 15.16)
 editor_settings/show_bone_gizmo = false
 
@@ -440,3 +440,5 @@ hair_profile = ExtResource("30_hair_profile")
 libraries/ = SubResource("AnimationLibrary_d2752")
 libraries/fem = ExtResource("18_26yyw")
 libraries/masc = ExtResource("19_ycmqt")
+
+[connection signal="animation_finished" from="AnimationPlayer" to="." method="_on_animation_player_animation_finished"]

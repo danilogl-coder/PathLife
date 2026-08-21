@@ -1,0 +1,57 @@
+[gd_scene format=3 uid="uid://c2ll6yox0l7xj"]
+
+[ext_resource type="Script" uid="uid://bn16ehdx41b8v" path="res://gameplay/furniture/bed/bed.gd" id="1_bed_script"]
+[ext_resource type="PackedScene" uid="uid://b22gof0njmoxi" path="res://presentation/furniture/bed/bed_visual.tscn" id="2_bed_visual"]
+[ext_resource type="PackedScene" path="res://gameplay/furniture/depth/furniture_top_occluder.tscn" id="3_top_occluder"]
+
+[node name="Bed2" type="StaticBody2D" unique_id=2054925717 node_paths=PackedStringArray("sleep_center", "pillow_anchor", "exit_anchor", "sleep_left_anchor", "sleep_right_anchor")]
+collision_layer = 8
+collision_mask = 2
+script = ExtResource("1_bed_script")
+sleep_center = NodePath("SleepCenter")
+pillow_anchor = NodePath("PillowAnchor")
+exit_anchor = NodePath("ExitAnchor")
+sleep_animation_direction = "ne"
+sleep_visual_offset = Vector2(0, 40)
+sleep_visual_rotation_degrees = 0.0
+sleep_visual_scale = Vector2(1, 1)
+sleep_left_anchor = NodePath("SleepSideLeft")
+sleep_right_anchor = NodePath("SleepSideRight")
+
+[node name="Visual" parent="." unique_id=1523704961 instance=ExtResource("2_bed_visual")]
+
+[node name="SolidCollision" type="CollisionPolygon2D" parent="." unique_id=165171394]
+polygon = PackedVector2Array(-82, -27, 18, -102, 93, -62, -21, 8)
+
+[node name="InteractionArea" type="Area2D" parent="." unique_id=1451867950]
+collision_layer = 4
+collision_mask = 2
+
+[node name="InteractionShape" type="CollisionPolygon2D" parent="InteractionArea" unique_id=26919407]
+polygon = PackedVector2Array(-82, -42, -16, -86, 84, -32, 20, 14)
+
+[node name="SleepCenter" type="Marker2D" parent="." unique_id=1012678058]
+position = Vector2(0, -55)
+
+[node name="PillowAnchor" type="Marker2D" parent="." unique_id=1391424610]
+position = Vector2(35, -68)
+
+[node name="ExitAnchor" type="Marker2D" parent="." unique_id=1574666515]
+position = Vector2(0, 18)
+
+[node name="SleepSideLeft" type="Marker2D" parent="."]
+position = Vector2(-55, -20)
+
+[node name="SleepSideRight" type="Marker2D" parent="."]
+position = Vector2(55, -65)
+
+[node name="TopOcclusionArea" parent="." unique_id=373969822 node_paths=PackedStringArray("visual_target") instance=ExtResource("3_top_occluder")]
+visual_target = NodePath("../Visual")
+
+[node name="TopOcclusionShape" parent="TopOcclusionArea" index="0"]
+polygon = PackedVector2Array(-108, -46, 16, -130, 125, -72, 97, -48, 18, -94, -70, -25)
+
+[editable path="Visual"]
+[editable path="TopOcclusionArea"]
+
+[connection signal="occupancy_changed" from="." to="Visual" method="present_occupied"]

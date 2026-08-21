@@ -1,0 +1,15 @@
+[gd_resource type="Resource" script_class="ClimateGenerator" format=3]
+
+[ext_resource type="FastNoiseLite" path="res://data/world/noise/continentalness.tres" id="1_lu151"]
+[ext_resource type="FastNoiseLite" path="res://data/world/noise/humidity.tres" id="2_wlyff"]
+[ext_resource type="Script" path="res://world_generation/climate/climate_generator.gd" id="3_2st1c"]
+[ext_resource type="FastNoiseLite" path="res://data/world/noise/temperature.tres" id="4_rtju6"]
+[ext_resource type="FastNoiseLite" path="res://data/world/noise/weirdness.tres" id="5_itgj5"]
+
+[resource]
+resource_name = "ClimateGenerator"
+script = ExtResource("3_2st1c")
+temperature_noise = ExtResource("4_rtju6")
+humidity_noise = ExtResource("2_wlyff")
+continentalness_noise = ExtResource("1_lu151")
+weirdness_noise = ExtResource("5_itgj5")

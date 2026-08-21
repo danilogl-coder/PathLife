@@ -16,6 +16,7 @@ var _direction: StringName = &"se"
 var _is_moving: bool = false
 var _is_running: bool = false
 var _is_crouching: bool = false
+var _is_sleeping: bool = false
 var _appearance: CharacterAppearance = CharacterAppearance.new()
 
 
@@ -46,10 +47,15 @@ func present_body(body_type: String) -> void:
 
 
 func present_crouch(is_crouching: bool) -> void:
+	if _is_sleeping:
+		return
 	if _is_crouching == is_crouching:
 		return
 	_is_crouching = is_crouching
-	_refresh_locomotion_animation()
+	if _is_crouching and not _is_moving:
+		_play_action(&"croushed")
+	else:
+		_refresh_locomotion_animation()
 
 
 func present_appearance(appearance: CharacterAppearance) -> void:
@@ -71,9 +77,34 @@ func play_action(action: StringName) -> void:
 	_play_action(action)
 
 
+func present_sleep(is_sleeping: bool, direction: StringName) -> void:
+	_is_sleeping = is_sleeping
+	_direction = direction
+	_is_moving = false
+	_is_running = false
+	_is_crouching = false
+	rig.set_direction(direction)
+	wardrobe.present(_appearance, direction)
+	hair.present(_appearance.hair_front, _appearance.hair_back, direction, _appearance.hair_color)
+	if _is_sleeping:
+		_play_action(&"sleep")
+	else:
+		_refresh_locomotion_animation()
+
+
 func _refresh_locomotion_animation() -> void:
-	if _is_crouching:
-		_play_action(&"crouch_walk" if _is_moving else &"croushed")
+	if _is_sleeping:
+		_play_action(&"sleep")
+	elif _is_crouching:
+		if _is_moving:
+			_play_action(&"crouch_walk")
+		else:
+			var crouch_enter_name := _make_animation_name(&"croushed")
+			if not (
+				animation_player.assigned_animation == crouch_enter_name
+				and animation_player.is_playing()
+			):
+				_play_action(&"crouch_idle")
 	elif not _is_moving:
 		_play_action(&"idle")
 	elif _is_running:
@@ -83,9 +114,7 @@ func _refresh_locomotion_animation() -> void:
 
 
 func _play_action(action: StringName) -> void:
-	var animation_name := StringName(
-		"%s/%s_%s" % [rig.body_type, String(action), String(_direction)]
-	)
+	var animation_name := _make_animation_name(action)
 
 	if (
 		animation_name == _current_animation
@@ -106,3 +135,16 @@ func _play_action(action: StringName) -> void:
 		animation_player.play(animation_name, locomotion_blend_time)
 		animation_player.advance(0.0)
 	_current_animation = animation_name
+
+
+func _make_animation_name(action: StringName) -> StringName:
+	return StringName(
+		"%s/%s_%s" % [rig.body_type, String(action), String(_direction)]
+	)
+
+
+func _on_animation_player_animation_finished(animation_name: StringName) -> void:
+	if animation_name != _make_animation_name(&"croushed"):
+		return
+	if _is_crouching and not _is_moving:
+		_play_action(&"crouch_idle")

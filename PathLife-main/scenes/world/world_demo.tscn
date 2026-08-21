@@ -1,0 +1,58 @@
+[gd_scene load_steps=6 format=3]
+
+[ext_resource type="Script" path="res://scenes/world/world_demo.gd" id="1_demo"]
+[ext_resource type="PackedScene" path="res://scenes/world/procedural_world.tscn" id="2_world"]
+[ext_resource type="Script" path="res://world_generation/agents/world_grid_agent.gd" id="3_agent"]
+[ext_resource type="Resource" path="res://data/world/player_movement_context.tres" id="4_movement"]
+[ext_resource type="PackedScene" path="res://presentation/world/entity_shadow.tscn" id="5_shadow"]
+
+[node name="WorldDemo" type="Node2D" node_paths=PackedStringArray("world", "agent", "info_label")]
+y_sort_enabled = true
+script = ExtResource("1_demo")
+world = NodePath("ProceduralWorld")
+agent = NodePath("DepthSort/ActorAnchor/Actor/WorldGridAgent")
+info_label = NodePath("UI/Info")
+
+[node name="GroundRoot" type="Node2D" parent="."]
+z_index = -1
+
+[node name="DepthSort" type="Node2D" parent="."]
+y_sort_enabled = true
+
+[node name="OverlayRoot" type="Node2D" parent="."]
+z_index = 1
+
+[node name="ProceduralWorld" parent="." node_paths=PackedStringArray("focus", "ground_root", "depth_root", "overlay_root") instance=ExtResource("2_world")]
+focus = NodePath("../DepthSort/ActorAnchor/Actor")
+ground_root = NodePath("../GroundRoot")
+depth_root = NodePath("../DepthSort")
+overlay_root = NodePath("../OverlayRoot")
+
+[node name="ActorAnchor" type="Node2D" parent="DepthSort" groups=["grid_sort_anchor"]]
+
+[node name="Actor" type="Node2D" parent="DepthSort/ActorAnchor"]
+
+[node name="Shadow" parent="DepthSort/ActorAnchor/Actor" instance=ExtResource("5_shadow")]
+
+[node name="Body" type="Polygon2D" parent="DepthSort/ActorAnchor/Actor"]
+color = Color(0.92, 0.2, 0.24, 1)
+polygon = PackedVector2Array(-11, -52, 11, -52, 11, -4, -11, -4)
+
+[node name="Head" type="Polygon2D" parent="DepthSort/ActorAnchor/Actor"]
+color = Color(1, 0.82, 0.66, 1)
+polygon = PackedVector2Array(-9, -70, 9, -70, 9, -52, -9, -52)
+
+[node name="WorldGridAgent" type="Node" parent="DepthSort/ActorAnchor/Actor"]
+script = ExtResource("3_agent")
+movement_context = ExtResource("4_movement")
+
+[node name="Camera2D" type="Camera2D" parent="DepthSort/ActorAnchor/Actor"]
+zoom = Vector2(0.9, 0.9)
+
+[node name="UI" type="CanvasLayer" parent="."]
+
+[node name="Info" type="Label" parent="UI"]
+offset_left = 12.0
+offset_top = 8.0
+offset_right = 700.0
+offset_bottom = 90.0

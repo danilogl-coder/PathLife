@@ -1,0 +1,614 @@
+{
+ "tile": {
+  "width": 128,
+  "height": 106,
+  "skirt": 26,
+  "frames": 3,
+  "diamond_top": 16,
+  "diamond_height": 64
+ },
+ "atlas": {
+  "ground": "res://assets/world/tiles/ground_atlas.png",
+  "top": "res://assets/world/tiles/ground_top_atlas.png",
+  "face": "res://assets/world/tiles/depth_face_atlas.png",
+  "face_kind_stride": 3
+ },
+ "animated_rows": 44,
+ "rows": [
+  {
+   "id": "campo_mato_denso",
+   "row": 0,
+   "animated": true,
+   "biome": "campo",
+   "kind": "arte"
+  },
+  {
+   "id": "campo_mato_denso_para_campo_alto_1",
+   "row": 1,
+   "animated": true,
+   "biome": "campo",
+   "kind": "transicao"
+  },
+  {
+   "id": "campo_mato_denso_para_campo_alto_2",
+   "row": 2,
+   "animated": true,
+   "biome": "campo",
+   "kind": "transicao"
+  },
+  {
+   "id": "campo_alto",
+   "row": 3,
+   "animated": true,
+   "biome": "campo",
+   "kind": "arte"
+  },
+  {
+   "id": "campo_alto_para_campo_ralo_1",
+   "row": 4,
+   "animated": true,
+   "biome": "campo",
+   "kind": "transicao"
+  },
+  {
+   "id": "campo_alto_para_campo_ralo_2",
+   "row": 5,
+   "animated": true,
+   "biome": "campo",
+   "kind": "transicao"
+  },
+  {
+   "id": "campo_alto_para_campo_ralo_3",
+   "row": 6,
+   "animated": true,
+   "biome": "campo",
+   "kind": "transicao"
+  },
+  {
+   "id": "campo_ralo",
+   "row": 7,
+   "animated": true,
+   "biome": "campo",
+   "kind": "arte"
+  },
+  {
+   "id": "campo_ralo_para_campo_quase_ralo_1",
+   "row": 8,
+   "animated": true,
+   "biome": "campo",
+   "kind": "transicao"
+  },
+  {
+   "id": "campo_ralo_para_campo_quase_ralo_2",
+   "row": 9,
+   "animated": true,
+   "biome": "campo",
+   "kind": "transicao"
+  },
+  {
+   "id": "campo_ralo_para_campo_quase_ralo_3",
+   "row": 10,
+   "animated": true,
+   "biome": "campo",
+   "kind": "transicao"
+  },
+  {
+   "id": "campo_quase_ralo",
+   "row": 11,
+   "animated": true,
+   "biome": "campo",
+   "kind": "arte"
+  },
+  {
+   "id": "campo_quase_ralo_para_campo_baixo_1",
+   "row": 12,
+   "animated": true,
+   "biome": "campo",
+   "kind": "transicao"
+  },
+  {
+   "id": "campo_quase_ralo_para_campo_baixo_2",
+   "row": 13,
+   "animated": true,
+   "biome": "campo",
+   "kind": "transicao"
+  },
+  {
+   "id": "campo_quase_ralo_para_campo_baixo_3",
+   "row": 14,
+   "animated": true,
+   "biome": "campo",
+   "kind": "transicao"
+  },
+  {
+   "id": "campo_baixo",
+   "row": 15,
+   "animated": true,
+   "biome": "campo",
+   "kind": "arte"
+  },
+  {
+   "id": "claro_denso",
+   "row": 16,
+   "animated": true,
+   "biome": "campo_claro",
+   "kind": "arte"
+  },
+  {
+   "id": "claro_denso_para_claro_1",
+   "row": 17,
+   "animated": true,
+   "biome": "campo_claro",
+   "kind": "transicao"
+  },
+  {
+   "id": "claro_denso_para_claro_2",
+   "row": 18,
+   "animated": true,
+   "biome": "campo_claro",
+   "kind": "transicao"
+  },
+  {
+   "id": "claro",
+   "row": 19,
+   "animated": true,
+   "biome": "campo_claro",
+   "kind": "arte"
+  },
+  {
+   "id": "florida",
+   "row": 20,
+   "animated": true,
+   "biome": "campo_florido",
+   "kind": "arte"
+  },
+  {
+   "id": "florida_para_florida_rasteira_1",
+   "row": 21,
+   "animated": true,
+   "biome": "campo_florido",
+   "kind": "transicao"
+  },
+  {
+   "id": "florida_para_florida_rasteira_2",
+   "row": 22,
+   "animated": true,
+   "biome": "campo_florido",
+   "kind": "transicao"
+  },
+  {
+   "id": "florida_para_florida_rasteira_3",
+   "row": 23,
+   "animated": true,
+   "biome": "campo_florido",
+   "kind": "transicao"
+  },
+  {
+   "id": "florida_para_florida_rasteira_4",
+   "row": 24,
+   "animated": true,
+   "biome": "campo_florido",
+   "kind": "transicao"
+  },
+  {
+   "id": "florida_rasteira",
+   "row": 25,
+   "animated": true,
+   "biome": "campo_florido",
+   "kind": "arte"
+  },
+  {
+   "id": "florida_rasteira_para_florida_baixa",
+   "row": 26,
+   "animated": true,
+   "biome": "campo_florido",
+   "kind": "transicao"
+  },
+  {
+   "id": "florida_baixa",
+   "row": 27,
+   "animated": true,
+   "biome": "campo_florido",
+   "kind": "arte"
+  },
+  {
+   "id": "floresta",
+   "row": 28,
+   "animated": true,
+   "biome": "floresta",
+   "kind": "arte"
+  },
+  {
+   "id": "floresta_para_floresta_rasteira_1",
+   "row": 29,
+   "animated": true,
+   "biome": "floresta",
+   "kind": "transicao"
+  },
+  {
+   "id": "floresta_para_floresta_rasteira_2",
+   "row": 30,
+   "animated": true,
+   "biome": "floresta",
+   "kind": "transicao"
+  },
+  {
+   "id": "floresta_para_floresta_rasteira_3",
+   "row": 31,
+   "animated": true,
+   "biome": "floresta",
+   "kind": "transicao"
+  },
+  {
+   "id": "floresta_rasteira",
+   "row": 32,
+   "animated": true,
+   "biome": "floresta",
+   "kind": "arte"
+  },
+  {
+   "id": "floresta_rasteira_para_musgo",
+   "row": 33,
+   "animated": true,
+   "biome": "floresta",
+   "kind": "transicao"
+  },
+  {
+   "id": "musgo",
+   "row": 34,
+   "animated": true,
+   "biome": "floresta",
+   "kind": "arte"
+  },
+  {
+   "id": "savana",
+   "row": 35,
+   "animated": true,
+   "biome": "savana",
+   "kind": "arte"
+  },
+  {
+   "id": "savana_para_savana_rasteira_1",
+   "row": 36,
+   "animated": true,
+   "biome": "savana",
+   "kind": "transicao"
+  },
+  {
+   "id": "savana_para_savana_rasteira_2",
+   "row": 37,
+   "animated": true,
+   "biome": "savana",
+   "kind": "transicao"
+  },
+  {
+   "id": "savana_para_savana_rasteira_3",
+   "row": 38,
+   "animated": true,
+   "biome": "savana",
+   "kind": "transicao"
+  },
+  {
+   "id": "savana_para_savana_rasteira_4",
+   "row": 39,
+   "animated": true,
+   "biome": "savana",
+   "kind": "transicao"
+  },
+  {
+   "id": "savana_rasteira",
+   "row": 40,
+   "animated": true,
+   "biome": "savana",
+   "kind": "arte"
+  },
+  {
+   "id": "savana_rasteira_para_savana_baixa_1",
+   "row": 41,
+   "animated": true,
+   "biome": "savana",
+   "kind": "transicao"
+  },
+  {
+   "id": "savana_rasteira_para_savana_baixa_2",
+   "row": 42,
+   "animated": true,
+   "biome": "savana",
+   "kind": "transicao"
+  },
+  {
+   "id": "savana_baixa",
+   "row": 43,
+   "animated": true,
+   "biome": "savana",
+   "kind": "arte"
+  },
+  {
+   "id": "campo_terra",
+   "row": 44,
+   "animated": false,
+   "biome": "campo",
+   "kind": "terra"
+  },
+  {
+   "id": "campo_claro_terra",
+   "row": 45,
+   "animated": false,
+   "biome": "campo_claro",
+   "kind": "terra"
+  },
+  {
+   "id": "campo_florido_terra",
+   "row": 46,
+   "animated": false,
+   "biome": "campo_florido",
+   "kind": "terra"
+  },
+  {
+   "id": "floresta_terra",
+   "row": 47,
+   "animated": false,
+   "biome": "floresta",
+   "kind": "terra"
+  },
+  {
+   "id": "savana_terra",
+   "row": 48,
+   "animated": false,
+   "biome": "savana",
+   "kind": "terra"
+  }
+ ],
+ "biomes": [
+  {
+   "id": "campo",
+   "wall": "campo_terra",
+   "variants": [
+    {
+     "id": "campo_mato_denso",
+     "weight": 0.6,
+     "kind": "arte"
+    },
+    {
+     "id": "campo_mato_denso_para_campo_alto_1",
+     "weight": 0.18,
+     "kind": "transicao"
+    },
+    {
+     "id": "campo_mato_denso_para_campo_alto_2",
+     "weight": 0.18,
+     "kind": "transicao"
+    },
+    {
+     "id": "campo_alto",
+     "weight": 0.9,
+     "kind": "arte"
+    },
+    {
+     "id": "campo_alto_para_campo_ralo_1",
+     "weight": 0.075,
+     "kind": "transicao"
+    },
+    {
+     "id": "campo_alto_para_campo_ralo_2",
+     "weight": 0.075,
+     "kind": "transicao"
+    },
+    {
+     "id": "campo_alto_para_campo_ralo_3",
+     "weight": 0.075,
+     "kind": "transicao"
+    },
+    {
+     "id": "campo_ralo",
+     "weight": 0.25,
+     "kind": "arte"
+    },
+    {
+     "id": "campo_ralo_para_campo_quase_ralo_1",
+     "weight": 0.075,
+     "kind": "transicao"
+    },
+    {
+     "id": "campo_ralo_para_campo_quase_ralo_2",
+     "weight": 0.075,
+     "kind": "transicao"
+    },
+    {
+     "id": "campo_ralo_para_campo_quase_ralo_3",
+     "weight": 0.075,
+     "kind": "transicao"
+    },
+    {
+     "id": "campo_quase_ralo",
+     "weight": 0.4,
+     "kind": "arte"
+    },
+    {
+     "id": "campo_quase_ralo_para_campo_baixo_1",
+     "weight": 0.12,
+     "kind": "transicao"
+    },
+    {
+     "id": "campo_quase_ralo_para_campo_baixo_2",
+     "weight": 0.12,
+     "kind": "transicao"
+    },
+    {
+     "id": "campo_quase_ralo_para_campo_baixo_3",
+     "weight": 0.12,
+     "kind": "transicao"
+    },
+    {
+     "id": "campo_baixo",
+     "weight": 2.0,
+     "kind": "arte"
+    }
+   ]
+  },
+  {
+   "id": "campo_claro",
+   "wall": "campo_claro_terra",
+   "variants": [
+    {
+     "id": "claro_denso",
+     "weight": 0.8,
+     "kind": "arte"
+    },
+    {
+     "id": "claro_denso_para_claro_1",
+     "weight": 0.24,
+     "kind": "transicao"
+    },
+    {
+     "id": "claro_denso_para_claro_2",
+     "weight": 0.24,
+     "kind": "transicao"
+    },
+    {
+     "id": "claro",
+     "weight": 1.5,
+     "kind": "arte"
+    }
+   ]
+  },
+  {
+   "id": "campo_florido",
+   "wall": "campo_florido_terra",
+   "variants": [
+    {
+     "id": "florida",
+     "weight": 0.6,
+     "kind": "arte"
+    },
+    {
+     "id": "florida_para_florida_rasteira_1",
+     "weight": 0.18,
+     "kind": "transicao"
+    },
+    {
+     "id": "florida_para_florida_rasteira_2",
+     "weight": 0.18,
+     "kind": "transicao"
+    },
+    {
+     "id": "florida_para_florida_rasteira_3",
+     "weight": 0.18,
+     "kind": "transicao"
+    },
+    {
+     "id": "florida_para_florida_rasteira_4",
+     "weight": 0.18,
+     "kind": "transicao"
+    },
+    {
+     "id": "florida_rasteira",
+     "weight": 0.7,
+     "kind": "arte"
+    },
+    {
+     "id": "florida_rasteira_para_florida_baixa",
+     "weight": 0.21,
+     "kind": "transicao"
+    },
+    {
+     "id": "florida_baixa",
+     "weight": 1.5,
+     "kind": "arte"
+    }
+   ]
+  },
+  {
+   "id": "floresta",
+   "wall": "floresta_terra",
+   "variants": [
+    {
+     "id": "floresta",
+     "weight": 0.7,
+     "kind": "arte"
+    },
+    {
+     "id": "floresta_para_floresta_rasteira_1",
+     "weight": 0.21,
+     "kind": "transicao"
+    },
+    {
+     "id": "floresta_para_floresta_rasteira_2",
+     "weight": 0.21,
+     "kind": "transicao"
+    },
+    {
+     "id": "floresta_para_floresta_rasteira_3",
+     "weight": 0.21,
+     "kind": "transicao"
+    },
+    {
+     "id": "floresta_rasteira",
+     "weight": 0.7,
+     "kind": "arte"
+    },
+    {
+     "id": "floresta_rasteira_para_musgo",
+     "weight": 0.21,
+     "kind": "transicao"
+    },
+    {
+     "id": "musgo",
+     "weight": 1.5,
+     "kind": "arte"
+    }
+   ]
+  },
+  {
+   "id": "savana",
+   "wall": "savana_terra",
+   "variants": [
+    {
+     "id": "savana",
+     "weight": 0.7,
+     "kind": "arte"
+    },
+    {
+     "id": "savana_para_savana_rasteira_1",
+     "weight": 0.21,
+     "kind": "transicao"
+    },
+    {
+     "id": "savana_para_savana_rasteira_2",
+     "weight": 0.21,
+     "kind": "transicao"
+    },
+    {
+     "id": "savana_para_savana_rasteira_3",
+     "weight": 0.21,
+     "kind": "transicao"
+    },
+    {
+     "id": "savana_para_savana_rasteira_4",
+     "weight": 0.21,
+     "kind": "transicao"
+    },
+    {
+     "id": "savana_rasteira",
+     "weight": 0.7,
+     "kind": "arte"
+    },
+    {
+     "id": "savana_rasteira_para_savana_baixa_1",
+     "weight": 0.21,
+     "kind": "transicao"
+    },
+    {
+     "id": "savana_rasteira_para_savana_baixa_2",
+     "weight": 0.21,
+     "kind": "transicao"
+    },
+    {
+     "id": "savana_baixa",
+     "weight": 1.5,
+     "kind": "arte"
+    }
+   ]
+  }
+ ]
+}

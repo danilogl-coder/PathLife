@@ -1,0 +1,9 @@
+[gd_resource type="Resource" script_class="GroundVariant" format=3]
+
+[ext_resource type="Script" path="res://world_generation/climate/ground_variant.gd" id="1_t8vi5"]
+
+[resource]
+resource_name = "savana_para_savana_rasteira_1"
+script = ExtResource("1_t8vi5")
+ground_id = &"savana_para_savana_rasteira_1"
+weight = 0.21

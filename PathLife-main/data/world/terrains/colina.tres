@@ -1,0 +1,13 @@
+[gd_resource type="Resource" script_class="TerrainDefinition" format=3]
+
+[ext_resource type="Script" path="res://world_generation/terrain/terrain_definition.gd" id="1_5md3b"]
+
+[resource]
+resource_name = "colina"
+script = ExtResource("1_5md3b")
+id = &"colina"
+display_name = "Colina"
+min_roughness = 0.35
+max_roughness = 0.85
+min_slope = 1.0
+max_slope = 2.5

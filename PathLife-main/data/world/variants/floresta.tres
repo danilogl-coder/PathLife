@@ -1,0 +1,9 @@
+[gd_resource type="Resource" script_class="GroundVariant" format=3]
+
+[ext_resource type="Script" path="res://world_generation/climate/ground_variant.gd" id="1_bojae"]
+
+[resource]
+resource_name = "floresta"
+script = ExtResource("1_bojae")
+ground_id = &"floresta"
+weight = 0.7

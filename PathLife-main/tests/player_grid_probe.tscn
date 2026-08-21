@@ -1,0 +1,30 @@
+[gd_scene load_steps=6 format=3]
+
+[ext_resource type="Script" path="res://gameplay/player/player_controller.gd" id="1_player"]
+[ext_resource type="Resource" path="res://data/player/default_player_config.tres" id="2_config"]
+[ext_resource type="Script" path="res://world_generation/agents/world_grid_agent.gd" id="3_agent"]
+[ext_resource type="Resource" path="res://data/world/player_movement_context.tres" id="4_movement"]
+[ext_resource type="PackedScene" path="res://presentation/world/entity_shadow.tscn" id="5_shadow"]
+
+[sub_resource type="CapsuleShape2D" id="CapsuleShape2D_probe"]
+radius = 5.0
+height = 10.0
+
+[node name="PlayerAnchor" type="Node2D" groups=["grid_sort_anchor"]]
+
+[node name="Player" type="CharacterBody2D" parent="." node_paths=PackedStringArray("grid_agent")]
+collision_layer = 2
+collision_mask = 9
+script = ExtResource("1_player")
+config = ExtResource("2_config")
+grid_agent = NodePath("WorldGridAgent")
+
+[node name="Shadow" parent="Player" instance=ExtResource("5_shadow")]
+
+[node name="CollisionShape2D" type="CollisionShape2D" parent="Player"]
+position = Vector2(0, -5)
+shape = SubResource("CapsuleShape2D_probe")
+
+[node name="WorldGridAgent" type="Node" parent="Player"]
+script = ExtResource("3_agent")
+movement_context = ExtResource("4_movement")

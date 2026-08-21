@@ -1,0 +1,17 @@
+[gd_scene format=3 uid="uid://c0i0bkk7ynmk5"]
+
+[ext_resource type="PackedScene" uid="uid://c2ll6yox0l7xj" path="res://gameplay/furniture/bed/bed_base.tscn" id="1_base"]
+
+[node name="Bed2" unique_id=1375632997 instance=ExtResource("1_base")]
+position = Vector2(-2, 1)
+sleep_direction = "se"
+sleep_animation_direction = "se"
+sleep_visual_offset = Vector2(15, 15)
+sleep_visual_rotation_degrees = -33.0
+use_interaction_side_direction = true
+
+[node name="SolidCollision" parent="." index="1" unique_id=165171394]
+polygon = PackedVector2Array(-77, -33, 18, -102, 102, -58, -10, 10)
+
+[editable path="Visual"]
+[editable path="TopOcclusionArea"]

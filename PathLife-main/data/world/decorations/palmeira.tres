@@ -1,0 +1,13 @@
+[gd_resource type="Resource" script_class="DecorationDefinition" format=3]
+
+[ext_resource type="PackedScene" path="res://presentation/world/vegetation/arvore_palmeira.tscn" id="1_ssjbh"]
+[ext_resource type="Script" path="res://world_generation/decoration/decoration_definition.gd" id="2_n7r05"]
+
+[resource]
+resource_name = "palmeira"
+script = ExtResource("2_n7r05")
+id = &"palmeira"
+scene = ExtResource("1_ssjbh")
+density = 0.03
+minimum_spacing = 5
+max_slope = 1.0

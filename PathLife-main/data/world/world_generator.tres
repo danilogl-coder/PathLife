@@ -1,0 +1,16 @@
+[gd_resource type="Resource" script_class="WorldGenerator" format=3]
+
+[ext_resource type="Script" path="res://world_generation/core/world_generation_pass.gd" id="1_l6m5a"]
+[ext_resource type="Resource" path="res://data/world/passes/01_climate.tres" id="2_4yib1"]
+[ext_resource type="Resource" path="res://data/world/passes/02_biome.tres" id="3_bjp5x"]
+[ext_resource type="Resource" path="res://data/world/passes/03_height.tres" id="4_4158f"]
+[ext_resource type="Resource" path="res://data/world/passes/04_structures.tres" id="5_vhaac"]
+[ext_resource type="Resource" path="res://data/world/passes/05_terrain.tres" id="6_h7tmm"]
+[ext_resource type="Resource" path="res://data/world/passes/06_water.tres" id="7_8mmcg"]
+[ext_resource type="Resource" path="res://data/world/passes/07_decoration.tres" id="8_1npwg"]
+[ext_resource type="Script" path="res://world_generation/core/world_generator.gd" id="9_sc5js"]
+
+[resource]
+resource_name = "WorldGenerator"
+script = ExtResource("9_sc5js")
+passes = Array[ExtResource("1_l6m5a")]([ExtResource("2_4yib1"), ExtResource("3_bjp5x"), ExtResource("4_4158f"), ExtResource("5_vhaac"), ExtResource("6_h7tmm"), ExtResource("7_8mmcg"), ExtResource("8_1npwg")])

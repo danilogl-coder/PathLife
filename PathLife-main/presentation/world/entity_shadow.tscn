@@ -1,0 +1,9 @@
+[gd_scene load_steps=2 format=3]
+
+[ext_resource type="Texture2D" path="res://assets/world/entity_shadow.png" id="1_shadow"]
+
+[node name="EntityShadow" type="Sprite2D"]
+modulate = Color(1, 1, 1, 0.68)
+texture_filter = 1
+position = Vector2(0, 10)
+texture = ExtResource("1_shadow")

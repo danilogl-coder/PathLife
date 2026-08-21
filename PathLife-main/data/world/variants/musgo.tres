@@ -1,0 +1,9 @@
+[gd_resource type="Resource" script_class="GroundVariant" format=3]
+
+[ext_resource type="Script" path="res://world_generation/climate/ground_variant.gd" id="1_fahow"]
+
+[resource]
+resource_name = "musgo"
+script = ExtResource("1_fahow")
+ground_id = &"musgo"
+weight = 1.5

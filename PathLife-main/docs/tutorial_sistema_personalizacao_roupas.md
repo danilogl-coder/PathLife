@@ -76,7 +76,6 @@ Inventário real:
 | Boné | 8 | cabeça | completa |
 | Chapéu | 8 | cabeça | completa |
 | Óculos | 8 | cabeça | completa |
-| Óculos escuros | 8 | cabeça | completa |
 | Saia deformável | 16 | Polygon2D com pesos no quadril e coxas | completa |
 
 ### Por que a saia é diferente
@@ -185,7 +184,7 @@ O JSON não possui slots. O sistema acrescentará seis:
 | `outerwear` | Jaqueta | Nenhuma, Jaqueta |
 | `bottom` | Parte inferior | Nenhuma, Calça, Saia |
 | `footwear` | Calçado | Nenhum, Sapato, Chinelo |
-| `eyewear` | Óculos | Nenhum, Óculos, Óculos escuros |
+| `eyewear` | Óculos | Nenhum, Óculos |
 | `headwear` | Cabeça | Nenhum, Boné, Chapéu |
 
 Camisa e jaqueta podem coexistir. A camisa tem ordem `1` e a jaqueta tem ordem `2`.
@@ -237,7 +236,6 @@ res://
 │       ├── chinelo/
 │       ├── jaqueta/
 │       ├── oculos/
-│       ├── oculos_escuro/
 │       ├── sapato/
 │       ├── saia/
 │       │   ├── masc/
@@ -285,11 +283,11 @@ O Godot exporta arquivos de `res://`. Ele não deve carregar roupas diretamente 
    C:\Users\danil\Desktop\PathLife\archive\roupas
    ```
 
-3. Copie `roupas.json` e estas nove pastas de roupas rígidas:
+3. Copie `roupas.json` e estas oito pastas de roupas rígidas:
 
    ```text
    bone, calca, camisa, chapeu, chinelo, jaqueta,
-   oculos, oculos_escuro, sapato
+   oculos, sapato
    ```
 
 4. Da pasta `saia`, copie apenas `masc` e `fem` para uma nova pasta chamada `saia` no destino.
@@ -516,7 +514,6 @@ Para cada item:
 | `bone.tres` | `bone` | Boné | `bone` | `headwear` | `bone_sprites` | 3 |
 | `chapeu.tres` | `chapeu` | Chapéu | `chapeu` | `headwear` | `bone_sprites` | 3 |
 | `oculos.tres` | `oculos` | Óculos | `oculos` | `eyewear` | `bone_sprites` | 2 |
-| `oculos_escuro.tres` | `oculos_escuro` | Óculos escuros | `oculos_escuro` | `eyewear` | `bone_sprites` | 2 |
 
 A última coluna serve apenas para conferência. Não há propriedade para digitá-la no Resource. A ordem da saia pode continuar sendo lida da entrada antiga do `roupas.json`; seus caminhos antigos de textura, porém, não serão utilizados.
 
@@ -1862,7 +1859,7 @@ nenhuma roupa
 cada roupa individualmente
 camisa + jaqueta
 óculos + boné
-óculos escuros + chapéu
+óculos + chapéu
 calça + sapato
 calça + chinelo
 saia + sapato

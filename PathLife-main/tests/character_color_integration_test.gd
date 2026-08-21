@@ -8,6 +8,9 @@ func _init() -> void:
 	var defaults := load("res://data/character_customization/default_character_appearance.tres") as CharacterAppearance
 	var randomizer := load("res://data/character_customization/default_character_appearance_randomizer.tres") as CharacterAppearanceRandomizer
 	assert(colors != null and clothes != null and hairs != null and defaults != null and randomizer != null)
+	assert(clothes.items.size() == 9)
+	var eyewear_items := clothes.get_items_for_slot(&"eyewear")
+	assert(eyewear_items.size() == 1 and eyewear_items[0].id == &"oculos")
 	_validate_palette_group(colors.skin_palettes, 20)
 	_validate_palette_group(colors.hair_palettes, 20)
 	_validate_palette_group(colors.clothing_palettes, 20)
@@ -97,7 +100,7 @@ func _init() -> void:
 	menu._on_randomize_button_pressed()
 	assert(_signature(menu._working) != before)
 	menu._on_cancel_button_pressed()
-	print("CHARACTER_COLOR_INTEGRATION_OK palettes=60 profiles=12 selectors=8")
+	print("CHARACTER_COLOR_INTEGRATION_OK palettes=60 profiles=11 selectors=8")
 	quit()
 
 

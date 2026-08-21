@@ -1,0 +1,145 @@
+[gd_scene load_steps=3 format=3]
+
+[ext_resource type="Script" path="res://world_generation/structures/structure_root.gd" id="1_root"]
+[ext_resource type="Texture2D" path="res://assets/world/structures/piso_madeira.png" id="2_piso"]
+[ext_resource type="Script" path="res://world_generation/structures/structure_marker.gd" id="3_marker"]
+
+[node name="DeckMadeira" type="Node2D"]
+y_sort_enabled = true
+script = ExtResource("1_root")
+footprint_preview = Vector2i(4, 4)
+
+[node name="Piso" type="Node2D" parent="."]
+y_sort_enabled = true
+
+[node name="Tabua_0_0" type="Sprite2D" parent="Piso"]
+texture_filter = 1
+position = Vector2(0, 0)
+texture = ExtResource("2_piso")
+centered = false
+offset = Vector2(-64, -32)
+
+[node name="Tabua_1_0" type="Sprite2D" parent="Piso"]
+texture_filter = 1
+position = Vector2(64, 32)
+texture = ExtResource("2_piso")
+centered = false
+offset = Vector2(-64, -32)
+
+[node name="Tabua_2_0" type="Sprite2D" parent="Piso"]
+texture_filter = 1
+position = Vector2(128, 64)
+texture = ExtResource("2_piso")
+centered = false
+offset = Vector2(-64, -32)
+
+[node name="Tabua_3_0" type="Sprite2D" parent="Piso"]
+texture_filter = 1
+position = Vector2(192, 96)
+texture = ExtResource("2_piso")
+centered = false
+offset = Vector2(-64, -32)
+
+[node name="Tabua_0_1" type="Sprite2D" parent="Piso"]
+texture_filter = 1
+position = Vector2(-64, 32)
+texture = ExtResource("2_piso")
+centered = false
+offset = Vector2(-64, -32)
+
+[node name="Tabua_1_1" type="Sprite2D" parent="Piso"]
+texture_filter = 1
+position = Vector2(0, 64)
+texture = ExtResource("2_piso")
+centered = false
+offset = Vector2(-64, -32)
+
+[node name="Tabua_2_1" type="Sprite2D" parent="Piso"]
+texture_filter = 1
+position = Vector2(64, 96)
+texture = ExtResource("2_piso")
+centered = false
+offset = Vector2(-64, -32)
+
+[node name="Tabua_3_1" type="Sprite2D" parent="Piso"]
+texture_filter = 1
+position = Vector2(128, 128)
+texture = ExtResource("2_piso")
+centered = false
+offset = Vector2(-64, -32)
+
+[node name="Tabua_0_2" type="Sprite2D" parent="Piso"]
+texture_filter = 1
+position = Vector2(-128, 64)
+texture = ExtResource("2_piso")
+centered = false
+offset = Vector2(-64, -32)
+
+[node name="Tabua_1_2" type="Sprite2D" parent="Piso"]
+texture_filter = 1
+position = Vector2(-64, 96)
+texture = ExtResource("2_piso")
+centered = false
+offset = Vector2(-64, -32)
+
+[node name="Tabua_2_2" type="Sprite2D" parent="Piso"]
+texture_filter = 1
+position = Vector2(0, 128)
+texture = ExtResource("2_piso")
+centered = false
+offset = Vector2(-64, -32)
+
+[node name="Tabua_3_2" type="Sprite2D" parent="Piso"]
+texture_filter = 1
+position = Vector2(64, 160)
+texture = ExtResource("2_piso")
+centered = false
+offset = Vector2(-64, -32)
+
+[node name="Tabua_0_3" type="Sprite2D" parent="Piso"]
+texture_filter = 1
+position = Vector2(-192, 96)
+texture = ExtResource("2_piso")
+centered = false
+offset = Vector2(-64, -32)
+
+[node name="Tabua_1_3" type="Sprite2D" parent="Piso"]
+texture_filter = 1
+position = Vector2(-128, 128)
+texture = ExtResource("2_piso")
+centered = false
+offset = Vector2(-64, -32)
+
+[node name="Tabua_2_3" type="Sprite2D" parent="Piso"]
+texture_filter = 1
+position = Vector2(-64, 160)
+texture = ExtResource("2_piso")
+centered = false
+offset = Vector2(-64, -32)
+
+[node name="Tabua_3_3" type="Sprite2D" parent="Piso"]
+texture_filter = 1
+position = Vector2(0, 192)
+texture = ExtResource("2_piso")
+centered = false
+offset = Vector2(-64, -32)
+
+[node name="Marcadores" type="Node2D" parent="."]
+
+[node name="EntranceMarker" type="Marker2D" parent="Marcadores"]
+position = Vector2(128, 128)
+script = ExtResource("3_marker")
+marker_type = 0
+cell_offset = Vector2i(2, 4)
+
+[node name="RoadMarker" type="Marker2D" parent="Marcadores"]
+position = Vector2(128, 160)
+script = ExtResource("3_marker")
+marker_type = 1
+cell_offset = Vector2i(2, 5)
+
+[node name="NPCSpawnMarker" type="Marker2D" parent="Marcadores"]
+position = Vector2(0, 64)
+script = ExtResource("3_marker")
+marker_type = 2
+cell_offset = Vector2i(1, 1)

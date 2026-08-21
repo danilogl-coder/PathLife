@@ -1,0 +1,304 @@
+[gd_resource type="Resource" script_class="TileCatalog" format=3 uid="uid://ck0ndwsdyexah"]
+
+[ext_resource type="Script" uid="uid://dtmjysjeqj6e" path="res://world_generation/rendering/ground_tile_entry.gd" id="1_qhse4"]
+[ext_resource type="Script" uid="uid://cwnpvq0hi0bb5" path="res://world_generation/rendering/tile_catalog.gd" id="2_2k4um"]
+[ext_resource type="TileSet" uid="uid://7yk6a4g47sc4" path="res://data/world/tiles/ground_tileset.tres" id="3_67p05"]
+
+[sub_resource type="Resource" id="Resource_g2ogv"]
+resource_name = "campo_mato_denso"
+script = ExtResource("1_qhse4")
+ground_id = &"campo_mato_denso"
+
+[sub_resource type="Resource" id="Resource_3h8e4"]
+resource_name = "campo_mato_denso_para_campo_alto_1"
+script = ExtResource("1_qhse4")
+ground_id = &"campo_mato_denso_para_campo_alto_1"
+atlas_coords = Vector2i(0, 1)
+
+[sub_resource type="Resource" id="Resource_jerfu"]
+resource_name = "campo_mato_denso_para_campo_alto_2"
+script = ExtResource("1_qhse4")
+ground_id = &"campo_mato_denso_para_campo_alto_2"
+atlas_coords = Vector2i(0, 2)
+
+[sub_resource type="Resource" id="Resource_17mfo"]
+resource_name = "campo_alto"
+script = ExtResource("1_qhse4")
+ground_id = &"campo_alto"
+atlas_coords = Vector2i(0, 3)
+
+[sub_resource type="Resource" id="Resource_pelmj"]
+resource_name = "campo_alto_para_campo_ralo_1"
+script = ExtResource("1_qhse4")
+ground_id = &"campo_alto_para_campo_ralo_1"
+atlas_coords = Vector2i(0, 4)
+
+[sub_resource type="Resource" id="Resource_noq2h"]
+resource_name = "campo_alto_para_campo_ralo_2"
+script = ExtResource("1_qhse4")
+ground_id = &"campo_alto_para_campo_ralo_2"
+atlas_coords = Vector2i(0, 5)
+
+[sub_resource type="Resource" id="Resource_1um83"]
+resource_name = "campo_alto_para_campo_ralo_3"
+script = ExtResource("1_qhse4")
+ground_id = &"campo_alto_para_campo_ralo_3"
+atlas_coords = Vector2i(0, 6)
+
+[sub_resource type="Resource" id="Resource_puvmp"]
+resource_name = "campo_ralo"
+script = ExtResource("1_qhse4")
+ground_id = &"campo_ralo"
+atlas_coords = Vector2i(0, 7)
+
+[sub_resource type="Resource" id="Resource_wvut2"]
+resource_name = "campo_ralo_para_campo_quase_ralo_1"
+script = ExtResource("1_qhse4")
+ground_id = &"campo_ralo_para_campo_quase_ralo_1"
+atlas_coords = Vector2i(0, 8)
+
+[sub_resource type="Resource" id="Resource_i3m4b"]
+resource_name = "campo_ralo_para_campo_quase_ralo_2"
+script = ExtResource("1_qhse4")
+ground_id = &"campo_ralo_para_campo_quase_ralo_2"
+atlas_coords = Vector2i(0, 9)
+
+[sub_resource type="Resource" id="Resource_8ftwv"]
+resource_name = "campo_ralo_para_campo_quase_ralo_3"
+script = ExtResource("1_qhse4")
+ground_id = &"campo_ralo_para_campo_quase_ralo_3"
+atlas_coords = Vector2i(0, 10)
+
+[sub_resource type="Resource" id="Resource_isf4n"]
+resource_name = "campo_quase_ralo"
+script = ExtResource("1_qhse4")
+ground_id = &"campo_quase_ralo"
+atlas_coords = Vector2i(0, 11)
+
+[sub_resource type="Resource" id="Resource_yk1p2"]
+resource_name = "campo_quase_ralo_para_campo_baixo_1"
+script = ExtResource("1_qhse4")
+ground_id = &"campo_quase_ralo_para_campo_baixo_1"
+atlas_coords = Vector2i(0, 12)
+
+[sub_resource type="Resource" id="Resource_hq8w1"]
+resource_name = "campo_quase_ralo_para_campo_baixo_2"
+script = ExtResource("1_qhse4")
+ground_id = &"campo_quase_ralo_para_campo_baixo_2"
+atlas_coords = Vector2i(0, 13)
+
+[sub_resource type="Resource" id="Resource_b73wc"]
+resource_name = "campo_quase_ralo_para_campo_baixo_3"
+script = ExtResource("1_qhse4")
+ground_id = &"campo_quase_ralo_para_campo_baixo_3"
+atlas_coords = Vector2i(0, 14)
+
+[sub_resource type="Resource" id="Resource_2ox83"]
+resource_name = "campo_baixo"
+script = ExtResource("1_qhse4")
+ground_id = &"campo_baixo"
+atlas_coords = Vector2i(0, 15)
+
+[sub_resource type="Resource" id="Resource_vegbn"]
+resource_name = "claro_denso"
+script = ExtResource("1_qhse4")
+ground_id = &"claro_denso"
+atlas_coords = Vector2i(0, 16)
+
+[sub_resource type="Resource" id="Resource_7nvqj"]
+resource_name = "claro_denso_para_claro_1"
+script = ExtResource("1_qhse4")
+ground_id = &"claro_denso_para_claro_1"
+atlas_coords = Vector2i(0, 17)
+
+[sub_resource type="Resource" id="Resource_yhvsa"]
+resource_name = "claro_denso_para_claro_2"
+script = ExtResource("1_qhse4")
+ground_id = &"claro_denso_para_claro_2"
+atlas_coords = Vector2i(0, 18)
+
+[sub_resource type="Resource" id="Resource_w68ln"]
+resource_name = "claro"
+script = ExtResource("1_qhse4")
+ground_id = &"claro"
+atlas_coords = Vector2i(0, 19)
+
+[sub_resource type="Resource" id="Resource_hccke"]
+resource_name = "florida"
+script = ExtResource("1_qhse4")
+ground_id = &"florida"
+atlas_coords = Vector2i(0, 20)
+
+[sub_resource type="Resource" id="Resource_7hm8x"]
+resource_name = "florida_para_florida_rasteira_1"
+script = ExtResource("1_qhse4")
+ground_id = &"florida_para_florida_rasteira_1"
+atlas_coords = Vector2i(0, 21)
+
+[sub_resource type="Resource" id="Resource_fdjnk"]
+resource_name = "florida_para_florida_rasteira_2"
+script = ExtResource("1_qhse4")
+ground_id = &"florida_para_florida_rasteira_2"
+atlas_coords = Vector2i(0, 22)
+
+[sub_resource type="Resource" id="Resource_ix57f"]
+resource_name = "florida_para_florida_rasteira_3"
+script = ExtResource("1_qhse4")
+ground_id = &"florida_para_florida_rasteira_3"
+atlas_coords = Vector2i(0, 23)
+
+[sub_resource type="Resource" id="Resource_qfm0k"]
+resource_name = "florida_para_florida_rasteira_4"
+script = ExtResource("1_qhse4")
+ground_id = &"florida_para_florida_rasteira_4"
+atlas_coords = Vector2i(0, 24)
+
+[sub_resource type="Resource" id="Resource_w3xqi"]
+resource_name = "florida_rasteira"
+script = ExtResource("1_qhse4")
+ground_id = &"florida_rasteira"
+atlas_coords = Vector2i(0, 25)
+
+[sub_resource type="Resource" id="Resource_rskx5"]
+resource_name = "florida_rasteira_para_florida_baixa"
+script = ExtResource("1_qhse4")
+ground_id = &"florida_rasteira_para_florida_baixa"
+atlas_coords = Vector2i(0, 26)
+
+[sub_resource type="Resource" id="Resource_5mk2j"]
+resource_name = "florida_baixa"
+script = ExtResource("1_qhse4")
+ground_id = &"florida_baixa"
+atlas_coords = Vector2i(0, 27)
+
+[sub_resource type="Resource" id="Resource_xhw0i"]
+resource_name = "floresta"
+script = ExtResource("1_qhse4")
+ground_id = &"floresta"
+atlas_coords = Vector2i(0, 28)
+
+[sub_resource type="Resource" id="Resource_lvml8"]
+resource_name = "floresta_para_floresta_rasteira_1"
+script = ExtResource("1_qhse4")
+ground_id = &"floresta_para_floresta_rasteira_1"
+atlas_coords = Vector2i(0, 29)
+
+[sub_resource type="Resource" id="Resource_neblj"]
+resource_name = "floresta_para_floresta_rasteira_2"
+script = ExtResource("1_qhse4")
+ground_id = &"floresta_para_floresta_rasteira_2"
+atlas_coords = Vector2i(0, 30)
+
+[sub_resource type="Resource" id="Resource_pg0v6"]
+resource_name = "floresta_para_floresta_rasteira_3"
+script = ExtResource("1_qhse4")
+ground_id = &"floresta_para_floresta_rasteira_3"
+atlas_coords = Vector2i(0, 31)
+
+[sub_resource type="Resource" id="Resource_spxbk"]
+resource_name = "floresta_rasteira"
+script = ExtResource("1_qhse4")
+ground_id = &"floresta_rasteira"
+atlas_coords = Vector2i(0, 32)
+
+[sub_resource type="Resource" id="Resource_y1uxo"]
+resource_name = "floresta_rasteira_para_musgo"
+script = ExtResource("1_qhse4")
+ground_id = &"floresta_rasteira_para_musgo"
+atlas_coords = Vector2i(0, 33)
+
+[sub_resource type="Resource" id="Resource_8mg0m"]
+resource_name = "musgo"
+script = ExtResource("1_qhse4")
+ground_id = &"musgo"
+atlas_coords = Vector2i(0, 34)
+
+[sub_resource type="Resource" id="Resource_kgv0n"]
+resource_name = "savana"
+script = ExtResource("1_qhse4")
+ground_id = &"savana"
+atlas_coords = Vector2i(0, 35)
+
+[sub_resource type="Resource" id="Resource_g5mh7"]
+resource_name = "savana_para_savana_rasteira_1"
+script = ExtResource("1_qhse4")
+ground_id = &"savana_para_savana_rasteira_1"
+atlas_coords = Vector2i(0, 36)
+
+[sub_resource type="Resource" id="Resource_yp7te"]
+resource_name = "savana_para_savana_rasteira_2"
+script = ExtResource("1_qhse4")
+ground_id = &"savana_para_savana_rasteira_2"
+atlas_coords = Vector2i(0, 37)
+
+[sub_resource type="Resource" id="Resource_dpxrn"]
+resource_name = "savana_para_savana_rasteira_3"
+script = ExtResource("1_qhse4")
+ground_id = &"savana_para_savana_rasteira_3"
+atlas_coords = Vector2i(0, 38)
+
+[sub_resource type="Resource" id="Resource_ha783"]
+resource_name = "savana_para_savana_rasteira_4"
+script = ExtResource("1_qhse4")
+ground_id = &"savana_para_savana_rasteira_4"
+atlas_coords = Vector2i(0, 39)
+
+[sub_resource type="Resource" id="Resource_s5dua"]
+resource_name = "savana_rasteira"
+script = ExtResource("1_qhse4")
+ground_id = &"savana_rasteira"
+atlas_coords = Vector2i(0, 40)
+
+[sub_resource type="Resource" id="Resource_eyrsx"]
+resource_name = "savana_rasteira_para_savana_baixa_1"
+script = ExtResource("1_qhse4")
+ground_id = &"savana_rasteira_para_savana_baixa_1"
+atlas_coords = Vector2i(0, 41)
+
+[sub_resource type="Resource" id="Resource_0l72a"]
+resource_name = "savana_rasteira_para_savana_baixa_2"
+script = ExtResource("1_qhse4")
+ground_id = &"savana_rasteira_para_savana_baixa_2"
+atlas_coords = Vector2i(0, 42)
+
+[sub_resource type="Resource" id="Resource_6tnvw"]
+resource_name = "savana_baixa"
+script = ExtResource("1_qhse4")
+ground_id = &"savana_baixa"
+atlas_coords = Vector2i(0, 43)
+
+[sub_resource type="Resource" id="Resource_2k2hb"]
+resource_name = "campo_terra"
+script = ExtResource("1_qhse4")
+ground_id = &"campo_terra"
+atlas_coords = Vector2i(0, 44)
+
+[sub_resource type="Resource" id="Resource_q4ci1"]
+resource_name = "campo_claro_terra"
+script = ExtResource("1_qhse4")
+ground_id = &"campo_claro_terra"
+atlas_coords = Vector2i(0, 45)
+
+[sub_resource type="Resource" id="Resource_elp80"]
+resource_name = "campo_florido_terra"
+script = ExtResource("1_qhse4")
+ground_id = &"campo_florido_terra"
+atlas_coords = Vector2i(0, 46)
+
+[sub_resource type="Resource" id="Resource_35y5y"]
+resource_name = "floresta_terra"
+script = ExtResource("1_qhse4")
+ground_id = &"floresta_terra"
+atlas_coords = Vector2i(0, 47)
+
+[sub_resource type="Resource" id="Resource_qk6e2"]
+resource_name = "savana_terra"
+script = ExtResource("1_qhse4")
+ground_id = &"savana_terra"
+atlas_coords = Vector2i(0, 48)
+
+[resource]
+resource_name = "GroundCatalog"
+script = ExtResource("2_2k4um")
+tile_set = ExtResource("3_67p05")
+entries = Array[ExtResource("1_qhse4")]([SubResource("Resource_g2ogv"), SubResource("Resource_3h8e4"), SubResource("Resource_jerfu"), SubResource("Resource_17mfo"), SubResource("Resource_pelmj"), SubResource("Resource_noq2h"), SubResource("Resource_1um83"), SubResource("Resource_puvmp"), SubResource("Resource_wvut2"), SubResource("Resource_i3m4b"), SubResource("Resource_8ftwv"), SubResource("Resource_isf4n"), SubResource("Resource_yk1p2"), SubResource("Resource_hq8w1"), SubResource("Resource_b73wc"), SubResource("Resource_2ox83"), SubResource("Resource_vegbn"), SubResource("Resource_7nvqj"), SubResource("Resource_yhvsa"), SubResource("Resource_w68ln"), SubResource("Resource_hccke"), SubResource("Resource_7hm8x"), SubResource("Resource_fdjnk"), SubResource("Resource_ix57f"), SubResource("Resource_qfm0k"), SubResource("Resource_w3xqi"), SubResource("Resource_rskx5"), SubResource("Resource_5mk2j"), SubResource("Resource_xhw0i"), SubResource("Resource_lvml8"), SubResource("Resource_neblj"), SubResource("Resource_pg0v6"), SubResource("Resource_spxbk"), SubResource("Resource_y1uxo"), SubResource("Resource_8mg0m"), SubResource("Resource_kgv0n"), SubResource("Resource_g5mh7"), SubResource("Resource_yp7te"), SubResource("Resource_dpxrn"), SubResource("Resource_ha783"), SubResource("Resource_s5dua"), SubResource("Resource_eyrsx"), SubResource("Resource_0l72a"), SubResource("Resource_6tnvw"), SubResource("Resource_2k2hb"), SubResource("Resource_q4ci1"), SubResource("Resource_elp80"), SubResource("Resource_35y5y"), SubResource("Resource_qk6e2")])

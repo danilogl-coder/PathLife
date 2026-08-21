@@ -1,0 +1,19 @@
+[gd_resource type="Resource" script_class="BiomeDefinition" format=3]
+
+[ext_resource type="Script" path="res://world_generation/decoration/decoration_definition.gd" id="1_amf7e"]
+[ext_resource type="Resource" path="res://data/world/decorations/palmeira.tres" id="2_846vl"]
+[ext_resource type="Script" path="res://world_generation/climate/biome_definition.gd" id="3_vlvps"]
+[ext_resource type="Script" path="res://world_generation/structures/structure_definition.gd" id="4_vad57"]
+
+[resource]
+resource_name = "deserto"
+script = ExtResource("3_vlvps")
+id = &"deserto"
+display_name = "Deserto"
+temperature_min = 0.72
+humidity_max = 0.32
+continentalness_min = 0.34
+height_amplitude = 0.7
+ground_id = &"areia"
+wall_id = &"areia"
+decorations = Array[ExtResource("1_amf7e")]([ExtResource("2_846vl")])

@@ -1,4 +1,4 @@
-[gd_scene load_steps=10 format=3 uid="uid://ccclce5ap3ngs"]
+[gd_scene load_steps=14 format=3 uid="uid://ccclce5ap3ngs"]
 
 [ext_resource type="Script" uid="uid://b54ob6bq6i7mu" path="res://gameplay/player/player_controller.gd" id="1_xq3ts"]
 [ext_resource type="Resource" uid="uid://cy5yh3iq3rj1j" path="res://data/player/default_player_config.tres" id="2_wvk08"]
@@ -8,14 +8,26 @@
 [ext_resource type="Resource" path="res://data/character_customization/default_clothing_catalog.tres" id="6_catalog"]
 [ext_resource type="Resource" path="res://data/character_customization/hair/default_hair_catalog.tres" id="7_hair_catalog"]
 [ext_resource type="Resource" path="res://data/character_customization/colors/default_character_color_catalog.tres" id="8_color_catalog"]
+[ext_resource type="PackedScene" path="res://gameplay/player/bed_sleep_interactor.tscn" id="9_sleep_interactor"]
+[ext_resource type="Script" path="res://world_generation/agents/world_grid_agent.gd" id="10_grid_agent"]
+[ext_resource type="Resource" path="res://data/world/player_movement_context.tres" id="11_movement_context"]
+[ext_resource type="Script" path="res://presentation/characters/cutout/character_viewport_composite.gd" id="12_composite"]
 
 [sub_resource type="CapsuleShape2D" id="CapsuleShape2D_omfh6"]
 radius = 5.0
 height = 10.0
 
-[node name="Player" type="CharacterBody2D"]
+[node name="Player" type="CharacterBody2D" groups=["depth_actor"] node_paths=PackedStringArray("grid_agent")]
+z_index = 0
+collision_layer = 2
+collision_mask = 9
 script = ExtResource("1_xq3ts")
 config = ExtResource("2_wvk08")
+grid_agent = NodePath("WorldGridAgent")
+
+[node name="WorldGridAgent" type="Node" parent="."]
+script = ExtResource("10_grid_agent")
+movement_context = ExtResource("11_movement_context")
 
 [node name="AppearanceState" type="Node" parent="."]
 script = ExtResource("4_appearance_state")
@@ -28,10 +40,32 @@ color_catalog = ExtResource("8_color_catalog")
 position = Vector2(0, -5)
 shape = SubResource("CapsuleShape2D_omfh6")
 
-[node name="VisualAnchor" type="Node2D" parent="."]
+[node name="VisualAnchor" type="Node2D" parent="." node_paths=PackedStringArray("character_viewport", "character_stage", "composite_sprite")]
+script = ExtResource("12_composite")
+character_viewport = NodePath("CharacterViewport")
+character_stage = NodePath("CharacterViewport/CharacterStage")
+composite_sprite = NodePath("CharacterComposite")
 
-[node name="CharacterVisual" parent="VisualAnchor" instance=ExtResource("3_visual")]
+[node name="CharacterViewport" type="SubViewport" parent="VisualAnchor"]
+transparent_bg = true
+disable_3d = true
+size = Vector2i(192, 192)
+render_target_update_mode = 4
 
-[connection signal="locomotion_changed" from="." to="VisualAnchor/CharacterVisual" method="present_locomotion"]
-[connection signal="crouch_changed" from="." to="VisualAnchor/CharacterVisual" method="present_crouch"]
-[connection signal="appearance_changed" from="AppearanceState" to="VisualAnchor/CharacterVisual" method="present_appearance"]
+[node name="CharacterStage" type="Node2D" parent="VisualAnchor/CharacterViewport"]
+
+[node name="CharacterVisual" parent="VisualAnchor/CharacterViewport/CharacterStage" instance=ExtResource("3_visual")]
+
+[node name="CharacterComposite" type="Sprite2D" parent="VisualAnchor"]
+texture_filter = 1
+position = Vector2(0, -48)
+
+[node name="BedSleepInteractor" parent="." node_paths=PackedStringArray("player", "visual_anchor", "character_visual") instance=ExtResource("9_sleep_interactor")]
+player = NodePath("..")
+visual_anchor = NodePath("../VisualAnchor")
+character_visual = NodePath("../VisualAnchor/CharacterViewport/CharacterStage/CharacterVisual")
+
+[connection signal="locomotion_changed" from="." to="VisualAnchor/CharacterViewport/CharacterStage/CharacterVisual" method="present_locomotion"]
+[connection signal="crouch_changed" from="." to="VisualAnchor/CharacterViewport/CharacterStage/CharacterVisual" method="present_crouch"]
+[connection signal="sleep_changed" from="." to="VisualAnchor/CharacterViewport/CharacterStage/CharacterVisual" method="present_sleep"]
+[connection signal="appearance_changed" from="AppearanceState" to="VisualAnchor/CharacterViewport/CharacterStage/CharacterVisual" method="present_appearance"]

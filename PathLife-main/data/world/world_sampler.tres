@@ -1,0 +1,17 @@
+[gd_resource type="Resource" script_class="WorldSampler" format=3]
+
+[ext_resource type="Resource" path="res://data/world/biome_resolver.tres" id="1_87x2j"]
+[ext_resource type="Resource" path="res://data/world/climate_generator.tres" id="2_72ksi"]
+[ext_resource type="Resource" path="res://data/world/height_generator.tres" id="3_jamsr"]
+[ext_resource type="Script" path="res://world_generation/core/world_sampler.gd" id="4_s0e6i"]
+[ext_resource type="Resource" path="res://data/world/terrain_resolver.tres" id="5_o2m1r"]
+[ext_resource type="FastNoiseLite" path="res://data/world/noise/ground_variation.tres" id="6_kogjm"]
+
+[resource]
+resource_name = "WorldSampler"
+script = ExtResource("4_s0e6i")
+climate = ExtResource("2_72ksi")
+biome_resolver = ExtResource("1_87x2j")
+height_generator = ExtResource("3_jamsr")
+terrain_resolver = ExtResource("5_o2m1r")
+variation_noise = ExtResource("6_kogjm")

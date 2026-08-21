@@ -1,0 +1,10 @@
+[gd_resource type="Resource" script_class="WaterPass" format=3]
+
+[ext_resource type="Resource" path="res://data/world/world_sampler.tres" id="1_xt8gv"]
+[ext_resource type="Script" path="res://world_generation/passes/water_pass.gd" id="2_31nwp"]
+
+[resource]
+script = ExtResource("2_31nwp")
+sampler = ExtResource("1_xt8gv")
+pass_name = "6 - Agua (desligado: falta arte de agua)"
+enabled = false
