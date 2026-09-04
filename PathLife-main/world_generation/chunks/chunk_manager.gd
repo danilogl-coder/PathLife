@@ -9,6 +9,10 @@ signal world_ready
 signal chunk_generated(chunk_coord: Vector2i)
 signal chunk_integrated(chunk_coord: Vector2i)
 signal chunk_unloaded(chunk_coord: Vector2i)
+signal structure_integrated(
+	owner_chunk: Vector2i, placement: StructurePlacement, structure: StructureRoot
+)
+signal structure_will_unload(owner_chunk: Vector2i, placement_id: int)
 
 @export_category("Configuração")
 @export var settings: WorldSettings
@@ -50,6 +54,10 @@ var _initialized: bool = false
 ## a borda de um chunk vire uma barreira de desenho sobre o chunk vizinho.
 var _ground_layer_registry: Dictionary = {}
 var _depth_layer_registry: Dictionary = {}
+## IDs das estruturas cuja instância visual pertence a cada ChunkView. O índice
+## permite remover topologia de visão antes que os nós sejam enfileirados para
+## destruição.
+var _structure_ids_by_chunk: Dictionary = {}
 
 
 func _ready() -> void:
@@ -64,6 +72,11 @@ func initialize() -> void:
 	_world_seed = settings.resolved_seed()
 	if save_manager != null and save_manager.has_save():
 		_world_seed = save_manager.load_seed(_world_seed)
+	if save_manager != null:
+		# `resolved_seed()` may generate a non-zero seed when the authored value is
+		# zero. Persist the value that actually drives generation so portal ids and
+		# explored-vision chunks still refer to the same world on the next boot.
+		save_manager.set_seed(_world_seed)
 
 	sampler.prepare(settings, _world_seed)
 	generator.prepare(settings, _world_seed)
@@ -72,13 +85,26 @@ func initialize() -> void:
 
 	_generator_pool.clear()
 	var copies := maxi(settings.max_parallel_generations, 1)
-	for i in copies:
-		var copy: WorldGenerator = generator.clone() if i > 0 else generator
+	for _i in copies:
+		# Nem o primeiro slot pode usar `generator` diretamente. A pipeline
+		# original aponta para o mesmo WorldSampler consultado pela main thread
+		# (movimento, bordas e navegação), e o sampler mantém um Dictionary de
+		# cache. Um worker escrevendo nesse cache enquanto a main thread o lê
+		# corrompe o heap nativo. Cada slot recebe sua pipeline e sampler próprios.
+		var copy := generator.clone()
 		copy.prepare(settings, _world_seed)
 		_generator_pool.append(copy)
 
 	_initialized = true
 	set_process(true)
+	WorldDiagnostic.reset()
+	if OS.is_debug_build():
+		# Marcador de build. Serve para responder, em dois segundos, a pergunta
+		# "o jogo está rodando o código que acabei de salvar?".
+		print(
+			"[Mundo] semente %d | chão de construção: piso da cena substitui o terreno"
+			% _world_seed
+		)
 
 
 func world_seed() -> int:
@@ -88,12 +114,19 @@ func world_seed() -> int:
 func _process(_delta: float) -> void:
 	if not _initialized:
 		return
+	# Resultados precisam avançar mesmo com o jogador parado. Além de liberar
+	# slots para novas solicitações, integrar antes do unload garante que um
+	# resultado antigo, concluído após um teleporte, seja removido no mesmo frame.
+	_integrate_ready_chunks()
 	var center := current_center_chunk()
-	_request_required_chunks(center)
 	if center != _last_center:
 		_last_center = center
-		_unload_far_chunks(center)
-	_integrate_ready_chunks()
+	# Um worker solicitado no centro anterior pode terminar depois que o jogador
+	# já parou no centro novo. Portanto o unload não pode depender apenas da
+	# mudança do centro: ele também precisa recolher resultados assíncronos
+	# obsoletos que acabaram de ser integrados.
+	_unload_far_chunks(center)
+	_request_required_chunks(center)
 
 
 func current_center_chunk() -> Vector2i:
@@ -237,11 +270,17 @@ func _integrate(chunk: ChunkData) -> void:
 		chunk, settings, catalog, ground_root, depth_root, overlay_root, world,
 		_ground_layer_registry, _depth_layer_registry
 	)
+	var structure_ids: Array[int] = []
 	for placement in chunk.structures:
-		view.add_structure(placement)
+		var structure := view.add_structure(placement) as StructureRoot
+		if structure != null:
+			structure_ids.append(placement.placement_id)
+			structure_integrated.emit(chunk.coord, placement, structure)
+		WorldDiagnostic.report(chunk, placement, _world_seed)
 	for placement in chunk.decorations:
 		view.add_decoration(placement)
 	_views[chunk.coord] = view
+	_structure_ids_by_chunk[chunk.coord] = structure_ids
 	chunk_integrated.emit(chunk.coord)
 
 	if not _world_ready_emitted and _views.size() >= _expected_view_count():
@@ -265,6 +304,10 @@ func _unload_far_chunks(center: Vector2i) -> void:
 
 
 func unload_chunk(coord: Vector2i) -> void:
+	var structure_ids: Array = _structure_ids_by_chunk.get(coord, [])
+	for placement_id: int in structure_ids:
+		structure_will_unload.emit(coord, placement_id)
+	_structure_ids_by_chunk.erase(coord)
 	world.remove_chunk(coord)
 	var view: ChunkView = _views.get(coord, null)
 	if view != null:

@@ -24,15 +24,27 @@ func rect() -> Rect2i:
 	return Rect2i(origin_xy, footprint())
 
 
-## Retângulo incluindo a margem de adaptação do terreno.
+## Retângulo com TODO o alcance da estrutura sobre o mundo.
+##
+## Inclui a margem de adaptação do relevo e a de limpeza do chão — é por este
+## retângulo que o chunk decide se precisa aplicar a estrutura, então uma margem
+## esquecida aqui viraria meia casa com grama e meia sem, na borda do chunk.
 func influence_rect() -> Rect2i:
-	var margin := definition.adaptation_margin if definition != null else 0
+	if definition == null:
+		return rect()
+	var margin := definition.adaptation_margin
+	if definition.clears_ground_cover:
+		margin = maxi(margin, definition.bare_ground_margin)
+		margin = maxi(margin, StructureFloorMask.reach_for(definition))
 	return rect().grow(margin)
 
 
 func center_cell() -> Vector2i:
 	var size := footprint()
-	return origin_xy + Vector2i(size.x / 2, size.y / 2)
+	return origin_xy + Vector2i(
+		floori(float(size.x) / 2.0),
+		floori(float(size.y) / 2.0)
+	)
 
 
 func world_position() -> Vector3i:

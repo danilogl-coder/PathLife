@@ -1,0 +1,24 @@
+[gd_scene format=3]
+
+[ext_resource type="Script" path="res://gameplay/furniture/furniture_piece.gd" id="1_piece"]
+[ext_resource type="PackedScene" path="res://presentation/furniture/furniture_visual.tscn" id="2_visual"]
+
+[node name="FurniturePiece" type="StaticBody2D" node_paths=PackedStringArray("sprite", "solid_collision", "interaction_area", "interaction_shape")]
+collision_layer = 8
+collision_mask = 2
+script = ExtResource("1_piece")
+sprite = NodePath("Visual/Sprite")
+solid_collision = NodePath("SolidCollision")
+interaction_area = NodePath("InteractionArea")
+interaction_shape = NodePath("InteractionArea/InteractionShape")
+
+[node name="Visual" parent="." instance=ExtResource("2_visual")]
+
+[node name="SolidCollision" type="CollisionPolygon2D" parent="."]
+
+[node name="InteractionArea" type="Area2D" parent="."]
+collision_layer = 4
+collision_mask = 2
+monitorable = false
+
+[node name="InteractionShape" type="CollisionPolygon2D" parent="InteractionArea"]

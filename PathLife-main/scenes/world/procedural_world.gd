@@ -20,6 +20,9 @@ signal world_ready
 ## Gera os chunks ao redor do foco de forma síncrona antes do primeiro frame.
 @export var preload_around_focus: bool = true
 @export_range(0, 4, 1) var preload_radius: int = 1
+## Se houver marcadores Spawn_Player pintados nas estruturas carregadas, usa o
+## mais próximo da célula inicial configurada no Player.
+@export var use_painted_player_spawn: bool = true
 
 @onready var chunk_container: Node = %ChunkContainer
 @onready var fallback_ground_root: Node2D = %GroundRoot
@@ -28,8 +31,11 @@ signal world_ready
 @onready var chunk_manager: ChunkManager = %ChunkManager
 @onready var height_visibility: HeightVisibilityManager = %HeightVisibility
 @onready var save_manager: WorldSaveManager = %SaveManager
+@onready var vision_system: VisionSystem = %VisionSystem
+@onready var visibility_presenter: VisibilityPresenter = %VisionOverlay
 
 var _agent: WorldGridAgent
+var _painted_player_spawn_applied := false
 
 
 func _ready() -> void:
@@ -46,7 +52,7 @@ func _ready() -> void:
 	chunk_manager.depth_root = depth_root
 	chunk_manager.overlay_root = overlay_root
 	chunk_manager.save_manager = save_manager
-	chunk_manager.world_ready.connect(func() -> void: world_ready.emit())
+	chunk_manager.world_ready.connect(_on_world_ready)
 	chunk_manager.chunk_integrated.connect(_on_chunk_integrated)
 
 	if focus != null:
@@ -54,12 +60,70 @@ func _ready() -> void:
 		if _agent != null:
 			_agent.height_changed.connect(_on_focus_height_changed)
 
+	# O coordenador liga os eventos antes da geração síncrona. Assim estados de
+	# porta/janela são restaurados antes do bake e a primeira máscara já nasce
+	# coerente, sem um frame mostrando o exterior através da estrutura.
+	vision_system.configure(focus, chunk_manager, save_manager)
+	var vision_world_root := get_parent() as Node2D
+	if vision_world_root == null:
+		vision_world_root = self
+	visibility_presenter.configure(
+		vision_system, vision_world_root, vision_system.profile, chunk_manager
+	)
+
 	if preload_around_focus:
 		chunk_manager.generate_around_now(chunk_manager.current_center_chunk(), preload_radius)
+		# As estruturas síncronas já existem aqui. Aplicar antes do primeiro frame
+		# evita o Player aparecer em (0,0) e teleportar visivelmente depois.
+		_apply_painted_player_spawn()
 	# Objetos autorados na cena (mobília, marcos) só sabem em que célula estão
 	# depois que o terreno existe. Assentar aqui evita que fiquem no nível 0,
 	# afundados no relevo e ordenados como se estivessem lá atrás.
 	snap_world_objects()
+	vision_system.force_update()
+
+
+func _on_world_ready() -> void:
+	_apply_painted_player_spawn()
+	world_ready.emit()
+
+
+## Cada cópia procedural da casa pode conter o marcador, então escolhemos o
+## mais próximo do start_cell atual. Assim o mesmo atlas continua reutilizável
+## sem tornar a escolha dependente da ordem de carregamento dos chunks.
+func _apply_painted_player_spawn() -> void:
+	if (
+		_painted_player_spawn_applied
+		or not use_painted_player_spawn
+		or _agent == null
+		or not _agent.is_active()
+	):
+		return
+	var best_cell := Vector2i.ZERO
+	var best_distance_squared := INF
+	var found := false
+	for node: Node in get_tree().get_nodes_in_group(StructureRoot.STRUCTURE_GROUP):
+		var structure := node as StructureRoot
+		if (
+			structure == null
+			or structure.placement() == null
+			or depth_root == null
+			or not depth_root.is_ancestor_of(structure)
+		):
+			continue
+		for local_spawn: Vector2i in structure.player_spawn_cells():
+			var candidate := structure.placement().origin_xy + local_spawn
+			var distance_squared := float(candidate.distance_squared_to(_agent.cell()))
+			if distance_squared >= best_distance_squared:
+				continue
+			best_distance_squared = distance_squared
+			best_cell = candidate
+			found = true
+	if not found:
+		return
+	_agent.teleport_to(best_cell)
+	_painted_player_spawn_applied = true
+	print("[Mundo] Player posicionado no Spawn_Player pintado: ", best_cell)
 
 
 ## Força Ground e Depth para o MESMO espaço de ordenação.
@@ -109,6 +173,10 @@ func world_data() -> WorldData:
 
 func navigation(context: MovementContext = null) -> WorldNavigation:
 	return WorldNavigation.new(world_data(), context)
+
+
+func vision() -> VisionSystem:
+	return vision_system
 
 
 func _on_focus_height_changed(level: int) -> void:

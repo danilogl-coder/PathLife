@@ -166,7 +166,7 @@ func _foundation_height(definition: StructureDefinition, origin_xy: Vector2i) ->
 	if heights.is_empty():
 		return 0
 	heights.sort()
-	var median := heights[heights.size() / 2]
+	var median := heights[floori(float(heights.size()) / 2.0)]
 	match definition.adaptation_mode:
 		StructureDefinition.TerrainAdaptationMode.EMBED:
 			median = heights[heights.size() - 1]

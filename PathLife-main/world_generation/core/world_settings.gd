@@ -76,11 +76,11 @@ extends Resource
 func tint_for_level(level: int, reference_level: int = 2147483647) -> Color:
 	if not height_shading_enabled:
 		return Color.WHITE
-	var reference := height_shading_reference
+	var neutral_level := height_shading_reference
 	if reference_level != 2147483647:
-		reference = reference_level
+		neutral_level = reference_level
 
-	var delta := level - reference
+	var delta := level - neutral_level
 	if delta == 0:
 		return Color.WHITE
 

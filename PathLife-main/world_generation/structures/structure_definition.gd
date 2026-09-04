@@ -47,6 +47,28 @@ enum TerrainAdaptationMode {
 ## Marca as células do footprint como não-caminháveis (a cena cuida do chão).
 @export var footprint_blocks_movement: bool = false
 
+@export_group("Cobertura do chão")
+## Troca a cobertura vegetal do footprint por chão nu.
+##
+## A arte de grama TRANSBORDA o losango da célula: as folhas sobem alguns pixels
+## acima dele para dar volume. Entre células de grama isso é invisível — a folha
+## cai sobre outra grama. Sob uma construção não: a célula da frente é desenhada
+## DEPOIS da de trás, então suas folhas caem sobre o PISO da casa e a sala
+## aparece com mato brotando entre as tábuas. A limpeza troca a cobertura por
+## terra nua e o [TerrainAdapter] também oculta a superfície exatamente onde a
+## cena pinta piso próprio.
+@export var clears_ground_cover: bool = true
+## Anéis de células ALÉM do footprint que também perdem a cobertura vegetal.
+##
+## 0 basta quando a cena tem paredes cobrindo a borda da frente. Use 1 em
+## construções de piso aberto (decks, pátios), onde a grama da célula vizinha
+## encostaria na última fileira de tábuas.
+@export_range(0, 8, 1) var bare_ground_margin: int = 0
+## Vazio = usa o chão nu do próprio bioma ([member BiomeDefinition.wall_id]).
+##
+## Preencha para uma construção com apron próprio (pedra, areia, cascalho).
+@export var bare_ground_id: StringName = &""
+
 
 func allows_biome(biome_id: StringName) -> bool:
 	return allowed_biomes.is_empty() or allowed_biomes.has(biome_id)

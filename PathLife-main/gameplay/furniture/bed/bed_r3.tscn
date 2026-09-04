@@ -1,6 +1,6 @@
-[gd_scene format=3 uid="uid://cehbejb8dn640"]
+[gd_scene format=3 uid="uid://b1oaurvfu8801"]
 
-[ext_resource type="PackedScene" uid="uid://c2ll6yox0l7xj" path="res://gameplay/furniture/bed/bed_base.tscn" id="1_base"]
+[ext_resource type="PackedScene" path="res://gameplay/furniture/bed/bed_base.tscn" id="1_base"]
 [ext_resource type="Texture2D" uid="uid://dnuu6b5aj1kro" path="res://assets/furniture/bedroom/bed/cama_r3.png" id="2_texture"]
 [ext_resource type="Texture2D" uid="uid://djjhwnok7uipr" path="res://assets/furniture/bedroom/bed/lencol_r3.png" id="3_blanket"]
 [ext_resource type="Texture2D" uid="uid://c08q3balnwrtp" path="res://assets/furniture/bedroom/bed/cabeceira_r3.png" id="4_headboard"]
@@ -20,7 +20,7 @@ texture = ExtResource("3_blanket")
 texture = ExtResource("4_headboard")
 
 [node name="SolidCollision" parent="." index="1" unique_id=165171394]
-polygon = PackedVector2Array(-90, -48, -14, -86, 68, -40, -3, 7)
+polygon = PackedVector2Array(-48, -31, 0, -61, 48, -31, 0, 1)
 
 [node name="InteractionShape" parent="InteractionArea" parent_id_path=PackedInt32Array(1451867950) index="0" unique_id=26919407]
 polygon = PackedVector2Array(-84, -32, 16, -86, 82, -42, -20, 14)

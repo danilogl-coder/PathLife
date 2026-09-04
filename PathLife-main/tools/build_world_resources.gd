@@ -20,6 +20,30 @@ var _saved: Array[String] = []
 
 func _init() -> void:
 	_ensure_dirs()
+	if "--tiles-only" in OS.get_cmdline_user_args():
+		var rebuilt_tile_set := _build_tileset()
+		_save(rebuilt_tile_set, OUT + "tiles/ground_tileset.tres")
+		_save(_build_catalog(rebuilt_tile_set), OUT + "tiles/ground_catalog.tres")
+		print("\n--- TileSet, catálogo e transições atualizados ---")
+		for path in _saved:
+			print("  ", path)
+		quit(0)
+		return
+	# Atualiza somente o catálogo quando o atlas/manifesto mudou. Evita recriar
+	# biomas, configurações e outros Resources que podem ter sido ajustados pelo
+	# Inspector desde a geração inicial.
+	if "--catalog-only" in OS.get_cmdline_user_args():
+		var existing_tile_set := load(OUT + "tiles/ground_tileset.tres") as TileSet
+		if existing_tile_set == null:
+			push_error("TileSet existente não encontrado; execute a geração completa.")
+			quit(1)
+			return
+		_save(_build_catalog(existing_tile_set), OUT + "tiles/ground_catalog.tres")
+		print("\n--- catálogo de tiles e transições atualizado ---")
+		for path in _saved:
+			print("  ", path)
+		quit(0)
+		return
 	var noises := _build_noises()
 	var climate: ClimateGenerator = _save(_build_climate(noises), OUT + "climate_generator.tres")
 	var height: HeightGenerator = _save(_build_height(noises), OUT + "height_generator.tres")
@@ -123,7 +147,7 @@ func _build_vegetation_frames() -> void:
 func _ensure_dirs() -> void:
 	for sub in [
 		"", "noise/", "biomes/", "variants/", "terrains/", "decorations/", "structures/",
-		"passes/", "tiles/",
+		"passes/", "tiles/", "tiles/transicoes/",
 	]:
 		DirAccess.make_dir_recursive_absolute(ProjectSettings.globalize_path(OUT + sub))
 		DirAccess.make_dir_recursive_absolute(OUT + sub)
@@ -294,10 +318,32 @@ func _build_structures() -> Dictionary:
 	deck.minimum_spacing = 40
 	deck.max_slope = 6.0
 	deck.adaptation_mode = StructureDefinition.TerrainAdaptationMode.FLATTEN
+	# Piso aberto: sem parede na borda, a grama da célula da frente encostaria
+	# na última fileira de tábuas. Um anel de terra ao redor resolve.
+	deck.bare_ground_margin = 1
 	deck.allowed_biomes = [&"campo", &"campo_claro", &"campo_florido", &"floresta"]
 	deck.resource_name = "deck_madeira"
 	_save(deck, OUT + "structures/deck_madeira.tres")
-	return {"deck": deck}
+
+	# Estrutura-base autorável pelo TileMap. Os valores altos de peso/chance são
+	# intencionais no ambiente de trabalho: facilitam encontrar o exemplo.
+	var casa := StructureDefinition.new()
+	casa.id = &"casa_madeira"
+	casa.display_name = "Casa de madeira"
+	casa.scene = load("res://presentation/world/structures/casa_madeira_tilemap.tscn")
+	casa.footprint = Vector2i(7, 8)
+	casa.adaptation_margin = 5
+	casa.spawn_weight = 16.0
+	casa.spawn_chance = 1.0
+	casa.minimum_spacing = 8
+	casa.max_slope = 32.0
+	casa.allowed_biomes = [&"campo"]
+	casa.allowed_terrains = [&"plano", &"colina"]
+	casa.adaptation_mode = StructureDefinition.TerrainAdaptationMode.FLATTEN
+	casa.footprint_blocks_movement = false
+	casa.resource_name = "casa_madeira"
+	_save(casa, OUT + "structures/casa_madeira.tres")
+	return {"deck": deck, "casa": casa}
 
 
 # ------------------------------------------------------------------- biomas
@@ -364,6 +410,7 @@ func _variants(entries: Array) -> Array[GroundVariant]:
 ## outro — sem essa ordem, as intermediárias não suavizariam nada.
 func _build_biomes(d: Dictionary, s: Dictionary) -> Array[BiomeDefinition]:
 	var deck: Array[StructureDefinition] = [s["deck"]]
+	var deck_e_casa: Array[StructureDefinition] = [s["deck"], s["casa"]]
 	var result: Array[BiomeDefinition] = []
 
 	result.append(_biome(&"campo_claro", "Campo claro", Vector2(0.0, 0.36), Vector2(0.0, 1.0),
@@ -373,7 +420,7 @@ func _build_biomes(d: Dictionary, s: Dictionary) -> Array[BiomeDefinition]:
 
 	result.append(_biome(&"campo", "Campo", Vector2(0.36, 0.68), Vector2(0.0, 0.55),
 		Vector2(0.0, 1.0), &"campo_baixo", &"campo_terra", 0.0, 1.0,
-		[d["ipe"], d["alamo"]] as Array[DecorationDefinition], deck, 1.15,
+		[d["ipe"], d["alamo"]] as Array[DecorationDefinition], deck_e_casa, 1.15,
 		_biome_variants(&"campo")))
 
 	result.append(_biome(&"floresta", "Floresta", Vector2(0.30, 0.68), Vector2(0.55, 1.0),
@@ -638,6 +685,7 @@ func _build_catalog(tile_set: TileSet) -> TileCatalog:
 	catalog.level_max = LEVEL_MAX
 	catalog.resource_name = "GroundCatalog"
 	catalog.face_kind_stride = _face_kind_stride()
+	var directional := _directional_rows()
 	var entries: Array[GroundTileEntry] = []
 	var ground_rows := _ground_rows()
 	for row in ground_rows.size():
@@ -646,7 +694,68 @@ func _build_catalog(tile_set: TileSet) -> TileCatalog:
 		entry.source_id = 0
 		entry.atlas_coords = Vector2i(0, row)
 		entry.alternative_tile = 0
+		entry.directional = directional.has(entry.ground_id)
 		entry.resource_name = String(ground_rows[row])
 		entries.append(entry)
 	catalog.entries = entries
+	var transitions: BiomeTransitionCatalog = _save(
+		_build_transitions(), OUT + "tiles/biome_transitions.tres"
+	)
+	catalog.transitions = transitions
 	return catalog
+
+
+## Ids cuja arte aponta para um lado — as peças de fronteira. Elas não podem ser
+## espelhadas; quem respeita isso é o [ChunkView], lendo esta marca.
+func _directional_rows() -> Dictionary:
+	var result: Dictionary = {}
+	for entry: Dictionary in _atlas().get("rows", []):
+		if String(entry.get("kind", "")) == "transicao_bioma":
+			result[StringName(entry["id"])] = true
+	return result
+
+
+## Bioma -> grupo de fronteira.
+##
+## Vários biomas compartilham a mesma arte de borda: campo, campo claro e campo
+## florido são todos `campo`, então `campo_para_musgo` serve para os três. Um
+## bioma fora deste mapa simplesmente não ganha transição — é assim que
+## floresta↔savana continua no corte seco enquanto não existir arte para ela.
+const TRANSITION_GROUPS := {
+	&"campo": &"campo",
+	&"campo_claro": &"campo",
+	&"campo_florido": &"campo",
+	&"floresta": &"floresta",
+	&"savana": &"savana",
+}
+
+
+## Catálogo de fronteiras: os pares vêm do manifesto do atlas (quem tem arte),
+## os grupos vêm da tabela acima (quem usa qual arte).
+func _build_transitions() -> BiomeTransitionCatalog:
+	var transitions := BiomeTransitionCatalog.new()
+	var grupos: Dictionary[StringName, StringName] = {}
+	for biome_id: StringName in TRANSITION_GROUPS:
+		grupos[biome_id] = TRANSITION_GROUPS[biome_id]
+	transitions.grupos = grupos
+
+	var rules: Array[BiomeTransitionRule] = []
+	var section: Dictionary = _atlas().get("transicoes", {})
+	for entry: Dictionary in section.get("pares", []):
+		var rule := BiomeTransitionRule.new()
+		rule.de_grupo = StringName(entry["de"])
+		rule.para_grupo = StringName(entry["para"])
+		rule.prefixo = StringName(entry["prefixo"])
+		rule.resource_name = String(rule.prefixo)
+		var saved: BiomeTransitionRule = _save(
+			rule, OUT + "tiles/transicoes/%s.tres" % rule.prefixo
+		)
+		rules.append(saved)
+	transitions.rules = rules
+	transitions.enabled = true
+	transitions.resource_name = "BiomeTransitions"
+	if rules.is_empty():
+		push_warning(
+			"Nenhum par de transicao no manifesto. Rode tools/gen_ground_atlas.py."
+		)
+	return transitions

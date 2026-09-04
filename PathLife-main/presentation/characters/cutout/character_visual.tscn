@@ -30,6 +30,8 @@
 [ext_resource type="Shader" uid="uid://cajxmkhkhryo8" path="res://shaders/skin_palette_swap.gdshader" id="28_palette_shader"]
 [ext_resource type="Resource" path="res://data/character_customization/colors/profiles/skin.tres" id="29_skin_profile"]
 [ext_resource type="Resource" path="res://data/character_customization/colors/profiles/hair.tres" id="30_hair_profile"]
+[ext_resource type="Script" uid="uid://b0ol5dkmo5s28" path="res://presentation/characters/cutout/age/character_age_presenter.gd" id="31_age_presenter"]
+[ext_resource type="Resource" path="res://data/character_customization/age/default_age_catalog.tres" id="32_age_catalog"]
 
 [sub_resource type="Animation" id="Animation_ukv25"]
 length = 0.001
@@ -242,7 +244,7 @@ position = Vector2(-0.2, -18.01)
 z_index = 12
 z_as_relative = false
 position = Vector2(-7.28, -13.05)
-rotation = -0.022636998
+rotation = -0.022636997
 scale = Vector2(0.99999946, 0.99999946)
 rest = Transform2D(1, 0, 0, 1, -7.28, -13.05)
 editor_settings/show_bone_gizmo = false
@@ -255,8 +257,8 @@ offset = Vector2(0.37, 6.27)
 z_index = 13
 z_as_relative = false
 position = Vector2(-0.73, 12.73)
-rotation = -0.168651
-scale = Vector2(0.99999917, 0.99999917)
+rotation = -0.16865101
+scale = Vector2(0.9999991, 0.9999991)
 rest = Transform2D(1, 0, 0, 1, -0.73, 12.73)
 editor_settings/show_bone_gizmo = false
 
@@ -300,7 +302,7 @@ offset = Vector2(0.82, 5.8)
 z_as_relative = false
 position = Vector2(1.35, 11.69)
 rotation = -0.17327602
-scale = Vector2(0.9999994, 0.9999994)
+scale = Vector2(0.99999934, 0.99999934)
 rest = Transform2D(1, 0, 0, 1, 1.35, 11.69)
 editor_settings/show_bone_gizmo = false
 
@@ -435,6 +437,12 @@ catalog = ExtResource("27_color_catalog")
 palette_shader = ExtResource("28_palette_shader")
 skin_profile = ExtResource("29_skin_profile")
 hair_profile = ExtResource("30_hair_profile")
+
+[node name="CharacterAgePresenter" type="Node" parent="." unique_id=2146033564 node_paths=PackedStringArray("rig", "animation_player")]
+script = ExtResource("31_age_presenter")
+catalog = ExtResource("32_age_catalog")
+rig = NodePath("../Skeleton2D")
+animation_player = NodePath("../AnimationPlayer")
 
 [node name="AnimationPlayer" type="AnimationPlayer" parent="." unique_id=1842682913]
 libraries/ = SubResource("AnimationLibrary_d2752")

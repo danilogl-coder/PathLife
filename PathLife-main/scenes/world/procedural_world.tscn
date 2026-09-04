@@ -1,4 +1,4 @@
-[gd_scene load_steps=10 format=3]
+[gd_scene load_steps=13 format=3]
 
 [ext_resource type="Script" path="res://scenes/world/procedural_world.gd" id="1_world"]
 [ext_resource type="Script" path="res://world_generation/chunks/chunk_manager.gd" id="2_chunks"]
@@ -9,6 +9,9 @@
 [ext_resource type="Resource" path="res://data/world/world_generator.tres" id="7_generator"]
 [ext_resource type="Resource" path="res://data/world/world_sampler.tres" id="8_sampler"]
 [ext_resource type="Resource" path="res://data/world/tiles/ground_catalog.tres" id="9_catalog"]
+[ext_resource type="Script" path="res://gameplay/vision/vision_system.gd" id="10_vision_system"]
+[ext_resource type="Resource" path="res://data/vision/default_vision_profile.tres" id="11_vision_profile"]
+[ext_resource type="PackedScene" path="res://presentation/world/visibility/vision_overlay.tscn" id="12_vision_overlay"]
 
 [node name="ProceduralWorld" type="Node2D"]
 texture_filter = 1
@@ -35,7 +38,7 @@ z_index = 1
 unique_name_in_owner = true
 script = ExtResource("4_save")
 
-[node name="ChunkManager" type="Node" parent="Systems" groups=["chunk_manager"]]
+[node name="ChunkManager" type="Node" parent="Systems" node_paths=PackedStringArray("save_manager") groups=["chunk_manager"]]
 unique_name_in_owner = true
 script = ExtResource("2_chunks")
 settings = ExtResource("6_settings")
@@ -43,7 +46,17 @@ generator = ExtResource("7_generator")
 sampler = ExtResource("8_sampler")
 catalog = ExtResource("9_catalog")
 chunk_view_scene = ExtResource("5_chunk_view")
+save_manager = NodePath("../SaveManager")
 
 [node name="HeightVisibility" type="Node" parent="Systems"]
 unique_name_in_owner = true
 script = ExtResource("3_visibility")
+
+[node name="VisionSystem" type="Node" parent="Systems"]
+unique_name_in_owner = true
+script = ExtResource("10_vision_system")
+profile = ExtResource("11_vision_profile")
+
+[node name="VisionOverlay" parent="." instance=ExtResource("12_vision_overlay")]
+unique_name_in_owner = true
+profile = ExtResource("11_vision_profile")

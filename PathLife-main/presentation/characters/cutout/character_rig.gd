@@ -1,14 +1,31 @@
 class_name CharacterRig
 extends Skeleton2D
 
+## Raízes de cadeia. Escalar a RAIZ é o que faz roupa, mão, pé, sapato e cabelo
+## acompanharem a idade sem uma linha a mais: todos eles são filhos.
+const OSSO_TRONCO: StringName = &"torso"
+const OSSO_CABECA: StringName = &"cabeca"
+const OSSOS_BRACO: Array[StringName] = [&"braco_sup_e", &"braco_sup_d"]
+const OSSOS_PERNA: Array[StringName] = [&"coxa_e", &"coxa_d"]
+
 @export_enum("masc", "fem") var body_type: String = "masc"
 @export_enum("se", "sw", "ne", "nw") var initial_direction: String = "se"
 @export_dir var assets_root: String = "res://assets/characters/cutout"
+## Y do dedo do pé no espaço do Skeleton2D com o rig em escala 1. Sem ele, o
+## personagem encolhido flutua: a escala puxa o pé para perto da origem.
+## Como medir: selecione ponta_pe_e no editor, na pose de repouso, e leia o Y
+## dele relativo ao Skeleton2D.
+@export_range(-32.0, 32.0, 0.01) var apoio_pes_y: float = 3.34
 
 var _rig_data: Dictionary = {}
 var _pieces: Dictionary = {}
 var _current_direction: StringName = &""
 var color_presenter: CharacterColorPresenter
+var _age: AgeProfile
+var _rig_base_position := Vector2.ZERO
+var _quadril_base := Vector2.ZERO
+var _perna_escalavel: float = 0.0
+var _medidas_prontas: bool = false
 
 
 func get_piece_bone(piece_name: StringName) -> Bone2D:
@@ -32,6 +49,7 @@ func present_skin_color(color_id: StringName) -> void:
 
 
 func _ready() -> void:
+	_rig_base_position = position
 	_cache_piece_nodes()
 	_load_body_data()
 	set_direction(initial_direction)
@@ -65,6 +83,18 @@ func set_direction(direction: StringName) -> void:
 		sprite.offset = _parse_vector2(piece["offset_sprite"])
 		sprite.texture = load("%s/%s" % [assets_root, piece["arquivo"]]) as Texture2D
 
+	_quadril_base = _parse_vector2(pieces_data["quadril"]["posicao"])
+	# A parte da perna que a escala do osso coxa realmente encolhe: joelho,
+	# tornozelo e ponta do pé. O offset quadril->coxa não entra, porque é filho
+	# do quadril e não da coxa.
+	_perna_escalavel = (
+		_parse_vector2(pieces_data["perna_e"]["posicao"]).y
+		+ _parse_vector2(pieces_data["pe_e"]["posicao"]).y
+		+ _parse_vector2(direction_data["pontas"]["ponta_pe_e"]["posicao"]).y
+	)
+	_medidas_prontas = true
+
+	apply_age_shape()
 	_apply_core_layering()
 	_apply_markers(direction_data["pontas"])
 	_current_direction = direction
@@ -82,6 +112,94 @@ func set_body(new_body: String) -> void:
 	_current_direction = &""
 	_load_body_data()
 	set_direction(direction_to_preserve if direction_to_preserve != &"" else StringName(initial_direction))
+
+
+## Troca de idade. Recarrega a arte só quando a pasta muda; o resto é escala.
+func set_age_profile(profile: AgeProfile) -> void:
+	var art_changed := _resolve_art_key(profile) != _resolve_art_key(_age)
+	_age = profile
+	if not art_changed:
+		apply_age_shape()
+		return
+	var direction_to_preserve := _current_direction
+	_current_direction = &""
+	_load_body_data()
+	set_direction(
+		direction_to_preserve if direction_to_preserve != &"" else StringName(initial_direction)
+	)
+
+
+## Só as escalas — sem tocar em JSON nem em textura. Barato o bastante para
+## rodar todo quadro durante a transição de idade.
+func set_age_shape(profile: AgeProfile) -> void:
+	_age = profile
+	apply_age_shape()
+
+
+func get_age_profile() -> AgeProfile:
+	return _age
+
+
+func get_art_key() -> String:
+	return _resolve_art_key(_age)
+
+
+## A proporção da idade, aplicada por escala nas raízes de cadeia. As animações
+## só escrevem `rotation` nos ossos, então `scale` e `position` são nossos.
+func apply_age_shape() -> void:
+	var escala := 1.0
+	var largura := 1.0
+	var tronco := 1.0
+	var pernas := 1.0
+	var bracos := 1.0
+	var cabeca := 1.0
+	if _age != null:
+		escala = _age.escala_global
+		largura = _age.fator_largura
+		tronco = maxf(_age.fator_tronco, 0.01)
+		pernas = _age.fator_pernas
+		bracos = _age.fator_bracos
+		cabeca = _age.escala_cabeca
+
+	# A largura é a única escala não uniforme, e por isso mora na RAIZ: aqui
+	# nenhum osso girado a herdou ainda de um pai já rotacionado.
+	scale = Vector2(escala * largura, escala)
+	# Escalar aproxima o pé da origem. Isto devolve o contato com o chão.
+	position.y = _rig_base_position.y + apoio_pes_y * (1.0 - escala)
+
+	_escalar_osso(OSSO_TRONCO, tronco)
+	# cabeça e ombros são FILHOS do tronco: dividir cancela a herança e deixa
+	# cada fator significar exatamente o que o nome diz.
+	_escalar_osso(OSSO_CABECA, cabeca / tronco)
+	for bone_name: StringName in OSSOS_BRACO:
+		_escalar_osso(bone_name, bracos / tronco)
+	for bone_name: StringName in OSSOS_PERNA:
+		_escalar_osso(bone_name, pernas)
+
+	var quadril := get_piece_bone(&"quadril")
+	if quadril != null and _medidas_prontas:
+		# Encurtar a perna sem descer o quadril deixa o personagem no ar. O
+		# quadril compensa exatamente o que a cadeia da perna perdeu.
+		quadril.position = Vector2(
+			_quadril_base.x,
+			_quadril_base.y + _perna_escalavel * (1.0 - pernas)
+		)
+
+
+func _escalar_osso(bone_name: StringName, factor: float) -> void:
+	var bone := get_piece_bone(bone_name)
+	if bone != null:
+		bone.scale = Vector2(factor, factor)
+
+
+## "bebe" + "masc" -> "bebe_masc" SE a pasta existir; senão "masc". É o fallback
+## que deixa uma idade nascer só com proporção e ganhar arte dedicada depois.
+func _resolve_art_key(profile: AgeProfile) -> String:
+	if profile != null and profile.pasta_arte != &"":
+		var candidate := "%s_%s" % [String(profile.pasta_arte), body_type]
+		if FileAccess.file_exists("%s/%s/rig.json" % [assets_root, candidate]):
+			return candidate
+	return body_type
 
 
 func _cache_piece_nodes() -> void:
@@ -106,7 +224,7 @@ func _collect_bones(node: Node) -> void:
 
 
 func _load_body_data() -> void:
-	var json_path := "%s/%s/rig.json" % [assets_root, body_type]
+	var json_path := "%s/%s/rig.json" % [assets_root, _resolve_art_key(_age)]
 	if not FileAccess.file_exists(json_path):
 		push_error("rig.json não encontrado: %s" % json_path)
 		return

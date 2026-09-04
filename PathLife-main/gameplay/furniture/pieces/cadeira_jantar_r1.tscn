@@ -1,0 +1,38 @@
+[gd_scene format=3]
+
+[ext_resource type="Script" path="res://gameplay/furniture/furniture_piece.gd" id="1_nafb0"]
+[ext_resource type="Resource" path="res://data/furniture/pieces/cadeira_jantar.tres" id="2_definition"]
+[ext_resource type="PackedScene" path="res://presentation/furniture/furniture_visual.tscn" id="3_qwibj"]
+[ext_resource type="Texture2D" path="res://assets/furniture/kitchen/dining_chair/dining_chair_r1.png" id="4_qwibj"]
+
+[node name="CadeiraJantarR1" type="StaticBody2D" unique_id=1331330455 node_paths=PackedStringArray("sprite", "solid_collision", "interaction_area", "interaction_shape")]
+collision_layer = 8
+collision_mask = 2
+script = ExtResource("1_nafb0")
+definition = ExtResource("2_definition")
+orientation = 1
+sprite = NodePath("Visual/Sprite")
+solid_collision = NodePath("SolidCollision")
+interaction_area = NodePath("InteractionArea")
+interaction_shape = NodePath("InteractionArea/InteractionShape")
+draw_gizmo = false
+
+[node name="Visual" parent="." unique_id=2023882335 instance=ExtResource("3_qwibj")]
+texture_filter = 1
+
+[node name="Sprite" parent="Visual" index="0"]
+position = Vector2(0, -48)
+texture = ExtResource("4_qwibj")
+
+[node name="SolidCollision" type="CollisionPolygon2D" parent="." unique_id=1622530829]
+polygon = PackedVector2Array(-1, 11, 26, 0, 0, -12, -27, 0)
+
+[node name="InteractionArea" type="Area2D" parent="." unique_id=94922878]
+collision_layer = 4
+collision_mask = 2
+monitorable = false
+
+[node name="InteractionShape" type="CollisionPolygon2D" parent="InteractionArea" unique_id=786290093]
+polygon = PackedVector2Array(0, -64, 128, 0, 0, 64, -128, 0)
+
+[editable path="Visual"]

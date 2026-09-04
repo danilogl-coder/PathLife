@@ -1,0 +1,38 @@
+[gd_scene format=3]
+
+[ext_resource type="Script" path="res://gameplay/furniture/furniture_piece.gd" id="1_66xim"]
+[ext_resource type="Resource" path="res://data/furniture/pieces/espelho.tres" id="2_definition"]
+[ext_resource type="PackedScene" path="res://presentation/furniture/furniture_visual.tscn" id="3_xid84"]
+[ext_resource type="Texture2D" path="res://assets/furniture/bathroom/mirror/mirror_r0.png" id="4_xid84"]
+
+[node name="EspelhoR0" type="StaticBody2D" unique_id=2100746549 node_paths=PackedStringArray("sprite", "solid_collision", "interaction_area", "interaction_shape")]
+collision_layer = 8
+collision_mask = 2
+script = ExtResource("1_66xim")
+definition = ExtResource("2_definition")
+sprite = NodePath("Visual/Sprite")
+solid_collision = NodePath("SolidCollision")
+interaction_area = NodePath("InteractionArea")
+interaction_shape = NodePath("InteractionArea/InteractionShape")
+draw_gizmo = false
+
+[node name="Visual" parent="." unique_id=499401646 instance=ExtResource("3_xid84")]
+texture_filter = 1
+
+[node name="Sprite" parent="Visual" index="0"]
+position = Vector2(1, -11)
+texture = ExtResource("4_xid84")
+
+[node name="SolidCollision" type="CollisionPolygon2D" parent="." unique_id=721934741]
+polygon = PackedVector2Array(16, 10, 22, 7, -16, -12, -22, -9)
+disabled = true
+
+[node name="InteractionArea" type="Area2D" parent="." unique_id=361606595]
+collision_layer = 4
+collision_mask = 2
+monitorable = false
+
+[node name="InteractionShape" type="CollisionPolygon2D" parent="InteractionArea" unique_id=135675399]
+polygon = PackedVector2Array(0, -64, 128, 0, 0, 64, -128, 0)
+
+[editable path="Visual"]

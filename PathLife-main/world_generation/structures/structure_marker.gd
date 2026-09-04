@@ -13,6 +13,7 @@ enum MarkerType {
 	DELIVERY,
 	INTERACTION,
 	CUSTOM,
+	PLAYER_SPAWN,
 }
 
 @export var marker_type: MarkerType = MarkerType.ENTRANCE:

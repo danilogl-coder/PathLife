@@ -1,0 +1,90 @@
+[gd_scene format=4 uid="uid://dpab5yf08eo1x"]
+
+[ext_resource type="Script" uid="uid://oqd3jjf5p7ls" path="res://world_generation/structures/structure_root.gd" id="1_2uqyi"]
+[ext_resource type="TileSet" uid="uid://2moaq6ru4dj0" path="res://data/world/structures/casa_madeira_tileset.tres" id="2_n30vi"]
+[ext_resource type="Script" uid="uid://b6j88f2n5ujp3" path="res://world_generation/structures/structure_marker.gd" id="3_lv88e"]
+
+[node name="CasaMadeiraTileMap" type="Node2D" unique_id=880563301]
+editor_description = "Cena-base editável. Pinte piso, paredes e portas selecionando cada TileMapLayer."
+y_sort_enabled = true
+script = ExtResource("1_2uqyi")
+footprint_preview = Vector2i(7, 8)
+draw_footprint_gizmo = false
+
+[node name="Piso" type="TileMapLayer" parent="." unique_id=1021727469]
+editor_description = "Use a fonte Pisos do TileSet para pintar o chão."
+y_sort_enabled = true
+texture_filter = 1
+position = Vector2(-64, -32)
+tile_map_data = PackedByteArray("AAAAAAAAAAAAAAAAAAABAAAAAAAAAAAAAAACAAAAAAAAAAAAAAADAAAAAAAAAAAAAAAAAAEAAAAAAAAAAAABAAEAAAAAAAAAAAACAAEAAAAAAAAAAAADAAEAAAAAAAAAAAAAAAIAAAAAAAAAAAABAAIAAAAAAAAAAAACAAIAAAAAAAAAAAADAAIAAAAAAAAAAAAAAAMAAAAAAAAAAAABAAMAAAAAAAAAAAACAAMAAAAAAAAAAAADAAMAAAAAAAAAAAAEAAMAAAABAAAAAAAEAAIAAAABAAAAAAAEAAEAAAABAAAAAAAFAAEAAAABAAAAAAAFAAIAAAABAAAAAAAFAAMAAAABAAAAAAAGAAMAAAABAAAAAAAGAAIAAAABAAAAAAAGAAEAAAABAAAAAAAEAAAAAAABAAAAAAAFAAAAAAABAAAAAAAGAAAAAAABAAAAAAAAAAQAAAADAAAAAAABAAQAAAADAAAAAAACAAQAAAADAAAAAAADAAQAAAADAAAAAAAAAAUAAAADAAAAAAABAAUAAAADAAAAAAACAAUAAAADAAAAAAADAAUAAAADAAAAAAAAAAYAAAADAAAAAAABAAYAAAADAAAAAAACAAYAAAADAAAAAAADAAYAAAADAAAAAAAAAAcAAAADAAAAAAABAAcAAAADAAAAAAACAAcAAAADAAAAAAADAAcAAAADAAAAAAAEAAcAAAACAAAAAAAEAAYAAAACAAAAAAAEAAUAAAACAAAAAAAFAAUAAAACAAAAAAAFAAYAAAACAAAAAAAFAAcAAAACAAAAAAAGAAcAAAACAAAAAAAGAAYAAAACAAAAAAAGAAUAAAACAAAAAAAEAAQAAAABAAAAAAAFAAQAAAABAAAAAAAGAAQAAAABAAAAAAA=")
+tile_set = ExtResource("2_n30vi")
+collision_enabled = false
+navigation_enabled = false
+
+[node name="Paredes" type="TileMapLayer" parent="." unique_id=776760747]
+editor_description = "Paredes e portas: a colisão já vem do TileSet."
+y_sort_enabled = true
+texture_filter = 1
+position = Vector2(-64, -32)
+tile_map_data = PackedByteArray("AAAAAAEADAABAAEAAAAAAAIAGgABAAEAAAAAAAMADAABAAEAAAACAAQADQAAAAEAAAADAAQADQAAAAEAAAAAAAAADAAIAAEAAAACAAAAGgAAAAEAAAAEAAMACwABAAEAAAAEAAEACwABAAEAAAAAAAQADQAEAAEAAAAHAAMACwABAAEAAAAHAAIAGQABAAEAAAAHAAEACwABAAEAAAADAAAADAAAAAEAAAAHAAAACwABAAEAAAAAAAUADQABAAEAAAAAAAYADQABAAEAAAACAAgADQAAAAEAAAADAAgAGwAAAAEAAAAEAAcADQABAAEAAAAEAAUADQAEAAEAAAAEAAgADQAAAAEAAAAFAAgADQAAAAEAAAAGAAgADQAAAAEAAAAHAAcADQABAAEAAAAHAAYAGwABAAEAAAAHAAUADQABAAEAAAAHAAQACwABAAEAAAAGAAAACwAAAAEAAAAFAAAAGQAAAAEAAAAEAAAACwAEAAEAAAAEAAIACwABAAEAAAABAAAADAAAAAEAAAAGAAUADQAAAAEAAAAFAAUADQAAAAEAAAABAAgAFwABAAEAAAABAAQAFwABAAEAAAAEAAQAFQAEAAEAAAAEAAYAFwAEAAEAAAAAAAgADQAAAAEAAAAAAAcADQABAAEAAAA=")
+tile_set = ExtResource("2_n30vi")
+navigation_enabled = false
+
+[node name="ParedesSemColisao" type="TileMapLayer" parent="." unique_id=1765962751]
+editor_description = "Use para fantasmas, prévias ou paredes que não devem bloquear o Player."
+y_sort_enabled = true
+texture_filter = 1
+position = Vector2(-64, -32)
+tile_set = ExtResource("2_n30vi")
+collision_enabled = false
+navigation_enabled = false
+
+[node name="Mobilia" type="TileMapLayer" parent="." unique_id=13693201]
+editor_description = "Pinte aqui os móveis da fonte Mobilia. A célula pintada é a da FRENTE do móvel; o footprint cresce para trás."
+y_sort_enabled = true
+texture_filter = 1
+position = Vector2(-64, -32)
+tile_map_data = PackedByteArray("AAAAAAEAKAAAAAAAAAAEAAAAKAAAAAAAGAAFAAAAKAAAAAAAHAAEAAIAKAAAAAAAIAAEAAMAKAAAAAAAFgAEAAEAKAAAAAAAFAAGAAAAKAAAAAAAJAABAAAAKAAAAAAAKAACAAAAKAAAAAAANAA=")
+tile_set = ExtResource("2_n30vi")
+collision_enabled = false
+navigation_enabled = false
+
+[node name="SpawnPlayer" type="TileMapLayer" parent="." unique_id=418259827]
+editor_description = "Pinte uma célula da fonte Marcadores_Spawn_Player para definir onde o Player inicia."
+z_index = 100
+texture_filter = 1
+position = Vector2(-64, -32)
+tile_map_data = PackedByteArray("AAABAAkAKQAAAAAAAAA=")
+tile_set = ExtResource("2_n30vi")
+collision_enabled = false
+navigation_enabled = false
+
+[node name="Telhado" type="TileMapLayer" parent="." unique_id=730885574]
+editor_description = "Pinte aqui usando a fonte Telhados. Em jogo, cobre a casa por fora e some quando o Player entra."
+visible = false
+z_index = 10
+texture_filter = 1
+position = Vector2(-64, -32)
+tile_map_data = PackedByteArray("AAADAAMAHwAAAAAAAAA=")
+tile_set = ExtResource("2_n30vi")
+collision_enabled = false
+navigation_enabled = false
+
+[node name="Marcadores" type="Node2D" parent="." unique_id=980746791]
+
+[node name="EntranceMarker" type="Marker2D" parent="Marcadores" unique_id=1116933946]
+position = Vector2(-448, 288)
+script = ExtResource("3_lv88e")
+cell_offset = Vector2i(1, 8)
+
+[node name="RoadMarker" type="Marker2D" parent="Marcadores" unique_id=1512874005]
+position = Vector2(-448, 352)
+script = ExtResource("3_lv88e")
+marker_type = 1
+cell_offset = Vector2i(2, 9)
+
+[node name="NPCSpawnMarker" type="Marker2D" parent="Marcadores" unique_id=1714426664]
+position = Vector2(-256, 192)
+script = ExtResource("3_lv88e")
+marker_type = 2
+cell_offset = Vector2i(1, 5)

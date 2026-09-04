@@ -1,0 +1,37 @@
+[gd_scene format=3]
+
+[ext_resource type="Script" path="res://gameplay/furniture/furniture_piece.gd" id="1_dya2u"]
+[ext_resource type="Resource" path="res://data/furniture/pieces/fogao.tres" id="2_definition"]
+[ext_resource type="PackedScene" path="res://presentation/furniture/furniture_visual.tscn" id="3_h5kk4"]
+[ext_resource type="Texture2D" path="res://assets/furniture/kitchen/stove/stove_r0.png" id="4_h5kk4"]
+
+[node name="FogaoR0" type="StaticBody2D" unique_id=1467362699 node_paths=PackedStringArray("sprite", "solid_collision", "interaction_area", "interaction_shape")]
+collision_layer = 8
+collision_mask = 2
+script = ExtResource("1_dya2u")
+definition = ExtResource("2_definition")
+sprite = NodePath("Visual/Sprite")
+solid_collision = NodePath("SolidCollision")
+interaction_area = NodePath("InteractionArea")
+interaction_shape = NodePath("InteractionArea/InteractionShape")
+draw_gizmo = false
+
+[node name="Visual" parent="." unique_id=794381980 instance=ExtResource("3_h5kk4")]
+texture_filter = 1
+
+[node name="Sprite" parent="Visual" index="0"]
+position = Vector2(0, -48)
+texture = ExtResource("4_h5kk4")
+
+[node name="SolidCollision" type="CollisionPolygon2D" parent="." unique_id=2099775088]
+polygon = PackedVector2Array(0, 19, 43, 0, -1, -20, -44, -1)
+
+[node name="InteractionArea" type="Area2D" parent="." unique_id=630670064]
+collision_layer = 4
+collision_mask = 2
+monitorable = false
+
+[node name="InteractionShape" type="CollisionPolygon2D" parent="InteractionArea" unique_id=1268015117]
+polygon = PackedVector2Array(0, -64, 128, 0, 0, 64, -128, 0)
+
+[editable path="Visual"]

@@ -1,0 +1,9 @@
+[gd_resource type="Resource" script_class="BiomeTransitionRule" format=3]
+
+[ext_resource type="Script" path="res://world_generation/rendering/biome_transition_rule.gd" id="1_vluxt"]
+
+[resource]
+resource_name = "campo_para_savana"
+script = ExtResource("1_vluxt")
+para_grupo = &"savana"
+prefixo = &"campo_para_savana"

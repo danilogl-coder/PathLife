@@ -33,10 +33,14 @@ func run(context: GenerationContext) -> void:
 			if terrain == null:
 				continue
 			cell.terrain_id = terrain.id
-			if terrain.ground_override_id != &"":
-				cell.ground_id = terrain.ground_override_id
-			elif terrain.expose_biome_wall and cell.wall_id != &"":
-				cell.ground_id = cell.wall_id
+			# Célula trancada por uma construção mantém o chão que ela assentou:
+			# devolver a arte do relevo aqui traria a grama de volta para debaixo
+			# do piso.
+			if not cell.ground_locked:
+				if terrain.ground_override_id != &"":
+					cell.ground_id = terrain.ground_override_id
+				elif terrain.expose_biome_wall and cell.wall_id != &"":
+					cell.ground_id = cell.wall_id
 			if not terrain.walkable:
 				cell.walkable = false
 

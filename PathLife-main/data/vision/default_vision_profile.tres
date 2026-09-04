@@ -1,0 +1,26 @@
+[gd_resource type="Resource" script_class="VisionProfile" load_steps=2 format=3]
+
+[ext_resource type="Script" path="res://gameplay/vision/vision_profile.gd" id="1_profile"]
+
+[resource]
+script = ExtResource("1_profile")
+enabled = true
+maximum_range_cells = 18
+front_cone_degrees = 155.0
+peripheral_range_cells = 2
+window_reveal_depth_cells = 5
+door_reveal_depth_cells = 8
+maximum_portal_hops = 1
+closed_window_transmission = 0.0
+open_window_transmission = 1.0
+sealed_structure_blocks_memory = true
+mask_resolution_scale = 0.5
+visual_reveal_height_px = 192
+edge_softness_px = 3.0
+transition_seconds = 0.15
+look_mouse_deadzone_px = 24.0
+look_stick_deadzone = 0.35
+unknown_opacity = 1.0
+remembered_opacity = 0.82
+forced_hidden_opacity = 1.0
+roof_revealed_alpha = 0.0

@@ -11,6 +11,8 @@ const OUTPUT := "user://world_roaming_contact_sheet.png"
 
 var _captures: Array[Image] = []
 var _positions: Array[Vector3i] = []
+var _total_steps := TOTAL_STEPS
+var _capture_interval := CAPTURE_INTERVAL
 
 
 func _init() -> void:
@@ -18,6 +20,11 @@ func _init() -> void:
 
 
 func _run() -> void:
+	for argument in OS.get_cmdline_user_args():
+		if argument.begins_with("--steps="):
+			_total_steps = maxi(4, int(argument.trim_prefix("--steps=")))
+		elif argument.begins_with("--capture-interval="):
+			_capture_interval = maxi(1, int(argument.trim_prefix("--capture-interval=")))
 	var scene: Node = load("res://scenes/main/main.tscn").instantiate()
 	root.add_child(scene)
 	var interface := scene.get_node_or_null(^"Interface") as CanvasLayer
@@ -44,8 +51,10 @@ func _run() -> void:
 	_capture(agent)
 	var visits: Dictionary = {agent.cell(): 1}
 	var completed := 0
-	for step in TOTAL_STEPS:
-		var direction := _pick_direction(agent, world.world_data(), visits, step)
+	for step in _total_steps:
+		var direction := _pick_direction(
+			agent, world.world_data(), visits, step, maxi(1, _total_steps / 4)
+		)
 		if direction == Vector2i.ZERO:
 			printerr("ROAM FAIL: sem vizinho válido em ", agent.world_position())
 			quit(1)
@@ -65,7 +74,7 @@ func _run() -> void:
 			return
 		completed += 1
 		visits[agent.cell()] = int(visits.get(agent.cell(), 0)) + 1
-		if completed % CAPTURE_INTERVAL == 0:
+		if completed % _capture_interval == 0:
 			for frame in 3:
 				await process_frame
 			_capture(agent)
@@ -127,11 +136,12 @@ func _pick_direction(
 	agent: WorldGridAgent,
 	world: WorldData,
 	visits: Dictionary,
-	step: int
+	step: int,
+	phase_length: int
 ) -> Vector2i:
 	# Quatro fases empurram o percurso para leste, sul, oeste e norte. Dentro
 	# de cada fase, a célula menos visitada ganha para evitar ficar oscilando.
-	var phase := (step / 128) % 4
+	var phase := (step / phase_length) % 4
 	var priorities: Array[Vector2i] = [
 		Vector2i(1, 0), Vector2i(0, 1), Vector2i(-1, 0), Vector2i(0, -1)
 	]

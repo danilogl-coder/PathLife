@@ -1,0 +1,38 @@
+[gd_scene format=3]
+
+[ext_resource type="Script" path="res://gameplay/furniture/furniture_piece.gd" id="1_obv7q"]
+[ext_resource type="Resource" path="res://data/furniture/pieces/armario.tres" id="2_definition"]
+[ext_resource type="PackedScene" path="res://presentation/furniture/furniture_visual.tscn" id="3_cdyfw"]
+[ext_resource type="Texture2D" path="res://assets/furniture/bedroom/wardrobe/wardrobe_r3.png" id="4_cdyfw"]
+
+[node name="ArmarioR3" type="StaticBody2D" unique_id=233318401 node_paths=PackedStringArray("sprite", "solid_collision", "interaction_area", "interaction_shape")]
+collision_layer = 8
+collision_mask = 2
+script = ExtResource("1_obv7q")
+definition = ExtResource("2_definition")
+orientation = 3
+sprite = NodePath("Visual/Sprite")
+solid_collision = NodePath("SolidCollision")
+interaction_area = NodePath("InteractionArea")
+interaction_shape = NodePath("InteractionArea/InteractionShape")
+draw_gizmo = false
+
+[node name="Visual" parent="." unique_id=1275678819 instance=ExtResource("3_cdyfw")]
+texture_filter = 1
+
+[node name="Sprite" parent="Visual" index="0"]
+position = Vector2(0, -48)
+texture = ExtResource("4_cdyfw")
+
+[node name="SolidCollision" type="CollisionPolygon2D" parent="." unique_id=53343087]
+polygon = PackedVector2Array(-13, 21, 45, -7, 12, -22, -46, 6)
+
+[node name="InteractionArea" type="Area2D" parent="." unique_id=1501371960]
+collision_layer = 4
+collision_mask = 2
+monitorable = false
+
+[node name="InteractionShape" type="CollisionPolygon2D" parent="InteractionArea" unique_id=404277664]
+polygon = PackedVector2Array(0, -64, 128, 0, 0, 64, -128, 0)
+
+[editable path="Visual"]

@@ -88,6 +88,28 @@ BIOMES = [
 ]
 
 
+# As 12 peças de fronteira de cada par, na ordem em que o
+# `BiomeTransitionCatalog` as nomeia. `aresta_<lado>` = um vizinho do outro
+# bioma; `uniao_<canto>` = os dois vizinhos que se encontram naquele canto;
+# `ponta_<canto>` = só a diagonal.
+FORMAS_TRANSICAO = [
+    'aresta_tras_esq', 'aresta_tras_dir', 'aresta_frente_dir', 'aresta_frente_esq',
+    'uniao_tras', 'uniao_dir', 'uniao_frente', 'uniao_esq',
+    'ponta_tras', 'ponta_dir', 'ponta_frente', 'ponta_esq',
+]
+
+# (pasta da arte, grupo de ORIGEM, grupo de DESTINO). Uma fronteira nova é uma
+# linha aqui mais a pasta com as 12 peças — nenhum código muda.
+# Quem diz que bioma pertence a que grupo é o `BiomeTransitionCatalog`, montado
+# por `build_world_resources.gd`.
+TRANSICOES = [
+    ('campo_para_musgo',  'campo',  'floresta'),
+    ('campo_para_savana', 'campo',  'savana'),
+    ('campo_para_terra',  'campo',  'terra'),
+    ('savana_para_terra', 'savana', 'terra'),
+]
+
+
 def load_frames(folder):
     return [Image.open(folder + 'frame_%d.png' % i).convert('RGBA') for i in (1, 2, 3)]
 
@@ -622,6 +644,33 @@ for biome_id, variants in BIOMES:
         'variants': variant_entries,
     })
 
+# ------------------------------------------------- transições entre biomas
+# As 12 peças de cada par são ARTE PRONTA, com os mesmos 3 quadros e o mesmo
+# canvas 128x106 das demais. Entram no atlas sem passar por mistura nenhuma:
+# quem desenhou a borda foi o artista, não o script. Elas vêm DEPOIS das
+# variantes e ANTES dos blocos de terra porque tudo que anima precisa ocupar
+# linhas contíguas no começo do atlas (é o que `animated_rows` significa).
+for prefixo, de_grupo, para_grupo in TRANSICOES:
+    for forma in FORMAS_TRANSICAO:
+        caminho = '%sTile Transicao de Bioma/%s/spritesheets/%s_sheet.png' % (
+            SRC, prefixo, forma)
+        if not os.path.exists(caminho):
+            print('  AUSENTE %s' % caminho)
+            continue
+        sheet = Image.open(caminho).convert('RGBA')
+        if sheet.size != (W * 3, H):
+            print('  TAMANHO INESPERADO %s: %s' % (caminho, sheet.size))
+            continue
+        frames = [sheet.crop((i * W, 0, (i + 1) * W, H)) for i in range(3)]
+        tile_id = '%s_%s' % (prefixo, forma)
+        manifest_rows.append({
+            'id': tile_id, 'row': len(rows), 'animated': True,
+            'biome': de_grupo, 'kind': 'transicao_bioma',
+            'par': prefixo, 'forma': forma,
+        })
+        rows.append((tile_id, frames, True))
+    print('  transicao %-18s %s -> %s' % (prefixo, de_grupo, para_grupo))
+
 ANIMATED_ROWS = len(rows)
 
 for biome_id, variants in BIOMES:
@@ -710,6 +759,12 @@ manifest = {
     'animated_rows': ANIMATED_ROWS,
     'rows': manifest_rows,
     'biomes': manifest_biomes,
+    'transicoes': {
+        'formas': FORMAS_TRANSICAO,
+        'pares': [
+            {'prefixo': p, 'de': d, 'para': a} for p, d, a in TRANSICOES
+        ],
+    },
 }
 with open('assets/world/tiles/ground_atlas.json', 'w', encoding='utf-8') as handle:
     json.dump(manifest, handle, ensure_ascii=False, indent=1)

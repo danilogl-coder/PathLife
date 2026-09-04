@@ -1,4 +1,4 @@
-## Save incremental: semente + diferenças + objetos removidos.
+## Save incremental: semente + diferenças + objetos removidos + percepção.
 class_name WorldSaveManager
 extends Node
 
@@ -8,6 +8,9 @@ extends Node
 var _seed: int = 0
 var _patches: Dictionary = {}          ## Vector2i -> CellPatch
 var _removed_objects: Dictionary = {}  ## int (object_id) -> true
+var _portal_states: Dictionary = {}    ## String (id estável) -> bool
+var _seen_chunks: Dictionary = {}      ## String (chunk_x:chunk_y:z) -> PackedByteArray
+var _loaded := false
 
 
 func has_save() -> bool:
@@ -37,6 +40,42 @@ func is_object_removed(object_id: int) -> bool:
 	return _removed_objects.has(object_id)
 
 
+## Guarda somente a diferença de runtime de uma abertura estrutural. O id é
+## determinístico (placement + célula + direção + tipo), portanto sobrevive ao
+## unload/reload de chunks e não depende de instance_id.
+func set_portal_state(portal_id: StringName, is_open: bool) -> void:
+	_load()
+	_portal_states[String(portal_id)] = is_open
+
+
+func has_portal_state(portal_id: StringName) -> bool:
+	_load()
+	return _portal_states.has(String(portal_id))
+
+
+func portal_state(portal_id: StringName, fallback: bool = false) -> bool:
+	_load()
+	return bool(_portal_states.get(String(portal_id), fallback))
+
+
+## A memória visual é compactada pelo VisionSystem em um bit por célula. O save
+## conhece apenas blocos opacos de bytes, sem depender do algoritmo de visão.
+func set_seen_chunk(chunk_key: StringName, bits: PackedByteArray) -> void:
+	_load()
+	if bits.is_empty():
+		_seen_chunks.erase(String(chunk_key))
+		return
+	_seen_chunks[String(chunk_key)] = bits.duplicate()
+
+
+func seen_chunks() -> Dictionary:
+	_load()
+	var copy: Dictionary = {}
+	for key: String in _seen_chunks:
+		copy[key] = (_seen_chunks[key] as PackedByteArray).duplicate()
+	return copy
+
+
 ## Aplica as diferenças sobre um chunk recém-gerado.
 func apply_patches(chunk: ChunkData) -> void:
 	if _patches.is_empty() and _removed_objects.is_empty():
@@ -50,6 +89,9 @@ func apply_patches(chunk: ChunkData) -> void:
 			cell.height = patch.height_override
 		if patch.ground_override != &"":
 			cell.ground_id = patch.ground_override
+			# O jogador escolheu este chão: nem relevo nem fronteira de bioma
+			# podem trocá-lo quando o chunk for gerado de novo.
+			cell.ground_locked = true
 		if patch.walkable_override >= 0:
 			cell.walkable = patch.walkable_override == 1
 	if not _removed_objects.is_empty():
@@ -64,11 +106,16 @@ func save() -> Error:
 	var patch_list: Array = []
 	for patch: CellPatch in _patches.values():
 		patch_list.append(patch.to_dictionary())
+	var encoded_seen: Dictionary = {}
+	for key: String in _seen_chunks:
+		encoded_seen[key] = Marshalls.raw_to_base64(_seen_chunks[key] as PackedByteArray)
 	var payload := {
-		"version": 1,
+		"version": 2,
 		"seed": _seed,
 		"patches": patch_list,
 		"removed_objects": _removed_objects.keys(),
+		"portal_states": _portal_states,
+		"seen_chunks": encoded_seen,
 	}
 	var file := FileAccess.open(save_path, FileAccess.WRITE)
 	if file == null:
@@ -79,6 +126,9 @@ func save() -> Error:
 
 
 func _load() -> void:
+	if _loaded:
+		return
+	_loaded = true
 	if not has_save():
 		return
 	var file := FileAccess.open(save_path, FileAccess.READ)
@@ -98,6 +148,18 @@ func _load() -> void:
 	_removed_objects.clear()
 	for object_id: Variant in data.get("removed_objects", []):
 		_removed_objects[int(object_id)] = true
+	_portal_states.clear()
+	var saved_portals: Variant = data.get("portal_states", {})
+	if typeof(saved_portals) == TYPE_DICTIONARY:
+		for portal_id: Variant in saved_portals:
+			_portal_states[String(portal_id)] = bool(saved_portals[portal_id])
+	_seen_chunks.clear()
+	var saved_seen: Variant = data.get("seen_chunks", {})
+	if typeof(saved_seen) == TYPE_DICTIONARY:
+		for chunk_key: Variant in saved_seen:
+			var encoded := String(saved_seen[chunk_key])
+			if encoded != "":
+				_seen_chunks[String(chunk_key)] = Marshalls.base64_to_raw(encoded)
 
 
 func _notification(what: int) -> void:

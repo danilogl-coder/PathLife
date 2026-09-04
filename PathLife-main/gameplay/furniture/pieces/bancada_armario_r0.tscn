@@ -1,0 +1,37 @@
+[gd_scene format=3]
+
+[ext_resource type="Script" path="res://gameplay/furniture/furniture_piece.gd" id="1_a5ne4"]
+[ext_resource type="Resource" path="res://data/furniture/pieces/bancada_armario.tres" id="2_definition"]
+[ext_resource type="PackedScene" path="res://presentation/furniture/furniture_visual.tscn" id="3_3evjy"]
+[ext_resource type="Texture2D" path="res://assets/furniture/kitchen/counter_cabinet/counter_cabinet_r0.png" id="4_3evjy"]
+
+[node name="BancadaArmarioR0" type="StaticBody2D" unique_id=126109879 node_paths=PackedStringArray("sprite", "solid_collision", "interaction_area", "interaction_shape")]
+collision_layer = 8
+collision_mask = 2
+script = ExtResource("1_a5ne4")
+definition = ExtResource("2_definition")
+sprite = NodePath("Visual/Sprite")
+solid_collision = NodePath("SolidCollision")
+interaction_area = NodePath("InteractionArea")
+interaction_shape = NodePath("InteractionArea/InteractionShape")
+draw_gizmo = false
+
+[node name="Visual" parent="." unique_id=147227621 instance=ExtResource("3_3evjy")]
+texture_filter = 1
+
+[node name="Sprite" parent="Visual" index="0"]
+position = Vector2(0, -48)
+texture = ExtResource("4_3evjy")
+
+[node name="SolidCollision" type="CollisionPolygon2D" parent="." unique_id=1210878547]
+polygon = PackedVector2Array(0, 18, 41, 0, -1, -19, -42, -1)
+
+[node name="InteractionArea" type="Area2D" parent="." unique_id=36563162]
+collision_layer = 4
+collision_mask = 2
+monitorable = false
+
+[node name="InteractionShape" type="CollisionPolygon2D" parent="InteractionArea" unique_id=642060901]
+polygon = PackedVector2Array(0, -64, 128, 0, 0, 64, -128, 0)
+
+[editable path="Visual"]

@@ -3,6 +3,7 @@
 [resource]
 script = ExtResource("1")
 body_type = "masc"
+age = &"adulto"
 top = &"camisa"
 bottom = &"calca"
 footwear = &"sapato"

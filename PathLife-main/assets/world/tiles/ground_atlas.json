@@ -13,7 +13,7 @@
   "face": "res://assets/world/tiles/depth_face_atlas.png",
   "face_kind_stride": 3
  },
- "animated_rows": 44,
+ "animated_rows": 92,
  "rows": [
   {
    "id": "campo_mato_denso",
@@ -324,36 +324,468 @@
    "kind": "arte"
   },
   {
-   "id": "campo_terra",
+   "id": "campo_para_musgo_aresta_tras_esq",
    "row": 44,
+   "animated": true,
+   "biome": "campo",
+   "kind": "transicao_bioma",
+   "par": "campo_para_musgo",
+   "forma": "aresta_tras_esq"
+  },
+  {
+   "id": "campo_para_musgo_aresta_tras_dir",
+   "row": 45,
+   "animated": true,
+   "biome": "campo",
+   "kind": "transicao_bioma",
+   "par": "campo_para_musgo",
+   "forma": "aresta_tras_dir"
+  },
+  {
+   "id": "campo_para_musgo_aresta_frente_dir",
+   "row": 46,
+   "animated": true,
+   "biome": "campo",
+   "kind": "transicao_bioma",
+   "par": "campo_para_musgo",
+   "forma": "aresta_frente_dir"
+  },
+  {
+   "id": "campo_para_musgo_aresta_frente_esq",
+   "row": 47,
+   "animated": true,
+   "biome": "campo",
+   "kind": "transicao_bioma",
+   "par": "campo_para_musgo",
+   "forma": "aresta_frente_esq"
+  },
+  {
+   "id": "campo_para_musgo_uniao_tras",
+   "row": 48,
+   "animated": true,
+   "biome": "campo",
+   "kind": "transicao_bioma",
+   "par": "campo_para_musgo",
+   "forma": "uniao_tras"
+  },
+  {
+   "id": "campo_para_musgo_uniao_dir",
+   "row": 49,
+   "animated": true,
+   "biome": "campo",
+   "kind": "transicao_bioma",
+   "par": "campo_para_musgo",
+   "forma": "uniao_dir"
+  },
+  {
+   "id": "campo_para_musgo_uniao_frente",
+   "row": 50,
+   "animated": true,
+   "biome": "campo",
+   "kind": "transicao_bioma",
+   "par": "campo_para_musgo",
+   "forma": "uniao_frente"
+  },
+  {
+   "id": "campo_para_musgo_uniao_esq",
+   "row": 51,
+   "animated": true,
+   "biome": "campo",
+   "kind": "transicao_bioma",
+   "par": "campo_para_musgo",
+   "forma": "uniao_esq"
+  },
+  {
+   "id": "campo_para_musgo_ponta_tras",
+   "row": 52,
+   "animated": true,
+   "biome": "campo",
+   "kind": "transicao_bioma",
+   "par": "campo_para_musgo",
+   "forma": "ponta_tras"
+  },
+  {
+   "id": "campo_para_musgo_ponta_dir",
+   "row": 53,
+   "animated": true,
+   "biome": "campo",
+   "kind": "transicao_bioma",
+   "par": "campo_para_musgo",
+   "forma": "ponta_dir"
+  },
+  {
+   "id": "campo_para_musgo_ponta_frente",
+   "row": 54,
+   "animated": true,
+   "biome": "campo",
+   "kind": "transicao_bioma",
+   "par": "campo_para_musgo",
+   "forma": "ponta_frente"
+  },
+  {
+   "id": "campo_para_musgo_ponta_esq",
+   "row": 55,
+   "animated": true,
+   "biome": "campo",
+   "kind": "transicao_bioma",
+   "par": "campo_para_musgo",
+   "forma": "ponta_esq"
+  },
+  {
+   "id": "campo_para_savana_aresta_tras_esq",
+   "row": 56,
+   "animated": true,
+   "biome": "campo",
+   "kind": "transicao_bioma",
+   "par": "campo_para_savana",
+   "forma": "aresta_tras_esq"
+  },
+  {
+   "id": "campo_para_savana_aresta_tras_dir",
+   "row": 57,
+   "animated": true,
+   "biome": "campo",
+   "kind": "transicao_bioma",
+   "par": "campo_para_savana",
+   "forma": "aresta_tras_dir"
+  },
+  {
+   "id": "campo_para_savana_aresta_frente_dir",
+   "row": 58,
+   "animated": true,
+   "biome": "campo",
+   "kind": "transicao_bioma",
+   "par": "campo_para_savana",
+   "forma": "aresta_frente_dir"
+  },
+  {
+   "id": "campo_para_savana_aresta_frente_esq",
+   "row": 59,
+   "animated": true,
+   "biome": "campo",
+   "kind": "transicao_bioma",
+   "par": "campo_para_savana",
+   "forma": "aresta_frente_esq"
+  },
+  {
+   "id": "campo_para_savana_uniao_tras",
+   "row": 60,
+   "animated": true,
+   "biome": "campo",
+   "kind": "transicao_bioma",
+   "par": "campo_para_savana",
+   "forma": "uniao_tras"
+  },
+  {
+   "id": "campo_para_savana_uniao_dir",
+   "row": 61,
+   "animated": true,
+   "biome": "campo",
+   "kind": "transicao_bioma",
+   "par": "campo_para_savana",
+   "forma": "uniao_dir"
+  },
+  {
+   "id": "campo_para_savana_uniao_frente",
+   "row": 62,
+   "animated": true,
+   "biome": "campo",
+   "kind": "transicao_bioma",
+   "par": "campo_para_savana",
+   "forma": "uniao_frente"
+  },
+  {
+   "id": "campo_para_savana_uniao_esq",
+   "row": 63,
+   "animated": true,
+   "biome": "campo",
+   "kind": "transicao_bioma",
+   "par": "campo_para_savana",
+   "forma": "uniao_esq"
+  },
+  {
+   "id": "campo_para_savana_ponta_tras",
+   "row": 64,
+   "animated": true,
+   "biome": "campo",
+   "kind": "transicao_bioma",
+   "par": "campo_para_savana",
+   "forma": "ponta_tras"
+  },
+  {
+   "id": "campo_para_savana_ponta_dir",
+   "row": 65,
+   "animated": true,
+   "biome": "campo",
+   "kind": "transicao_bioma",
+   "par": "campo_para_savana",
+   "forma": "ponta_dir"
+  },
+  {
+   "id": "campo_para_savana_ponta_frente",
+   "row": 66,
+   "animated": true,
+   "biome": "campo",
+   "kind": "transicao_bioma",
+   "par": "campo_para_savana",
+   "forma": "ponta_frente"
+  },
+  {
+   "id": "campo_para_savana_ponta_esq",
+   "row": 67,
+   "animated": true,
+   "biome": "campo",
+   "kind": "transicao_bioma",
+   "par": "campo_para_savana",
+   "forma": "ponta_esq"
+  },
+  {
+   "id": "campo_para_terra_aresta_tras_esq",
+   "row": 68,
+   "animated": true,
+   "biome": "campo",
+   "kind": "transicao_bioma",
+   "par": "campo_para_terra",
+   "forma": "aresta_tras_esq"
+  },
+  {
+   "id": "campo_para_terra_aresta_tras_dir",
+   "row": 69,
+   "animated": true,
+   "biome": "campo",
+   "kind": "transicao_bioma",
+   "par": "campo_para_terra",
+   "forma": "aresta_tras_dir"
+  },
+  {
+   "id": "campo_para_terra_aresta_frente_dir",
+   "row": 70,
+   "animated": true,
+   "biome": "campo",
+   "kind": "transicao_bioma",
+   "par": "campo_para_terra",
+   "forma": "aresta_frente_dir"
+  },
+  {
+   "id": "campo_para_terra_aresta_frente_esq",
+   "row": 71,
+   "animated": true,
+   "biome": "campo",
+   "kind": "transicao_bioma",
+   "par": "campo_para_terra",
+   "forma": "aresta_frente_esq"
+  },
+  {
+   "id": "campo_para_terra_uniao_tras",
+   "row": 72,
+   "animated": true,
+   "biome": "campo",
+   "kind": "transicao_bioma",
+   "par": "campo_para_terra",
+   "forma": "uniao_tras"
+  },
+  {
+   "id": "campo_para_terra_uniao_dir",
+   "row": 73,
+   "animated": true,
+   "biome": "campo",
+   "kind": "transicao_bioma",
+   "par": "campo_para_terra",
+   "forma": "uniao_dir"
+  },
+  {
+   "id": "campo_para_terra_uniao_frente",
+   "row": 74,
+   "animated": true,
+   "biome": "campo",
+   "kind": "transicao_bioma",
+   "par": "campo_para_terra",
+   "forma": "uniao_frente"
+  },
+  {
+   "id": "campo_para_terra_uniao_esq",
+   "row": 75,
+   "animated": true,
+   "biome": "campo",
+   "kind": "transicao_bioma",
+   "par": "campo_para_terra",
+   "forma": "uniao_esq"
+  },
+  {
+   "id": "campo_para_terra_ponta_tras",
+   "row": 76,
+   "animated": true,
+   "biome": "campo",
+   "kind": "transicao_bioma",
+   "par": "campo_para_terra",
+   "forma": "ponta_tras"
+  },
+  {
+   "id": "campo_para_terra_ponta_dir",
+   "row": 77,
+   "animated": true,
+   "biome": "campo",
+   "kind": "transicao_bioma",
+   "par": "campo_para_terra",
+   "forma": "ponta_dir"
+  },
+  {
+   "id": "campo_para_terra_ponta_frente",
+   "row": 78,
+   "animated": true,
+   "biome": "campo",
+   "kind": "transicao_bioma",
+   "par": "campo_para_terra",
+   "forma": "ponta_frente"
+  },
+  {
+   "id": "campo_para_terra_ponta_esq",
+   "row": 79,
+   "animated": true,
+   "biome": "campo",
+   "kind": "transicao_bioma",
+   "par": "campo_para_terra",
+   "forma": "ponta_esq"
+  },
+  {
+   "id": "savana_para_terra_aresta_tras_esq",
+   "row": 80,
+   "animated": true,
+   "biome": "savana",
+   "kind": "transicao_bioma",
+   "par": "savana_para_terra",
+   "forma": "aresta_tras_esq"
+  },
+  {
+   "id": "savana_para_terra_aresta_tras_dir",
+   "row": 81,
+   "animated": true,
+   "biome": "savana",
+   "kind": "transicao_bioma",
+   "par": "savana_para_terra",
+   "forma": "aresta_tras_dir"
+  },
+  {
+   "id": "savana_para_terra_aresta_frente_dir",
+   "row": 82,
+   "animated": true,
+   "biome": "savana",
+   "kind": "transicao_bioma",
+   "par": "savana_para_terra",
+   "forma": "aresta_frente_dir"
+  },
+  {
+   "id": "savana_para_terra_aresta_frente_esq",
+   "row": 83,
+   "animated": true,
+   "biome": "savana",
+   "kind": "transicao_bioma",
+   "par": "savana_para_terra",
+   "forma": "aresta_frente_esq"
+  },
+  {
+   "id": "savana_para_terra_uniao_tras",
+   "row": 84,
+   "animated": true,
+   "biome": "savana",
+   "kind": "transicao_bioma",
+   "par": "savana_para_terra",
+   "forma": "uniao_tras"
+  },
+  {
+   "id": "savana_para_terra_uniao_dir",
+   "row": 85,
+   "animated": true,
+   "biome": "savana",
+   "kind": "transicao_bioma",
+   "par": "savana_para_terra",
+   "forma": "uniao_dir"
+  },
+  {
+   "id": "savana_para_terra_uniao_frente",
+   "row": 86,
+   "animated": true,
+   "biome": "savana",
+   "kind": "transicao_bioma",
+   "par": "savana_para_terra",
+   "forma": "uniao_frente"
+  },
+  {
+   "id": "savana_para_terra_uniao_esq",
+   "row": 87,
+   "animated": true,
+   "biome": "savana",
+   "kind": "transicao_bioma",
+   "par": "savana_para_terra",
+   "forma": "uniao_esq"
+  },
+  {
+   "id": "savana_para_terra_ponta_tras",
+   "row": 88,
+   "animated": true,
+   "biome": "savana",
+   "kind": "transicao_bioma",
+   "par": "savana_para_terra",
+   "forma": "ponta_tras"
+  },
+  {
+   "id": "savana_para_terra_ponta_dir",
+   "row": 89,
+   "animated": true,
+   "biome": "savana",
+   "kind": "transicao_bioma",
+   "par": "savana_para_terra",
+   "forma": "ponta_dir"
+  },
+  {
+   "id": "savana_para_terra_ponta_frente",
+   "row": 90,
+   "animated": true,
+   "biome": "savana",
+   "kind": "transicao_bioma",
+   "par": "savana_para_terra",
+   "forma": "ponta_frente"
+  },
+  {
+   "id": "savana_para_terra_ponta_esq",
+   "row": 91,
+   "animated": true,
+   "biome": "savana",
+   "kind": "transicao_bioma",
+   "par": "savana_para_terra",
+   "forma": "ponta_esq"
+  },
+  {
+   "id": "campo_terra",
+   "row": 92,
    "animated": false,
    "biome": "campo",
    "kind": "terra"
   },
   {
    "id": "campo_claro_terra",
-   "row": 45,
+   "row": 93,
    "animated": false,
    "biome": "campo_claro",
    "kind": "terra"
   },
   {
    "id": "campo_florido_terra",
-   "row": 46,
+   "row": 94,
    "animated": false,
    "biome": "campo_florido",
    "kind": "terra"
   },
   {
    "id": "floresta_terra",
-   "row": 47,
+   "row": 95,
    "animated": false,
    "biome": "floresta",
    "kind": "terra"
   },
   {
    "id": "savana_terra",
-   "row": 48,
+   "row": 96,
    "animated": false,
    "biome": "savana",
    "kind": "terra"
@@ -610,5 +1042,43 @@
     }
    ]
   }
- ]
+ ],
+ "transicoes": {
+  "formas": [
+   "aresta_tras_esq",
+   "aresta_tras_dir",
+   "aresta_frente_dir",
+   "aresta_frente_esq",
+   "uniao_tras",
+   "uniao_dir",
+   "uniao_frente",
+   "uniao_esq",
+   "ponta_tras",
+   "ponta_dir",
+   "ponta_frente",
+   "ponta_esq"
+  ],
+  "pares": [
+   {
+    "prefixo": "campo_para_musgo",
+    "de": "campo",
+    "para": "floresta"
+   },
+   {
+    "prefixo": "campo_para_savana",
+    "de": "campo",
+    "para": "savana"
+   },
+   {
+    "prefixo": "campo_para_terra",
+    "de": "campo",
+    "para": "terra"
+   },
+   {
+    "prefixo": "savana_para_terra",
+    "de": "savana",
+    "para": "terra"
+   }
+  ]
+ }
 }

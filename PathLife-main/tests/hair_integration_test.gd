@@ -13,6 +13,7 @@ func _init() -> void:
 	state.catalog = load("res://data/character_customization/default_clothing_catalog.tres")
 	state.hair_catalog = catalog
 	state.color_catalog = load("res://data/character_customization/colors/default_character_color_catalog.tres")
+	state.age_catalog = load("res://data/character_customization/age/default_age_catalog.tres")
 	root.add_child(state)
 	var invalid := appearance.snapshot()
 	invalid.hair_front = &"nao_existe"

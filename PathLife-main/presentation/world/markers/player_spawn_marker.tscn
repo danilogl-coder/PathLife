@@ -1,0 +1,24 @@
+[gd_scene load_steps=2 format=3]
+
+[ext_resource type="Script" path="res://world_generation/structures/player_spawn_marker.gd" id="1_marker"]
+
+[node name="PlayerSpawnMarker" type="Marker2D"]
+editor_description = "Pinte este marcador na célula onde o Player deve iniciar. O desenho aparece somente no editor."
+script = ExtResource("1_marker")
+marker_type = 6
+
+[node name="EditorPreview" type="Node2D" parent="."]
+z_index = 100
+
+[node name="Diamond" type="Polygon2D" parent="EditorPreview"]
+color = Color(0.05, 0.9, 1, 0.55)
+polygon = PackedVector2Array(-28, 0, 0, -14, 28, 0, 0, 14)
+
+[node name="Outline" type="Line2D" parent="EditorPreview"]
+points = PackedVector2Array(-28, 0, 0, -14, 28, 0, 0, 14, -28, 0)
+width = 2.0
+default_color = Color(0.75, 1, 1, 1)
+
+[node name="Arrow" type="Polygon2D" parent="EditorPreview"]
+color = Color(1, 0.9, 0.15, 1)
+polygon = PackedVector2Array(-6, -8, -6, -27, -13, -27, 0, -43, 13, -27, 6, -27, 6, -8)

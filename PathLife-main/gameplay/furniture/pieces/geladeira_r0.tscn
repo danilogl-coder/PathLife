@@ -1,0 +1,37 @@
+[gd_scene format=3]
+
+[ext_resource type="Script" path="res://gameplay/furniture/furniture_piece.gd" id="1_mrrnn"]
+[ext_resource type="Resource" path="res://data/furniture/pieces/geladeira.tres" id="2_definition"]
+[ext_resource type="PackedScene" path="res://presentation/furniture/furniture_visual.tscn" id="3_e6j0r"]
+[ext_resource type="Texture2D" path="res://assets/furniture/kitchen/refrigerator/refrigerator_r0.png" id="4_e6j0r"]
+
+[node name="GeladeiraR0" type="StaticBody2D" unique_id=2055683436 node_paths=PackedStringArray("sprite", "solid_collision", "interaction_area", "interaction_shape")]
+collision_layer = 8
+collision_mask = 2
+script = ExtResource("1_mrrnn")
+definition = ExtResource("2_definition")
+sprite = NodePath("Visual/Sprite")
+solid_collision = NodePath("SolidCollision")
+interaction_area = NodePath("InteractionArea")
+interaction_shape = NodePath("InteractionArea/InteractionShape")
+draw_gizmo = false
+
+[node name="Visual" parent="." unique_id=1443888155 instance=ExtResource("3_e6j0r")]
+texture_filter = 1
+
+[node name="Sprite" parent="Visual" index="0"]
+position = Vector2(0, -48)
+texture = ExtResource("4_e6j0r")
+
+[node name="SolidCollision" type="CollisionPolygon2D" parent="." unique_id=776656930]
+polygon = PackedVector2Array(0, 19, 41, 0, -1, -19, -42, 0)
+
+[node name="InteractionArea" type="Area2D" parent="." unique_id=2039020966]
+collision_layer = 4
+collision_mask = 2
+monitorable = false
+
+[node name="InteractionShape" type="CollisionPolygon2D" parent="InteractionArea" unique_id=1774754273]
+polygon = PackedVector2Array(0, -64, 128, 0, 0, 64, -128, 0)
+
+[editable path="Visual"]

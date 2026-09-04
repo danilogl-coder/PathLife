@@ -1,0 +1,21 @@
+[gd_resource type="Resource" script_class="FurnitureDefinition" format=3]
+
+[ext_resource type="Script" path="res://data/furniture/furniture_definition.gd" id="1_def"]
+[ext_resource type="Texture2D" uid="uid://b77imncp703si" path="res://assets/furniture/bedroom/bed/cama_r0.png" id="2_ne"]
+[ext_resource type="Texture2D" uid="uid://byx3fw0um7o7o" path="res://assets/furniture/bedroom/bed/cama_r1.png" id="3_nw"]
+[ext_resource type="Texture2D" uid="uid://b22ofhe312wbg" path="res://assets/furniture/bedroom/bed/cama_r2.png" id="4_se"]
+[ext_resource type="Texture2D" uid="uid://dnuu6b5aj1kro" path="res://assets/furniture/bedroom/bed/cama_r3.png" id="5_sw"]
+
+[resource]
+script = ExtResource("1_def")
+id = &"cama_simples"
+display_name = "Cama"
+orientation_textures = Array[Texture2D]([ExtResource("2_ne"), ExtResource("3_nw"), ExtResource("4_se"), ExtResource("5_sw")])
+footprint_cells = Vector2i(1, 2)
+swap_footprint_on_side_orientations = true
+tile_size = Vector2i(128, 64)
+collision_source = 0
+collision_inset = 4.0
+blocks_movement = true
+interaction_margin_cells = 0.5
+interaction_prompt = "Dormir"

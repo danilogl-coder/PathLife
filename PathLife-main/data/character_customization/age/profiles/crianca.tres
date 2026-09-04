@@ -1,0 +1,25 @@
+[gd_resource type="Resource" script_class="AgeProfile" load_steps=2 format=3]
+
+[ext_resource type="Script" path="res://data/character_customization/age/age_profile.gd" id="1_age_profile"]
+
+[resource]
+script = ExtResource("1_age_profile")
+id = &"crianca"
+display_name = "Criança"
+ordem = 1
+pasta_arte = &""
+biblioteca_animacao = &""
+escala_global = 0.7
+escala_cabeca = 1.25
+fator_tronco = 1.0
+fator_pernas = 0.9
+fator_bracos = 0.92
+fator_largura = 1.02
+curvatura_tronco = 0.0
+curvatura_cabeca = 0.0
+velocidade_animacao = 1.1
+multiplicador_velocidade = 0.8
+raio_colisao = 4.0
+altura_colisao = 8.0
+pode_correr = true
+pode_agachar = true

@@ -48,16 +48,16 @@ var _world_seed: int = 0
 var _level_cache: Dictionary = {}
 
 
-func prepare(settings: WorldSettings, world_seed: int) -> void:
-	_settings = settings
-	_world_seed = world_seed
+func prepare(p_settings: WorldSettings, p_world_seed: int) -> void:
+	_settings = p_settings
+	_world_seed = p_world_seed
 	_level_cache.clear()
 	if climate != null:
-		climate.prepare(world_seed)
+		climate.prepare(p_world_seed)
 	if height_generator != null:
-		height_generator.prepare(world_seed)
+		height_generator.prepare(p_world_seed)
 	if variation_noise != null:
-		variation_noise.seed = WorldRandom.sub_seed(world_seed, &"ground_variation")
+		variation_noise.seed = WorldRandom.sub_seed(p_world_seed, &"ground_variation")
 
 
 func settings() -> WorldSettings:
@@ -128,7 +128,7 @@ func _plateau_level(world_xy: Vector2i, pass_index: int) -> int:
 		for dx in range(-radius, radius + 1):
 			samples.append(_plateau_level(world_xy + Vector2i(dx, dy), pass_index - 1))
 	samples.sort()
-	var level := samples[samples.size() / 2]
+	var level := samples[floori(float(samples.size()) / 2.0)]
 	_store_level(key, level)
 	return level
 

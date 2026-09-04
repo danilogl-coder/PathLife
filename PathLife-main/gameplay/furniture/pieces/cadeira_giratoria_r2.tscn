@@ -1,0 +1,38 @@
+[gd_scene format=3]
+
+[ext_resource type="Script" path="res://gameplay/furniture/furniture_piece.gd" id="1_tq8aq"]
+[ext_resource type="Resource" path="res://data/furniture/pieces/cadeira_giratoria.tres" id="2_definition"]
+[ext_resource type="PackedScene" path="res://presentation/furniture/furniture_visual.tscn" id="3_8stj2"]
+[ext_resource type="Texture2D" path="res://assets/furniture/bedroom/office_chair/office_chair_r2.png" id="4_8stj2"]
+
+[node name="CadeiraGiratoriaR2" type="StaticBody2D" unique_id=686975810 node_paths=PackedStringArray("sprite", "solid_collision", "interaction_area", "interaction_shape")]
+collision_layer = 8
+collision_mask = 2
+script = ExtResource("1_tq8aq")
+definition = ExtResource("2_definition")
+orientation = 2
+sprite = NodePath("Visual/Sprite")
+solid_collision = NodePath("SolidCollision")
+interaction_area = NodePath("InteractionArea")
+interaction_shape = NodePath("InteractionArea/InteractionShape")
+draw_gizmo = false
+
+[node name="Visual" parent="." unique_id=672571177 instance=ExtResource("3_8stj2")]
+texture_filter = 1
+
+[node name="Sprite" parent="Visual" index="0"]
+position = Vector2(0, -48)
+texture = ExtResource("4_8stj2")
+
+[node name="SolidCollision" type="CollisionPolygon2D" parent="." unique_id=1527678528]
+polygon = PackedVector2Array(-1, 12, 28, 0, -1, -13, -29, 0)
+
+[node name="InteractionArea" type="Area2D" parent="." unique_id=235802208]
+collision_layer = 4
+collision_mask = 2
+monitorable = false
+
+[node name="InteractionShape" type="CollisionPolygon2D" parent="InteractionArea" unique_id=824618122]
+polygon = PackedVector2Array(0, -64, 128, 0, 0, 64, -128, 0)
+
+[editable path="Visual"]

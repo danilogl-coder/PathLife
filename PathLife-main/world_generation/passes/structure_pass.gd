@@ -22,6 +22,28 @@ func prepare(settings: WorldSettings, world_seed: int) -> void:
 	if planner.sampler != null:
 		planner.sampler.prepare(settings, world_seed)
 	planner.clear_cache()
+	# Ler o piso de uma cena instancia a cena: só pode acontecer aqui, na thread
+	# principal e uma vez. Depois disso os workers apenas consultam o cache.
+	StructureFloorMask.warm(_known_definitions())
+
+
+## Todas as definições que este passe pode encontrar (pools de bioma + global).
+func _known_definitions() -> Array[StructureDefinition]:
+	var result: Array[StructureDefinition] = []
+	if planner == null:
+		return result
+	for definition in planner.global_pool:
+		if definition != null and not result.has(definition):
+			result.append(definition)
+	if planner.sampler == null or planner.sampler.biome_resolver == null:
+		return result
+	for biome: BiomeDefinition in planner.sampler.biome_resolver.biomes:
+		if biome == null:
+			continue
+		for definition in biome.structure_pool:
+			if definition != null and not result.has(definition):
+				result.append(definition)
+	return result
 
 
 func run(context: GenerationContext) -> void:

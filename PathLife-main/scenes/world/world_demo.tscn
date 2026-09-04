@@ -50,6 +50,7 @@ movement_context = ExtResource("4_movement")
 zoom = Vector2(0.9, 0.9)
 
 [node name="UI" type="CanvasLayer" parent="."]
+layer = 20
 
 [node name="Info" type="Label" parent="UI"]
 offset_left = 12.0

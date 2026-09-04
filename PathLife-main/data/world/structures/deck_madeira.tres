@@ -13,3 +13,4 @@ adaptation_margin = 5
 spawn_chance = 0.6
 allowed_biomes = Array[StringName]([&"campo", &"campo_claro", &"campo_florido", &"floresta"])
 minimum_spacing = 40
+bare_ground_margin = 1

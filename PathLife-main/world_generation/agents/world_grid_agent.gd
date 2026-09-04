@@ -39,6 +39,11 @@ signal step_blocked(direction: Vector2i)
 @export_range(0.1, 1.0, 0.05) var crouch_multiplier: float = 0.55
 ## Consulta a física antes do passo (respeita móveis e paredes já existentes).
 @export var respect_physics_obstacles: bool = true
+## Móveis são obstáculos locais, não paredes entre células. A varredura do
+## passo inteiro ignora estas camadas e testa o corpo somente no destino. Assim
+## um móvel não bloqueia antecipadamente uma célula livre ao lado, mas continua
+## impedindo que o Player termine o passo dentro de seu SolidCollision.
+@export_flags_2d_physics var furniture_collision_mask: int = 8
 ## Legado: ajustava o z_index pela altura. Mantenha DESLIGADO — o mundo agora
 ## usa um único Y-Sort por profundidade e todo mundo fica em z_index 0.
 @export var drive_z_index: bool = false
@@ -62,6 +67,10 @@ var _step_time: float = 0.3
 var _target_cell: Vector2i = Vector2i.ZERO
 var _target_height: int = 0
 var _ready_done: bool = false
+var _extra_sort_bias: float = 0.0
+var _last_flat: Vector2 = Vector2.ZERO
+var _last_height_levels: float = 0.0
+var _visual_applied: bool = false
 
 
 func _ready() -> void:
@@ -163,7 +172,30 @@ func _is_physically_blocked(target_visual: Vector2) -> bool:
 	if physics_body == null:
 		return false
 	var motion := target_visual - physics_body.global_position
-	return physics_body.test_move(physics_body.global_transform, motion)
+	var original_mask := physics_body.collision_mask
+	var furniture_mask := original_mask & furniture_collision_mask
+	var swept_mask := original_mask & ~furniture_collision_mask
+	var blocked := false
+
+	# Paredes, portas e demais obstáculos estruturais bloqueiam qualquer ponto
+	# do percurso entre as duas células.
+	if swept_mask != 0:
+		physics_body.collision_mask = swept_mask
+		blocked = physics_body.test_move(physics_body.global_transform, motion)
+
+	# Furniture é avaliada pelo footprint real apenas no destino. Usar
+	# recovery_as_collision faz uma sobreposição sem movimento contar como
+	# bloqueio, inclusive quando a cápsula já nasce tocando o polígono.
+	if not blocked and furniture_mask != 0:
+		physics_body.collision_mask = furniture_mask
+		var target_transform := physics_body.global_transform
+		target_transform.origin += motion
+		blocked = physics_body.test_move(
+			target_transform, Vector2.ZERO, null, 0.08, true
+		)
+
+	physics_body.collision_mask = original_mask
+	return blocked
 
 
 func _process(delta: float) -> void:
@@ -204,13 +236,39 @@ func _process(delta: float) -> void:
 func _apply_visual(flat: Vector2, height_levels: float) -> void:
 	if _body == null:
 		return
+	_last_flat = flat
+	_last_height_levels = height_levels
+	_visual_applied = true
 	var offset := height_levels * float(_iso.height_pixels)
 	if _anchor == null:
 		_body.position = flat - Vector2(0.0, offset)
 		_body.z_index = clampi(_height, -4000, 4000) if drive_z_index else 0
 		return
 
-	var bias := _iso.prop_sort_bias()
+	var bias := _iso.prop_sort_bias() + _extra_sort_bias
 	_anchor.position = flat + Vector2(0.0, bias)
 	_body.position = Vector2(0.0, -offset - bias)
 	_body.z_index = clampi(_height, -4000, 4000) if drive_z_index else 0
+
+
+## Viés EXTRA somado à chave do Y-Sort desta entidade, em pixels.
+##
+## Serve para móveis compridos (ver [FurnitureFrontOccluder]). Um móvel de mais
+## de uma célula precisa ser ordenado pelo ponto mais baixo do desenho, senão o
+## piso das células da frente passa por cima dele — e isso faz o ator que está
+## ao LADO do móvel, visivelmente à frente, ficar com chave menor e ser desenhado
+## atrás. A faixa da frente do móvel empurra a chave do ator meia célula, só
+## enquanto ele está lá.
+##
+## O desenho não se move: como no viés padrão, o valor entra na âncora e sai do
+## corpo. Ninguém muda de z_index.
+func set_extra_sort_bias(value: float) -> void:
+	if is_equal_approx(_extra_sort_bias, value):
+		return
+	_extra_sort_bias = value
+	if _visual_applied:
+		_apply_visual(_last_flat, _last_height_levels)
+
+
+func extra_sort_bias() -> float:
+	return _extra_sort_bias

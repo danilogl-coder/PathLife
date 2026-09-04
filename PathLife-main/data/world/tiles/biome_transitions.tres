@@ -1,0 +1,20 @@
+[gd_resource type="Resource" script_class="BiomeTransitionCatalog" format=3]
+
+[ext_resource type="Script" path="res://world_generation/rendering/biome_transition_rule.gd" id="1_ib1vh"]
+[ext_resource type="Resource" path="res://data/world/tiles/transicoes/campo_para_musgo.tres" id="2_mwh58"]
+[ext_resource type="Resource" path="res://data/world/tiles/transicoes/campo_para_savana.tres" id="3_87enw"]
+[ext_resource type="Resource" path="res://data/world/tiles/transicoes/campo_para_terra.tres" id="4_t1t7w"]
+[ext_resource type="Resource" path="res://data/world/tiles/transicoes/savana_para_terra.tres" id="5_vgirv"]
+[ext_resource type="Script" path="res://world_generation/rendering/biome_transition_catalog.gd" id="6_uivij"]
+
+[resource]
+resource_name = "BiomeTransitions"
+script = ExtResource("6_uivij")
+grupos = Dictionary[StringName, StringName]({
+&"campo": &"campo",
+&"campo_claro": &"campo",
+&"campo_florido": &"campo",
+&"floresta": &"floresta",
+&"savana": &"savana"
+})
+rules = Array[ExtResource("1_ib1vh")]([ExtResource("2_mwh58"), ExtResource("3_87enw"), ExtResource("4_t1t7w"), ExtResource("5_vgirv")])

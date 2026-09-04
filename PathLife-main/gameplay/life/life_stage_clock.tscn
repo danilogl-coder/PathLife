@@ -1,0 +1,21 @@
+[gd_scene load_steps=3 format=3]
+
+; O relógio da vida. Instancie em Main e ligue stage_changed ao
+; AppearanceState.set_age. Com iniciar_automaticamente desligado, ele fica
+; pronto sem mudar nada no jogo — ligue quando quiser ver as fases passarem.
+
+[ext_resource type="Script" path="res://gameplay/life/life_stage_clock.gd" id="1_clock"]
+[ext_resource type="Resource" path="res://data/character_customization/age/default_age_catalog.tres" id="2_age_catalog"]
+
+[node name="LifeStageClock" type="Node" node_paths=PackedStringArray("timer")]
+script = ExtResource("1_clock")
+catalog = ExtResource("2_age_catalog")
+idade_inicial = &"adulto"
+segundos_por_estagio = 120.0
+iniciar_automaticamente = false
+timer = NodePath("Timer")
+
+[node name="Timer" type="Timer" parent="."]
+wait_time = 120.0
+
+[connection signal="timeout" from="Timer" to="." method="_on_timer_timeout"]

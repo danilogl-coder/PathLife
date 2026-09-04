@@ -1,0 +1,38 @@
+[gd_scene format=3]
+
+[ext_resource type="Script" path="res://gameplay/furniture/furniture_piece.gd" id="1_d4hhc"]
+[ext_resource type="Resource" path="res://data/furniture/pieces/cama_simples.tres" id="2_definition"]
+[ext_resource type="PackedScene" path="res://presentation/furniture/furniture_visual.tscn" id="3_k5e7s"]
+[ext_resource type="Texture2D" path="res://assets/furniture/bedroom/bed/cama_r1.png" id="3_texture"]
+
+[node name="CamaR1" type="StaticBody2D" unique_id=1181618897 node_paths=PackedStringArray("sprite", "solid_collision", "interaction_area", "interaction_shape")]
+collision_layer = 8
+collision_mask = 2
+script = ExtResource("1_d4hhc")
+definition = ExtResource("2_definition")
+orientation = 1
+sprite = NodePath("Visual/Sprite")
+solid_collision = NodePath("SolidCollision")
+interaction_area = NodePath("InteractionArea")
+interaction_shape = NodePath("InteractionArea/InteractionShape")
+draw_gizmo = false
+
+[node name="Visual" parent="." unique_id=2054230564 instance=ExtResource("3_k5e7s")]
+texture_filter = 1
+
+[node name="Sprite" parent="Visual" index="0"]
+position = Vector2(-32, -64)
+texture = ExtResource("3_texture")
+
+[node name="SolidCollision" type="CollisionPolygon2D" parent="." unique_id=1568420897]
+polygon = PackedVector2Array(-19, 16, 35, -9, -46, -48, -100, -24)
+
+[node name="InteractionArea" type="Area2D" parent="." unique_id=97019195]
+collision_layer = 4
+collision_mask = 2
+monitorable = false
+
+[node name="InteractionShape" type="CollisionPolygon2D" parent="InteractionArea" unique_id=418082864]
+polygon = PackedVector2Array(-64, -96, 128, 0, 0, 64, -192, -32)
+
+[editable path="Visual"]

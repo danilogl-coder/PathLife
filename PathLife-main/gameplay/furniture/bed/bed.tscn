@@ -1,8 +1,6 @@
-[gd_scene format=3 uid="uid://bfw3efsi68ch7"]
+[gd_scene format=3 uid="uid://bl32vsvim1hty"]
 
-[ext_resource type="PackedScene" uid="uid://c0i0bkk7ynmk5" path="res://gameplay/furniture/bed/bed_r0.tscn" id="1_default_bed"]
-
-[node name="Bed" unique_id=1446520129 instance=ExtResource("1_default_bed")]
+[node name="Bed" unique_id=1446520129]
 
 [node name="BedBack" parent="Visual" parent_id_path=PackedInt32Array(1523704961) index="0" unique_id=2045096022]
 offset = Vector2(0, 0)
@@ -11,9 +9,10 @@ offset = Vector2(0, 0)
 z_index = 0
 
 [node name="SolidCollision" parent="." index="1" unique_id=165171394]
-position = Vector2(32.8271, -6.449997)
-scale = Vector2(1.3458028, 1.2986112)
-polygon = PackedVector2Array(-82.35018, -15.8246, -12, -72, 55.8573, -38.15615, -34.05187, 15.747591)
+polygon = PackedVector2Array(-56, -35, 27, -85, 82, -56, -6, -9)
+
+[node name="TopOcclusionShape" parent="TopOcclusionArea" parent_id_path=PackedInt32Array(373969822) index="0"]
+polygon = PackedVector2Array(-108, -46, -9, -112, 25, -89, -70, -25)
 
 [editable path="Visual"]
 [editable path="TopOcclusionArea"]

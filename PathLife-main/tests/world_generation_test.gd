@@ -178,17 +178,26 @@ func _test_depth_sorting_setup() -> void:
 	)
 	var art_ids: Dictionary = {}
 	var blend_ids: Dictionary = {}
+	var biome_transition_ids: Dictionary = {}
 	var dirt_ids: Dictionary = {}
+	var unknown_kinds: Array[String] = []
 	for row_info: Dictionary in manifest.get("rows", []):
 		match String(row_info["kind"]):
 			"arte": art_ids[StringName(row_info["id"])] = true
 			"transicao": blend_ids[StringName(row_info["id"])] = true
-			_: dirt_ids[StringName(row_info["id"])] = true
-	var expected_animated := art_ids.size() + blend_ids.size()
+			"transicao_bioma": biome_transition_ids[StringName(row_info["id"])] = true
+			"terra": dirt_ids[StringName(row_info["id"])] = true
+			var kind: unknown_kinds.append(kind)
+	var expected_ground_variants := art_ids.size() + blend_ids.size()
+	var expected_animated := expected_ground_variants + biome_transition_ids.size()
+	_check(unknown_kinds.is_empty(), "manifesto nao possui tipos de tile desconhecidos",
+		", ".join(unknown_kinds))
 	_check(art_ids.size() == 16, "as 16 variantes fornecidas continuam catalogadas",
 		"%d" % art_ids.size())
 	_check(blend_ids.size() > 0, "existem variantes de transicao entre as fornecidas",
 		"%d" % blend_ids.size())
+	_check(biome_transition_ids.size() > 0, "transicoes direcionais de bioma estao no manifesto",
+		"%d" % biome_transition_ids.size())
 
 	var animated := 0
 	var static_tiles := 0
@@ -225,9 +234,9 @@ func _test_depth_sorting_setup() -> void:
 			if variant == null or not catalog.has(variant.ground_id):
 				variants_ok = false
 	_check(variants_ok, "todo bioma tem 2+ variantes catalogadas")
-	_check(total_variants == expected_animated,
+	_check(total_variants == expected_ground_variants,
 		"toda variante do atlas (arte + transicao) esta em uso",
-		"%d de %d" % [total_variants, expected_animated])
+		"%d de %d" % [total_variants, expected_ground_variants])
 	# O que motiva as transições: entre duas variantes vizinhas na escala do
 	# bioma o salto de luminosidade tem de ser pequeno. Sem isso o campo troca
 	# de tom de uma célula para a outra.
@@ -248,9 +257,9 @@ func _test_depth_sorting_setup() -> void:
 		reachable_variants += seen.size()
 		if seen.size() != biome.ground_variants.size():
 			variants_ok = false
-	_check(reachable_variants == expected_animated,
+	_check(reachable_variants == expected_ground_variants,
 		"toda variante e alcancavel pelo sorteio",
-		"%d de %d" % [reachable_variants, expected_animated])
+		"%d de %d" % [reachable_variants, expected_ground_variants])
 
 
 ## Luminosidade média da face de cima de um tile, lida do atlas.

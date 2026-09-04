@@ -9,6 +9,7 @@ signal menu_closed
 @export var catalog: ClothingCatalog
 @export var hair_catalog: HairCatalog
 @export var color_catalog: CharacterColorCatalog
+@export var age_catalog: AgeCatalog
 @export var randomizer: CharacterAppearanceRandomizer
 
 @onready var preview: CharacterVisual = %PreviewCharacter
@@ -18,6 +19,7 @@ signal menu_closed
 @onready var nw_button: Button = %NWButton
 @onready var se_button: Button = %SEButton
 @onready var sw_button: Button = %SWButton
+@onready var age_row: AgeSelectionRow = %AgeRow
 @onready var rows: Array[CustomizationSlotRow] = [%TopRow, %OuterwearRow, %BottomRow, %FootwearRow, %EyewearRow, %HeadwearRow]
 @onready var hair_rows: Array[HairSelectionRow] = [%HairFrontRow, %HairBackRow]
 @onready var palette_selectors: Array[PaletteSelector] = [
@@ -33,7 +35,10 @@ func _ready() -> void:
 	hide()
 
 func open(source: CharacterAppearance) -> void:
-	if source == null or catalog == null or hair_catalog == null or color_catalog == null or randomizer == null:
+	if (
+		source == null or catalog == null or hair_catalog == null
+		or color_catalog == null or age_catalog == null or randomizer == null
+	):
 		push_error("Menu recebeu aparência ou catálogo nulo")
 		return
 	_working = source.snapshot()
@@ -46,6 +51,7 @@ func open(source: CharacterAppearance) -> void:
 func _refresh_everything() -> void:
 	masc_button.button_pressed = _working.body_type == "masc"
 	fem_button.button_pressed = _working.body_type == "fem"
+	age_row.setup(age_catalog, _working.age)
 	for row: CustomizationSlotRow in rows:
 		row.setup(catalog, _working.body_type, _working.get_item(StringName(row.slot)))
 	for row: HairSelectionRow in hair_rows:
@@ -64,6 +70,10 @@ func _refresh_preview() -> void:
 
 func _on_slot_selection_changed(slot: StringName, item_id: StringName) -> void:
 	_working.set_item(slot, item_id)
+	_refresh_everything()
+
+func _on_age_selection_changed(age_id: StringName) -> void:
+	_working.set_age(age_id)
 	_refresh_everything()
 
 func _on_hair_selection_changed(side: StringName, style_id: StringName) -> void:

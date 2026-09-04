@@ -37,6 +37,7 @@ func _init() -> void:
 	state.catalog = clothes
 	state.hair_catalog = hairs
 	state.color_catalog = colors
+	state.age_catalog = load("res://data/character_customization/age/default_age_catalog.tres")
 	root.add_child(state)
 	var invalid_colors := defaults.snapshot()
 	invalid_colors.skin_color = &"invalida"

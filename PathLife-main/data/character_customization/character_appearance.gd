@@ -5,6 +5,7 @@ const SLOTS: Array[StringName] = [&"top", &"outerwear", &"bottom", &"footwear", 
 const HAIR_SIDES: Array[StringName] = [&"front", &"back"]
 
 @export_enum("masc", "fem") var body_type: String = "masc"
+@export var age: StringName = &"adulto"
 @export var top: StringName = &""
 @export var outerwear: StringName = &""
 @export var bottom: StringName = &""
@@ -27,6 +28,14 @@ func set_body_type(new_body_type: String) -> void:
 		push_error("Corpo inválido: %s" % new_body_type)
 		return
 	body_type = new_body_type
+	emit_changed()
+
+## Quem valida o id é o AgeCatalog, no CharacterAppearanceState. Aqui é só
+## dado, do mesmo jeito que body_type.
+func set_age(new_age: StringName) -> void:
+	if new_age == age:
+		return
+	age = new_age
 	emit_changed()
 
 func get_item(slot_name: StringName) -> StringName:

@@ -1,0 +1,25 @@
+[gd_resource type="Resource" script_class="AgeProfile" load_steps=2 format=3]
+
+[ext_resource type="Script" path="res://data/character_customization/age/age_profile.gd" id="1_age_profile"]
+
+[resource]
+script = ExtResource("1_age_profile")
+id = &"bebe"
+display_name = "Bebê"
+ordem = 0
+pasta_arte = &"bebe"
+biblioteca_animacao = &""
+escala_global = 0.44
+escala_cabeca = 1.75
+fator_tronco = 1.05
+fator_pernas = 0.72
+fator_bracos = 0.78
+fator_largura = 1.18
+curvatura_tronco = 0.04
+curvatura_cabeca = -0.02
+velocidade_animacao = 1.15
+multiplicador_velocidade = 0.45
+raio_colisao = 3.0
+altura_colisao = 5.0
+pode_correr = false
+pode_agachar = false

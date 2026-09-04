@@ -1,0 +1,146 @@
+[gd_scene format=3 uid="uid://du23r82rebfd6"]
+
+[ext_resource type="Script" uid="uid://oqd3jjf5p7ls" path="res://world_generation/structures/structure_root.gd" id="1_root"]
+[ext_resource type="Texture2D" uid="uid://cc2h1v2kdgfke" path="res://assets/world/structures/piso_madeira.png" id="2_piso"]
+[ext_resource type="Script" uid="uid://b6j88f2n5ujp3" path="res://world_generation/structures/structure_marker.gd" id="3_marker"]
+
+[node name="DeckMadeira" type="Node2D" unique_id=560653291]
+y_sort_enabled = true
+script = ExtResource("1_root")
+
+[node name="Piso" type="Node2D" parent="." unique_id=87142828]
+y_sort_enabled = true
+
+[node name="Tabua_0_0" type="Sprite2D" parent="Piso" unique_id=1716696728]
+texture_filter = 1
+texture = ExtResource("2_piso")
+centered = false
+offset = Vector2(-64, -32)
+
+[node name="Tabua_1_0" type="Sprite2D" parent="Piso" unique_id=1990790535]
+texture_filter = 1
+position = Vector2(64, 32)
+texture = ExtResource("2_piso")
+centered = false
+offset = Vector2(-64, -32)
+
+[node name="Tabua_2_0" type="Sprite2D" parent="Piso" unique_id=951728387]
+texture_filter = 1
+position = Vector2(128, 64)
+texture = ExtResource("2_piso")
+centered = false
+offset = Vector2(-64, -32)
+
+[node name="Tabua_3_0" type="Sprite2D" parent="Piso" unique_id=583469687]
+texture_filter = 1
+position = Vector2(192, 96)
+texture = ExtResource("2_piso")
+centered = false
+offset = Vector2(-64, -32)
+
+[node name="Tabua_0_1" type="Sprite2D" parent="Piso" unique_id=1380418730]
+texture_filter = 1
+position = Vector2(-64, 32)
+texture = ExtResource("2_piso")
+centered = false
+offset = Vector2(-64, -32)
+
+[node name="Tabua_1_1" type="Sprite2D" parent="Piso" unique_id=1420367874]
+texture_filter = 1
+position = Vector2(0, 64)
+texture = ExtResource("2_piso")
+centered = false
+offset = Vector2(-64, -32)
+
+[node name="Tabua_2_1" type="Sprite2D" parent="Piso" unique_id=881563862]
+texture_filter = 1
+position = Vector2(64, 96)
+texture = ExtResource("2_piso")
+centered = false
+offset = Vector2(-64, -32)
+
+[node name="Tabua_3_1" type="Sprite2D" parent="Piso" unique_id=1096487628]
+texture_filter = 1
+position = Vector2(128, 128)
+texture = ExtResource("2_piso")
+centered = false
+offset = Vector2(-64, -32)
+
+[node name="Tabua_0_2" type="Sprite2D" parent="Piso" unique_id=538093876]
+texture_filter = 1
+position = Vector2(-128, 64)
+texture = ExtResource("2_piso")
+centered = false
+offset = Vector2(-64, -32)
+
+[node name="Tabua_1_2" type="Sprite2D" parent="Piso" unique_id=1249054191]
+texture_filter = 1
+position = Vector2(-64, 96)
+texture = ExtResource("2_piso")
+centered = false
+offset = Vector2(-64, -32)
+
+[node name="Tabua_2_2" type="Sprite2D" parent="Piso" unique_id=454449256]
+texture_filter = 1
+position = Vector2(0, 128)
+texture = ExtResource("2_piso")
+centered = false
+offset = Vector2(-64, -32)
+
+[node name="Tabua_3_2" type="Sprite2D" parent="Piso" unique_id=745518286]
+texture_filter = 1
+position = Vector2(64, 160)
+texture = ExtResource("2_piso")
+centered = false
+offset = Vector2(-64, -32)
+
+[node name="Tabua_0_3" type="Sprite2D" parent="Piso" unique_id=1083380706]
+texture_filter = 1
+position = Vector2(-189, 95)
+texture = ExtResource("2_piso")
+centered = false
+offset = Vector2(-64, -32)
+
+[node name="Tabua_1_3" type="Sprite2D" parent="Piso" unique_id=1930771087]
+texture_filter = 1
+position = Vector2(-128, 128)
+texture = ExtResource("2_piso")
+centered = false
+offset = Vector2(-64, -32)
+
+[node name="Tabua_2_3" type="Sprite2D" parent="Piso" unique_id=136747919]
+texture_filter = 1
+position = Vector2(-64, 160)
+texture = ExtResource("2_piso")
+centered = false
+offset = Vector2(-64, -32)
+
+[node name="Tabua_3_3" type="Sprite2D" parent="Piso" unique_id=1452894807]
+texture_filter = 1
+position = Vector2(0, 192)
+texture = ExtResource("2_piso")
+centered = false
+offset = Vector2(-64, -32)
+
+[node name="Parede" type="Node2D" parent="." unique_id=1133037606]
+
+[node name="Parede 0" type="Sprite2D" parent="Parede" unique_id=896875599]
+
+[node name="Marcadores" type="Node2D" parent="." unique_id=398741449]
+
+[node name="EntranceMarker" type="Marker2D" parent="Marcadores" unique_id=1639487385]
+position = Vector2(128, 128)
+script = ExtResource("3_marker")
+cell_offset = Vector2i(2, 4)
+
+[node name="RoadMarker" type="Marker2D" parent="Marcadores" unique_id=909267347]
+position = Vector2(128, 160)
+script = ExtResource("3_marker")
+marker_type = 1
+cell_offset = Vector2i(2, 5)
+
+[node name="NPCSpawnMarker" type="Marker2D" parent="Marcadores" unique_id=613921501]
+position = Vector2(0, 64)
+script = ExtResource("3_marker")
+marker_type = 2
+cell_offset = Vector2i(1, 1)

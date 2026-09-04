@@ -25,6 +25,10 @@ const GROUND_UNDERLAY_SOURCE_ID := 2
 @export var entries: Array[GroundTileEntry] = []
 ## Usado quando um id não está catalogado (evita mundo invisível por engano).
 @export var fallback_ground_id: StringName = &"campo_terra"
+## Peças de fronteira entre biomas. Opcional: sem ele o mundo volta ao corte
+## seco. Anda junto do catálogo porque quem desenha o chão já recebe este
+## recurso — a regra de qual peça usar continua morando no recurso próprio.
+@export var transitions: BiomeTransitionCatalog
 
 ## Espelha o topo de metade das células, na horizontal.
 ##

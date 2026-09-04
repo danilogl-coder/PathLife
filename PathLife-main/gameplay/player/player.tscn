@@ -1,71 +1,78 @@
-[gd_scene load_steps=14 format=3 uid="uid://ccclce5ap3ngs"]
+[gd_scene format=3 uid="uid://ccclce5ap3ngs"]
 
 [ext_resource type="Script" uid="uid://b54ob6bq6i7mu" path="res://gameplay/player/player_controller.gd" id="1_xq3ts"]
 [ext_resource type="Resource" uid="uid://cy5yh3iq3rj1j" path="res://data/player/default_player_config.tres" id="2_wvk08"]
 [ext_resource type="PackedScene" uid="uid://gcuaslvokbkv" path="res://presentation/characters/cutout/character_visual.tscn" id="3_visual"]
-[ext_resource type="Script" path="res://gameplay/player/character_appearance_state.gd" id="4_appearance_state"]
+[ext_resource type="Script" uid="uid://xvibea06lwbs" path="res://gameplay/player/character_appearance_state.gd" id="4_appearance_state"]
 [ext_resource type="Resource" path="res://data/character_customization/default_character_appearance.tres" id="5_default_appearance"]
 [ext_resource type="Resource" path="res://data/character_customization/default_clothing_catalog.tres" id="6_catalog"]
 [ext_resource type="Resource" path="res://data/character_customization/hair/default_hair_catalog.tres" id="7_hair_catalog"]
 [ext_resource type="Resource" path="res://data/character_customization/colors/default_character_color_catalog.tres" id="8_color_catalog"]
-[ext_resource type="PackedScene" path="res://gameplay/player/bed_sleep_interactor.tscn" id="9_sleep_interactor"]
-[ext_resource type="Script" path="res://world_generation/agents/world_grid_agent.gd" id="10_grid_agent"]
+[ext_resource type="Script" uid="uid://cu4grq7ycxskv" path="res://world_generation/agents/world_grid_agent.gd" id="10_grid_agent"]
 [ext_resource type="Resource" path="res://data/world/player_movement_context.tres" id="11_movement_context"]
-[ext_resource type="Script" path="res://presentation/characters/cutout/character_viewport_composite.gd" id="12_composite"]
+[ext_resource type="Script" uid="uid://gdbc8ufx2txo" path="res://presentation/characters/cutout/character_viewport_composite.gd" id="12_composite"]
+[ext_resource type="Script" uid="uid://b3gb7je1wvo6l" path="res://gameplay/player/character_age_body.gd" id="13_age_body"]
+[ext_resource type="Resource" path="res://data/character_customization/age/default_age_catalog.tres" id="14_age_catalog"]
+[ext_resource type="Script" uid="uid://b1vw3ielngcw5" path="res://gameplay/player/door_interactor.gd" id="15_door_interactor"]
 
 [sub_resource type="CapsuleShape2D" id="CapsuleShape2D_omfh6"]
-radius = 5.0
-height = 10.0
+radius = 1.25
+height = 2.5
 
-[node name="Player" type="CharacterBody2D" groups=["depth_actor"] node_paths=PackedStringArray("grid_agent")]
-z_index = 0
+[node name="Player" type="CharacterBody2D" unique_id=654435446 node_paths=PackedStringArray("grid_agent") groups=["depth_actor"]]
 collision_layer = 2
 collision_mask = 9
 script = ExtResource("1_xq3ts")
 config = ExtResource("2_wvk08")
 grid_agent = NodePath("WorldGridAgent")
 
-[node name="WorldGridAgent" type="Node" parent="."]
+[node name="WorldGridAgent" type="Node" parent="." unique_id=1701979207]
 script = ExtResource("10_grid_agent")
 movement_context = ExtResource("11_movement_context")
 
-[node name="AppearanceState" type="Node" parent="."]
+[node name="AppearanceState" type="Node" parent="." unique_id=1974395715]
 script = ExtResource("4_appearance_state")
 default_appearance = ExtResource("5_default_appearance")
 catalog = ExtResource("6_catalog")
 hair_catalog = ExtResource("7_hair_catalog")
 color_catalog = ExtResource("8_color_catalog")
+age_catalog = ExtResource("14_age_catalog")
 
-[node name="CollisionShape2D" type="CollisionShape2D" parent="."]
+[node name="AgeBody" type="Node" parent="." unique_id=1720666197 node_paths=PackedStringArray("collision_shape")]
+script = ExtResource("13_age_body")
+catalog = ExtResource("14_age_catalog")
+collision_shape = NodePath("../CollisionShape2D")
+
+[node name="CollisionShape2D" type="CollisionShape2D" parent="." unique_id=1259154378]
 position = Vector2(0, -5)
 shape = SubResource("CapsuleShape2D_omfh6")
 
-[node name="VisualAnchor" type="Node2D" parent="." node_paths=PackedStringArray("character_viewport", "character_stage", "composite_sprite")]
+[node name="VisualAnchor" type="Node2D" parent="." unique_id=2075797385 node_paths=PackedStringArray("character_viewport", "character_stage", "composite_sprite")]
 script = ExtResource("12_composite")
 character_viewport = NodePath("CharacterViewport")
 character_stage = NodePath("CharacterViewport/CharacterStage")
 composite_sprite = NodePath("CharacterComposite")
 
-[node name="CharacterViewport" type="SubViewport" parent="VisualAnchor"]
-transparent_bg = true
+[node name="CharacterViewport" type="SubViewport" parent="VisualAnchor" unique_id=964748438]
 disable_3d = true
+transparent_bg = true
 size = Vector2i(192, 192)
 render_target_update_mode = 4
 
-[node name="CharacterStage" type="Node2D" parent="VisualAnchor/CharacterViewport"]
+[node name="CharacterStage" type="Node2D" parent="VisualAnchor/CharacterViewport" unique_id=1798371840]
 
-[node name="CharacterVisual" parent="VisualAnchor/CharacterViewport/CharacterStage" instance=ExtResource("3_visual")]
+[node name="CharacterVisual" parent="VisualAnchor/CharacterViewport/CharacterStage" unique_id=740926070 instance=ExtResource("3_visual")]
 
-[node name="CharacterComposite" type="Sprite2D" parent="VisualAnchor"]
+[node name="CharacterComposite" type="Sprite2D" parent="VisualAnchor" unique_id=768164149]
 texture_filter = 1
 position = Vector2(0, -48)
 
-[node name="BedSleepInteractor" parent="." node_paths=PackedStringArray("player", "visual_anchor", "character_visual") instance=ExtResource("9_sleep_interactor")]
-player = NodePath("..")
-visual_anchor = NodePath("../VisualAnchor")
-character_visual = NodePath("../VisualAnchor/CharacterViewport/CharacterStage/CharacterVisual")
+[node name="DoorInteractor" type="Node" parent="." unique_id=173514720]
+script = ExtResource("15_door_interactor")
 
-[connection signal="locomotion_changed" from="." to="VisualAnchor/CharacterViewport/CharacterStage/CharacterVisual" method="present_locomotion"]
 [connection signal="crouch_changed" from="." to="VisualAnchor/CharacterViewport/CharacterStage/CharacterVisual" method="present_crouch"]
+[connection signal="locomotion_changed" from="." to="VisualAnchor/CharacterViewport/CharacterStage/CharacterVisual" method="present_locomotion"]
 [connection signal="sleep_changed" from="." to="VisualAnchor/CharacterViewport/CharacterStage/CharacterVisual" method="present_sleep"]
+[connection signal="appearance_changed" from="AppearanceState" to="AgeBody" method="present_appearance"]
 [connection signal="appearance_changed" from="AppearanceState" to="VisualAnchor/CharacterViewport/CharacterStage/CharacterVisual" method="present_appearance"]
+[connection signal="age_body_changed" from="AgeBody" to="." method="present_age_body"]

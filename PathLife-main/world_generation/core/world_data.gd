@@ -65,6 +65,20 @@ func height_at(world_xy: Vector2i) -> int:
 	return 0
 
 
+## Bioma da célula. Fora dos chunks carregados cai no amostrador global, que é
+## determinístico: a borda desenhada agora é a mesma que o chunk vizinho vai
+## gerar quando entrar. Sem isso, toda fronteira de chunk viraria um corte seco.
+func biome_at(world_xy: Vector2i) -> StringName:
+	var cell := get_cell(world_xy)
+	if cell != null:
+		return cell.biome_id
+	if sampler != null:
+		var biome := sampler.resolve_biome(world_xy)
+		if biome != null:
+			return biome.id
+	return &""
+
+
 func is_walkable(world_xy: Vector2i) -> bool:
 	var cell := get_cell(world_xy)
 	if cell == null:

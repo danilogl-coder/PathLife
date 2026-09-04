@@ -1,0 +1,13 @@
+[gd_resource type="Resource" script_class="AgeCatalog" load_steps=7 format=3]
+
+[ext_resource type="Script" path="res://data/character_customization/age/age_catalog.gd" id="1_age_catalog"]
+[ext_resource type="Resource" path="res://data/character_customization/age/profiles/bebe.tres" id="2_bebe"]
+[ext_resource type="Resource" path="res://data/character_customization/age/profiles/crianca.tres" id="3_crianca"]
+[ext_resource type="Resource" path="res://data/character_customization/age/profiles/adolescente.tres" id="4_adolescente"]
+[ext_resource type="Resource" path="res://data/character_customization/age/profiles/adulto.tres" id="5_adulto"]
+[ext_resource type="Resource" path="res://data/character_customization/age/profiles/idoso.tres" id="6_idoso"]
+
+[resource]
+script = ExtResource("1_age_catalog")
+profiles = Array[ExtResource("2_bebe")]([ExtResource("2_bebe"), ExtResource("3_crianca"), ExtResource("4_adolescente"), ExtResource("5_adulto"), ExtResource("6_idoso")])
+default_id = &"adulto"

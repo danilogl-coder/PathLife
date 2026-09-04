@@ -1,6 +1,6 @@
-[gd_scene format=3 uid="uid://c0i0bkk7ynmk5"]
+[gd_scene format=3 uid="uid://bjrtpp5o5fvcv"]
 
-[ext_resource type="PackedScene" uid="uid://c2ll6yox0l7xj" path="res://gameplay/furniture/bed/bed_base.tscn" id="1_base"]
+[ext_resource type="PackedScene" path="res://gameplay/furniture/bed/bed_base.tscn" id="1_base"]
 
 [node name="Bed2" unique_id=1375632997 instance=ExtResource("1_base")]
 position = Vector2(-2, 1)
@@ -11,7 +11,13 @@ sleep_visual_rotation_degrees = -33.0
 use_interaction_side_direction = true
 
 [node name="SolidCollision" parent="." index="1" unique_id=165171394]
-polygon = PackedVector2Array(-77, -33, 18, -102, 102, -58, -10, 10)
+polygon = PackedVector2Array(-53, -30, 20, -90, 75, -104, -45, -27)
+
+[node name="InteractionShape" parent="InteractionArea" parent_id_path=PackedInt32Array(1451867950) index="0" unique_id=26919407]
+polygon = PackedVector2Array(-82, -42, -16, -86, 49.38011, -48.52603, 66, -39, -2, 2, -16.129654, -5.7713013)
+
+[node name="TopOcclusionShape" parent="TopOcclusionArea" parent_id_path=PackedInt32Array(373969822) index="0"]
+polygon = PackedVector2Array(-84, -53, 1, -103, 15, -93, -66, -43)
 
 [editable path="Visual"]
 [editable path="TopOcclusionArea"]

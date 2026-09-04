@@ -7,11 +7,15 @@ signal appearance_changed(appearance: CharacterAppearance)
 @export var catalog: ClothingCatalog
 @export var hair_catalog: HairCatalog
 @export var color_catalog: CharacterColorCatalog
+@export var age_catalog: AgeCatalog
 
 var _current: CharacterAppearance
 
 func _ready() -> void:
-	if default_appearance == null or catalog == null or hair_catalog == null or color_catalog == null:
+	if (
+		default_appearance == null or catalog == null or hair_catalog == null
+		or color_catalog == null or age_catalog == null
+	):
 		push_error("AppearanceState está sem configuração")
 		return
 	_current = default_appearance.snapshot()
@@ -24,6 +28,7 @@ func apply_appearance(candidate: CharacterAppearance) -> void:
 	if candidate == null: return
 	var validated := candidate.snapshot()
 	if validated.body_type not in ["masc", "fem"]: validated.body_type = "masc"
+	validated.age = age_catalog.normalize_id(validated.age)
 	for slot_name: StringName in CharacterAppearance.SLOTS:
 		var item_id := validated.get_item(slot_name)
 		if item_id == &"": continue
@@ -39,6 +44,14 @@ func apply_appearance(candidate: CharacterAppearance) -> void:
 			CharacterColorCatalog.CLOTHING, validated.get_item_color(slot_name)))
 	_current = validated
 	_publish_current()
+
+## Envelhecer é só mudar um campo da aparência. Todo o resto já está ligado:
+## proporção, colisão e velocidade descem pelo mesmo appearance_changed.
+func set_age(age_id: StringName) -> void:
+	if _current == null: return
+	var updated := _current.snapshot()
+	updated.age = age_id
+	apply_appearance(updated)
 
 func _publish_current() -> void:
 	if _current != null: appearance_changed.emit(_current.snapshot())

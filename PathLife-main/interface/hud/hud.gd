@@ -2,10 +2,12 @@ class_name PlayerHUD
 extends Control
 
 signal customization_requested
+signal wall_view_requested
 
 @onready var health_label: Label = %HealthLabel
 @onready var health_bar: ProgressBar = %HealthBar
 @onready var movement_label: Label = %MovementLabel
+@onready var wall_view_button: Button = %WallViewButton
 
 
 func present_health(current_health: int, maximum_health: int) -> void:
@@ -22,5 +24,13 @@ func present_locomotion(direction: StringName, is_moving: bool, is_running: bool
 	movement_label.text = "%s  •  %s" % [state_text, String(direction).to_upper()]
 
 
+func present_wall_view(mode_label: String) -> void:
+	wall_view_button.text = "Paredes: %s" % mode_label
+
+
 func _on_customize_button_pressed() -> void:
 	customization_requested.emit()
+
+
+func _on_wall_view_button_pressed() -> void:
+	wall_view_requested.emit()

@@ -1,0 +1,21 @@
+[gd_resource type="Resource" script_class="StructureDefinition" format=3]
+
+[ext_resource type="PackedScene" path="res://presentation/world/structures/casa_madeira_tilemap.tscn" id="1_casa"]
+[ext_resource type="Script" path="res://world_generation/structures/structure_definition.gd" id="2_def"]
+
+[resource]
+resource_name = "casa_madeira"
+script = ExtResource("2_def")
+id = &"casa_madeira"
+display_name = "Casa de madeira"
+scene = ExtResource("1_casa")
+footprint = Vector2i(7, 8)
+adaptation_margin = 5
+spawn_weight = 16.0
+spawn_chance = 1.0
+allowed_biomes = Array[StringName]([&"campo"])
+allowed_terrains = Array[StringName]([&"plano", &"colina"])
+minimum_spacing = 8
+max_slope = 32.0
+adaptation_mode = 1
+footprint_blocks_movement = false

@@ -22,6 +22,19 @@ var walkable: bool = true
 var liquid_depth: int = 0
 ## Marcada por estruturas/estradas: o relevo procedural não pode mais mexer.
 var terrain_locked: bool = false
+## Marcada por estruturas: a COBERTURA do chão já foi decidida.
+##
+## Enquanto [member terrain_locked] protege a ALTURA, esta marca protege o
+## DESENHO: nem a variante de bioma, nem o relevo, nem a peça de fronteira podem
+## trocar [member ground_id] depois que uma construção assentou o terreno dela.
+var ground_locked: bool = false
+## Uma estrutura desenha piso próprio nesta célula.
+##
+## O chão continua existindo como dado (e ainda pode fornecer as faces do
+## relevo), mas sua superfície não deve ser pintada. Apenas trocar grama por
+## terra não basta: com Y-Sort, qualquer tile do mundo na mesma célula pode ser
+## desenhado depois do piso e aparecer nas juntas da arte da construção.
+var ground_surface_hidden: bool = false
 
 ## Clima amostrado (útil para vegetação, clima dinâmico, etc.).
 var temperature: float = 0.0
@@ -53,6 +66,8 @@ func duplicate_cell() -> WorldCell:
 	copy.walkable = walkable
 	copy.liquid_depth = liquid_depth
 	copy.terrain_locked = terrain_locked
+	copy.ground_locked = ground_locked
+	copy.ground_surface_hidden = ground_surface_hidden
 	copy.temperature = temperature
 	copy.humidity = humidity
 	copy.continentalness = continentalness

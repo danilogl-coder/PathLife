@@ -1,0 +1,34 @@
+PathLife — diagnóstico do chão sob construções
+2026-09-04 01:54:25
+semente do mundo: 20260819
+regra ativa neste build: piso da cena substitui o terreno
+
+== casa_madeira em (-6, -6) (fundação 3)
+   clears_ground_cover=true  bare_ground_margin=0  footprint=(7, 8)
+   piso lido da cena: 56 células
+   células conferidas: 36 (fora deste chunk: 20)
+     chão campo_terra: 36 célula(s)
+   todas trancadas (ground_locked)
+
+== casa_madeira em (15, -2) (fundação 3)
+   clears_ground_cover=true  bare_ground_margin=0  footprint=(7, 8)
+   piso lido da cena: 56 células
+   células conferidas: 2 (fora deste chunk: 54)
+     chão campo_terra: 2 célula(s)
+   todas trancadas (ground_locked)
+
+== casa_madeira em (24, 11) (fundação 4)
+   clears_ground_cover=true  bare_ground_margin=0  footprint=(7, 8)
+   piso lido da cena: 56 células
+   células conferidas: 35 (fora deste chunk: 21)
+     chão campo_terra: 35 célula(s)
+   todas trancadas (ground_locked)
+
+== casa_madeira em (-2, 19) (fundação 3)
+   clears_ground_cover=true  bare_ground_margin=0  footprint=(7, 8)
+   piso lido da cena: 56 células
+   células conferidas: 16 (fora deste chunk: 40)
+     chão campo_terra: 5 célula(s)
+     chão savana_terra: 11 célula(s)
+   todas trancadas (ground_locked)
+

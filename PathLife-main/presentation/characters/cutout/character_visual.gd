@@ -6,6 +6,7 @@ extends Node2D
 @onready var wardrobe: WardrobePresenter = $WardrobePresenter
 @onready var hair: HairManager = $Skeleton2D/quadril/torso/cabeca/HairRig
 @onready var color_presenter: CharacterColorPresenter = $CharacterColorPresenter
+@onready var age_presenter: CharacterAgePresenter = $CharacterAgePresenter
 
 @export_category("Animation Transitions")
 @export_range(0.0, 0.5, 0.01) var locomotion_blend_time: float = 0.08
@@ -26,6 +27,7 @@ func _ready() -> void:
 	hair.color_presenter = color_presenter
 	_direction = StringName(rig.initial_direction)
 	_appearance.body_type = rig.body_type
+	age_presenter.present(_appearance.age)
 	rig.present_skin_color(_appearance.skin_color)
 	_refresh_locomotion_animation()
 
@@ -63,6 +65,9 @@ func present_appearance(appearance: CharacterAppearance) -> void:
 		return
 	_appearance = appearance.snapshot()
 	rig.set_body(_appearance.body_type)
+	# Antes do set_direction: é ele que reescreve a posição dos ossos, e a
+	# proporção da idade precisa entrar na mesma passada.
+	age_presenter.present(_appearance.age)
 	rig.set_direction(_direction)
 	rig.present_skin_color(_appearance.skin_color)
 	wardrobe.invalidate()
@@ -123,8 +128,13 @@ func _play_action(action: StringName) -> void:
 	):
 		return
 	if not animation_player.has_animation(animation_name):
-		push_error("Animação não encontrada: %s" % animation_name)
-		return
+		# A idade pode ter biblioteca própria com só algumas ações gravadas. O
+		# que faltar cai na biblioteca do corpo em vez de virar erro.
+		var fallback := _fallback_animation_name(action)
+		if not animation_player.has_animation(fallback):
+			push_error("Animação não encontrada: %s" % animation_name)
+			return
+		animation_name = fallback
 
 	# Como todas as animações idle controlam o corpo inteiro, a transição pode
 	# misturar naturalmente a pose atual de caminhada/corrida com a pose parada.
@@ -139,12 +149,21 @@ func _play_action(action: StringName) -> void:
 
 func _make_animation_name(action: StringName) -> StringName:
 	return StringName(
-		"%s/%s_%s" % [rig.body_type, String(action), String(_direction)]
+		"%s/%s_%s" % [
+			age_presenter.animation_library(rig.body_type), String(action), String(_direction)
+		]
 	)
 
 
+func _fallback_animation_name(action: StringName) -> StringName:
+	return StringName("%s/%s_%s" % [rig.body_type, String(action), String(_direction)])
+
+
 func _on_animation_player_animation_finished(animation_name: StringName) -> void:
-	if animation_name != _make_animation_name(&"croushed"):
+	if (
+		animation_name != _make_animation_name(&"croushed")
+		and animation_name != _fallback_animation_name(&"croushed")
+	):
 		return
 	if _is_crouching and not _is_moving:
 		_play_action(&"crouch_idle")

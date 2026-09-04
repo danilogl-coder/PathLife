@@ -239,6 +239,9 @@ alinhar paredes e móveis.
 | Terreno | `adaptation_mode` | `FLATTEN`, `PLATEAU`, `EMBED`, `CARVE`, `WATER_EDGE` ou `NONE`. |
 | | `preferred_foundation_offset` | Sobe/desce a fundação em níveis (ex.: `-1` para um porão). |
 | | `footprint_blocks_movement` | Marque se a própria cena controla a passagem. |
+| Cobertura do chão | `clears_ground_cover` | Ligado (padrão): a construção assenta chão nu no footprint, no lugar da grama. |
+| | `bare_ground_margin` | Anéis de células ALÉM do footprint que também perdem a grama. `0` basta quando a cena tem paredes na borda; use `1` em piso aberto (deck, pátio). |
+| | `bare_ground_id` | Vazio = usa a terra do próprio bioma (`wall_id`). Preencha para um apron de pedra, areia ou cascalho. |
 
 ### Passo 3 — registrar
 
@@ -262,6 +265,19 @@ construções. Uma região é `generation_region_size_chunks²` chunks (padrão 
    atravessar 4 chunks sem duplicar.
 5. Células do footprint ficam com `terrain_locked = true`: água, vegetação e
    relevo não mexem mais nelas.
+6. As células do footprint — **e todas as que a CENA pinta de piso**, mesmo
+   fora dele — ficam com `ground_locked = true` e recebem o chão nu do
+   bioma. Quem manda é o desenho: `StructureFloorMask` lê uma vez, no
+   `prepare()` do passe, quais células a cena cobre com tiles de categoria
+   `piso`. **Por que**: a arte de chão tem 128×106 px para um losango de 128×64
+   — a sobra de cima são as folhas, que transbordam a célula de propósito para
+   a grama ter volume. Entre duas gramas isso é invisível. Sob uma casa não: a
+   célula da FRENTE é desenhada depois da de trás, então suas folhas caem sobre
+   o PISO e a sala aparece com mato entre as tábuas. O tile de terra não
+   transborda, e a tranca impede que o passe de relevo ou uma peça de fronteira
+   de bioma devolvam a grama para debaixo do piso.
+
+![Antes e depois do chão nu sob a construção](preview_chao_estrutura.png)
 
 ### Usando os marcadores depois
 
@@ -665,6 +681,7 @@ Nada disso exige mexer em geração, dados ou regras — é puramente renderiza�
 | **Pernas do personagem piscando ao andar** | `IsoCoordinateSystem.prop_sort_bias()` diferente de um quarto do tile. A chave do tile é o CENTRO do losango; com viés menor a troca de profundidade escorrega para o fim do passo e o ator anda atrás da grama de destino. Rode `tests/character_walk_flicker_test.gd`. |
 | Vontade de dar um `z_index` próprio ao piso "para ele não engolir as pernas" | Já foi medido: com piso e faces no mesmo Z o personagem fica com **exatamente os mesmos** pixels visíveis. O que muda é o terreno, que se recorta. O `ProceduralWorld` devolve o Z para zero e avisa no console. |
 | Riscos de terra soltos, sem penhasco contínuo | `plateau_filter_enabled` desligado (ver 5.9). |
+| **Grama brotando por cima do piso da casa** | Primeiro confira no Output a linha `[Mundo] semente … \| chão de construção: piso da cena substitui o terreno`: sem ela, o jogo está rodando um build antigo (a janela já estava aberta quando os scripts mudaram). Se a linha aparece, a construção não está assentando chão nu: `clears_ground_cover` desligado na definição, ou o bioma sem `wall_id`. Se sobrar mato só na fileira da frente (construção de piso aberto), suba `bare_ground_margin` para `1`. Rode `tests/structure_ground_cover_test.gd`. |
 | Mobília/objeto coberto pela grama de trás | Objeto solto na cena, sem `WorldObjectAnchor` (ver 5.10). |
 | Mundo "de cabeça para baixo" | Sinal do `texture_origin` invertido. Ele é SUBTRAÍDO ao desenhar: para o bloco subir, o valor é positivo. |
 | Não dá para ver quem está acima/abaixo | `height_shading_step` baixo demais, ou `relative_height_shading` desligado. |
@@ -690,6 +707,9 @@ godot --headless --path . --script res://tools/build_world_resources.gd
 
 # testes de lógica (96 verificações)
 godot --headless --path . --script res://tests/world_generation_test.gd
+
+# grama nunca por cima do piso de uma construção
+godot --headless --path . --script res://tests/structure_ground_cover_test.gd
 
 # testes de integração com SceneTree (32 verificações)
 godot --headless --path . --script res://tests/player_grid_integration_test.gd

@@ -120,9 +120,17 @@ layout_mode = 2
 mouse_filter = 0
 text = "Personalizar personagem"
 
+[node name="WallViewButton" type="Button" parent="SafeMargin/HUDColumn/StatusPanel/PanelMargin/Content"]
+unique_name_in_owner = true
+layout_mode = 2
+mouse_filter = 0
+tooltip_text = "Alternar paredes automáticas, inteiras, transparentes e cortadas (atalho: V)"
+text = "Paredes: Automáticas"
+
 [node name="Spacer" type="Control" parent="SafeMargin/HUDColumn"]
 layout_mode = 2
 size_flags_vertical = 3
 mouse_filter = 2
 
 [connection signal="pressed" from="SafeMargin/HUDColumn/StatusPanel/PanelMargin/Content/CustomizeButton" to="." method="_on_customize_button_pressed"]
+[connection signal="pressed" from="SafeMargin/HUDColumn/StatusPanel/PanelMargin/Content/WallViewButton" to="." method="_on_wall_view_button_pressed"]

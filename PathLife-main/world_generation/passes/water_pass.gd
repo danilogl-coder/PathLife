@@ -25,7 +25,7 @@ func run(context: GenerationContext) -> void:
 	for y in size:
 		for x in size:
 			var cell := context.cell(Vector2i(x, y))
-			if cell.terrain_locked or cell.height >= settings.sea_level:
+			if cell.terrain_locked or cell.ground_locked or cell.height >= settings.sea_level:
 				cell.liquid_depth = 0
 				continue
 			cell.liquid_depth = settings.sea_level - cell.height

@@ -1,0 +1,22 @@
+[gd_resource type="Resource" script_class="FurnitureDefinition" format=3]
+
+[ext_resource type="Script" path="res://data/furniture/furniture_definition.gd" id="1_def"]
+[ext_resource type="Texture2D" path="res://assets/furniture/bedroom/nightstand/nightstand_r0.png" id="2_r0"]
+[ext_resource type="Texture2D" path="res://assets/furniture/bedroom/nightstand/nightstand_r1.png" id="3_r1"]
+[ext_resource type="Texture2D" path="res://assets/furniture/bedroom/nightstand/nightstand_r2.png" id="4_r2"]
+[ext_resource type="Texture2D" path="res://assets/furniture/bedroom/nightstand/nightstand_r3.png" id="5_r3"]
+
+[resource]
+script = ExtResource("1_def")
+id = &"criado_mudo"
+display_name = "Criado-mudo"
+orientation_textures = Array[Texture2D]([ExtResource("2_r0"), ExtResource("3_r1"), ExtResource("4_r2"), ExtResource("5_r3")])
+footprint_cells = Vector2i(1, 1)
+swap_footprint_on_side_orientations = true
+tile_size = Vector2i(128, 64)
+collision_source = 0
+collision_inset = 4.0
+blocks_movement = true
+interaction_margin_cells = 0.5
+interaction_prompt = "Abrir"
+

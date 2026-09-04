@@ -1,0 +1,38 @@
+[gd_scene format=3]
+
+[ext_resource type="Script" path="res://gameplay/furniture/furniture_piece.gd" id="1_4d05b"]
+[ext_resource type="Resource" path="res://data/furniture/pieces/criado_mudo.tres" id="2_definition"]
+[ext_resource type="PackedScene" path="res://presentation/furniture/furniture_visual.tscn" id="3_1y2k6"]
+[ext_resource type="Texture2D" path="res://assets/furniture/bedroom/nightstand/nightstand_r3.png" id="4_1y2k6"]
+
+[node name="CriadoMudoR3" type="StaticBody2D" unique_id=2025264179 node_paths=PackedStringArray("sprite", "solid_collision", "interaction_area", "interaction_shape")]
+collision_layer = 8
+collision_mask = 2
+script = ExtResource("1_4d05b")
+definition = ExtResource("2_definition")
+orientation = 3
+sprite = NodePath("Visual/Sprite")
+solid_collision = NodePath("SolidCollision")
+interaction_area = NodePath("InteractionArea")
+interaction_shape = NodePath("InteractionArea/InteractionShape")
+draw_gizmo = false
+
+[node name="Visual" parent="." unique_id=957463040 instance=ExtResource("3_1y2k6")]
+texture_filter = 1
+
+[node name="Sprite" parent="Visual" index="0"]
+position = Vector2(0, -48)
+texture = ExtResource("4_1y2k6")
+
+[node name="SolidCollision" type="CollisionPolygon2D" parent="." unique_id=1257239740]
+polygon = PackedVector2Array(-1, 17, 38, 0, 0, -18, -39, 0)
+
+[node name="InteractionArea" type="Area2D" parent="." unique_id=10395888]
+collision_layer = 4
+collision_mask = 2
+monitorable = false
+
+[node name="InteractionShape" type="CollisionPolygon2D" parent="InteractionArea" unique_id=2095837290]
+polygon = PackedVector2Array(0, -64, 128, 0, 0, 64, -128, 0)
+
+[editable path="Visual"]

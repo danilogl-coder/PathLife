@@ -1,9 +1,9 @@
-[gd_resource type="Resource" script_class="BiomeDefinition" format=3]
+[gd_resource type="Resource" script_class="BiomeDefinition" format=3 uid="uid://dt3ou0djbuhun"]
 
-[ext_resource type="Script" path="res://world_generation/decoration/decoration_definition.gd" id="1_vef4d"]
+[ext_resource type="Script" uid="uid://o8xx5ewu8fm0" path="res://world_generation/decoration/decoration_definition.gd" id="1_vef4d"]
 [ext_resource type="Resource" path="res://data/world/decorations/ipe.tres" id="2_fbfwx"]
 [ext_resource type="Resource" path="res://data/world/decorations/alamo.tres" id="3_cxip4"]
-[ext_resource type="Script" path="res://world_generation/climate/ground_variant.gd" id="4_dvoac"]
+[ext_resource type="Script" uid="uid://cvsfyrcty6cf8" path="res://world_generation/climate/ground_variant.gd" id="4_dvoac"]
 [ext_resource type="Resource" path="res://data/world/variants/campo_mato_denso.tres" id="5_dxj36"]
 [ext_resource type="Resource" path="res://data/world/variants/campo_mato_denso_para_campo_alto_1.tres" id="6_8xvk0"]
 [ext_resource type="Resource" path="res://data/world/variants/campo_mato_denso_para_campo_alto_2.tres" id="7_tnat1"]
@@ -20,9 +20,10 @@
 [ext_resource type="Resource" path="res://data/world/variants/campo_quase_ralo_para_campo_baixo_2.tres" id="18_mcylr"]
 [ext_resource type="Resource" path="res://data/world/variants/campo_quase_ralo_para_campo_baixo_3.tres" id="19_n0oio"]
 [ext_resource type="Resource" path="res://data/world/variants/campo_baixo.tres" id="20_e6ap7"]
-[ext_resource type="Script" path="res://world_generation/climate/biome_definition.gd" id="21_cvrcp"]
-[ext_resource type="Script" path="res://world_generation/structures/structure_definition.gd" id="22_v03kc"]
+[ext_resource type="Script" uid="uid://bqgt3w4w86ht4" path="res://world_generation/climate/biome_definition.gd" id="21_cvrcp"]
+[ext_resource type="Script" uid="uid://bido6sd7nrt5k" path="res://world_generation/structures/structure_definition.gd" id="22_v03kc"]
 [ext_resource type="Resource" path="res://data/world/structures/deck_madeira.tres" id="23_jsswh"]
+[ext_resource type="Resource" path="res://data/world/structures/casa_madeira.tres" id="24_casa"]
 
 [resource]
 resource_name = "campo"
@@ -35,4 +36,4 @@ humidity_max = 0.55
 weight = 1.15
 ground_variants = Array[ExtResource("4_dvoac")]([ExtResource("5_dxj36"), ExtResource("6_8xvk0"), ExtResource("7_tnat1"), ExtResource("8_b051e"), ExtResource("9_ikrtf"), ExtResource("10_ojv4s"), ExtResource("11_iwrgm"), ExtResource("12_aol0t"), ExtResource("13_n8q16"), ExtResource("14_ijqhg"), ExtResource("15_smawp"), ExtResource("16_lcguw"), ExtResource("17_tse6e"), ExtResource("18_mcylr"), ExtResource("19_n0oio"), ExtResource("20_e6ap7")])
 decorations = Array[ExtResource("1_vef4d")]([ExtResource("2_fbfwx"), ExtResource("3_cxip4")])
-structure_pool = Array[ExtResource("22_v03kc")]([ExtResource("23_jsswh")])
+structure_pool = Array[ExtResource("22_v03kc")]([ExtResource("23_jsswh"), ExtResource("24_casa")])

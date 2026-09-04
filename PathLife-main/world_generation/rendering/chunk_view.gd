@@ -31,6 +31,7 @@ var _visibility_tints: Dictionary = {}
 var _owned_depth_nodes: Array[Node] = []
 var _owned_ground_cells: Dictionary = {}
 var _owned_depth_cells: Dictionary = {}
+var _group_cache: Dictionary = {}
 var _uses_shared_layers: bool = false
 var _iso: IsoCoordinateSystem
 var _world_data: WorldData
@@ -90,6 +91,7 @@ func _clear() -> void:
 	_owned_depth_nodes.clear()
 	_base_tints.clear()
 	_visibility_tints.clear()
+	_group_cache.clear()
 
 
 func _erase_owned_cells(registry: Dictionary, owned: Dictionary) -> void:
@@ -123,19 +125,33 @@ func _paint_ground(chunk: ChunkData) -> void:
 			# 1) superfície top-only. Não precisa de tratamento especial quando o
 			# vizinho de trás é mais alto: a face dele fica meio tile ATRÁS no
 			# Y-Sort, então esta superfície já a recobre naturalmente.
-			_set_ground_tile(cell.height, cell_coord, cell.ground_id)
+			#
+			# Numa fronteira de bioma o id desenhado é o da peça de transição.
+			# Ele é VISUAL: `cell.ground_id` continua sendo o dado, e é ele que
+			# gameplay, IA e save enxergam.
+			var ground_visual := _ground_visual_for(chunk, cell)
+			# A estrutura fornece a superfície destas células. Não desenhar o
+			# chão do mundo evita que ele vença o Y-Sort e apareça entre as
+			# tábuas/placas do piso. O dado e as faces continuam disponíveis.
+			if not cell.ground_surface_hidden:
+				_set_ground_tile(cell.height, cell_coord, ground_visual)
 
 			# 2) faces independentes. Cada lado consulta seu próprio vizinho;
 			# portanto uma borda reta não ganha uma lateral fantasma no outro lado.
-			_paint_exposed_faces(chunk, cell, cell_coord)
+			_paint_exposed_faces(chunk, cell, cell_coord, ground_visual)
 
 			# 3) superfície de água
-			if cell.is_liquid():
+			if cell.is_liquid() and not cell.ground_surface_hidden:
 				_set_ground_tile(settings.sea_level, cell_coord, settings.water_ground_id)
 
 
 ## Vizinhos frontais na projeção: +Y expõe a face esquerda; +X, a direita.
-func _paint_exposed_faces(chunk: ChunkData, cell: WorldCell, cell_coord: Vector2i) -> void:
+func _paint_exposed_faces(
+	chunk: ChunkData,
+	cell: WorldCell,
+	cell_coord: Vector2i,
+	ground_visual: StringName
+) -> void:
 	var left_height := _front_neighbor_height(chunk, cell, Vector2i(0, 1))
 	var right_height := _front_neighbor_height(chunk, cell, Vector2i(1, 0))
 	var lowest := mini(left_height, right_height)
@@ -150,7 +166,9 @@ func _paint_exposed_faces(chunk: ChunkData, cell: WorldCell, cell_coord: Vector2
 			mask = TileCatalog.FaceMask.LEFT
 		elif show_right and not show_left:
 			mask = TileCatalog.FaceMask.RIGHT
-		var tile_id: StringName = cell.ground_id if level == cell.height else cell.wall_id
+		# O nível do topo usa a MESMA peça da superfície: numa transição, a
+		# lateral tem que continuar a borda desenhada em cima dela.
+		var tile_id: StringName = ground_visual if level == cell.height else cell.wall_id
 		_set_depth_face(level, cell_coord, tile_id, mask)
 
 
@@ -171,13 +189,64 @@ func _set_ground_tile(level: int, cell_coord: Vector2i, ground_id: StringName) -
 	var entry := catalog.find(ground_id)
 	if entry == null:
 		return
+	# Peça de transição nunca espelha: o espelho trocaria esquerda por direita e
+	# jogaria a borda do bioma para o lado errado da célula.
+	var mirrored := not entry.directional and _mirrors_top(cell_coord)
 	_ground_layer_for(level).set_cell(
 		cell_coord,
 		entry.source_id,
 		entry.atlas_coords,
-		catalog.alternative_for(level, _mirrors_top(cell_coord))
+		catalog.alternative_for(level, mirrored)
 	)
 	_remember_cell(_owned_ground_cells, level, cell_coord)
+
+
+## Peça de fronteira para esta célula, ou o chão dela quando não há fronteira.
+##
+## Só olha os 4 lados; as diagonais entram apenas quando nenhum lado difere,
+## para a pontinha do canto não ficar em degrau. É consulta de leitura: nada
+## aqui escreve na [WorldCell].
+func _ground_visual_for(chunk: ChunkData, cell: WorldCell) -> StringName:
+	# Chão assentado por uma construção não recebe peça de fronteira: a peça de
+	# transição é desenhada com grama e ela transborda o losango — voltaria a
+	# aparecer por cima do piso da célula de trás.
+	if cell.ground_locked:
+		return cell.ground_id
+	if catalog == null or catalog.transitions == null or not catalog.transitions.enabled:
+		return cell.ground_id
+	var transitions := catalog.transitions
+	var grupo := transitions.grupo_de(cell.biome_id)
+	if grupo == &"":
+		return cell.ground_id
+
+	var lados: Array[StringName] = []
+	for offset: Vector2i in BiomeTransitionCatalog.LADOS:
+		lados.append(_neighbor_group(chunk, cell.world_xy + offset))
+	var diagonais: Array[StringName] = []
+	for offset: Vector2i in BiomeTransitionCatalog.DIAGONAIS:
+		diagonais.append(_neighbor_group(chunk, cell.world_xy + offset))
+
+	var tile := transitions.resolve(grupo, lados, diagonais)
+	if tile == &"" or not catalog.has(tile):
+		return cell.ground_id
+	return tile
+
+
+## Grupo de transição do vizinho. O cache existe porque cada célula consulta 8
+## vizinhos e cada vizinho é consultado por até 8 células: sem ele, a borda de
+## um chunk chamaria o amostrador milhares de vezes por carregamento.
+func _neighbor_group(chunk: ChunkData, world_xy: Vector2i) -> StringName:
+	if _group_cache.has(world_xy):
+		return _group_cache[world_xy]
+	var biome_id: StringName = &""
+	var neighbor := chunk.get_cell_world(world_xy)
+	if neighbor != null:
+		biome_id = neighbor.biome_id
+	elif _world_data != null:
+		biome_id = _world_data.biome_at(world_xy)
+	var grupo := catalog.transitions.grupo_de(biome_id)
+	_group_cache[world_xy] = grupo
+	return grupo
 
 
 ## Sorteio ESTÁVEL por célula: recarregar o chunk não pode mudar o desenho.
@@ -309,10 +378,14 @@ func add_structure(placement: StructurePlacement) -> Node2D:
 	var root := instance as StructureRoot
 	if root != null:
 		root.setup(placement)
+	var uses_tilemap_layers := not instance.find_children(
+		"*", "TileMapLayer", true, false
+	).is_empty()
 	_anchor_prop(
 		instance,
 		Vector3i(placement.origin_xy.x, placement.origin_xy.y, placement.foundation_height),
-		structures_root
+		structures_root,
+		uses_tilemap_layers
 	)
 	return instance
 
@@ -322,19 +395,53 @@ func add_structure(placement: StructurePlacement) -> Node2D:
 ## A âncora carrega a posição PLANA da célula (é ela que entra no Y-Sort) e o
 ## objeto recebe só o deslocamento vertical da altura. Sem isso, um objeto em
 ## cima de um morro seria ordenado como se estivesse mais ao fundo.
-func _anchor_prop(prop: Node2D, world_pos: Vector3i, parent: Node2D) -> void:
+##
+## Estruturas feitas com TileMapLayer usam [param expose_y_sorted_children].
+## Nesse modo, cada tile participa do Y-Sort global em vez de a casa inteira ser
+## agrupada pela célula de origem. O y_sort_origin das camadas compensa o
+## deslocamento visual da fundação para continuar ordenando no plano lógico.
+func _anchor_prop(
+	prop: Node2D,
+	world_pos: Vector3i,
+	parent: Node2D,
+	expose_y_sorted_children: bool = false
+) -> void:
 	var cell := Vector2i(world_pos.x, world_pos.y)
 	var anchor: Node2D = (
 		prop_anchor_scene.instantiate() if prop_anchor_scene != null else Node2D.new()
 	)
 	anchor.name = "Anchor_%d_%d" % [cell.x, cell.y]
-	anchor.y_sort_enabled = false
+	anchor.y_sort_enabled = expose_y_sorted_children
 	anchor.position = _iso.cell_to_local(cell) + Vector2(0.0, _iso.prop_sort_bias())
 	parent.add_child(anchor)
 	_owned_depth_nodes.append(anchor)
 	anchor.add_child(prop)
 	prop.position = Vector2(0.0, -float(world_pos.z * settings.height_pixels) - _iso.prop_sort_bias())
 	prop.z_index = 0
+	if expose_y_sorted_children:
+		var height_sort_compensation := world_pos.z * settings.height_pixels
+		for descendant: Node in prop.find_children("*", "TileMapLayer", true, false):
+			var layer := descendant as TileMapLayer
+			if layer != null:
+				layer.y_sort_origin += height_sort_compensation
+		# Mobília pintada é promovida para uma âncora Node2D direta. Deslocamos
+		# somente o pivô de ordenação e aplicamos o inverso no conteúdo, mantendo
+		# o sprite exatamente no mesmo pixel enquanto ele disputa o Y-Sort no
+		# plano lógico da fundação.
+		for descendant: Node in prop.find_children("*", "Node2D", true, false):
+			var furniture_anchor := descendant as Node2D
+			if (
+				furniture_anchor == null
+				or not furniture_anchor.get_meta(
+					StructureRoot.FURNITURE_SORT_ANCHOR_META, false
+				)
+			):
+				continue
+			furniture_anchor.position.y += height_sort_compensation
+			for child: Node in furniture_anchor.get_children():
+				var visual_root := child as Node2D
+				if visual_root != null:
+					visual_root.position.y -= height_sort_compensation
 
 
 ## Usado pelo [HeightVisibilityManager]. Não altera dados, só aparência.

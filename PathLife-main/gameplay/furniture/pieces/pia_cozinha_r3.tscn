@@ -1,0 +1,38 @@
+[gd_scene format=3]
+
+[ext_resource type="Script" path="res://gameplay/furniture/furniture_piece.gd" id="1_ipohu"]
+[ext_resource type="Resource" path="res://data/furniture/pieces/pia_cozinha.tres" id="2_definition"]
+[ext_resource type="PackedScene" path="res://presentation/furniture/furniture_visual.tscn" id="3_bj2mx"]
+[ext_resource type="Texture2D" path="res://assets/furniture/kitchen/kitchen_sink/kitchen_sink_r3.png" id="4_bj2mx"]
+
+[node name="PiaCozinhaR3" type="StaticBody2D" unique_id=1948211558 node_paths=PackedStringArray("sprite", "solid_collision", "interaction_area", "interaction_shape")]
+collision_layer = 8
+collision_mask = 2
+script = ExtResource("1_ipohu")
+definition = ExtResource("2_definition")
+orientation = 3
+sprite = NodePath("Visual/Sprite")
+solid_collision = NodePath("SolidCollision")
+interaction_area = NodePath("InteractionArea")
+interaction_shape = NodePath("InteractionArea/InteractionShape")
+draw_gizmo = false
+
+[node name="Visual" parent="." unique_id=1673208689 instance=ExtResource("3_bj2mx")]
+texture_filter = 1
+
+[node name="Sprite" parent="Visual" index="0"]
+position = Vector2(32, -64)
+texture = ExtResource("4_bj2mx")
+
+[node name="SolidCollision" type="CollisionPolygon2D" parent="." unique_id=1342060499]
+polygon = PackedVector2Array(62, -61, 124, -31, 2, 29, -60, -1)
+
+[node name="InteractionArea" type="Area2D" parent="." unique_id=1097708833]
+collision_layer = 4
+collision_mask = 2
+monitorable = false
+
+[node name="InteractionShape" type="CollisionPolygon2D" parent="InteractionArea" unique_id=2017751637]
+polygon = PackedVector2Array(64, -96, 192, -32, 0, 64, -128, 0)
+
+[editable path="Visual"]
